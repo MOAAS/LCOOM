@@ -1,0 +1,20 @@
+@lcflib.a:2018, lcf_start
+  video_test_controller()
+  @lab5.c:277, video_test_controller
+    lm_init(false)
+  < lm_init(false) -> (ret: 0xefafd000)
+  @vbe.c:58, vbe_get_controllerInfo
+    lm_alloc(sizeof(vbe_info_block), &map)
+  < lm_alloc(512, addr: 0xeffff548 [phys: 0x0008f000, virt: 0xefb8c000, size: 512 bytes]) -> (ret: 0xefb8c000)
+  @vbe.c:73, vbe_get_controllerInfo
+    sys_int86(&reg)
+  > sys_int86(addr: 0xeffff520 [AX: 4f00, BX: 0000, CX: 0000, DX: 0000, ES: 8000, DI: f000])
+  < sys_int86(addr: 0xeffff520 [AX: 004f, BX: 0000, CX: 0000, DX: 0000, ES: 8000, DI: f000]) -> (ret: 0)
+  @vbe.c:104, vbe_get_controllerInfo
+    lm_free(&map)
+  < lm_free(addr: 0xeffff548 [phys: 0x0008f000, virt: 0xefb8c000, size: 512 bytes]) -> (ret: true)
+  @lab5.c:285, video_test_controller
+    vg_display_vbe_contr_info(&contr_info)
+  > vg_display_vbe_contr_info(addr: 0xeffff588)
+  < vg_display_vbe_contr_info(addr: 0xeffff588) -> (ret: 0)
+< video_test_controller() -> (ret: 0)
