@@ -143,6 +143,30 @@ Bitmap* resizeBitmap(Bitmap* bitmap, uint16_t factor) {
     return resized;
 }
 
+/*
+//supply an array of pixels[height][width] <- notice that height comes first
+void writeBMP(char* filename, unsigned int width, unsigned int height, char* address) {
+    File* file = fopen(filename, )
+	int fd = open(filename, O_WRONLY|O_CREAT|O_TRUNC,S_IRUSR|S_IWUSR|S_IRGRP|S_IWGRP|S_IROTH|S_IWOTH);  
+	static unsigned char header[54] = {66,77,0,0,0,0,0,0,0,0,54,0,0,0,40,0,0,0,0,0,0,0,0,0,0,0,1,0,24}; //rest is zeroes
+	unsigned int pixelBytesPerRow = width*sizeof(pixel);
+	unsigned int paddingBytesPerRow = (4-(pixelBytesPerRow%4))%4;
+	unsigned int* sizeOfFileEntry = (unsigned int*) &header[2];
+	*sizeOfFileEntry = 54 + (pixelBytesPerRow+paddingBytesPerRow)*height;  
+	unsigned int* widthEntry = (unsigned int*) &header[18];    
+	*widthEntry = width;
+	unsigned int* heightEntry = (unsigned int*) &header[22];    
+	*heightEntry = height;
+	write(fd, header, 54);
+	static unsigned char zeroes[3] = {0,0,0}; //for padding    
+	for (int row = 0; row < height; row++) {
+		write(fd,pixels[row],pixelBytesPerRow);
+		write(fd,zeroes,paddingBytesPerRow);
+	}
+	close(fd);
+}
+*/
+
 void draw_bitmap(Bitmap* bmp, int x, int y, Alignment alignment) {
     if (bmp == NULL)
         return;
@@ -180,6 +204,11 @@ uint32_t get_bitmap_color(Bitmap* bmp, uint16_t x, uint16_t y) {
     return color;
 }
 
+bool is_transparent(uint32_t color) {
+    return (color & 0xFFFFFF) == 0xFF00FF;
+}
+
+// NAO USADO POR AGORA
 char *double_buffering() {
 	char* double_buffer = malloc(vg_get_hres() * vg_get_vres() * vg_get_bytes_pp());
 	char* video_mem = vg_get_video_mem();
@@ -194,6 +223,3 @@ void deleteBitmap(Bitmap* bmp) {
     free(bmp);
 }
 
-bool is_transparent(uint32_t color) {
-    return (color & 0xFFFFFF) == 0xFF00FF;
-}
