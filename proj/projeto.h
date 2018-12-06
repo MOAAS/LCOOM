@@ -22,6 +22,8 @@ typedef enum  {
     Drawing,
     Guessing,
     Typing,
+    EndGameWin,
+    EndGameLoss,
     ExitGame
 } GameState;
 
@@ -48,8 +50,9 @@ void guess();
 void draw();
 void type();
 void start_game();
+void end_game();
 
-bool useTextbox(TextBox* textbox, Event_t event);
+void useTextbox(TextBox* textbox, Event_t event);
 
 void main_menu();
 void usePencil(DrawingState* pencil, Event_t event);

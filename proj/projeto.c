@@ -39,6 +39,9 @@ static Bitmap* rubber_hl;
 static Bitmap* textbox_bmp;
 static Bitmap* clock_bmp;
 
+static Bitmap* thumbsup_bmp;
+static Bitmap* thumbsdown_bmp;
+
 static Event_t event;
 
 static int num_paint_buttons = 6;
@@ -75,6 +78,9 @@ void loadBitmaps() {
     rubber_button = loadBitmap("home/lcom/labs/proj/bitmaps/rubber.bmp");
     rubber_hl = loadBitmap("home/lcom/labs/proj/bitmaps/rubber_hl.bmp");
 
+    thumbsup_bmp =  loadBitmap("home/lcom/labs/proj/bitmaps/thumbsup.bmp");
+    thumbsdown_bmp = loadBitmap("home/lcom/labs/proj/bitmaps/thumbsdown.bmp");
+
     textbox_bmp = loadBitmap("home/lcom/labs/proj/bitmaps/textbox.bmp");
 
     clock_bmp = loadBitmap("home/lcom/labs/proj/bitmaps/clock.bmp");
@@ -93,12 +99,13 @@ void loadButtons() {
     menu_buttons[0] = create_button(300, 150, background, mainmenu_button1, mainmenu_button1_hl);
     menu_buttons[1] = create_button(300, 350, background, mainmenu_button2, mainmenu_button2_hl);
     menu_buttons[2] = create_button(300, 550, background, mainmenu_button3, mainmenu_button3_hl);
-
+    menu_buttons[0]->singleState = true; // so tem um estado
+    menu_buttons[1]->singleState = true; // so tem um estado
+    menu_buttons[2]->singleState = true; // so tem um estado
 }
 
 void loadBackground() {
     background = create_layer(0, 0, vg_get_hres(), vg_get_vres());
-    layer_draw_image(background, ULTRA_BACKGROUND, 0, 0);
 }
 
 void projeto() {
@@ -118,6 +125,8 @@ void projeto() {
             case Drawing: draw(); break;
             case Guessing: guess(); break;
             case Typing: type(); break;
+            case EndGameWin: end_game(); break;
+            case EndGameLoss: end_game(); break;
             case ExitGame: break;
         }
     }
@@ -129,6 +138,7 @@ void projeto() {
 
 
 void main_menu() {
+    layer_draw_image(background, ULTRA_BACKGROUND, 0, 0);
     draw_buttons(menu_buttons, num_menu_buttons);
     draw_sprite(cursor);
     while (1) {
@@ -139,8 +149,16 @@ void main_menu() {
             return;
         }
         switch (checkButtonPress(event, cursor, menu_buttons, num_menu_buttons)) {
-            case 0: gameState = Drawing;  start_game(); return;
-            case 1: gameState = Guessing; start_game(); return;
+            case 0: 
+                gameState = Drawing;  
+                start_game(); 
+                disable_buttons(menu_buttons, num_menu_buttons);
+                return;
+            case 1: 
+                gameState = Guessing; 
+                start_game(); 
+                disable_buttons(menu_buttons, num_menu_buttons);
+                return;
             case 2: gameState = ExitGame; return;
             case -1: break;
         }
@@ -149,8 +167,8 @@ void main_menu() {
 }
 
 void start_game() {
-    create_clock(clock_bmp, 90);
-    create_canvas(background, 150, 150, 1000, 750, 0xFFFFFF);
+    create_clock(clock_bmp, 13);
+    create_canvas(background, 150, 150, 1000, 750, WHITE);
     char* solution = get_random_word();
     if (gameState == Drawing) {
         pencil = create_pencil();
@@ -160,21 +178,48 @@ void start_game() {
     draw_sprite(cursor);
 }
 
+void end_game() {
+    word_pick_end();
+    destroy_canvas();
+    destroy_clock();
+    Bitmap* wordbox_bmp = loadBitmap("home/lcom/labs/proj/bitmaps/wordbox.bmp");
+    layer_draw_image(background, ULTRA_BACKGROUND, 0, 0);
+    layer_draw_image(background, wordbox_bmp, 100, 200);
+    if (gameState == EndGameWin) {
+        draw_word(background, "You win!", 3, 32, 175, 225);
+        layer_draw_image(background, thumbsup_bmp, 300, 300);
+    }
+    else {
+        draw_word(background, "You lose!", 3, 32, 175, 225);
+        layer_draw_image(background, thumbsdown_bmp, 300, 300);
+    }
+    timer_reset_counter();
+    while(1) {
+        event = GetEvent();
+        if (event.isTimerEvent && event.timerEvent.seconds_passed == 3)
+            break;
+    }
+    gameState = MainMenu;
+    
+}
+
 //////////////
 // GUESSING //
 //////////////
 
 void guess() {
-    while(1) {
+    while(gameState == Guessing) {
         event = GetEvent();
         update_clock(event);
+        if (clock_get_time_left() == 0)
+            gameState = EndGameLoss;
         update_cursor(cursor, event);
-        if (event.isTimerEvent && event.timerEvent.has_second_passed)// && event.timerEvent.seconds_passed % 12 == 0)
+        if (event.isTimerEvent && event.timerEvent.has_second_passed && event.timerEvent.seconds_passed % 12 == 0)
             reveal_letter();
         if (event.isKeyboardEvent) {
             switch(event.keyboardEvent.type) {
-                case ESC_PRESS: gameState = ExitGame; return;
-                case ENTER_PRESS: gameState = Typing; return;
+                case ESC_PRESS: gameState = ExitGame; break;
+                case ENTER_PRESS: gameState = Typing; break;
                 default: break;
             }
         }
@@ -186,20 +231,23 @@ void type() {
     TextBox* textbox = create_textbox(textbox_layer, textbox_bmp, 300, 300, 10, 5, 1);
     textbox_write(textbox, "Insert text here...");
     draw_sprite(cursor);
-    while(1) {
+    while(gameState == Typing) {
         event = GetEvent();
         update_clock(event);
+        if (clock_get_time_left() == 0)
+            gameState = EndGameLoss;
         update_cursor(cursor, event);
-        if (useTextbox(textbox, event))
-            break;
+        useTextbox(textbox, event);
     }
+    if (verify_guess(textbox->text))
+        gameState = EndGameWin;
     destroy_layer(textbox_layer);
     destroy_textbox(textbox);
 }
 
-bool useTextbox(TextBox* textbox, Event_t event) {
+void useTextbox(TextBox* textbox, Event_t event) {
     if (!event.isKeyboardEvent)
-        return false;
+        return;
     switch(event.keyboardEvent.type) {
         case CHARACTER_PRESS: 
             if (textbox->isEmpty) {
@@ -207,17 +255,17 @@ bool useTextbox(TextBox* textbox, Event_t event) {
                 textbox_clear(textbox);
             }
             textbox_put(textbox, event.keyboardEvent.character); 
-            return false;
+            return;
         case BACKSPACE_PRESS: 
             if (textbox->isEmpty) {
                 textbox->isEmpty = false;
                 textbox_clear(textbox);
             }
             else textbox_backspace(textbox);
-            return false;
-        case ESC_PRESS: gameState = ExitGame; return true;
-        case ENTER_PRESS: gameState = Guessing; return true;
-        default: return false;
+            return;
+        case ESC_PRESS: gameState = ExitGame; return;
+        case ENTER_PRESS: gameState = Guessing; return;
+        default: return;
     }
 }
 
@@ -237,6 +285,7 @@ DrawingState* create_pencil() {
 
 void draw() {
     draw_buttons(paint_buttons, num_paint_buttons);
+    press_button(paint_buttons[0]);
     while (1) {
         event = GetEvent();
         switch (checkButtonPress(event, cursor, paint_buttons, num_paint_buttons)) {

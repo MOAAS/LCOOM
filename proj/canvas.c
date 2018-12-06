@@ -9,8 +9,6 @@
 
 Canvas* canvas = NULL;
 void create_canvas(Layer* layer, uint16_t xMin, uint16_t yMin, uint16_t xMax, uint16_t yMax, uint32_t color) {
-    if (canvas != NULL)
-        return;
     canvas = malloc(sizeof(Canvas));
     canvas->layer = layer;
     canvas->xMin = xMin;
@@ -23,6 +21,12 @@ void create_canvas(Layer* layer, uint16_t xMin, uint16_t yMin, uint16_t xMax, ui
     canvas_set_outline(BLACK);
 }
 
+void destroy_canvas() {
+    canvas_set_color(WHITE);
+    canvas_set_outline(WHITE);
+    free(canvas);
+    canvas = NULL;    
+}
 
 void canvas_draw_line1(uint16_t x0, uint16_t y0, uint16_t xf, uint16_t yf, uint32_t color, uint16_t thickness) {
     int16_t dx = xf - x0, dy = yf - y0;

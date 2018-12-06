@@ -133,6 +133,14 @@ void draw_buttons(Button* buttons[], uint8_t num_buttons) {
     }
 }
 
+void disable_buttons(Button* buttons[], uint8_t num_buttons) {
+    for (uint8_t i = 0; i < num_buttons; i++) {
+        buttons[i]->bitmap = buttons[i]->bitmapIdle;
+        buttons[i]->isHighlighted = false;
+        buttons[i]->isPressed = false;
+    }
+}
+
 void unhighlight_button(Button* button) {
     button->isHighlighted = false;
     button->bitmap = button->bitmapIdle;

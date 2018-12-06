@@ -2,6 +2,7 @@
 
 #include <stdint.h>
 #include <stdio.h>
+#include <ctype.h>
 
 #include "wordpicker.h"
 
@@ -46,8 +47,6 @@ void loadDictionary() {
 }
 
 void word_pick_start(Layer* bg, char* solution, bool isDrawing) {
-    if (background != NULL)
-        return;
     background = bg;
     // Draw the box
     wordbox_bmp = loadBitmap("home/lcom/labs/proj/bitmaps/wordbox.bmp");
@@ -71,13 +70,14 @@ void word_pick_start(Layer* bg, char* solution, bool isDrawing) {
     else for (int i = 0; i < word_size; i++)
         draw_char(background, '_', 2, wordbox_X + (wordbox_width - word_size * 64) / 2 + i * 64, wordbox_Y + wordbox_height / 2 - 8);
 }
+
 void word_pick_end() {
-    if (background == NULL)
-        return;
     free(word);
     free(revealed_letters);
     word_size = 0;
     num_revealed_letters = 0;
+    layer_draw_image(background, wordbox_bmp, wordbox_X, wordbox_Y);
+    background = NULL;
 }
 
 char* get_random_word() {
@@ -95,6 +95,12 @@ void reveal_letter() {
     }
 }
 
-char* get_solution() {
-    return word;
+bool verify_guess(char* guess) {
+    if (strlen(guess) != strlen(word))
+        return false;
+    for (int i = 0; guess[i] != '\0'; i++) {
+        if (tolower((int)guess[i]) != tolower((int)word[i]))
+            return false;
+    }
+    return true;
 }

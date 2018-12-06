@@ -12,8 +12,6 @@ static char time_left_string[12];
 static Layer* clock_layer = NULL;
 
 void create_clock(Bitmap* bmp, uint16_t time_left_i) {
-    if (clock_layer != NULL)
-        return;
     clock_layer = create_layer(12, 150, 128, 128);
     clock_box = create_textbox(clock_layer, bmp, 12, 150, 36, 50, 2);
     time_left = time_left_i;
