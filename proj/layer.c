@@ -5,7 +5,6 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <math.h>
-
 #include "layer.h"
 
 Layer layers[5];
@@ -106,11 +105,16 @@ bool is_top_layer(Layer* layer, uint16_t x, uint16_t y) {
     }
     return true;
 }
-
+ 
 
 bool is_within_bounds(Layer* layer, uint16_t x, uint16_t y) {
     return x >= layer->x && y >= layer->y && x < layer->x + layer->width && y < layer->y + layer->height;
 }
+
+/*
+bool is_cursor_on_layer(Layer* layer, Sprite* cursor){
+    return cursor->x > layer->x && cursor->y > layer ->y && cursor->x < (layer->x + layer->width) && cursor->y < (layer->y + layer->height);
+}*/
 
 
 void layer_draw_image(Layer* layer, Bitmap* bmp, int x, int y) {

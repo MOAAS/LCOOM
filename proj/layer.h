@@ -2,6 +2,7 @@
 
 #include "video.h"
 #include "bitmap.h"
+//#include "sprite.h"
 
 typedef struct {
     char* map;
@@ -30,6 +31,7 @@ uint32_t layer_get_pixel_under(Layer* layer, uint16_t x, uint16_t y);
 
 bool is_within_bounds(Layer* layer, uint16_t x, uint16_t y);
 
+//bool is_cursor_on_layer(Layer* layer, Sprite* cursor);
 void layer_draw_image(Layer* layer, Bitmap* bmp, int x, int y);
 
 

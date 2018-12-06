@@ -100,16 +100,20 @@ void textbox_backspace(TextBox* textbox) {
     }
 }
 
-void draw_char(Layer* layer, char character, uint16_t font_scale, uint16_t x, uint16_t y) {
+void draw_char(Layer* layer, char character, int16_t x, int16_t y, uint16_t font_scale, TextAlignment alignment){
     Bitmap* bitmap = resizeBitmap(letters[(uint8_t)character], font_scale);
+    if (alignment == Center)
+        x -= 8 * font_scale;
     layer_draw_image(layer, bitmap, x, y);
 }
 
-void draw_word(Layer* layer, char* word, uint16_t font_scale, uint16_t space_length, uint16_t x, uint16_t y) {
-    Bitmap* bitmap; 
+void draw_word(Layer* layer, char* word, int16_t x, int16_t y, uint16_t font_scale, uint16_t space_scale, TextAlignment alignment) {
+    int16_t xDiff = 16 * (font_scale + space_scale);
+    if (alignment == Center) {
+        x -= xDiff * (strlen(word) - 1) / 2.0;
+    }
     for (int i = 0; word[i] != '\0'; i++) {
-        bitmap = resizeBitmap(letters[(uint8_t)(word[i])], font_scale);
-        layer_draw_image(layer, bitmap, x, y);
-        x = x + 16 * font_scale + space_length;
+        draw_char(layer, word[i], x, y, font_scale, alignment);
+        x += xDiff;
     }
 }

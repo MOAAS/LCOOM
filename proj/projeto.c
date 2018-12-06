@@ -13,6 +13,7 @@ static Sprite* cursor;
 
 static Layer* background;
 static Layer* textbox_layer;
+static Layer* color_picker_layer;
 
 static Bitmap* ULTRA_BACKGROUND;
 
@@ -35,8 +36,11 @@ static Bitmap* trash_button;
 static Bitmap* trash_hl;
 static Bitmap* rubber_button;
 static Bitmap* rubber_hl;
+static Bitmap* color_button;
+static Bitmap* color_hl;
 
 static Bitmap* textbox_bmp;
+static Bitmap* colorpicker_bmp;
 static Bitmap* clock_bmp;
 
 static Bitmap* thumbsup_bmp;
@@ -44,9 +48,9 @@ static Bitmap* thumbsdown_bmp;
 
 static Event_t event;
 
-static int num_paint_buttons = 6;
+static int num_paint_buttons = 7;
 static int num_menu_buttons = 3;
-static Button* paint_buttons[6];
+static Button* paint_buttons[7];
 static Button* menu_buttons[3];
 
 void loadBitmaps() {
@@ -78,10 +82,14 @@ void loadBitmaps() {
     rubber_button = loadBitmap("home/lcom/labs/proj/bitmaps/rubber.bmp");
     rubber_hl = loadBitmap("home/lcom/labs/proj/bitmaps/rubber_hl.bmp");
 
+    color_button = loadBitmap("home/lcom/labs/proj/bitmaps/color.bmp");
+    color_hl = loadBitmap("home/lcom/labs/proj/bitmaps/color_hl.bmp");
+
     thumbsup_bmp =  loadBitmap("home/lcom/labs/proj/bitmaps/thumbsup.bmp");
     thumbsdown_bmp = loadBitmap("home/lcom/labs/proj/bitmaps/thumbsdown.bmp");
 
     textbox_bmp = loadBitmap("home/lcom/labs/proj/bitmaps/textbox.bmp");
+    colorpicker_bmp = loadBitmap("home/lcom/labs/proj/bitmaps/colorpicker.bmp");
 
     clock_bmp = loadBitmap("home/lcom/labs/proj/bitmaps/clock.bmp");
     cursor = create_sprite("home/lcom/labs/proj/bitmaps/cool_cursor.bmp", 0, 0);
@@ -94,7 +102,9 @@ void loadButtons() {
     paint_buttons[3] = create_button(80, 470, background, rainbow_button, rainbow_hl); // rainbow
     paint_buttons[4] = create_button(80, 550, background, rubber_button, rubber_hl); // borracha
     paint_buttons[5] = create_button(80, 630, background, trash_button, trash_hl); // trash
+    paint_buttons[6] = create_button(45, 360, background, color_button, color_hl); //color picker
     paint_buttons[5]->singleState = true; // trash so tem um estado
+    paint_buttons[6]->singleState = true; // trash so tem um estado
 
     menu_buttons[0] = create_button(300, 150, background, mainmenu_button1, mainmenu_button1_hl);
     menu_buttons[1] = create_button(300, 350, background, mainmenu_button2, mainmenu_button2_hl);
@@ -184,13 +194,13 @@ void end_game() {
     destroy_clock();
     Bitmap* wordbox_bmp = loadBitmap("home/lcom/labs/proj/bitmaps/wordbox.bmp");
     layer_draw_image(background, ULTRA_BACKGROUND, 0, 0);
-    layer_draw_image(background, wordbox_bmp, 100, 200);
+    layer_draw_image(background, wordbox_bmp, 100, 200); // 860x100 image
     if (gameState == EndGameWin) {
-        draw_word(background, "You win!", 3, 32, 175, 225);
+        draw_word(background, "You win!", 530, 225, 3, 2, Center);
         layer_draw_image(background, thumbsup_bmp, 300, 300);
     }
     else {
-        draw_word(background, "You lose!", 3, 32, 175, 225);
+        draw_word(background, "You lose!", 530, 225, 3, 2, Center);
         layer_draw_image(background, thumbsdown_bmp, 300, 300);
     }
     timer_reset_counter();
@@ -214,7 +224,7 @@ void guess() {
         if (clock_get_time_left() == 0)
             gameState = EndGameLoss;
         update_cursor(cursor, event);
-        if (event.isTimerEvent && event.timerEvent.has_second_passed && event.timerEvent.seconds_passed % 12 == 0)
+        if (event.isTimerEvent && event.timerEvent.has_second_passed && event.timerEvent.seconds_passed % 1 == 0)
             reveal_letter();
         if (event.isKeyboardEvent) {
             switch(event.keyboardEvent.type) {
@@ -239,7 +249,7 @@ void type() {
         update_cursor(cursor, event);
         useTextbox(textbox, event);
     }
-    if (verify_guess(textbox->text))
+    if (verify_guess(textbox->text)) // if guess is correct
         gameState = EndGameWin;
     destroy_layer(textbox_layer);
     destroy_textbox(textbox);
@@ -283,6 +293,28 @@ DrawingState* create_pencil() {
     return pencil;
 }
 
+void color_picker() {
+    color_picker_layer = create_layer(45, 440, 538, 323);
+    layer_draw_image(color_picker_layer, colorpicker_bmp, 45, 440);
+    draw_sprite(cursor);
+    while(1) {
+        event = GetEvent();
+        update_clock(event);
+        update_cursor(cursor, event);
+        if(event.isMouseEvent && (event.mouseEvent.type == LB_PRESS || event.mouseEvent.type == RB_PRESS)) { //is_cursor_on_layer()tem um erro gay depois vejo melhor;
+      //      if(cursor->x > color_picker_layer->x && cursor->y > color_picker_layer ->y && cursor->x < (color_picker_layer->x + color_picker_layer->width) && cursor->y < (color_picker_layer->y + color_picker_layer->height))
+            if (is_within_bounds(color_picker_layer, cursor->x, cursor->y)) {
+                if (event.mouseEvent.type == LB_PRESS)
+                    pencil->color1 = layer_get_pixel(color_picker_layer, cursor->x, cursor->y);
+                else pencil->color2 = layer_get_pixel(color_picker_layer, cursor->x, cursor->y);  
+            }
+            break;
+        }
+    }
+    destroy_layer(color_picker_layer);
+    unpress_button(paint_buttons[6]);
+}
+
 void draw() {
     draw_buttons(paint_buttons, num_paint_buttons);
     press_button(paint_buttons[0]);
@@ -295,7 +327,9 @@ void draw() {
             case 3: pencil->tool = Rainbow; break;
             case 4: pencil->tool = Rubber; break;
             case 5: canvas_set_color(WHITE); break;
-            case -1: usePencil(pencil, event); break; // Se um botao for carregado o pincel nao e usado (rimou)
+            case 6: color_picker(); break;
+        
+            case -1: usePencil(pencil, event); break; // Se um botao for carregado o pincel nao e usado (rimou) xd
         }
         update_clock(event);
         update_cursor(cursor, event);
@@ -309,6 +343,7 @@ void draw() {
         }
     }
 }
+
 
 void usePencil(DrawingState* pencil, Event_t event) {
     if (!event.isMouseEvent)
@@ -341,8 +376,8 @@ void usePencil(DrawingState* pencil, Event_t event) {
             break;
         case Bucket:
             color_under = layer_get_pixel(background, cursor->x, cursor->y);
-            if (event.mouseEvent.type == LB_PRESS)
-                bucket_tool(cursor, color_under, pencil->color1);
+			if (event.mouseEvent.type == LB_PRESS)
+				 bucket_tool(cursor, color_under, pencil->color1);
             else if (event.mouseEvent.type == RB_PRESS)
                 bucket_tool(cursor, color_under, pencil->color2);
             break;
