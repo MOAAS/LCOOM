@@ -302,7 +302,7 @@ void color_picker() {
         update_clock(event);
         update_cursor(cursor, event);
         if(event.isMouseEvent && (event.mouseEvent.type == LB_PRESS || event.mouseEvent.type == RB_PRESS)) { //is_cursor_on_layer()tem um erro gay depois vejo melhor;
-      //      if(cursor->x > color_picker_layer->x && cursor->y > color_picker_layer ->y && cursor->x < (color_picker_layer->x + color_picker_layer->width) && cursor->y < (color_picker_layer->y + color_picker_layer->height))
+        //if(cursor->x > color_picker_layer->x && cursor->y > color_picker_layer ->y && cursor->x < (color_picker_layer->x + color_picker_layer->width) && cursor->y < (color_picker_layer->y + color_picker_layer->height))
             if (is_within_bounds(color_picker_layer, cursor->x, cursor->y)) {
                 if (event.mouseEvent.type == LB_PRESS)
                     pencil->color1 = layer_get_pixel(color_picker_layer, cursor->x, cursor->y);

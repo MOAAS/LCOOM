@@ -78,6 +78,7 @@ void word_pick_start(Layer* bg, char* solution, bool isDrawing) {
         char* hidden_word = malloc(word_size * sizeof(char) + 1);
         for (int i = 0; i < word_size; i++)
             hidden_word[i] = '_';
+        hidden_word[word_size] = '\0';
         draw_word(background, hidden_word, wordbox_xMid, wordbox_yMid + 8, FONT_SCALE, SPACE_SCALE, Center);        
     }
 }
