@@ -48,6 +48,8 @@ typedef struct {
     unsigned int actual_width;
 } Bitmap;
 
+void saveBitmap(char* filename, unsigned int width, unsigned int height, char* address);
+
 Bitmap* loadBitmap(const char* filename);
 
 Bitmap* loadBitmapSection(Bitmap* bitmap, uint16_t x, uint16_t y, uint16_t width, uint16_t height);
@@ -55,6 +57,8 @@ Bitmap* loadBitmapSection(Bitmap* bitmap, uint16_t x, uint16_t y, uint16_t width
 Bitmap* resizeBitmap(Bitmap* bitmap, uint16_t factor);
 
 void draw_bitmap(Bitmap* bmp, int x, int y, Alignment alignment);
+
+void draw_bitmap_color(Bitmap* bmp, int x, int y, Alignment alignmentn , uint32_t new_color) ;
 
 uint32_t get_bitmap_color(Bitmap* bmp, uint16_t x, uint16_t y);
 

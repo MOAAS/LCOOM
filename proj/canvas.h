@@ -41,3 +41,9 @@ uint32_t rainbow();
 void bucket_tool(Sprite* cursor, uint32_t cor_inicial, uint32_t cor_balde);
 
 bool is_inside_canvas(uint16_t x, uint16_t y);
+
+char* canvas_get_map();
+
+int canvas_get_height();
+
+int canvas_get_width();

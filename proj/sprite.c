@@ -5,6 +5,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <math.h>
+#include "canvas.h"
 
 
 #include "sprite.h"
@@ -39,6 +40,10 @@ void destroy_sprite(Sprite *sp) {
 
 void draw_sprite(Sprite *sp) {
     draw_bitmap(sp->bitmap, sp->x, sp->y, ALIGN_LEFT);
+}
+
+void draw_sprite_color(Sprite *sp,uint32_t new_color) {
+    draw_bitmap_color(sp->bitmap, sp->x, sp->y, ALIGN_LEFT,new_color);
 }
 
 void erase_sprite(Sprite *sp) {
@@ -80,9 +85,9 @@ uint16_t cursor_get_yf(Sprite* cursor, int16_t delY) {
     return yf;
 }
 
-void update_cursor(Sprite *cursor, Event_t event) {
+void update_cursor(Sprite *cursor, Event_t event, uint32_t cor) {
     if (!event.isMouseEvent) {
-        draw_sprite(cursor);
+        draw_sprite_color(cursor,cor);
         return;
     }
     erase_sprite(cursor);
@@ -94,9 +99,14 @@ void update_cursor(Sprite *cursor, Event_t event) {
         if (cursor->y < 0) cursor->y = 0;
         else if (cursor->y > (int)vg_get_vres()) cursor->y = (int)vg_get_vres();
     }
-    draw_sprite(cursor);
+    draw_sprite_color(cursor,cor);
 }
 
+void cursor_change_bmp(Sprite *cursor,Bitmap* bm){
+    erase_sprite(cursor);
+    cursor->bitmap = bm;
+    draw_sprite_color(cursor,WHITE);
+}
 
 Button* create_button(uint16_t x, uint16_t y, Layer* layer, Bitmap* bitmapIdle, Bitmap* bitmapHighlighted) {
     Button* button = malloc(sizeof(Button));
@@ -192,3 +202,19 @@ int checkButtonPress(Event_t event, Sprite* cursor, Button* buttons[], uint8_t n
     return pressedButton;
 }
 
+NNY* create_NNY(uint16_t x, uint16_t y, Layer* layer, Bitmap* bitmap) {
+    NNY* nny = malloc(sizeof(NNY));
+    nny->x = x;
+    nny->y = y;
+    nny->bitmap = bitmap;
+    nny->layer = layer;
+    return nny;
+}
+
+void draw_nny(NNY* nny) {
+    layer_draw_image(nny->layer, nny->bitmap, nny->x, nny->y);
+}
+
+void nny_change_color(NNY* nny,uint32_t color) {
+    layer_draw_image_color(nny->layer, nny->bitmap, nny->x, nny->y,color);
+}

@@ -21,7 +21,8 @@ typedef enum  {
     MainMenu,
     Drawing,
     Guessing,
-    Typing,
+    TypingGuess,
+    Saving,
     EndGameWin,
     EndGameLoss,
     ExitGame
@@ -47,12 +48,13 @@ typedef struct {
 
 void projeto();
 void guess();
+void type_guess();
 void draw();
-void type();
 void start_game();
 void end_game();
+void save();
 
-void useTextbox(TextBox* textbox, Event_t event);
+void useTextbox(TextBox* textbox, Event_t event, GameState previous_state, GameState next_state);
 
 void main_menu();
 void usePencil(DrawingState* pencil, Event_t event);

@@ -191,12 +191,12 @@ void canvas_set_color(uint32_t color) {
 
 uint32_t rainbow() {
     static uint32_t R = 255, G = 0 , B = 0;
-    if(G<255 && B==0 && R==255) G+=5;    
-    else if(R>0 && G==255 && B==0 ) R-=5;
-    else if(B<255 && R==0 && G == 255) B+=5;
-    else if(G>0 && R == 0 && B == 255) G-=5;
-    else if(R<255 && G==0 && B == 255) R+=5;
-    else if(B>0 && R==255 && G==0) B-=5;
+    if(G<255 && B==0 && R==255) G+=3;    
+    else if(R>0 && G==255 && B==0 ) R-=3;
+    else if(B<255 && R==0 && G == 255) B+=3;
+    else if(G>0 && R == 0 && B == 255) G-=3;
+    else if(R<255 && G==0 && B == 255) R+=3;
+    else if(B>0 && R==255 && G==0) B-=3;
     return vg_compose_RGB(R, G, B);
 } 
 
@@ -204,6 +204,26 @@ bool is_inside_canvas(uint16_t x , uint16_t y) {
     return x >= canvas->xMin && y >= canvas->yMin && x < canvas->xMax && y < canvas->yMax;
 }
 
+char* canvas_get_map() {
+    uint8_t bytes_per_pixel = vg_get_bytes_pp();
+    char* canvas_map = malloc(canvas->width * canvas->height * bytes_per_pixel);
+    char* layer_map = calc_address(canvas->layer->map, canvas->xMin, canvas->yMin, canvas->layer->width); 
+    char* canvas_curr = canvas_map;
+    for (int i = 0; i < canvas->height; i++) {
+        memcpy(canvas_curr, layer_map, canvas->width * bytes_per_pixel);
+        canvas_curr += canvas->width * bytes_per_pixel;         
+        layer_map += canvas->layer->width * bytes_per_pixel;   
+    }
+    return canvas_map;
+}
+
+int canvas_get_height() {
+    return canvas->height;
+}
+
+int canvas_get_width() {
+    return canvas->width;
+}
 
 void bucket_tool(Sprite* cursor, uint32_t cor_inicial, uint32_t cor_balde) {
     if (cor_inicial == cor_balde || !is_inside_canvas(cursor->x, cursor->y))
@@ -254,44 +274,3 @@ void bucket_tool(Sprite* cursor, uint32_t cor_inicial, uint32_t cor_balde) {
         video_mem = video_mem + (vg_get_hres() - canvas->width) * bytes_pp;
     }
 }
-
-/*
-void bucket_tool(uint16_t x0 , uint16_t y0, uint32_t cor_inicial, uint32_t cor_balde) {
-    if (cor_inicial == cor_balde || !is_inside_canvas(x0, y0))
-        return;
-    // Cria fila e coloca as posicoes iniciais nela
-    Queue* Q = create_queue();
-    char* layer_map = canvas->layer->map + (x0 + y0 * canvas->layer->width) * vg_get_bytes_pp();
-    char* video_mem = (char*)vg_get_video_mem() + (x0 + y0 * vg_get_hres()) * vg_get_bytes_pp();
-    push(Q, x0, y0, layer_map, video_mem);
-    Point p;
-    uint32_t diff = vg_get_hres() * 3;
-    x0 = y0 = 3;
-    while(Q->front != NULL) {
-        // Trata as posicoes que estao a frente na fila
-        p = front(Q);
-        pop(Q);
-        if (!is_inside_canvas(p.x, p.y))
-            continue;
-        // Se estiver a ser tratado um pixel valido, continua
-        if(vg_retrieve(p.layer_address) == cor_inicial) {
-            // Adiciona os 4 pixeis a volta a fila, se nao tiverem sido tratados ainda
-            vg_insert(p.layer_address, cor_balde);
-            vg_insert(p.vg_address, cor_balde);
-            if(vg_retrieve(p.layer_address - 3) != cor_balde) {
-                push(Q, p.x-1, p.y, p.layer_address - 3, p.vg_address - 3);
-            }
-            if(vg_retrieve(p.layer_address + 3) != cor_balde) {
-                push(Q, p.x+1, p.y, p.layer_address + 3, p.vg_address + 3);
-            }
-            if(vg_retrieve(p.layer_address - diff) != cor_balde) {
-                push(Q, p.x, p.y-1, p.layer_address - diff, p.vg_address - diff);
-            }
-            if(vg_retrieve(p.layer_address + diff) != cor_balde) {
-                push(Q, p.x, p.y+1, p.layer_address + diff, p.vg_address + diff);
-            }
-        }
-    }
-    destroy_queue(Q);
-}
-*/

@@ -10,6 +10,7 @@
 #include "video.h"
 
 
+
 Bitmap* loadBitmap(const char* filename) {
     // allocating necessary size
     Bitmap* bmp = (Bitmap*) malloc(sizeof(Bitmap));
@@ -143,29 +144,32 @@ Bitmap* resizeBitmap(Bitmap* bitmap, uint16_t factor) {
     return resized;
 }
 
-/*
-//supply an array of pixels[height][width] <- notice that height comes first
-void writeBMP(char* filename, unsigned int width, unsigned int height, char* address) {
-    File* file = fopen(filename, )
-	int fd = open(filename, O_WRONLY|O_CREAT|O_TRUNC,S_IRUSR|S_IWUSR|S_IRGRP|S_IWGRP|S_IROTH|S_IWOTH);  
-	static unsigned char header[54] = {66,77,0,0,0,0,0,0,0,0,54,0,0,0,40,0,0,0,0,0,0,0,0,0,0,0,1,0,24}; //rest is zeroes
-	unsigned int pixelBytesPerRow = width*sizeof(pixel);
-	unsigned int paddingBytesPerRow = (4-(pixelBytesPerRow%4))%4;
-	unsigned int* sizeOfFileEntry = (unsigned int*) &header[2];
-	*sizeOfFileEntry = 54 + (pixelBytesPerRow+paddingBytesPerRow)*height;  
-	unsigned int* widthEntry = (unsigned int*) &header[18];    
+void saveBitmap(char* filename, unsigned int width, unsigned int height, char* address) {
+    FILE* file = fopen(filename, "w");
+	static unsigned char bmp_header[54] = {66,77,0,0,0,0,0,0,0,0,54,0,0,0,40,0,0,0,0,0,0,0,0,0,0,0,1,0,24}; //rest is zeroes
+	unsigned int bytes_per_row = width * vg_get_bytes_pp();
+	unsigned int padding = (4 - (bytes_per_row % 4)) % 4;
+	unsigned int* sizeOfFileEntry = (unsigned int*)&bmp_header[2];
+	*sizeOfFileEntry = 54 + (bytes_per_row + padding) * height;  
+	unsigned int* widthEntry = (unsigned int*)&bmp_header[18];    
 	*widthEntry = width;
-	unsigned int* heightEntry = (unsigned int*) &header[22];    
+	unsigned int* heightEntry = (unsigned int*)&bmp_header[22];    
 	*heightEntry = height;
-	write(fd, header, 54);
-	static unsigned char zeroes[3] = {0,0,0}; //for padding    
-	for (int row = 0; row < height; row++) {
-		write(fd,pixels[row],pixelBytesPerRow);
-		write(fd,zeroes,paddingBytesPerRow);
-	}
-	close(fd);
+    fwrite(bmp_header, sizeof(char), 54, file);
+	static unsigned char zeroes[3] = {0,0,0}; // padding
+    uint8_t bytes_per_pixel = vg_get_bytes_pp();
+    address += (height - 1) * bytes_per_row;
+    for (unsigned int i = 0; i < height; i++) {
+        for (unsigned int j = 0; j < width; j++) {
+            fwrite(address, 1, bytes_per_pixel, file);
+            address += bytes_per_pixel;
+        }
+        address -= 2 * bytes_per_row;
+        fwrite(zeroes, sizeof(char), padding, file);
+    }
+	fclose(file);
+
 }
-*/
 
 void draw_bitmap(Bitmap* bmp, int x, int y, Alignment alignment) {
     if (bmp == NULL)
@@ -185,6 +189,33 @@ void draw_bitmap(Bitmap* bmp, int x, int y, Alignment alignment) {
             uint32_t color = *(uint32_t*)img;
             if (!is_transparent(color))
                 vg_draw_pixel(xCoord, yCoord, color);
+            img += bmp->bytes_per_pixel;
+        }
+        img += bmp->padding; // * bmp->bytes_per_pixel;
+    }
+}
+
+void draw_bitmap_color(Bitmap* bmp, int x, int y, Alignment alignment , uint32_t new_color) {
+    if (bmp == NULL)
+        return;
+    int width = bmp->bitmapInfoHeader.width;
+    int height = bmp->bitmapInfoHeader.height;
+    if (alignment == ALIGN_CENTER)
+        x -= width / 2;
+    else if (alignment == ALIGN_RIGHT)
+        x -= width;
+    uint16_t xCoord = x;
+    uint16_t yCoord = y + height - 1;  
+    unsigned char* img = bmp->bitmapData;
+    for (int i = 0; i < height; i++, yCoord--) { // y
+        xCoord = x;
+    	for(int j = 0; j < width; j++, xCoord++) { // x
+            uint32_t color = *(uint32_t*)img;
+            if (!is_transparent(color)) {
+                if((color & 0xFFFFFF) == GREEN)
+                    vg_draw_pixel(xCoord, yCoord, new_color);
+                else vg_draw_pixel(xCoord, yCoord, color);
+            }
             img += bmp->bytes_per_pixel;
         }
         img += bmp->padding; // * bmp->bytes_per_pixel;

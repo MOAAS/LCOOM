@@ -20,12 +20,15 @@ Sprite *create_sprite(const char *file, int x, int y);
  */
 void destroy_sprite(Sprite *fig);
 void draw_sprite(Sprite *sp);
+void draw_sprite_color(Sprite *sp,uint32_t new_color);
 void erase_sprite(Sprite *sp);
 void move_sprite(Sprite *sp, int16_t delX, int16_t delY);
 
 uint16_t cursor_get_xf(Sprite* cursor, int16_t delX);
 uint16_t cursor_get_yf(Sprite* cursor, int16_t delY);
-void update_cursor(Sprite *cursor, Event_t event);
+void update_cursor(Sprite *cursor, Event_t event,uint32_t cor);
+void cursor_change_bmp(Sprite *cursor,Bitmap* bitmap);
+
 
 typedef struct {
   uint16_t x, y;
@@ -52,3 +55,14 @@ void press_button(Button* button);
 void unpress_button(Button* button);
 
 int checkButtonPress(Event_t event, Sprite* cursor, Button* buttons[], uint8_t num_buttons);
+
+typedef struct {
+  uint16_t x, y;
+  Bitmap* bitmap;
+  Layer* layer;
+} NNY;
+
+NNY* create_NNY(uint16_t x, uint16_t y, Layer* layer, Bitmap* bitmap);
+void draw_nny(NNY* nny);
+void nny_change_color(NNY* nny,uint32_t color);
+

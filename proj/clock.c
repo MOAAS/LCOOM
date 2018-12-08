@@ -7,7 +7,7 @@
 
 static TextBox* clock_box;
 static Layer* clock_layer;
-static uint16_t time_left;
+static uint16_t time_left = 0;
 static char time_left_string[12];
 static Layer* clock_layer = NULL;
 
@@ -22,6 +22,7 @@ void create_clock(Bitmap* bmp, uint16_t time_left_i) {
 void destroy_clock() {
     destroy_layer(clock_layer);
     clock_layer = NULL;
+    time_left = 0;
 }
 
 uint16_t clock_get_time_left() {

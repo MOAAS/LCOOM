@@ -5,6 +5,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <math.h>
+#include "canvas.h"
 #include "layer.h"
 
 Layer layers[5];
@@ -131,6 +132,30 @@ void layer_draw_image(Layer* layer, Bitmap* bmp, int x, int y) {
             uint32_t color = *(uint32_t*)img;
             if (!is_transparent(color)) { // && is_within_bounds(layer, xCoord, yCoord)) {
                 draw_on_layer(layer, xCoord, yCoord, color);
+            }
+            img += bmp->bytes_per_pixel;
+        }
+        img += bmp->padding; //* bmp->bytes_per_pixel;
+    }
+}
+
+
+void layer_draw_image_color(Layer* layer, Bitmap* bmp, int x, int y, uint32_t new_color) {
+    if (bmp == NULL || layer == NULL)
+        return;
+    int width =  bmp->bitmapInfoHeader.width;
+    int height = bmp->bitmapInfoHeader.height;
+    uint16_t xCoord = x;
+    uint16_t yCoord = height + y - 1;
+    unsigned char* img = bmp->bitmapData;
+    for (int i = 0; i < height; i++, yCoord--) { // y
+        xCoord = x;
+    	for(int j = 0; j < width; j++, xCoord++) { // x
+            uint32_t color = *(uint32_t*)img;
+            if (!is_transparent(color)) { // && is_within_bounds(layer, xCoord, yCoord)) {
+                if((color & 0xFFFFFF) == GREEN)
+                    draw_on_layer(layer, xCoord, yCoord, new_color);
+                else draw_on_layer(layer, xCoord, yCoord, color);
             }
             img += bmp->bytes_per_pixel;
         }

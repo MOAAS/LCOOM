@@ -33,6 +33,7 @@ bool is_within_bounds(Layer* layer, uint16_t x, uint16_t y);
 
 //bool is_cursor_on_layer(Layer* layer, Sprite* cursor);
 void layer_draw_image(Layer* layer, Bitmap* bmp, int x, int y);
+void layer_draw_image_color(Layer* layer, Bitmap* bmp, int x, int y,uint32_t new_color);
 
 
 

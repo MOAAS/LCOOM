@@ -40,6 +40,7 @@ TextBox* create_textbox(Layer* layer, Bitmap* bitmap, uint16_t x, uint16_t y, ui
 }
 
 void destroy_textbox(TextBox* textbox) {
+    destroy_layer(textbox->layer);
     free(textbox);
 }
 
