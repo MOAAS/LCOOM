@@ -8,26 +8,29 @@ typedef struct {
   int x,y;             /**< current sprite position */
   int width, height;   /**< sprite dimensions */
   Bitmap* bitmap;      /**< the sprite bitmap */
+  uint32_t color;
 } Sprite;
 
 /** Creates a new sprite with pixmap "pic", with specified position (within the screen limits).
 * Does not draw the sprite on the screen
 * Returns NULL on invalid pixmap.
 */
-Sprite *create_sprite(const char *file, int x, int y);
+Sprite *create_sprite(Bitmap* bitmap, int x, int y);
 /** The "fig" sprite is erased from memory whose address is "base"
  * and used resources released.
  */
 void destroy_sprite(Sprite *fig);
 void draw_sprite(Sprite *sp);
-void draw_sprite_color(Sprite *sp,uint32_t new_color);
+void draw_sprite_color(Sprite *sp);
+
 void erase_sprite(Sprite *sp);
 void move_sprite(Sprite *sp, int16_t delX, int16_t delY);
+void sprite_set_color(Sprite *sp, uint32_t color);
 
 uint16_t cursor_get_xf(Sprite* cursor, int16_t delX);
 uint16_t cursor_get_yf(Sprite* cursor, int16_t delY);
-void update_cursor(Sprite *cursor, Event_t event,uint32_t cor);
-void cursor_change_bmp(Sprite *cursor,Bitmap* bitmap);
+void update_cursor(Sprite *cursor, Event_t event);
+void cursor_change_bmp(Sprite *cursor, Bitmap* bitmap);
 
 
 typedef struct {
@@ -64,5 +67,5 @@ typedef struct {
 
 NNY* create_NNY(uint16_t x, uint16_t y, Layer* layer, Bitmap* bitmap);
 void draw_nny(NNY* nny);
-void nny_change_color(NNY* nny,uint32_t color);
+void nny_change_color(NNY* nny, uint32_t color);
 

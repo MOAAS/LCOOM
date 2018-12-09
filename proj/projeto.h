@@ -39,6 +39,7 @@ typedef enum  {
 
 typedef struct {
     Tool tool;
+    Sprite* cursor;
     bool isDrawing;
     uint8_t thickness;
     uint32_t color1;
@@ -47,6 +48,7 @@ typedef struct {
 } DrawingState;
 
 void projeto();
+void main_menu();
 void guess();
 void type_guess();
 void draw();
@@ -54,12 +56,15 @@ void start_game();
 void end_game();
 void save();
 
+
+
 void useTextbox(TextBox* textbox, Event_t event, GameState previous_state, GameState next_state);
-
-void main_menu();
 void usePencil(DrawingState* pencil, Event_t event);
-DrawingState* create_pencil();
 
+DrawingState* create_pencil();
+void setupDrawing();
+void change_tool(DrawingState* pencil, Tool tool);
+void rainbow_draw(DrawingState* pencil, uint16_t x0, uint16_t y0, uint16_t xf, uint16_t yf);
 void increaseThickness(DrawingState* pencil);
 void decreaseThickness(DrawingState* pencil);
 

@@ -10,6 +10,8 @@ static GameState gameState = MainMenu;
 static DrawingState* pencil;
 
 static Sprite* cursor;
+
+static Bitmap* cursor_normal;
 static Bitmap* cursor_brush;
 static Bitmap* cursor_rainbow;
 static Bitmap* cursor_balde;
@@ -102,7 +104,8 @@ void loadBitmaps() {
     colorpicker_bmp = loadBitmap("home/lcom/labs/proj/bitmaps/colorpicker.bmp");
 
     clock_bmp = loadBitmap("home/lcom/labs/proj/bitmaps/clock.bmp");
-    cursor = create_sprite("home/lcom/labs/proj/bitmaps/cool_cursor.bmp", 0, 0);
+    
+    cursor_normal = loadBitmap("home/lcom/labs/proj/bitmaps/cool_cursor.bmp");
     cursor_brush = loadBitmap("home/lcom/labs/proj/bitmaps/cursor_brush.bmp");
     cursor_balde = loadBitmap("home/lcom/labs/proj/bitmaps/cursor_balde.bmp");
     cursor_picker = loadBitmap("home/lcom/labs/proj/bitmaps/cursor_picker.bmp");
@@ -111,6 +114,10 @@ void loadBitmaps() {
 
     paint_tube_1_bmp = loadBitmap("home/lcom/labs/proj/bitmaps/painttube_1.bmp");
     paint_tube_2_bmp = loadBitmap("home/lcom/labs/proj/bitmaps/painttube_2.bmp");
+
+    // Sprites
+    cursor = create_sprite(cursor_normal, 0, 0);
+    pencil = create_pencil(cursor);
 }
 
 void loadButtons() {
@@ -134,6 +141,7 @@ void loadButtons() {
 
 void loadBackground() {
     background = create_layer(0, 0, vg_get_hres(), vg_get_vres());
+    layer_draw_image(background, ULTRA_BACKGROUND, 0, 0);
 }
 
 void projeto() {
@@ -142,12 +150,11 @@ void projeto() {
     loadDictionary();
     video_init(0x118);
     loadBackground();
-    layer_draw_image(background, ULTRA_BACKGROUND, 0, 0);
     loadButtons();
     subscribe_device(Mouse);
     subscribe_device(Keyboard);
     subscribe_device(Timer);
-    draw_sprite(cursor);
+    draw_sprite_color(cursor);
     while(gameState != ExitGame) {
         switch(gameState) {
             case MainMenu: main_menu(); break;
@@ -170,7 +177,6 @@ void projeto() {
 void main_menu() {
     layer_draw_image(background, ULTRA_BACKGROUND, 0, 0);
     draw_buttons(menu_buttons, num_menu_buttons);
-    draw_sprite(cursor);
     while (1) {
         event = GetEvent();
         // isto e temporario caso algo crashe
@@ -192,7 +198,7 @@ void main_menu() {
             case 2: gameState = ExitGame; return;
             case -1: break;
         }
-        update_cursor(cursor, event, WHITE);
+        update_cursor(cursor, event);
     }
 }
 
@@ -200,13 +206,11 @@ void start_game() {
     create_clock(clock_bmp, 90);
     create_canvas(background, 150, 150, 1000, 750, WHITE);
     char* solution = get_random_word();
-    if (gameState == Drawing) {
-        pencil = create_pencil();
+    if (gameState == Drawing) {      
+        setupDrawing();
         word_pick_start(background, solution, true);
     }
     else word_pick_start(background, solution, false);
-    cursor_change_bmp(cursor,cursor_brush);
-    draw_sprite(cursor);
 }
 
 void end_game() {
@@ -225,10 +229,12 @@ void end_game() {
         layer_draw_image(background, thumbsdown_bmp, 300, 300);
     }
     timer_reset_counter();
+    change_tool(pencil, None);
     while(1) {
         event = GetEvent();
         if (event.isTimerEvent && event.timerEvent.seconds_passed == 3)
             break;
+        update_cursor(cursor, event);
     }
     gameState = MainMenu;
     
@@ -244,8 +250,8 @@ void guess() {
         update_clock(event);
         if (clock_get_time_left() == 0)
             gameState = EndGameLoss;
-        update_cursor(cursor, event,WHITE);
-        if (event.isTimerEvent && event.timerEvent.has_second_passed && event.timerEvent.seconds_passed % 1 == 0)
+        update_cursor(cursor, event);
+        if (event.isTimerEvent && event.timerEvent.has_second_passed && event.timerEvent.seconds_passed % 12 == 0)
             reveal_letter();
         if (event.isKeyboardEvent) {
             switch(event.keyboardEvent.type) {
@@ -261,11 +267,10 @@ void type_guess() {
     textbox_layer = create_layer(300, 300, 400, 200);
     TextBox* textbox = create_textbox(textbox_layer, textbox_bmp, 300, 300, 10, 5, 1);
     textbox_write(textbox, "Insert text here...");
-    draw_sprite(cursor);
     while(gameState == TypingGuess) {
         event = GetEvent();
         update_clock(event);
-        update_cursor(cursor, event, WHITE);
+        update_cursor(cursor, event);
         if (clock_get_time_left() == 0)
             gameState = EndGameLoss;
         if (event.isTimerEvent && event.timerEvent.has_second_passed && event.timerEvent.seconds_passed % 1 == 0)
@@ -308,25 +313,34 @@ void useTextbox(TextBox* textbox, Event_t event, GameState previous_state, GameS
 // DRAWING //
 /////////////
 
-DrawingState* create_pencil() {
+DrawingState* create_pencil(Sprite* cursor) {
     DrawingState* pencil = malloc(sizeof(DrawingState));
     pencil->color1 = RED;
     pencil->color2 = WHITE;
-    pencil->tool = Brush;
+    pencil->tool = None;
     pencil->thickness = 4;
-    pencil->rainbowColor=RED;
+    pencil->rainbowColor= RED;
+    pencil->cursor = cursor;
     return pencil;
 }
 
-void color_picker() {
-    
+void setupDrawing() {
+    paint_tube_1 = create_NNY(45, 280, background, paint_tube_1_bmp);
+    paint_tube_2 = create_NNY(79, 283, background, paint_tube_2_bmp);
+    nny_change_color(paint_tube_1, pencil->color1);
+    nny_change_color(paint_tube_2, pencil->color2);
+    draw_buttons(paint_buttons, num_paint_buttons);
+    change_tool(pencil, Brush);
+    press_button(paint_buttons[0]); // Brush
+}
+
+void color_picker() {    
     color_picker_layer = create_layer(45, 440, 538, 323);
     layer_draw_image(color_picker_layer, colorpicker_bmp, 45, 440);
-    draw_sprite(cursor);
     while(1) {
         event = GetEvent();
         update_clock(event);
-        update_cursor(cursor, event, pencil->color1);
+        update_cursor(cursor, event);
         if(event.isMouseEvent && (event.mouseEvent.type == LB_PRESS || event.mouseEvent.type == RB_PRESS)) {
             if (is_within_bounds(color_picker_layer, cursor->x, cursor->y)) {
                 if (event.mouseEvent.type == LB_PRESS)
@@ -336,32 +350,27 @@ void color_picker() {
             break;
         }
     }
+    change_tool(pencil, pencil->tool); // atualiza os paint tubes
     destroy_layer(color_picker_layer);
     unpress_button(paint_buttons[6]);
 }
-void draw() { //todo - meter atualizacoes no sitio certo , nomes , butoes no sitio certo
-    paint_tube_1 = create_NNY(45,280,background,paint_tube_1_bmp);
-    paint_tube_2 = create_NNY(79,283,background,paint_tube_2_bmp);
-    nny_change_color(paint_tube_1,pencil->color1);
-    nny_change_color(paint_tube_2,pencil->color2);
-    draw_buttons(paint_buttons, num_paint_buttons);
-    press_button(paint_buttons[0]);
+
+
+void draw() {
     while (1) {
         event = GetEvent();
         switch (checkButtonPress(event, cursor, paint_buttons, num_paint_buttons)) {
-            case 0: pencil->tool = Brush; cursor_change_bmp(cursor,cursor_brush);  break;
-            case 1: pencil->tool = Bucket; cursor_change_bmp(cursor,cursor_balde);break;
-            case 2: pencil->tool = ColorPicker; cursor_change_bmp(cursor,cursor_picker); break;
-            case 3: pencil->tool = Rainbow ;  cursor_change_bmp(cursor,cursor_rainbow);uint32_t cor=rainbow();nny_change_color(paint_tube_1,cor); nny_change_color(paint_tube_2,cor);  break;
-            case 4: pencil->tool = Rubber;  cursor_change_bmp(cursor,cursor_rubber);break;
+            case 0: change_tool(pencil, Brush); break;
+            case 1: change_tool(pencil, Bucket);break;
+            case 2: change_tool(pencil, ColorPicker); break;
+            case 3: change_tool(pencil, Rainbow); break;
+            case 4: change_tool(pencil, Rubber); break;
             case 5: canvas_set_color(WHITE); break;
             case 6: color_picker(); break;
             case -1: usePencil(pencil, event); break; // Se um botao for carregado o pincel nao e usado (rimou) xd
         }
         update_clock(event);
-        if(pencil->tool==Rainbow)
-            update_cursor(cursor, event,pencil->rainbowColor);
-        else update_cursor(cursor, event,pencil->color1);
+        update_cursor(cursor, event);
         if (event.isKeyboardEvent) {
             switch(event.keyboardEvent.type) {
                 case ESC_PRESS: gameState = ExitGame; return;
@@ -377,10 +386,6 @@ void draw() { //todo - meter atualizacoes no sitio certo , nomes , butoes no sit
 void usePencil(DrawingState* pencil, Event_t event) {
     if (!event.isMouseEvent)
         return;
-    if(!(pencil->tool == Rainbow)){
-    nny_change_color(paint_tube_1,pencil->color1);
-    nny_change_color(paint_tube_2,pencil->color2);    
-    }
     int xf = cursor_get_xf(cursor, event.mouseEvent.delta_x);
     int yf = cursor_get_yf(cursor, -event.mouseEvent.delta_y);
     uint32_t color_under;
@@ -394,18 +399,16 @@ void usePencil(DrawingState* pencil, Event_t event) {
         case Rainbow: 
             if (!event.isLBPressed && !event.isRBPressed)
                 break;
-            pencil->rainbowColor = rainbow();
-            nny_change_color(paint_tube_1,pencil->rainbowColor);
-            nny_change_color(paint_tube_2,pencil->rainbowColor);   
-            canvas_draw_line1(cursor->x, cursor->y, xf, yf, pencil->rainbowColor, pencil->thickness);
+            rainbow_draw(pencil, cursor->x, cursor->y, xf, yf);
+            sprite_set_color(cursor, pencil->rainbowColor);
             break;
         case ColorPicker:
             if (event.mouseEvent.type == LB_PRESS || event.mouseEvent.type == RB_PRESS) {
                 if (event.mouseEvent.type == LB_PRESS)
-                        pencil->color1 = layer_get_pixel(background, cursor->x, cursor->y);
+                    pencil->color1 = layer_get_pixel(background, cursor->x, cursor->y);
                 else pencil->color2 = layer_get_pixel(background, cursor->x, cursor->y);
                 pencil->tool = Brush;
-                cursor_change_bmp(cursor,cursor_brush);
+                cursor_change_bmp(cursor, cursor_brush);
                 press_button(paint_buttons[0]); // Brush
                 unpress_button(paint_buttons[2]);
             }
@@ -413,19 +416,49 @@ void usePencil(DrawingState* pencil, Event_t event) {
         case Bucket:
             color_under = layer_get_pixel(background, cursor->x, cursor->y);
 			if (event.mouseEvent.type == LB_PRESS)
-				 bucket_tool(cursor, color_under, pencil->color1);
+				bucket_tool(cursor, color_under, pencil->color1);
             else if (event.mouseEvent.type == RB_PRESS)
                 bucket_tool(cursor, color_under, pencil->color2);
             break;
         case Rubber:
             if (event.isLBPressed)
-                canvas_draw_line2(cursor->x, cursor->y, xf, yf, pencil->color2, pencil->thickness + 3);
+                canvas_draw_line2(cursor->x, cursor->y, xf, yf, pencil->color2, pencil->thickness + 2);
             else if (event.isRBPressed)
-                canvas_draw_line2(cursor->x, cursor->y, xf, yf, pencil->color1, pencil->thickness + 3);
+                canvas_draw_line2(cursor->x, cursor->y, xf, yf, pencil->color1, pencil->thickness + 2);
             break;
 
         default: break;
     }
+}
+
+void rainbow_draw(DrawingState* pencil, uint16_t x0, uint16_t y0, uint16_t xf, uint16_t yf) {
+    pencil->rainbowColor = rainbow();
+    nny_change_color(paint_tube_1, pencil->rainbowColor);
+    nny_change_color(paint_tube_2, pencil->rainbowColor);
+    canvas_draw_line1(x0, y0, xf, yf, pencil->rainbowColor, pencil->thickness);
+}
+
+void change_tool(DrawingState* pencil, Tool tool) {
+    switch (tool) {
+        case Brush: cursor_change_bmp(cursor,cursor_brush);  break;
+        case Bucket: cursor_change_bmp(cursor,cursor_balde);break;
+        case ColorPicker: cursor_change_bmp(cursor,cursor_picker); break;
+        case Rainbow: cursor_change_bmp(cursor, cursor_rainbow); break;
+        case Rubber: cursor_change_bmp(cursor, cursor_rubber); break;
+        case None: cursor_change_bmp(cursor, cursor_normal); break;
+    } 
+    if (tool == Rainbow) {
+        nny_change_color(paint_tube_1, pencil->rainbowColor);
+        nny_change_color(paint_tube_2, pencil->rainbowColor);  
+        sprite_set_color(cursor, pencil->rainbowColor);
+    }
+    else {
+        nny_change_color(paint_tube_1, pencil->color1);
+        nny_change_color(paint_tube_2, pencil->color2);
+        sprite_set_color(cursor, pencil->color1);
+    }
+    draw_sprite_color(cursor);
+    pencil->tool = tool;
 }
 
 void increaseThickness(DrawingState* pencil) {
@@ -446,10 +479,9 @@ void save() {
     textbox_layer = create_layer(300, 300, 400, 200);
     TextBox* textbox = create_textbox(textbox_layer, textbox_bmp, 300, 300, 10, 5, 1);
     textbox_write(textbox, "Insert file name...");
-    draw_sprite(cursor);
     while(gameState == Saving) {
         event = GetEvent();
-        update_cursor(cursor, event, WHITE);
+        update_cursor(cursor, event);
         useTextbox(textbox, event, Drawing, Drawing);
     }
     if (strcmp(textbox->text, "") != 0) {

@@ -112,12 +112,6 @@ bool is_within_bounds(Layer* layer, uint16_t x, uint16_t y) {
     return x >= layer->x && y >= layer->y && x < layer->x + layer->width && y < layer->y + layer->height;
 }
 
-/*
-bool is_cursor_on_layer(Layer* layer, Sprite* cursor){
-    return cursor->x > layer->x && cursor->y > layer ->y && cursor->x < (layer->x + layer->width) && cursor->y < (layer->y + layer->height);
-}*/
-
-
 void layer_draw_image(Layer* layer, Bitmap* bmp, int x, int y) {
     if (bmp == NULL || layer == NULL)
         return;
@@ -126,16 +120,16 @@ void layer_draw_image(Layer* layer, Bitmap* bmp, int x, int y) {
     uint16_t xCoord = x;
     uint16_t yCoord = height + y - 1;
     unsigned char* img = bmp->bitmapData;
-    for (int i = 0; i < height; i++, yCoord--) { // y
+    for (int i = 0; i < height; i++, yCoord--) {
         xCoord = x;
-    	for(int j = 0; j < width; j++, xCoord++) { // x
+    	for(int j = 0; j < width; j++, xCoord++) {
             uint32_t color = *(uint32_t*)img;
-            if (!is_transparent(color)) { // && is_within_bounds(layer, xCoord, yCoord)) {
+            if (!is_transparent(color)) {
                 draw_on_layer(layer, xCoord, yCoord, color);
             }
             img += bmp->bytes_per_pixel;
         }
-        img += bmp->padding; //* bmp->bytes_per_pixel;
+        img += bmp->padding;
     }
 }
 
@@ -148,18 +142,18 @@ void layer_draw_image_color(Layer* layer, Bitmap* bmp, int x, int y, uint32_t ne
     uint16_t xCoord = x;
     uint16_t yCoord = height + y - 1;
     unsigned char* img = bmp->bitmapData;
-    for (int i = 0; i < height; i++, yCoord--) { // y
+    for (int i = 0; i < height; i++, yCoord--) {
         xCoord = x;
-    	for(int j = 0; j < width; j++, xCoord++) { // x
+    	for(int j = 0; j < width; j++, xCoord++) {
             uint32_t color = *(uint32_t*)img;
-            if (!is_transparent(color)) { // && is_within_bounds(layer, xCoord, yCoord)) {
+            if (!is_transparent(color)) {
                 if((color & 0xFFFFFF) == GREEN)
                     draw_on_layer(layer, xCoord, yCoord, new_color);
                 else draw_on_layer(layer, xCoord, yCoord, color);
             }
             img += bmp->bytes_per_pixel;
         }
-        img += bmp->padding; //* bmp->bytes_per_pixel;
+        img += bmp->padding;
     }
 }
 

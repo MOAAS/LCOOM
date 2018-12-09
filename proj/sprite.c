@@ -10,22 +10,22 @@
 
 #include "sprite.h"
 
-Sprite *create_sprite(const char *file, int x, int y) {
+Sprite *create_sprite(Bitmap* bitmap, int x, int y) {
     //allocate space for the "object"
     Sprite *sp = (Sprite *) malloc ( sizeof(Sprite));
     if( sp == NULL )
     return NULL;
-    // read the sprite bitmao
-    Bitmap* bm = loadBitmap(file);
-    sp->bitmap = bm;
-    sp->height = bm->bitmapInfoHeader.height;
-    sp->width = bm->bitmapInfoHeader.width;
+    // read the sprite bitmap
+    sp->bitmap = bitmap;
+    sp->height = bitmap->bitmapInfoHeader.height;
+    sp->width = bitmap->bitmapInfoHeader.width;
     if( sp->bitmap == NULL ) {
         free(sp);
         return NULL;
     }
     sp->x = x;
     sp->y = y;
+    sp->color = WHITE;
     return sp;
 }
 
@@ -42,8 +42,12 @@ void draw_sprite(Sprite *sp) {
     draw_bitmap(sp->bitmap, sp->x, sp->y, ALIGN_LEFT);
 }
 
-void draw_sprite_color(Sprite *sp,uint32_t new_color) {
-    draw_bitmap_color(sp->bitmap, sp->x, sp->y, ALIGN_LEFT,new_color);
+void sprite_set_color(Sprite *sp, uint32_t color) {
+    sp->color = color;
+}
+
+void draw_sprite_color(Sprite *sp) {
+    draw_bitmap_color(sp->bitmap, sp->x, sp->y, ALIGN_LEFT, sp->color);
 }
 
 void erase_sprite(Sprite *sp) {
@@ -85,9 +89,9 @@ uint16_t cursor_get_yf(Sprite* cursor, int16_t delY) {
     return yf;
 }
 
-void update_cursor(Sprite *cursor, Event_t event, uint32_t cor) {
+void update_cursor(Sprite *cursor, Event_t event) {
     if (!event.isMouseEvent) {
-        draw_sprite_color(cursor,cor);
+        draw_sprite_color(cursor);
         return;
     }
     erase_sprite(cursor);
@@ -99,14 +103,16 @@ void update_cursor(Sprite *cursor, Event_t event, uint32_t cor) {
         if (cursor->y < 0) cursor->y = 0;
         else if (cursor->y > (int)vg_get_vres()) cursor->y = (int)vg_get_vres();
     }
-    draw_sprite_color(cursor,cor);
+    draw_sprite_color(cursor);
 }
 
-void cursor_change_bmp(Sprite *cursor,Bitmap* bm){
+void cursor_change_bmp(Sprite *cursor, Bitmap* bm){
     erase_sprite(cursor);
     cursor->bitmap = bm;
-    draw_sprite_color(cursor,WHITE);
+    draw_sprite_color(cursor);
 }
+
+// Button
 
 Button* create_button(uint16_t x, uint16_t y, Layer* layer, Bitmap* bitmapIdle, Bitmap* bitmapHighlighted) {
     Button* button = malloc(sizeof(Button));
@@ -152,18 +158,24 @@ void disable_buttons(Button* buttons[], uint8_t num_buttons) {
 }
 
 void unhighlight_button(Button* button) {
+    if (!button->isHighlighted || (button->isPressed && !button->singleState))
+        return;
     button->isHighlighted = false;
     button->bitmap = button->bitmapIdle;
     draw_button(button);
 }
 
 void highlight_button(Button* button) {
+    if (button->isHighlighted)
+        return;
     button->isHighlighted = true;
     button->bitmap = button->bitmapHighlighted;
     draw_button(button);
 }
 
 void press_button(Button* button) {
+    if (button->isPressed)
+        return;
     button->isPressed = true;
     highlight_button(button);
 }
@@ -180,16 +192,15 @@ int checkButtonPress(Event_t event, Sprite* cursor, Button* buttons[], uint8_t n
     for (uint8_t i = 0; i < num_buttons; i++) {
         if (is_on_button(cursor, buttons[i])) {
             if (event.mouseEvent.type == LB_PRESSED) {
-                if (buttons[i]->isPressed || buttons[i]->singleState) // Ja estava premido ou é botao que nao fica ativo
-                    return i;
+                if (buttons[i]->isPressed || buttons[i]->singleState) 
+                    return i; // Ja estava premido ou é botao que nao fica ativo
                 press_button(buttons[i]);
                 pressedButton = i;
                 break;
             }
             else highlight_button(buttons[i]);
         }
-        else if (buttons[i]->isHighlighted && (!buttons[i]->isPressed || buttons[i]->singleState))
-            unhighlight_button(buttons[i]);
+        else unhighlight_button(buttons[i]);
     }
     // Nenhum botao premido
     if (pressedButton == -1)
@@ -201,6 +212,8 @@ int checkButtonPress(Event_t event, Sprite* cursor, Button* buttons[], uint8_t n
         unpress_button(buttons[i]);
     return pressedButton;
 }
+
+// NNY
 
 NNY* create_NNY(uint16_t x, uint16_t y, Layer* layer, Bitmap* bitmap) {
     NNY* nny = malloc(sizeof(NNY));
