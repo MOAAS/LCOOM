@@ -1,7 +1,6 @@
 #pragma once
 #include "layer.h"
 #include "video.h"
-#include "sprite.h"
 
 typedef struct {
     uint16_t xMin, xMax;
@@ -38,7 +37,7 @@ void canvas_set_outline(uint32_t color);
 
 uint32_t rainbow();
 
-void bucket_tool(Sprite* cursor, uint32_t cor_inicial, uint32_t cor_balde);
+void bucket_tool(uint16_t x, uint16_t y, uint32_t cor_inicial, uint32_t cor_balde);
 
 bool is_inside_canvas(uint16_t x, uint16_t y);
 
