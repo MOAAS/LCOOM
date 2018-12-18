@@ -31,6 +31,18 @@ Event_t GetEvent() {
         event.timerEvent.seconds_passed = notification.seconds_passed;
     }
     else event.isTimerEvent = false;
+    if (notification.serialPortNotif  && notification.uart_int_info.last_int_type == Received && notification.uart_int_info.received->size != 0) {
+        event.isUARTEvent = false;
+        event.num_uart_messages = 0;
+        while(notification.uart_int_info.received->size != 0) {
+            if (uart_assemble_received_message(queue_front(notification.uart_int_info.received), &event.uart_messages[event.num_uart_messages])) {
+                event.num_uart_messages++;
+                event.isUARTEvent = true;
+            }
+            queue_pop(notification.uart_int_info.received);
+        }
+    }
+    else event.isUARTEvent = false;
     event.isCtrlPressed = is_CTRL_PRESSED;
     event.isLShiftPressed = is_LSHIFT_PRESSED;
     event.isRShiftPressed = is_RSHIFT_PRESSED;
