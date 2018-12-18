@@ -13,6 +13,7 @@
 #include "timer.h"
 #include "textbox.h"
 #include "sprite.h"
+#include "uart_protocol.h"
 #include "vbe.h"
 #include "video.h"
 #include "wordpicker.h"
