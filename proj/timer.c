@@ -7,13 +7,13 @@
 #define FUNCTION_FAIL 1
 #define BAD_PARAMS 2
 
-int hook_id_timer = IRQ_SET_TIMER;
+int hook_id_timer = TIMER0_IRQ;
 
 static uint32_t timer_aux_counter = 0;
 static uint32_t timer_frequency = 60;
 
 int (timer_subscribe_int)(uint8_t *bit_no) {  
-  *bit_no = hook_id_timer = IRQ_SET_TIMER;
+  *bit_no = hook_id_timer = TIMER0_IRQ;
   if (sys_irqsetpolicy(TIMER0_IRQ, IRQ_REENABLE, &hook_id_timer) != OK)
     return FUNCTION_FAIL;
   return 0;
