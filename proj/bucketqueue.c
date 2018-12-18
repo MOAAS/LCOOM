@@ -8,19 +8,19 @@ int front = 0;
 int rear = -1;
 int itemCount = 0;
 
-BucketQueuePoint queue_front() {
+BucketQueuePoint bqueue_front() {
    return ptArray[front];
 }
 
-bool queue_isEmpty() {
+bool bqueue_isEmpty() {
    return itemCount == 0;
 }
 
-int queue_size() {
+int bqueue_size() {
    return itemCount;
 }  
 
-void queue_push(uint16_t x, uint16_t y, char* layer_address) {
+void bqueue_push(uint16_t x, uint16_t y, char* layer_address) {
 	rear++;
 	ptArray[rear].x = x;
 	ptArray[rear].y = y;
@@ -28,12 +28,12 @@ void queue_push(uint16_t x, uint16_t y, char* layer_address) {
 	itemCount++;
 }
 
-BucketQueuePoint queue_pop() {
+BucketQueuePoint bqueue_pop() {
    itemCount--;
    return ptArray[front++];  
 }
 
-void queue_destroy() {
+void bqueue_destroy() {
 	front = 0;
 	rear = -1;
 	itemCount = 0;
