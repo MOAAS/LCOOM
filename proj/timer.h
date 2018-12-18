@@ -1,6 +1,6 @@
 #pragma once
+#include "i8042.h"
 
-#define IRQ_SET_TIMER 0
 
 int timer_wait(uint32_t time_s);
 void timer_reset_counter();
