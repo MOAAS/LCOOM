@@ -2,7 +2,7 @@
 #include "keyboard.h"
 #include "i8042.h"
 
-#define IRQ_SET_MOUSE   4
+#define IRQ_SET_MOUSE   12
 
 #define MOUSE_LB        BIT(0)
 #define MOUSE_RB        BIT(1)
