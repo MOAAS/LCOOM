@@ -2,14 +2,11 @@
 
 #include <stdint.h>
 #include <stdio.h>
-
-#include "keyboard.h"
-#include "mouse.h"
-#include "timer.h"
 #include "interrupts.h"
 
 extern uint16_t scancode;
 extern struct packet mouse_packet;
+extern UART_Int_Info uart_int_info;
 
 int subscribe_device(Device device) {
     uint8_t irq_set;
@@ -17,14 +14,19 @@ int subscribe_device(Device device) {
         case Timer: return timer_subscribe_int(&irq_set);
         case Keyboard: return keyboard_subscribe_int(&irq_set);
         case Mouse:
-            // Eventualmente por a verificar return values! (n necessario p/ lab5)
+            // Eventualmente por a verificar return values!
             mouse_subscribe_int(&irq_set);
             mouse_disable_int();
             mouse_set_stream();
             mouse_enable_data_report();
             mouse_enable_int();
             return 0;
-
+        case SerialPort:
+            uart_subscribe_int(&irq_set);
+            uart_set_dlab(0);
+            uart_enable_ier(UART_IER_RECEIVE | UART_IER_TRANSMIT | UART_IER_STATUS);
+            uart_setup_fifo();
+            return 0;
         default: return 1;
     }
 }
@@ -40,7 +42,10 @@ int unsubscribe_device(Device device) {
             mouse_enable_int();
             mouse_unsubscribe_int();
             return 0;
-
+        case SerialPort:
+            uart_destroy_fifo();
+            uart_unsubscribe_int();
+            return 0;
         default: return 1;
     }
 }
@@ -48,7 +53,7 @@ int unsubscribe_device(Device device) {
 Notification GetNotification() {
     bool gotNotification = false;
     Notification notif;
-    notif.timerNotif = notif.keyboardNotif = notif.mouseNotif = false;
+    notif.timerNotif = notif.keyboardNotif = notif.mouseNotif = notif.serialPortNotif = false;
     int ipc_status; message msg;
     while(!gotNotification) {
         int r; // Get a request message.
@@ -59,14 +64,14 @@ Notification GetNotification() {
         if (is_ipc_notify(ipc_status)) { // received notification
             switch (_ENDPOINT_P(msg.m_source)) {
             case HARDWARE: // hardware interrupt notification                                
-                if (msg.m_notify.interrupts & BIT(IRQ_SET_TIMER)) { // subscribed interrupt
+                if (msg.m_notify.interrupts & BIT(TIMER0_IRQ)) { // subscribed interrupt
                   timer_int_handler();
                   notif.timer_counter = timer_get_counter();
                   notif.seconds_passed = timer_get_counter() / 60;
                   notif.timerNotif = true;
                   gotNotification = true;
                 }
-                if (msg.m_notify.interrupts & BIT(IRQ_SET_KEYBOARD)) { // subscribed interrupt
+                if (msg.m_notify.interrupts & BIT(KEYBOARD_IRQ)) { // subscribed interrupt
                     kbc_ih();
                     if (kbd_assemble_scancode()) {
                         notif.scancode = scancode;
@@ -74,7 +79,7 @@ Notification GetNotification() {
                         gotNotification = true;
                     }
                 }
-                if (msg.m_notify.interrupts & BIT(IRQ_SET_MOUSE)) { // subscribed interrupt
+                if (msg.m_notify.interrupts & BIT(MOUSE_IRQ)) { // subscribed interrupt
                     mouse_ih();
                     int8_t byte_read_no = mouse_assemble_packet();
                     if (byte_read_no == 2) {
@@ -82,6 +87,12 @@ Notification GetNotification() {
                         notif.mouseNotif = true;
                         gotNotification = true;
                     }
+                }
+                if (msg.m_notify.interrupts & BIT(COM1_IRQ)) { // subscribed interrupt
+                    uart_ih();
+                    notif.serialPortNotif = true;
+                    notif.uart_int_info = uart_int_info;
+                    gotNotification = true;
                 }
                 break;
             default:
