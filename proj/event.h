@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <ctype.h>
 
+#include "uart_protocol.h"
 #include "interrupts.h"
 #include "i8042.h"
 
@@ -52,22 +53,27 @@ typedef struct {
     bool has_second_passed;
 } TimerEvent;
 
+
 typedef struct {
+    bool isTimerEvent;
     bool isKeyboardEvent;
     bool isMouseEvent;
+    bool isUARTEvent;
     KeyboardEvent keyboardEvent;
     MouseEvent mouseEvent;
     TimerEvent timerEvent;
+    UARTMessage uart_messages[50];
+    uint8_t num_uart_messages;
     bool isCtrlPressed;
     bool isLShiftPressed;
     bool isRShiftPressed;
     bool isLBPressed;
     bool isMBPressed;
     bool isRBPressed;
-    bool isTimerEvent;
 } Event_t;
 
 Event_t GetEvent();
 MouseEvent mouse_detect_ev(struct packet *pp);
 KeyboardEvent kbd_detect_ev(uint16_t scancode);
+
 void print_event(Event_t event);
