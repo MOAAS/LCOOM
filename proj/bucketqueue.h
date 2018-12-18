@@ -6,12 +6,12 @@ typedef struct {
     char* layer_address;
 } BucketQueuePoint;
 
-BucketQueuePoint queue_front();
-bool queue_isEmpty();
-bool queue_isFull();
+BucketQueuePoint bqueue_front();
+bool bqueue_isEmpty();
+bool bqueue_isFull();
 
-int queue_size();
-void queue_push(uint16_t x, uint16_t y, char* layer_address);
+int bqueue_size();
+void bqueue_push(uint16_t x, uint16_t y, char* layer_address);
 
-BucketQueuePoint queue_pop();
-void queue_destroy();
+BucketQueuePoint bqueue_pop();
+void bqueue_destroy();
