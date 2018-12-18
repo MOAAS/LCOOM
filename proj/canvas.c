@@ -225,43 +225,42 @@ int canvas_get_width() {
     return canvas->width;
 }
 
-void bucket_tool(Sprite* cursor, uint32_t cor_inicial, uint32_t cor_balde) {
-    if (cor_inicial == cor_balde || !is_inside_canvas(cursor->x, cursor->y))
+void bucket_tool(uint16_t x, uint16_t y, uint32_t cor_inicial, uint32_t cor_balde) {
+    if (cor_inicial == cor_balde || !is_inside_canvas(x, y))
         return;
     // Cria fila e coloca as posicoes iniciais nela
-    //Queue* Q = create_queue();
-    char* layer_map = canvas->layer->map + (cursor->x + cursor->y * canvas->layer->width) * vg_get_bytes_pp();
-    queue_destroy();
-    queue_push(cursor->x, cursor->y, layer_map);
+    char* layer_map = canvas->layer->map + (x + y * canvas->layer->width) * vg_get_bytes_pp();
+    bqueue_destroy();
+    bqueue_push(x, y, layer_map);
     BucketQueuePoint P;
     uint8_t bytes_pp = vg_get_bytes_pp();
     uint32_t vertical_diff = vg_get_hres() * bytes_pp;
-    while(!queue_isEmpty()) {
+    while(!bqueue_isEmpty()) {
         // Trata as posicoes que estao a frente na fila
-        P = queue_pop();
+        P = bqueue_pop();
         // Se estiver a ser tratado um pixel valido, continua
         if(vg_retrieve(P.layer_address) == cor_inicial) {
             // Adiciona os 4 pixeis a volta a fila, se nao tiverem sido tratados ainda
             vg_insert(P.layer_address, cor_balde);
             P.layer_address -= bytes_pp;
             if(is_inside_canvas(P.x-1, P.y) && vg_retrieve(P.layer_address) != cor_balde) {
-                queue_push(P.x-1, P.y, P.layer_address);
+                bqueue_push(P.x-1, P.y, P.layer_address);
             }
             P.layer_address += 2 * bytes_pp;
             if(is_inside_canvas(P.x+1, P.y) && vg_retrieve(P.layer_address) != cor_balde) {
-                queue_push(P.x+1, P.y, P.layer_address);
+                bqueue_push(P.x+1, P.y, P.layer_address);
             }
             P.layer_address -= bytes_pp + vertical_diff;
             if(is_inside_canvas(P.x, P.y-1) && vg_retrieve(P.layer_address) != cor_balde) {
-                queue_push(P.x, P.y-1, P.layer_address);
+                bqueue_push(P.x, P.y-1, P.layer_address);
             }
             P.layer_address += 2 * vertical_diff;
             if(is_inside_canvas(P.x, P.y+1) && vg_retrieve(P.layer_address) != cor_balde) {
-                queue_push(P.x, P.y+1, P.layer_address);
+                bqueue_push(P.x, P.y+1, P.layer_address);
             }
         }
     }
-    queue_destroy();
+    bqueue_destroy();
     layer_map = canvas->layer->map + (canvas->xMin + canvas->yMin * canvas->layer->width) * bytes_pp;
     char* video_mem = (char*)vg_get_video_mem() + (canvas->xMin + canvas->yMin * vg_get_hres()) * bytes_pp;
     for (int y = canvas->yMin; y < canvas->yMax; y++) {
