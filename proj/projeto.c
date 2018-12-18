@@ -151,6 +151,7 @@ void projeto() {
     video_init(0x118);
     loadBackground();
     loadButtons();
+    subscribe_device(SerialPort);
     subscribe_device(Mouse);
     subscribe_device(Keyboard);
     subscribe_device(Timer);
@@ -168,9 +169,10 @@ void projeto() {
         }
     }
     vg_exit();
-    unsubscribe_device(Keyboard);
     unsubscribe_device(Timer);
+    unsubscribe_device(Keyboard);
     unsubscribe_device(Mouse);
+    unsubscribe_device(SerialPort);
 }
 
 
@@ -248,11 +250,16 @@ void guess() {
     while(gameState == Guessing) {
         event = GetEvent();
         update_clock(event);
+        update_cursor(cursor, event);
         if (clock_get_time_left() == 0)
             gameState = EndGameLoss;
-        update_cursor(cursor, event);
         if (event.isTimerEvent && event.timerEvent.has_second_passed && event.timerEvent.seconds_passed % 12 == 0)
             reveal_letter();
+        if (event.isUARTEvent) {
+            for (int i = 0; i < event.num_uart_messages; i++) {
+                uart_receive_draw_line1(&event.uart_messages[i]);
+            }
+        }
         if (event.isKeyboardEvent) {
             switch(event.keyboardEvent.type) {
                 case ESC_PRESS: gameState = ExitGame; break;
@@ -391,8 +398,10 @@ void usePencil(DrawingState* pencil, Event_t event) {
     uint32_t color_under;
     switch (pencil->tool) {
         case Brush:
-            if (event.isLBPressed)
+            if (event.isLBPressed) {
                 canvas_draw_line1(cursor->x, cursor->y, xf, yf, pencil->color1, pencil->thickness);
+                uart_send_draw_line1(cursor->x, cursor->y, xf, yf, pencil->color1, pencil->thickness);
+            }
             else if (event.isRBPressed)
                 canvas_draw_line1(cursor->x, cursor->y, xf, yf, pencil->color2, pencil->thickness);
             break;
@@ -408,7 +417,7 @@ void usePencil(DrawingState* pencil, Event_t event) {
                     pencil->color1 = layer_get_pixel(background, cursor->x, cursor->y);
                 else pencil->color2 = layer_get_pixel(background, cursor->x, cursor->y);
                 pencil->tool = Brush;
-                cursor_change_bmp(cursor, cursor_brush);
+                change_tool(pencil, Brush);
                 press_button(paint_buttons[0]); // Brush
                 unpress_button(paint_buttons[2]);
             }
@@ -416,9 +425,9 @@ void usePencil(DrawingState* pencil, Event_t event) {
         case Bucket:
             color_under = layer_get_pixel(background, cursor->x, cursor->y);
 			if (event.mouseEvent.type == LB_PRESS)
-				bucket_tool(cursor, color_under, pencil->color1);
+				bucket_tool(cursor->x, cursor->y, color_under, pencil->color1);
             else if (event.mouseEvent.type == RB_PRESS)
-                bucket_tool(cursor, color_under, pencil->color2);
+                bucket_tool(cursor->x, cursor->y, color_under, pencil->color2);
             break;
         case Rubber:
             if (event.isLBPressed)
@@ -452,7 +461,7 @@ void change_tool(DrawingState* pencil, Tool tool) {
         nny_change_color(paint_tube_2, pencil->rainbowColor);  
         sprite_set_color(cursor, pencil->rainbowColor);
     }
-    else {
+    else if (tool != None) {
         nny_change_color(paint_tube_1, pencil->color1);
         nny_change_color(paint_tube_2, pencil->color2);
         sprite_set_color(cursor, pencil->color1);
