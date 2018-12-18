@@ -7,7 +7,6 @@
 #include <math.h>
 #include "canvas.h"
 
-
 #include "sprite.h"
 
 Sprite *create_sprite(Bitmap* bitmap, int x, int y) {
