@@ -35,6 +35,11 @@ typedef struct {
 } UARTMessage;
 
 UARTMessage* create_message(uint8_t size, uint8_t type, uint8_t* bytes);
+
+void destroy_message(UARTMessage* msg);
+
+void free_messages(UARTMessage msgs[], uint16_t num_msgs);
+
 void uart_send_message(UARTMessage* msg);
 bool uart_assemble_received_message(uint8_t byte, UARTMessage* msg_ptr);
 
@@ -54,4 +59,4 @@ void uart_send_tick_clock();
 void uart_process_msgs(UARTMessage messages[], uint16_t num_messages);
 void uart_process_msg(UARTMessage* message);
 
-bool uart_check_message_id(UARTMessage messages[], uint16_t num_messages, uint8_t id);
+UARTMessage* get_msg_by_id(uint8_t id, UARTMessage messages[], uint16_t num_messages);

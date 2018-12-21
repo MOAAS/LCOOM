@@ -274,13 +274,15 @@ void start_game(char* solution) {
 }
 
 void wait_for_guesser() {
-    layer_draw_image(background, wide_textbox_bmp, 100, 650); // 860x100 image
-    draw_word(background, "Waiting for opponent...", 530, 684, 2, 0, Center);
+    layer_draw_image(background, wide_textbox_bmp, 85, 428); // 860x100 image
+    draw_word(background, "Waiting for opponent...", 515, 462, 2, 0, Center);
     while (1) {
         event = GetEvent();
         update_cursor(cursor, event);
-        if (event.isUARTEvent && uart_check_message_id(event.uart_messages, event.num_uart_messages, MSG_GUESSER_READY))
+        if (event.isUARTEvent && get_msg_by_id(MSG_GUESSER_READY, event.uart_messages, event.num_uart_messages)) {
+            free_messages(event.uart_messages, event.num_uart_messages);
             break;
+        }
         if (event.isKeyboardEvent && event.keyboardEvent.type == ESC_PRESS) {
             gameState = MainMenu; // Verifica DEPOIS de (nao) receber
             return;
@@ -292,8 +294,9 @@ void wait_for_guesser() {
 }
 
 void wait_for_drawer() {
-    layer_draw_image(background, wide_textbox_bmp, 100, 650); // 860x100 image
-    draw_word(background, "Waiting for opponent...", 530, 684, 2, 0, Center);
+    UARTMessage* msg; char* solution = NULL;
+    layer_draw_image(background, wide_textbox_bmp, 85, 428); // 860x100 image
+    draw_word(background, "Waiting for opponent...", 515, 462, 2, 0, Center);
     while (1) {
         event = GetEvent();
         update_cursor(cursor, event);
@@ -303,18 +306,15 @@ void wait_for_drawer() {
         }
         if (event.isTimerEvent && event.timerEvent.timer_counter % 30 == 0)
             uart_send_guesser_ready(); // manda de meio em meio segundo
-        if (event.isUARTEvent) {
-            for (int i = 0; i < event.num_uart_messages; i++) {
-                if (event.uart_messages[i].type == MSG_DRAWER_READY) {
-                    char* solution = malloc((strlen((char*)event.uart_messages[i].bytes) + 1) * sizeof(char));
-                    strcpy(solution, (char*)event.uart_messages[i].bytes);
-                    start_game(solution);
-                    free(solution);
-                    return;
-                }
-            }
+        if (event.isUARTEvent && (msg = get_msg_by_id(MSG_DRAWER_READY, event.uart_messages, event.num_uart_messages))) {
+            solution = malloc(strlen((char*)msg->bytes + 1) * sizeof(char));
+            strcpy(solution, (char*)msg->bytes);
+            free_messages(event.uart_messages, event.num_uart_messages);
+            break;
         }
     }
+    start_game(solution);
+    free(solution);
 }
 
 void end_game() {
@@ -474,10 +474,11 @@ void color_picker() {
             gameState = lastGameState;
         }
         if (event.isUARTEvent) {
-            if (uart_check_message_id(event.uart_messages, event.num_uart_messages, MSG_GAME_WON))
+            if (get_msg_by_id(MSG_GAME_WON, event.uart_messages, event.num_uart_messages))
                 gameState = EndGameWin;
-            else if (uart_check_message_id(event.uart_messages, event.num_uart_messages, MSG_GAME_LOST))
+            else if (get_msg_by_id(MSG_GAME_LOST, event.uart_messages, event.num_uart_messages))
                 gameState = EndGameLoss;
+            free_messages(event.uart_messages, event.num_uart_messages);    
         }
     }
     change_tool(pencil, pencil->tool); // atualiza os paint tubes
@@ -514,10 +515,11 @@ void draw() {
             }
         }
         if (event.isUARTEvent) {
-            if (uart_check_message_id(event.uart_messages, event.num_uart_messages, MSG_GAME_WON))
+            if (get_msg_by_id(MSG_GAME_WON, event.uart_messages, event.num_uart_messages))
                 gameState = EndGameWin;
-            else if (uart_check_message_id(event.uart_messages, event.num_uart_messages, MSG_GAME_LOST))
+            else if (get_msg_by_id(MSG_GAME_LOST, event.uart_messages, event.num_uart_messages))
                 gameState = EndGameLoss;
+            free_messages(event.uart_messages, event.num_uart_messages);   
         }
     }
 }

@@ -19,6 +19,13 @@ void destroy_message(UARTMessage* msg) {
     free(msg);
 }
 
+void free_messages(UARTMessage msgs[], uint16_t num_msgs) {
+    for (uint16_t i = 0; i < num_msgs; i++) {
+        free(msgs[i].bytes);
+    }
+}
+
+
 void uart_send_message(UARTMessage* msg) {
     uint8_t size_id = (msg->size << 4) | msg->type;
     uart_fifo_send(MSG_PREFIX);
@@ -203,10 +210,10 @@ void uart_process_msgs(UARTMessage messages[], uint16_t num_messages) {
     }
 }
 
-bool uart_check_message_id(UARTMessage messages[], uint16_t num_messages, uint8_t id) {
+UARTMessage* get_msg_by_id(uint8_t id, UARTMessage messages[], uint16_t num_messages){
     for (uint16_t i = 0; i < num_messages; i++) {
         if (messages[i].type == id)
-            return true;
+            return &messages[i];
     }
-    return false;
+    return NULL;
 }
