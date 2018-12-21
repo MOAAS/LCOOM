@@ -2,13 +2,6 @@
 
 #include "video.h"
 
-unsigned char * db;
-
-typedef enum {
-    ALIGN_LEFT, ALIGN_CENTER, ALIGN_RIGHT
-} Alignment;
-
-
 #pragma pack(push, 1)
 
 typedef struct {
@@ -42,11 +35,17 @@ typedef struct {
 /// Represents a Bitmap
 typedef struct {
     BitmapInfoHeader bitmapInfoHeader;
-    unsigned char* bitmapData;
+    char* bitmapData;
     unsigned int bytes_per_pixel;
     unsigned int padding;
-    unsigned int actual_width;
+    unsigned int actual_bytes_per_row;
 } Bitmap;
+
+
+typedef enum {
+    ALIGN_LEFT, ALIGN_CENTER, ALIGN_RIGHT
+} Alignment;
+
 
 void saveBitmap(char* filename, unsigned int width, unsigned int height, char* address);
 

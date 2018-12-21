@@ -6,7 +6,6 @@
 #include "uart_protocol.h"
 #include "interrupts.h"
 #include "i8042.h"
-
 // Se forem preciso mais de alguma coisa poe-se!
 
 typedef enum {
@@ -37,6 +36,7 @@ typedef enum {
     ESC_PRESS,
     BACKSPACE_PRESS,
     ENTER_PRESS,
+    ENTER_RELEASE,
     CHARACTER_PRESS,
     OTHER_KEY
 } KeyboardEventType;

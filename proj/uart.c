@@ -141,7 +141,7 @@ void uart_ih() {
             uart_int_info.last_int_type = Received;
             break; 
         case UART_INT_TRANSMIT:
-            printf("Transmit interrupt: Queue size = %d \n", uart_int_info.toSend->size);
+           // printf("Transmit interrupt: Queue size = %d \n", uart_int_info.toSend->size);
             uart_clear_toSend_queue();
             uart_int_info.last_int_type = Transmitted;
             break; 

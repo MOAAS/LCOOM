@@ -5,17 +5,19 @@
 
 #include "clock.h"
 
+static uint16_t initial_time_left = 90;
+
 static TextBox* clock_box;
 static Layer* clock_layer;
 static uint16_t time_left = 0;
 static char time_left_string[12];
 static Layer* clock_layer = NULL;
 
-void create_clock(Bitmap* bmp, uint16_t time_left_i) {
+void create_clock(Bitmap* bmp) {
     clock_layer = create_layer(12, 150, 128, 128);
     clock_box = create_textbox(clock_layer, bmp, 12, 150, 36, 50, 2);
-    time_left = time_left_i;
-    sprintf(time_left_string, "%d", time_left_i);
+    time_left = initial_time_left;
+    sprintf(time_left_string, "%d", initial_time_left);
     textbox_write(clock_box, time_left_string); 
 }
 
@@ -29,8 +31,12 @@ uint16_t clock_get_time_left() {
     return time_left;
 }
 
-void update_clock(Event_t event) {
-    if (time_left == 0 || !(event.isTimerEvent && event.timerEvent.has_second_passed))
+bool clock_time_up() {
+    return time_left == 0;
+}
+
+void tick_clock() {
+    if (time_left == 0)
         return;
     time_left--;
     textbox_clear(clock_box);

@@ -45,8 +45,8 @@ typedef struct {
 } Button;
 
 Button* create_button(uint16_t x, uint16_t y, Layer* layer, Bitmap* bitmapIdle, Bitmap* bitmapHighlighted);
-void draw_button(Button* button);
-void draw_buttons(Button* buttons[], uint8_t num_buttons);
+void draw_button(Sprite* cursor, Button* button);
+void draw_buttons(Sprite* cursor, Button* buttons[], uint8_t num_buttons);
 
 void disable_buttons(Button* buttons[], uint8_t num_buttons);
 

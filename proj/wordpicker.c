@@ -27,10 +27,17 @@ static uint16_t wordbox_yMid;
 static uint16_t wordbox_width;
 static uint16_t wordbox_height;
 
-void loadDictionary() {
-	char * filename = "home/lcom/labs/proj/palavras/palavras.txt";
-	FILE * fp = fopen(filename, "r");
-	if (fp == NULL) return;
+char * filename = "palavras.txt";
+
+void loadDictionary(char* folderPath) {
+	char * filePath = malloc(strlen(folderPath) + strlen(filename) + 1);
+    strcpy(filePath, folderPath);
+    strcat(filePath, filename);
+	FILE * fp = fopen(filePath, "r");
+	if (fp == NULL) {
+        printf("File not found! %s\n", filePath);
+        return;
+    }
 	char c;
     char string[20] = "";
 	while(1) {
@@ -48,13 +55,16 @@ void loadDictionary() {
 		else strncat(string , &c, 1);
 	}
 	fclose(fp); 
+    free(filePath);
 	return;
 }
 
 void word_pick_start(Layer* bg, char* solution, bool isDrawing) {
+    if (!isDrawing)
+        printf("word = %s \n", solution);
     background = bg;
     // Draw the box
-    wordbox_bmp = loadBitmap("home/lcom/labs/proj/bitmaps/wordbox.bmp");
+    wordbox_bmp = loadBitmap("wordbox.bmp");
     layer_draw_image(bg, wordbox_bmp, wordbox_X, wordbox_Y);
     wordbox_height = wordbox_bmp->bitmapInfoHeader.height;
     wordbox_width = wordbox_bmp->bitmapInfoHeader.width;
@@ -73,7 +83,6 @@ void word_pick_start(Layer* bg, char* solution, bool isDrawing) {
     // Desenha: mostra a palavra
     if (isDrawing)
         draw_word(background, word, wordbox_xMid, wordbox_yMid, FONT_SCALE, 0, Center);        
-       // draw_word(background, word, 2, 0, wordbox_X + (wordbox_width - word_size * 32) / 2 , wordbox_Y + wordbox_height / 2 - 16);
     else { // Nao desenha: Nao mostra
         char* hidden_word = malloc(word_size * sizeof(char) + 1);
         for (int i = 0; i < word_size; i++)
@@ -99,7 +108,7 @@ char* get_random_word() {
 
 void reveal_letter() {
     int letter_no = rand() % word_size;
-    if (revealed_letters[letter_no] == true || num_revealed_letters > word_size / 2)
+    if (revealed_letters[letter_no] == true || num_revealed_letters >= word_size / 2)
         return;
     else {
         // n adianta tentar perceber mas é assim.

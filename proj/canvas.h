@@ -1,8 +1,10 @@
 #pragma once
 #include "layer.h"
 #include "video.h"
+#include "bucketqueue.h"
 
 typedef struct {
+    bool isEmpty;
     uint16_t xMin, xMax;
     uint16_t yMin, yMax;
     uint16_t width;
@@ -37,7 +39,7 @@ void canvas_set_outline(uint32_t color);
 
 uint32_t rainbow();
 
-void bucket_tool(uint16_t x, uint16_t y, uint32_t cor_inicial, uint32_t cor_balde);
+void bucket_tool(uint16_t x, uint16_t y, uint32_t cor_balde);
 
 bool is_inside_canvas(uint16_t x, uint16_t y);
 

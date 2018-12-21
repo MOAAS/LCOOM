@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <math.h>
 
-#include "bucketqueue.h"
 #include "canvas.h"
 
 Canvas* canvas = NULL;
@@ -112,12 +111,14 @@ void canvas_draw_circumference(uint16_t x, uint16_t y, uint16_t radius, uint32_t
 
 void canvas_draw_pixel(uint16_t x, uint16_t y, uint32_t color) {
     if (canvas->layer == NULL || !is_inside_canvas(x, y))
-        return; 
+        return;
+    canvas->isEmpty = false;
     draw_on_layer(canvas->layer, x, y, color);
 }
 
 // usado pelo draw circle, importante estar otimizado
 void canvas_draw_hline(uint16_t x, uint16_t y, uint16_t len, uint32_t color) {
+    canvas->isEmpty = false;
     char* layer_addr = calc_address(canvas->layer->map, x, y, canvas->layer->width);
     char* video_addr = calc_address(vg_get_video_mem(), x, y, vg_get_hres());
     uint8_t bytes_pp = vg_get_bytes_pp();
@@ -134,10 +135,11 @@ void canvas_draw_hline(uint16_t x, uint16_t y, uint16_t len, uint32_t color) {
 
 void canvas_draw_vline(uint16_t x, uint16_t y, uint16_t len, uint32_t color) {
     for (size_t i = 0; i < len; i++)
-        canvas_draw_pixel(x, y++, color);    
+        canvas_draw_pixel(x, y++, color);
 }
 
-void canvas_draw_rectangle(uint16_t x0, uint16_t y0, uint16_t width, uint16_t height, uint32_t color) { 
+void canvas_draw_rectangle(uint16_t x0, uint16_t y0, uint16_t width, uint16_t height, uint32_t color) {
+    canvas->isEmpty = false;
     char* layer_addr = calc_address(canvas->layer->map, x0, y0, canvas->layer->width);
     char* video_addr = calc_address(vg_get_video_mem(), x0, y0, vg_get_hres());
     uint8_t bytes_pp = vg_get_bytes_pp();
@@ -187,6 +189,7 @@ void canvas_set_outline(uint32_t color) {
 
 void canvas_set_color(uint32_t color) {
     canvas_draw_rectangle(canvas->xMin, canvas->yMin, canvas->width, canvas->height, color);
+    canvas->isEmpty = true;
 }
 
 uint32_t rainbow() {
@@ -223,11 +226,15 @@ int canvas_get_height() {
 
 int canvas_get_width() {
     return canvas->width;
-}
+}    
 
-void bucket_tool(uint16_t x, uint16_t y, uint32_t cor_inicial, uint32_t cor_balde) {
+void bucket_tool(uint16_t x, uint16_t y, uint32_t cor_balde) {
+    uint32_t cor_inicial = layer_get_pixel(canvas->layer, x, y);
     if (cor_inicial == cor_balde || !is_inside_canvas(x, y))
         return;
+    if (canvas->isEmpty) {
+        canvas_set_color(cor_balde);
+    }
     // Cria fila e coloca as posicoes iniciais nela
     char* layer_map = canvas->layer->map + (x + y * canvas->layer->width) * vg_get_bytes_pp();
     bqueue_destroy();
@@ -263,13 +270,20 @@ void bucket_tool(uint16_t x, uint16_t y, uint32_t cor_inicial, uint32_t cor_bald
     bqueue_destroy();
     layer_map = canvas->layer->map + (canvas->xMin + canvas->yMin * canvas->layer->width) * bytes_pp;
     char* video_mem = (char*)vg_get_video_mem() + (canvas->xMin + canvas->yMin * vg_get_hres()) * bytes_pp;
+    bool isEmpty = true;
     for (int y = canvas->yMin; y < canvas->yMax; y++) {
         for (int x = canvas->xMin; x < canvas->xMax; x++) {
-            vg_insert(video_mem, vg_retrieve(layer_map));
+            uint32_t color = vg_retrieve(layer_map);
+            if (is_top_layer(canvas->layer, x, y))
+                vg_insert(video_mem, color);
+            if (color != cor_balde)
+                isEmpty = false;
             layer_map += bytes_pp;
             video_mem += bytes_pp;
         }
         layer_map = layer_map + (canvas->layer->width - canvas->width) * bytes_pp;
         video_mem = video_mem + (vg_get_hres() - canvas->width) * bytes_pp;
     }
+    canvas->isEmpty = isEmpty;
 }
+

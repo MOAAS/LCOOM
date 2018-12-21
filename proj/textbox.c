@@ -8,7 +8,7 @@
 static Bitmap* letters[256];
 
 void loadLetterMap() {
-    Bitmap* letters_bmp = loadBitmap("home/lcom/labs/proj/bitmaps/letraas.bmp");
+    Bitmap* letters_bmp = loadBitmap("letras.bmp");
     int i = 0;
     for (int y = 256 - 16; y >= 0; y -= 16) {
         for (int x = 0; x < 256; x += 16, i++) {
@@ -27,12 +27,11 @@ TextBox* create_textbox(Layer* layer, Bitmap* bitmap, uint16_t x, uint16_t y, ui
     textbox->cursorY = y + y_disp;
     textbox->cursorX_init = textbox->cursorX;
     textbox->cursorY_init = textbox->cursorY;
-    textbox->cursorX_limit = textbox->cursorX_init + textbox->layer->width;
-    textbox->cursorY_limit = textbox->cursorY_init + textbox->layer->height;
+    textbox->font_size = 16 * font_scale;
+    textbox->cursorX_limit = textbox->cursorX_init + (int)((textbox->layer->width - 2 * x_disp) / textbox->font_size) * textbox->font_size + textbox->font_size;
+    textbox->cursorY_limit = textbox->cursorY_init + (int)((textbox->layer->width - 2 * y_disp) / textbox->font_size) * textbox->font_size + textbox->font_size;
     textbox->isEmpty = true;
     textbox->text_size = 0;
-    textbox->font_size = 16 * font_scale;
-    textbox->letter_width = textbox->font_size;
     strcpy(textbox->text, "");
     layer_draw_image(layer, bitmap, x, y);
     return textbox;
@@ -57,8 +56,10 @@ void textbox_clear(TextBox* textbox) {
 
 
 void textbox_put(TextBox* textbox, char character) {
-    if (textbox->text_size >= 199)
+    if (textbox->text_size >= 90)
         return;
+    if (textbox->cursorX >= textbox->cursorX_limit) // ultrapassou
+        textbox_linefeed(textbox);
     // talvez guardar no inicio
     Bitmap* bitmap = resizeBitmap(letters[(uint8_t)character], textbox->font_size / 16);
     // atualizar char arrays
@@ -66,9 +67,7 @@ void textbox_put(TextBox* textbox, char character) {
     strcat(textbox->text, string);
     textbox->text_size++;
     layer_draw_image(textbox->layer, bitmap, textbox->cursorX, textbox->cursorY);
-    textbox->cursorX += textbox->letter_width;
-    if (textbox->cursorX >= textbox->cursorX_limit - textbox->letter_width) // ultrapassou
-        textbox_linefeed(textbox);
+    textbox->cursorX += textbox->font_size;
 }
 
 void textbox_linefeed(TextBox* textbox) {
@@ -85,18 +84,18 @@ void textbox_backspace(TextBox* textbox) {
     if (textbox->text_size == 0)
         return;
     string_pop_char(textbox->text);
-    textbox->cursorX -= textbox->letter_width;
+    textbox->cursorX -= textbox->font_size;
     textbox->text_size--;
     int16_t relative_x = textbox->cursorX - textbox->x;
     int16_t relative_y = textbox->cursorY - textbox->y;
     for (int8_t i = 0; i < textbox->font_size; i++) {
-        for (int8_t j = 0; j < textbox->letter_width; j++) {
+        for (int8_t j = 0; j < textbox->font_size; j++) {
             uint32_t color = get_bitmap_color(textbox->bitmap, relative_x + j, relative_y + i);
             draw_on_layer(textbox->layer, textbox->cursorX + j, textbox->cursorY + i, color);
         }
     }
-    if (textbox->cursorX < textbox->cursorX_init && textbox->cursorY > textbox->cursorY_init) {
-        textbox->cursorX = textbox->cursorX_limit - textbox->letter_width;
+    if (textbox->cursorX <= textbox->cursorX_init && textbox->cursorY > textbox->cursorY_init) {
+        textbox->cursorX = textbox->cursorX_limit;
         textbox->cursorY -= textbox->font_size;
     }
 }
@@ -113,7 +112,7 @@ void draw_word(Layer* layer, char* word, int16_t x, int16_t y, uint16_t font_sca
     if (alignment == Center) {
         x -= xDiff * (strlen(word) - 1) / 2.0;
     }
-    for (int i = 0; word[i] != '\0'; i++) {
+    for (int i = 0; word[i] != '\0'; i++) {     
         draw_char(layer, word[i], x, y, font_scale, alignment);
         x += xDiff;
     }

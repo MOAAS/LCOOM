@@ -9,16 +9,19 @@
 #include "bitmap.h"
 #include "video.h"
 
-
+char* bitmap_path = "home/lcom/labs/proj/bitmaps/";
 
 Bitmap* loadBitmap(const char* filename) {
+    char* file_path = malloc((strlen(bitmap_path) + strlen(filename) + 1) * sizeof(char));
+    strcpy(file_path, bitmap_path);
+    strcat(file_path, filename);
     // allocating necessary size
     Bitmap* bmp = (Bitmap*) malloc(sizeof(Bitmap));
     // open filename in read binary mode
     FILE *filePtr;
-    filePtr = fopen(filename, "rb");
+    filePtr = fopen(file_path, "rb");
     if (filePtr == NULL) {
-        printf("File not found! %s\n", filename);
+        printf("File not found! %s (%s)\n", file_path, file_path);
         return NULL;
     }
     // read the bitmap file header
@@ -28,7 +31,7 @@ Bitmap* loadBitmap(const char* filename) {
     // verify that this is a bmp file by check bitmap id
     if (bitmapFileHeader.type != 0x4D42) {
         fclose(filePtr);
-        printf("Error reading file: %s! Not a BMP!\n", filename);
+        printf("Error reading file: %s! Not a BMP!\n", file_path);
         return NULL;
     }
 
@@ -43,14 +46,14 @@ Bitmap* loadBitmap(const char* filename) {
 
     // calculate the padding , width and size
     bmp->padding = (4 - (bitmapInfoHeader.width * bytes_per_pixel) % 4) % 4;
-    bmp->actual_width = bitmapInfoHeader.width + (bmp->padding != 0); // + 1 if padding != 0
-    bitmapInfoHeader.imageSize = bitmapInfoHeader.height * (bmp->actual_width) * bytes_per_pixel; 
-    unsigned char* bitmapImage = (unsigned char*) malloc(bitmapInfoHeader.imageSize);
+    bmp->actual_bytes_per_row = bitmapInfoHeader.width * bytes_per_pixel + bmp->padding;
+    bitmapInfoHeader.imageSize = bitmapInfoHeader.height * bmp->actual_bytes_per_row;
+    char* bitmapImage = malloc(bitmapInfoHeader.imageSize);
     // verify memory allocation
     if (!bitmapImage) {
         free(bitmapImage);
         fclose(filePtr);
-        printf("Error reading file: %s! Bad allocation.\n", filename);
+        printf("Error reading file: %s! Bad allocation.\n", file_path);
         return NULL;
     }
     // read in the bitmap image data
@@ -58,7 +61,7 @@ Bitmap* loadBitmap(const char* filename) {
     // make sure bitmap image data was read
     if (bitmapImage == NULL) {
         fclose(filePtr);
-        printf("Error reading file: %s! Bad reading.\n", filename);
+        printf("Error reading file: %s! Bad reading.\n", file_path);
         return NULL;
     }
 
@@ -74,7 +77,7 @@ Bitmap* loadBitmap(const char* filename) {
 
     // close file and return bitmap
     fclose(filePtr);
-
+    free(file_path);
     bmp->bitmapData = bitmapImage;
     bmp->bitmapInfoHeader = bitmapInfoHeader;
     bmp->bytes_per_pixel = bytes_per_pixel;
@@ -85,27 +88,18 @@ Bitmap* loadBitmapSection(Bitmap* bitmap, uint16_t x, uint16_t y, uint16_t width
     Bitmap* section = malloc(sizeof(Bitmap));
     *section = *bitmap;
     uint8_t bytes_per_pixel = bitmap->bytes_per_pixel;
-    uint32_t interval = (bitmap->actual_width - width) * bytes_per_pixel;
-
     section->padding = (4 - (width * bytes_per_pixel) % 4) % 4;
     section->bitmapInfoHeader.width = width;
     section->bitmapInfoHeader.height = height;
-    section->actual_width = width + (section->padding != 0); // + 1 if padding != 0
-    section->bitmapInfoHeader.imageSize = height * (section->actual_width) * bytes_per_pixel; 
-    section->bitmapData  = (unsigned char*) malloc(section->bitmapInfoHeader.imageSize);
-
-    unsigned char* original = bitmap->bitmapData + ((bitmap->bitmapInfoHeader.width + bitmap->padding) * y + x) * bytes_per_pixel;
-    unsigned char* new = section->bitmapData;
+    section->actual_bytes_per_row = section->bitmapInfoHeader.width * bytes_per_pixel + section->padding;
+    section->bitmapInfoHeader.imageSize = height * section->actual_bytes_per_row; 
+    section->bitmapData  = malloc(section->bitmapInfoHeader.imageSize);
+    char* original = bitmap->bitmapData + (bitmap->actual_bytes_per_row) * y + x * bytes_per_pixel;
+    char* new = section->bitmapData;
     for (int i = 0; i < height; i++) { // y
-    	for(int j = 0; j < width; j++) { // x
-            uint32_t color = *(uint32_t*)original;
-            for (size_t offset = 0; offset < bytes_per_pixel; offset++, color = color >> 8) 
-                *(new + offset) = color;
-            original += bytes_per_pixel;
-            new += bytes_per_pixel;
-        }
-        original += interval;
-        new += section->padding;
+        memcpy(new, original, width * bytes_per_pixel);
+        original += bitmap->actual_bytes_per_row;
+        new += section->actual_bytes_per_row;
     }
     return section;
 }
@@ -122,22 +116,21 @@ Bitmap* resizeBitmap(Bitmap* bitmap, uint16_t factor) {
     resized->padding = (4 - (width * bytes_per_pixel) % 4) % 4;
     resized->bitmapInfoHeader.width = width;
     resized->bitmapInfoHeader.height = height;
-    resized->actual_width = width + (resized->padding != 0); // + 1 if padding != 0
-    resized->bitmapInfoHeader.imageSize = height * (resized->actual_width) * bytes_per_pixel; 
-    resized->bitmapData  = (unsigned char*) malloc(resized->bitmapInfoHeader.imageSize);
-    unsigned char* original = bitmap->bitmapData;
-    unsigned char* new = resized->bitmapData;
+
+    resized->actual_bytes_per_row = resized->bitmapInfoHeader.width * bytes_per_pixel + resized->padding;
+    resized->bitmapInfoHeader.imageSize = height * resized->actual_bytes_per_row; 
+    resized->bitmapData  = malloc(resized->bitmapInfoHeader.imageSize);
+    char* original = bitmap->bitmapData;
+    char* new = resized->bitmapData;
     for (int i = 0; i < height; i++) { // y
     	for(int j = 0; j < width; j++) { // x
-            uint32_t color = *(uint32_t*)original;
-            for (size_t offset = 0; offset < bytes_per_pixel; offset++, color = color >> 8) 
-                *(new + offset) = color;
+            memcpy(new, original, bytes_per_pixel);
             if (j % factor == factor - 1)
                 original += bytes_per_pixel;
             new += bytes_per_pixel;
         }
         if (i % factor != factor - 1)
-            original -= bitmap->bitmapInfoHeader.width * bytes_per_pixel;
+            original -= bitmap->actual_bytes_per_row;
         original += bitmap->padding;
         new += resized->padding;
     }
@@ -146,7 +139,7 @@ Bitmap* resizeBitmap(Bitmap* bitmap, uint16_t factor) {
 
 void saveBitmap(char* filename, unsigned int width, unsigned int height, char* address) {
     FILE* file = fopen(filename, "w");
-	static unsigned char bmp_header[54] = {66,77,0,0,0,0,0,0,0,0,54,0,0,0,40,0,0,0,0,0,0,0,0,0,0,0,1,0,24}; //rest is zeroes
+	static unsigned char bmp_header[54] = {66,77,0,0,0,0,0,0,0,0,54,0,0,0,40,0,0,0,0,0,0,0,0,0,0,0,1,0,24}; // info header
 	unsigned int bytes_per_row = width * vg_get_bytes_pp();
 	unsigned int padding = (4 - (bytes_per_row % 4)) % 4;
 	unsigned int* sizeOfFileEntry = (unsigned int*)&bmp_header[2];
@@ -182,11 +175,11 @@ void draw_bitmap(Bitmap* bmp, int x, int y, Alignment alignment) {
         x -= width;
     uint16_t xCoord = x;
     uint16_t yCoord = y + height - 1;  
-    unsigned char* img = bmp->bitmapData;
+    char* img = bmp->bitmapData;
     for (int i = 0; i < height; i++, yCoord--) { // y
         xCoord = x;
     	for(int j = 0; j < width; j++, xCoord++) { // x
-            uint32_t color = *(uint32_t*)img;
+            uint32_t color = vg_retrieve(img);
             if (!is_transparent(color))
                 vg_draw_pixel(xCoord, yCoord, color);
             img += bmp->bytes_per_pixel;
@@ -206,19 +199,18 @@ void draw_bitmap_color(Bitmap* bmp, int x, int y, Alignment alignment , uint32_t
         x -= width;
     uint16_t xCoord = x;
     uint16_t yCoord = y + height - 1;  
-    unsigned char* img = bmp->bitmapData;
+    char* img = bmp->bitmapData;
     for (int i = 0; i < height; i++, yCoord--) { // y
         xCoord = x;
     	for(int j = 0; j < width; j++, xCoord++) { // x
-            uint32_t color = *(uint32_t*)img;
-            if (!is_transparent(color)) {
-                if((color & 0xFFFFFF) == GREEN)
-                    vg_draw_pixel(xCoord, yCoord, new_color);
-                else vg_draw_pixel(xCoord, yCoord, color);
-            }
+            uint32_t color = vg_retrieve(img);
+            if ((color & 0xFFFFFF) == GREEN)
+                vg_draw_pixel(xCoord, yCoord, new_color);
+            else if (!is_transparent(color))
+                vg_draw_pixel(xCoord, yCoord, color);
             img += bmp->bytes_per_pixel;
         }
-        img += bmp->padding; // * bmp->bytes_per_pixel;
+        img += bmp->padding; 
     }
 }
 
@@ -226,7 +218,7 @@ uint32_t get_bitmap_color(Bitmap* bmp, uint16_t x, uint16_t y) {
     if (x >= bmp->bitmapInfoHeader.width || y >= bmp->bitmapInfoHeader.height)
         return 0;
     uint32_t color = 0;
-    unsigned char* pixel_ptr = bmp->bitmapData + (bmp->actual_width * (bmp->bitmapInfoHeader.height - y - 1) + x) * bmp->bytes_per_pixel;
+    char* pixel_ptr = bmp->bitmapData + (bmp->actual_bytes_per_row * (bmp->bitmapInfoHeader.height - y - 1) + x * bmp->bytes_per_pixel);
     for (int offset = bmp->bytes_per_pixel -  1; offset >= 0; offset--) {
         color = color << 8;
         uint8_t comp = *(pixel_ptr + offset);
@@ -240,6 +232,9 @@ bool is_transparent(uint32_t color) {
 }
 
 // NAO USADO POR AGORA
+
+unsigned char * db;
+
 char *double_buffering() {
 	char* double_buffer = malloc(vg_get_hres() * vg_get_vres() * vg_get_bytes_pp());
 	char* video_mem = vg_get_video_mem();

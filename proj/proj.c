@@ -53,57 +53,23 @@ int (proj_main_loop)() { //int argc, char *argv[]) {
   subscribe_device(Mouse);
   while (1) {
     Event_t event = GetEvent();
-    if (event.isMouseEvent && event.mouseEvent.type == LB_PRESS) {
-      printf("SENDING!\n");
-      uart_send_draw_line1(364, 364, 364, 364, 16711680, 4);
-      uart_send_draw_line1(364, 364, 368, 368, 16711680, 4);
-     // uart_fifo_send(notif.mouse_packet.delta_x);
-     // uart_fifo_send(notif.mouse_packet.delta_y);
-     // uart_fifo_send(notif.mouse_packet.lb);
-     // uart_fifo_send(notif.mouse_packet.rb);
-     // uart_fifo_send(notif.mouse_packet.mb);
-     // uart_fifo_send(notif.mouse_packet.delta_x);
-     // uart_fifo_send(notif.mouse_packet.delta_y);
-     // uart_fifo_send(notif.mouse_packet.lb);
-     // uart_fifo_send(notif.mouse_packet.rb);
-     // uart_fifo_send(notif.mouse_packet.mb);
-     // uart_fifo_send(notif.mouse_packet.delta_x);
-     // uart_fifo_send(notif.mouse_packet.delta_y);
-     // uart_fifo_send(notif.mouse_packet.lb);
-     // uart_fifo_send(notif.mouse_packet.rb);
-     // uart_fifo_send(notif.mouse_packet.mb);
-     // uart_fifo_send(notif.mouse_packet.delta_x);
-     // uart_fifo_send(notif.mouse_packet.delta_y);
-     // uart_fifo_send(notif.mouse_packet.lb);
-     // uart_fifo_send(notif.mouse_packet.rb);
-     // uart_fifo_send(notif.mouse_packet.mb);
-     // uart_fifo_send(notif.mouse_packet.delta_x);
-     // uart_fifo_send(notif.mouse_packet.delta_y);
-     // uart_fifo_send(notif.mouse_packet.lb);
-     // uart_fifo_send(notif.mouse_packet.rb);
-     // uart_fifo_send(notif.mouse_packet.mb);
-     // uart_fifo_send(notif.mouse_packet.delta_x);
-     // uart_fifo_send(notif.mouse_packet.delta_y);
-     // uart_fifo_send(notif.mouse_packet.lb);
-     // uart_fifo_send(notif.mouse_packet.rb);
-     // uart_fifo_send(notif.mouse_packet.mb);
-     // uart_fifo_send(notif.mouse_packet.delta_x);
-     // uart_fifo_send(notif.mouse_packet.delta_y);
-     // uart_fifo_send(notif.mouse_packet.lb);
-     // uart_fifo_send(notif.mouse_packet.rb);
-     // uart_fifo_send(notif.mouse_packet.mb);
-     // uart_fifo_send(notif.mouse_packet.delta_x);
-     // uart_fifo_send(notif.mouse_packet.delta_y);
-     // uart_fifo_send(notif.mouse_packet.lb);
-     // uart_fifo_send(notif.mouse_packet.rb);
-     // uart_fifo_send(notif.mouse_packet.mb);
-    }
+    print_event(event);
+    //if (event.isMouseEvent) {
+     // printf("SENDING!\n");
+     // uart_send_bucket(100, 100, 16711680);
+     // uart_send_bucket(200, 100, 16711680);
+     // uart_send_drawer_ready("HI HOW ARE YOU");
+    //}
     if (event.isKeyboardEvent && event.keyboardEvent.type == ESC_PRESS)
       break;
     if (event.isUARTEvent) {
       printf("num uart_messages: %d\n", event.num_uart_messages);
       for (int j = 0; j < event.num_uart_messages; j++) {
-        uart_receive_draw_line1(&event.uart_messages[j]);
+        //uart_process_msg(&event.uart_messages[j]);
+        if (event.uart_messages[j].type == MSG_DRAWER_READY) {
+          printf ("string: ");
+          printf ("\"%s\" \n", event.uart_messages[j].bytes);
+        }
       }
     }
   }

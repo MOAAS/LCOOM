@@ -52,11 +52,11 @@ void draw_sprite_color(Sprite *sp) {
 void erase_sprite(Sprite *sp) {
     uint16_t xCoord = sp->x;
     uint16_t yCoord = sp->y + sp->height - 1;
-    unsigned char* img = sp->bitmap->bitmapData;
+    char* img = sp->bitmap->bitmapData;
     for (int i = 0; i < sp->height; i++, yCoord--) {
         xCoord = sp->x;
     	for(int j = 0; j < sp->width; j++, xCoord++) {
-            uint32_t color = *(uint32_t*)img;
+            uint32_t color = vg_retrieve(img);
             if (!is_transparent(color)) {
                 vg_draw_pixel(xCoord, yCoord, layer_get_pixel_under(get_highest_layer(), xCoord, yCoord));
             }
@@ -138,13 +138,16 @@ bool is_on_button(Sprite* cursor, Button* button) {
     layer_get_pixel_under(get_highest_layer(), cursor->x, cursor->y) == get_bitmap_color(button->bitmap, cursor->x - button->x, cursor->y - button->y);
 }
 
-void draw_button(Button* button) {
+void draw_button(Sprite* cursor, Button* button) {
     layer_draw_image(button->layer, button->bitmap, button->x, button->y);
+    if (is_on_button(cursor, button))
+        highlight_button(button);
+    else unhighlight_button(button);
 }
 
-void draw_buttons(Button* buttons[], uint8_t num_buttons) {
+void draw_buttons(Sprite* cursor, Button* buttons[], uint8_t num_buttons) {
     for (uint8_t i = 0; i < num_buttons; i++) {
-        draw_button(buttons[i]);
+        draw_button(cursor, buttons[i]);
     }
 }
 
@@ -161,7 +164,7 @@ void unhighlight_button(Button* button) {
         return;
     button->isHighlighted = false;
     button->bitmap = button->bitmapIdle;
-    draw_button(button);
+    layer_draw_image(button->layer, button->bitmap, button->x, button->y);
 }
 
 void highlight_button(Button* button) {
@@ -169,7 +172,7 @@ void highlight_button(Button* button) {
         return;
     button->isHighlighted = true;
     button->bitmap = button->bitmapHighlighted;
-    draw_button(button);
+    layer_draw_image(button->layer, button->bitmap, button->x, button->y);
 }
 
 void press_button(Button* button) {

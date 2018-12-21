@@ -183,6 +183,7 @@ bool kbd_assemble_scancode() {
 }
 
 int kbc_get_out_buf(uint8_t* content) {
+    *content = 0;
     uint8_t status;
     // The loop isn't that necessary, but doesn't hurt to recheck.
     for (int i = 0; i < TRIES_TIL_TIMEOUT; i++) { 

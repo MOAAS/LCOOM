@@ -18,9 +18,7 @@ typedef struct {
     int16_t cursorY_init;
     int16_t cursorX_limit;
     int16_t cursorY_limit;
-    uint16_t text_size;
-    uint16_t letter_width;
-    
+    uint16_t text_size;    
     Bitmap* bitmap;
     char text[200];
     uint8_t font_size;

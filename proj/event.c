@@ -119,6 +119,9 @@ KeyboardEvent kbd_detect_ev(uint16_t scancode) {
         case ENTER_MAKE: 
             event.type = ENTER_PRESS; 
             break;
+        case ENTER_BREAK: 
+            event.type = ENTER_RELEASE; 
+            break;            
         // letters
         case A_MAKE: event.character = 'a'; event.type = CHARACTER_PRESS; break;
         case B_MAKE: event.character = 'b'; event.type = CHARACTER_PRESS; break;
