@@ -38,6 +38,14 @@ typedef enum {
     ENTER_PRESS,
     ENTER_RELEASE,
     CHARACTER_PRESS,
+    ARROW_UP_PRESS,
+    ARROW_UP_RELEASE,
+    ARROW_LEFT_PRESS,
+    ARROW_LEFT_RELEASE,
+    ARROW_DOWN_PRESS,
+    ARROW_DOWN_RELEASE,
+    ARROW_RIGHT_PRESS,
+    ARROW_RIGHT_RELEASE,
     OTHER_KEY
 } KeyboardEventType;
 
@@ -67,6 +75,7 @@ typedef struct {
     bool isCtrlPressed;
     bool isLShiftPressed;
     bool isRShiftPressed;
+    
     bool isLBPressed;
     bool isMBPressed;
     bool isRBPressed;

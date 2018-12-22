@@ -54,6 +54,7 @@ int uart_set_dlab(bool bit) {
         return 1;
     if (bit) ctrl_byte |= UART_DLAB;
     else ctrl_byte &= ~UART_DLAB;
+    ctrl_byte = ctrl_byte | BIT(0) | BIT(1) | BIT(2);
     uart_write_reg(UART_LCR, ctrl_byte);
     return 0;
 }
@@ -122,16 +123,14 @@ void uart_ih() {
     uint8_t status;
     uint8_t data;
     uint8_t int_id;
+    uart_read_status(&status);
     uart_get_int_id(&int_id);
     if (int_id & UART_NO_INT)
         return;
-    uart_read_status(&status);
-    if (status & UART_FIFO_ERR)
-        printf("FIFO ERROR \n");
     switch(int_id & UART_INT_ID) {
         case UART_INT_RECEIVE: 
         case UART_INT_CHAR_TO: // recebe sempre bit(2) | bit(3) !
-           // printf("Receive interrupt");
+           // printf("Receive interrupt \n");
             while (status & UART_RECEIVER_DATA) {
                 uart_read_data(&data);
                 if (!uart_com_error(status))
@@ -177,7 +176,7 @@ int uart_clear_toSend_queue() {
 
 int uart_enable_fifo() {
     //fcr = (fcr & ~BIT(6)) | BIT(7); // trigger level 8
-    return uart_write_reg(UART_FCR, UART_FIFO_ENABLE | UART_FIFO_CLR_RCVR | UART_FIFO_CLR_XMIT | UART_FIFO64_ENABLE);
+    return uart_write_reg(UART_FCR, UART_FIFO_ENABLE | UART_FIFO_CLR_RCVR | UART_FIFO_CLR_XMIT | BIT(3) | UART_FIFO64_ENABLE);
 }
 
 int uart_disable_fifo() {

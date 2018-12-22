@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdlib.h>
+#include <math.h>
 
 #include "bitmap.h"
 #include "canvas.h"
@@ -33,7 +34,8 @@ typedef enum  {
     EndGameLoss,
     Training,
     Saving,
-    ExitGame
+    ExitGame,
+    PlayingSnake
 } GameState;
 
 typedef enum  {
@@ -54,6 +56,10 @@ typedef struct {
     uint32_t color2;
     uint32_t rainbowColor;
 } DrawingState;
+
+void play_snake();
+
+
 
 void projeto();
 void start_screen();

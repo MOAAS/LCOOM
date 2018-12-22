@@ -173,7 +173,7 @@ int kbc_enable_poll() {
 
 bool kbd_assemble_scancode() {
     if (scancode == SCANCODE_PREFIX) {
-        scancode |= scancode_byte << 8;
+        scancode = scancode << 8 | scancode_byte;
         return true;
     }
     scancode = scancode_byte;

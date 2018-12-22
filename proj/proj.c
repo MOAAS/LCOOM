@@ -51,19 +51,34 @@ int (proj_main_loop)() { //int argc, char *argv[]) {
   subscribe_device(SerialPort);
   subscribe_device(Keyboard);
   subscribe_device(Mouse);
+  subscribe_device(Timer);
   while (1) {
     Event_t event = GetEvent();
-    print_event(event);
-    //if (event.isMouseEvent) {
-     // printf("SENDING!\n");
-     // uart_send_bucket(100, 100, 16711680);
-     // uart_send_bucket(200, 100, 16711680);
-     // uart_send_drawer_ready("HI HOW ARE YOU");
-    //}
+    if (event.isMouseEvent && event.mouseEvent.type == LB_PRESS) {
+      printf("Sending...\n");
+      util_delay(1000);
+      uart_send_drawer_ready("HI HOW ARE YOU");
+     //uart_send_drawer_ready("HI HOW ARE YOU");
+     //uart_send_drawer_ready("HI HOW ARE YOU");
+     //uart_send_drawer_ready("HI HOW ARE YOU");
+     //uart_send_drawer_ready("HI HOW ARE YOU");
+    }
     if (event.isKeyboardEvent && event.keyboardEvent.type == ESC_PRESS)
       break;
+    if (event.isKeyboardEvent && event.keyboardEvent.type == ENTER_PRESS) {
+      uint8_t status;
+      uart_read_status(&status);
+      while (status & UART_RECEIVER_DATA) {
+        printf("status = %d \n", status);
+        uart_read_data(&status);
+        uart_read_status(&status);
+      }
+      printf("done (status = %d)", status);
+
+    }
+
     if (event.isUARTEvent) {
-      printf("num uart_messages: %d\n", event.num_uart_messages);
+     // printf("num uart_messages: %d\n", event.num_uart_messages);
       for (int j = 0; j < event.num_uart_messages; j++) {
         //uart_process_msg(&event.uart_messages[j]);
         if (event.uart_messages[j].type == MSG_DRAWER_READY) {

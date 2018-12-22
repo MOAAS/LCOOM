@@ -121,7 +121,31 @@ KeyboardEvent kbd_detect_ev(uint16_t scancode) {
             break;
         case ENTER_BREAK: 
             event.type = ENTER_RELEASE; 
-            break;            
+            break;          
+        case ARROW_U_MAKE:
+            event.type = ARROW_UP_PRESS;
+            break;
+        case ARROW_D_MAKE:
+            event.type = ARROW_DOWN_PRESS;
+            break;
+        case ARROW_L_MAKE:
+            event.type = ARROW_LEFT_PRESS;
+            break;
+        case ARROW_R_MAKE:
+            event.type = ARROW_RIGHT_PRESS;
+            break;
+        case ARROW_U_BREAK:
+            event.type = ARROW_UP_RELEASE;
+            break;
+        case ARROW_D_BREAK:
+            event.type = ARROW_DOWN_RELEASE;
+            break;
+        case ARROW_L_BREAK:
+            event.type = ARROW_LEFT_RELEASE;
+            break;
+        case ARROW_R_BREAK:
+            event.type = ARROW_RIGHT_RELEASE;
+            break;
         // letters
         case A_MAKE: event.character = 'a'; event.type = CHARACTER_PRESS; break;
         case B_MAKE: event.character = 'b'; event.type = CHARACTER_PRESS; break;

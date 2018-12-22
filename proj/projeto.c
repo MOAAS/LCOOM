@@ -37,6 +37,9 @@ static Bitmap* mainmenu_button2_hl;
 static Bitmap* mainmenu_button3_hl;
 static Bitmap* mainmenu_button4_hl;
 
+static Bitmap* snake_button;
+static Bitmap* snake_button_hl;
+
 static Bitmap* rainbow_button;
 static Bitmap* rainbow_hl;
 static Bitmap* balde_button;
@@ -71,12 +74,12 @@ static Event_t event;
 static NNY* paint_tube_1;
 static NNY* paint_tube_2;
 
-static int num_menu_buttons = 4;
+static int num_menu_buttons = 5;
 static int num_paint_buttons = 7;
 static int num_training_buttons = 1;
 
 static Button* paint_buttons[7];
-static Button* menu_buttons[4];
+static Button* menu_buttons[10];
 static Button* training_buttons[1];
 
 char* words_folder_path = "home/lcom/labs/proj/palavras/";
@@ -95,6 +98,9 @@ void loadBitmaps() {
     mainmenu_button2_hl = loadBitmap("mainmenu_button2_hl.bmp");
     mainmenu_button3_hl = loadBitmap("mainmenu_button3_hl.bmp");
     mainmenu_button4_hl = loadBitmap("mainmenu_button4_hl.bmp");
+
+    snake_button = loadBitmap("snake_button.bmp");
+    snake_button_hl = loadBitmap("snake_button_hl.bmp");
 
     // Drawing mode buttons
     rainbow_button = loadBitmap("rainbow.bmp");
@@ -172,10 +178,12 @@ void loadButtons() {
     menu_buttons[1] = create_button(25, 500, background, mainmenu_button2, mainmenu_button2_hl);
     menu_buttons[2] = create_button(525, 300, background, mainmenu_button3, mainmenu_button3_hl);
     menu_buttons[3] = create_button(525, 500, background, mainmenu_button4, mainmenu_button4_hl);
+    menu_buttons[4] = create_button(260, 700, background, snake_button, snake_button_hl);
     menu_buttons[0]->singleState = true; 
     menu_buttons[1]->singleState = true; 
     menu_buttons[2]->singleState = true; 
     menu_buttons[3]->singleState = true; 
+    menu_buttons[4]->singleState = true; 
 
     training_buttons[0] = create_button(35, 225, background, save_button, save_hl); // save
     training_buttons[0]->singleState = true; // save
@@ -217,6 +225,7 @@ void projeto() {
             case EndGameWin: end_game(); break;
             case EndGameLoss: end_game(); break;
             case ExitGame: break;
+            case PlayingSnake: play_snake(); break;
         }
     }
     vg_exit();
@@ -225,6 +234,78 @@ void projeto() {
     unsubscribe_device(Mouse);
     unsubscribe_device(SerialPort);
 }
+
+// ULTRA TEST //
+// ULTRA TEST //
+// ULTRA TEST //
+
+typedef struct {
+    double x;
+    double y;
+    double speed;
+    double angle;
+    uint32_t color;
+    bool turning_left;
+    bool turning_right;
+} Snake;
+
+Snake snake;
+
+void play_snake() {
+    timer_reset_counter();
+    reloadBackground();
+    create_canvas(background, 5, 5, vg_get_hres() - 5 ,  vg_get_vres() - 5, WHITE);
+    snake.x = 500;
+    snake.y = 500;
+    snake.angle = 0;
+    snake.speed = 1;
+    snake.color = RED;
+    snake.turning_left = false;
+    snake.turning_right = false;
+    while (gameState == PlayingSnake) {
+        event = GetEvent();
+        if (event.isTimerEvent) {
+            double xNext = snake.x + snake.speed * cos(snake.angle);
+            double yNext = snake.y + snake.speed * sin(snake.angle);
+            if (is_past_hor_bounds(xNext)) {
+                snake.angle = M_PI - snake.angle;
+                snake.speed *= 0.8;
+            }
+            else if (is_past_ver_bounds(yNext)) {
+                snake.angle = 2 * M_PI - snake.angle;
+                snake.speed *= 0.8;
+            }
+            else {
+                canvas_draw_line1((uint16_t)snake.x, (uint16_t)snake.y, (uint16_t)xNext, (uint16_t)yNext, rainbow(), 5);
+                snake.x = xNext;
+                snake.y = yNext;
+                snake.speed += 0.01;
+            }
+        }
+        if (event.isKeyboardEvent) {
+            if (event.keyboardEvent.type == ARROW_LEFT_PRESS)
+                snake.turning_left = true;
+            else if (event.keyboardEvent.type == ARROW_RIGHT_PRESS)
+                snake.turning_right = true;
+            else if (event.keyboardEvent.type == ARROW_LEFT_RELEASE)
+                snake.turning_left = false;
+            else if (event.keyboardEvent.type == ARROW_RIGHT_RELEASE)
+                snake.turning_right = false;
+        }
+        if (snake.turning_left)
+            snake.angle -= 0.02 * 1.1 * snake.speed;
+        if (snake.turning_right)
+            snake.angle += 0.02 * 1.1 * snake.speed;
+        if (event.isKeyboardEvent && event.keyboardEvent.type == ENTER_PRESS)
+            gameState = MainMenu;        
+    }
+    destroy_canvas();
+}
+
+// ULTRA TEST END //
+// ULTRA TEST END //
+// ULTRA TEST END //
+
 
 void start_screen() {
     layer_draw_image(background, welcome_screen, 0, 0);
@@ -253,6 +334,7 @@ void main_menu() {
                 setup_training();
                 break;
             case 3: gameState = ExitGame; break;
+            case 4: gameState = PlayingSnake; break;
             case -1: break;
         }
         update_cursor(cursor, event);
@@ -272,6 +354,33 @@ void start_game(char* solution) {
     }
     else gameState = MainMenu;
 }
+
+void end_game() {
+    word_pick_end();
+    destroy_canvas();
+    destroy_clock();   
+    reset_pencil(pencil);
+    layer_draw_image(background, ULTRA_BACKGROUND, 0, 0);
+    layer_draw_image(background, wide_textbox_bmp, 100, 200); // 860x100 image
+    if (gameState == EndGameWin) {
+        draw_word(background, "You win!", 530, 225, 3, 1, Center);
+        layer_draw_image(background, cool_dude_happy_big, 500, 325);
+    }
+    else {
+        draw_word(background, "You lose!", 530, 225, 3, 1, Center);
+        layer_draw_image(background, cool_dude_angry_big, 500, 325);
+    }
+    timer_reset_counter();
+    while(1) {
+        event = GetEvent();
+        if (event.isTimerEvent && event.timerEvent.seconds_passed == 2)
+            break;
+        update_cursor(cursor, event);
+    }
+    gameState = MainMenu;
+    
+}
+
 
 void wait_for_guesser() {
     layer_draw_image(background, wide_textbox_bmp, 85, 428); // 860x100 image
@@ -317,31 +426,6 @@ void wait_for_drawer() {
     free(solution);
 }
 
-void end_game() {
-    word_pick_end();
-    destroy_canvas();
-    destroy_clock();   
-    reset_pencil(pencil);
-    layer_draw_image(background, ULTRA_BACKGROUND, 0, 0);
-    layer_draw_image(background, wide_textbox_bmp, 100, 200); // 860x100 image
-    if (gameState == EndGameWin) {
-        draw_word(background, "You win!", 530, 225, 3, 1, Center);
-        layer_draw_image(background, cool_dude_happy_big, 500, 325);
-    }
-    else {
-        draw_word(background, "You lose!", 530, 225, 3, 1, Center);
-        layer_draw_image(background, cool_dude_angry_big, 500, 325);
-    }
-    timer_reset_counter();
-    while(1) {
-        event = GetEvent();
-        if (event.isTimerEvent && event.timerEvent.seconds_passed == 2)
-            break;
-        update_cursor(cursor, event);
-    }
-    gameState = MainMenu;
-    
-}
 
 //////////////
 // GUESSING //
@@ -565,8 +649,7 @@ void usePencil(DrawingState* pencil, Event_t event) {
             break;
         case Bucket:
             if (event.mouseEvent.type != LB_PRESS && event.mouseEvent.type != RB_PRESS)
-                break;
-            print_event(event);            
+                break;       
             bucket_tool(cursor->x, cursor->y, color);
             if (gameState != Training)
                 uart_send_bucket(cursor->x, cursor->y, color);

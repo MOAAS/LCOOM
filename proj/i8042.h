@@ -205,6 +205,16 @@
 #define RCTRL_MAKE      0xe01d
 #define RCTRL_BREAK     0xe09d
 
+#define ARROW_U_MAKE    0xe048
+#define ARROW_D_MAKE    0xe050
+#define ARROW_L_MAKE    0xe04b
+#define ARROW_R_MAKE    0xe04d
+
+#define ARROW_U_BREAK   0xe0c8
+#define ARROW_D_BREAK   0xe0d0
+#define ARROW_L_BREAK   0xe0cb
+#define ARROW_R_BREAK   0xe0cd
+
 #define KEYPAD1_MAKE    0x4f
 #define KEYPAD2_MAKE    0x50
 #define KEYPAD3_MAKE    0x51

@@ -21,6 +21,8 @@ void create_canvas(Layer* layer, uint16_t xMin, uint16_t yMin, uint16_t xMax, ui
 }
 
 void destroy_canvas() {
+    if (canvas != NULL)
+        return;
     canvas_set_color(WHITE);
     canvas_set_outline(WHITE);
     free(canvas);
@@ -206,6 +208,15 @@ uint32_t rainbow() {
 bool is_inside_canvas(uint16_t x , uint16_t y) {
     return x >= canvas->xMin && y >= canvas->yMin && x < canvas->xMax && y < canvas->yMax;
 }
+
+bool is_past_hor_bounds(uint16_t x) {
+    return x > canvas->xMax || x < canvas->xMin;
+}
+
+bool is_past_ver_bounds(uint16_t y) {
+    return y > canvas->yMax || y < canvas->yMin;
+}
+
 
 char* canvas_get_map() {
     uint8_t bytes_per_pixel = vg_get_bytes_pp();

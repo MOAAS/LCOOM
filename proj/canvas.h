@@ -43,6 +43,9 @@ void bucket_tool(uint16_t x, uint16_t y, uint32_t cor_balde);
 
 bool is_inside_canvas(uint16_t x, uint16_t y);
 
+bool is_past_hor_bounds(uint16_t x);
+bool is_past_ver_bounds(uint16_t y);
+
 char* canvas_get_map();
 
 int canvas_get_height();
