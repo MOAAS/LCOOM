@@ -4,8 +4,8 @@
 #include "bitmap.h"
 
 typedef enum {
-    Left,
-    Center
+    LeftAlign,
+    CenterAlign
 } TextAlignment;
 
 typedef struct {
@@ -19,15 +19,17 @@ typedef struct {
     int16_t cursorX_limit;
     int16_t cursorY_limit;
     uint16_t text_size;    
+    uint8_t font_size;
     Bitmap* bitmap;
     char text[200];
-    uint8_t font_size;
+    TextAlignment alignment;
     bool isEmpty;
 } TextBox;
 
 void loadLetterMap();
 
-TextBox* create_textbox(Layer* layer, Bitmap* bitmap, uint16_t x, uint16_t y, uint8_t x_disp, uint8_t y_disp, uint8_t font_scale);
+TextBox* create_textbox(Layer* layer, Bitmap* bitmap, uint16_t x_disp, uint16_t y_disp, uint8_t font_scale, TextAlignment alignment);
+
 void destroy_textbox(TextBox* textbox);
 
 void textbox_write(TextBox* textbox, char* string);

@@ -176,7 +176,7 @@ int uart_clear_toSend_queue() {
 
 int uart_enable_fifo() {
     //fcr = (fcr & ~BIT(6)) | BIT(7); // trigger level 8
-    return uart_write_reg(UART_FCR, UART_FIFO_ENABLE | UART_FIFO_CLR_RCVR | UART_FIFO_CLR_XMIT | BIT(3) | UART_FIFO64_ENABLE);
+    return uart_write_reg(UART_FCR, UART_FIFO_ENABLE | UART_FIFO_CLR_RCVR | UART_FIFO_CLR_XMIT | UART_FIFO64_ENABLE);
 }
 
 int uart_disable_fifo() {

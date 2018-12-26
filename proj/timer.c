@@ -25,6 +25,12 @@ int (timer_unsubscribe_int)() {
   return 0;
 }
 
+int timer_enable_speaker() {
+  uint32_t spk_ctrl;
+  sys_inb(SPEAKER_CTRL, &spk_ctrl);
+  return sys_outb(SPEAKER_CTRL, spk_ctrl | BIT(1) | BIT(0));
+}
+
 int (timer_set_frequency)(uint8_t timer, uint32_t freq) {
   if (timer < 0 || timer > 2 || freq <= 0)
     return BAD_PARAMS;

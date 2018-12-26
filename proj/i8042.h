@@ -194,10 +194,10 @@
 #define LCTRL_BREAK     0x9d
 
 #define LALT_MAKE       0x38
-#define LALT_BREAK      0x38
+#define LALT_BREAK      0xb8
 
 #define SPACE_MAKE      0x39
-#define SPACE_BREAK     0x39
+#define SPACE_BREAK     0xb9
 
 #define RALT_MAKE       0xe038
 #define RALT_BREAK      0xe0b8

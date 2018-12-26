@@ -173,18 +173,23 @@ void draw_bitmap(Bitmap* bmp, int x, int y, Alignment alignment) {
         x -= width / 2;
     else if (alignment == ALIGN_RIGHT)
         x -= width;
-    uint16_t xCoord = x;
-    uint16_t yCoord = y + height - 1;  
+    int xCoord = x;
+    int yCoord = y + height - 1;  
     char* img = bmp->bitmapData;
+    char* vmem = calc_address(vg_get_video_mem(), xCoord, yCoord, vg_get_hres());
     for (int i = 0; i < height; i++, yCoord--) { // y
         xCoord = x;
     	for(int j = 0; j < width; j++, xCoord++) { // x
-            uint32_t color = vg_retrieve(img);
-            if (!is_transparent(color))
-                vg_draw_pixel(xCoord, yCoord, color);
+            if (xCoord >= 0 && yCoord >= 0 && xCoord < (int)vg_get_hres() && yCoord < (int)vg_get_vres()) {
+                uint32_t color = vg_retrieve(img);
+                if (!is_transparent(color))
+                    vg_insert(vmem, color);
+            }
             img += bmp->bytes_per_pixel;
+            vmem += vg_get_bytes_pp();
         }
         img += bmp->padding; // * bmp->bytes_per_pixel;
+        vmem = vmem - (vg_get_hres() + width) * vg_get_bytes_pp();
     }
 }
 

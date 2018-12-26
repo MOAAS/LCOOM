@@ -5,37 +5,46 @@
 
 #include "textbox.h"
 
-static Bitmap* letters[256];
+static Bitmap* letters_small[256];
+static Bitmap* letters_medium[256];
+static Bitmap* letters_big[256];
 
 void loadLetterMap() {
     Bitmap* letters_bmp = loadBitmap("letras.bmp");
     int i = 0;
     for (int y = 256 - 16; y >= 0; y -= 16) {
         for (int x = 0; x < 256; x += 16, i++) {
-            letters[i]= loadBitmapSection(letters_bmp, x, y, 16, 16);
+            letters_small[i]= loadBitmapSection(letters_bmp, x, y, 16, 16);
         }
+    }
+    for (int i = 0; i < 256; i++) {
+        letters_medium[i] = resizeBitmap(letters_small[i], 2);
+        letters_big[i] = resizeBitmap(letters_small[i], 3);
     }
 }
 
-TextBox* create_textbox(Layer* layer, Bitmap* bitmap, uint16_t x, uint16_t y, uint8_t x_disp, uint8_t y_disp, uint8_t font_scale) {
-    TextBox* textbox = malloc(sizeof(TextBox));
+TextBox* create_textbox(Layer* layer, Bitmap* bitmap, uint16_t x_disp, uint16_t y_disp, uint8_t font_scale, TextAlignment alignment) {
+    TextBox* textbox = malloc(sizeof(TextBox)); 
     textbox->bitmap = bitmap;
     textbox->layer = layer;
-    textbox->x = x;
-    textbox->y = y;
-    textbox->cursorX = x + x_disp;
-    textbox->cursorY = y + y_disp;
+    textbox->x = layer->x;
+    textbox->y = layer->y;
+    textbox->cursorX = textbox->x + x_disp;
+    textbox->cursorY = textbox->y + y_disp;
     textbox->cursorX_init = textbox->cursorX;
     textbox->cursorY_init = textbox->cursorY;
+    
     textbox->font_size = 16 * font_scale;
-    textbox->cursorX_limit = textbox->cursorX_init + (int)((textbox->layer->width - 2 * x_disp) / textbox->font_size) * textbox->font_size + textbox->font_size;
-    textbox->cursorY_limit = textbox->cursorY_init + (int)((textbox->layer->width - 2 * y_disp) / textbox->font_size) * textbox->font_size + textbox->font_size;
-    textbox->isEmpty = true;
     textbox->text_size = 0;
-    strcpy(textbox->text, "");
-    layer_draw_image(layer, bitmap, x, y);
-    return textbox;
 
+    textbox->cursorX_limit = textbox->x + textbox->layer->width;
+    textbox->cursorY_limit = textbox->y + textbox->layer->height;
+   
+    textbox->isEmpty = true;
+    textbox->alignment = alignment;
+    strcpy(textbox->text, "");
+    layer_draw_image(layer, bitmap, layer->x, layer->y);
+    return textbox;
 }
 
 void destroy_textbox(TextBox* textbox) {
@@ -44,7 +53,7 @@ void destroy_textbox(TextBox* textbox) {
 }
 
 void textbox_write(TextBox* textbox, char* string) {
-    for (int i = 0; string[i] != 0; i++) {
+    for (int i = 0; string[i] != '\0'; i++) {
         textbox_put(textbox, string[i]);
     }
 }
@@ -61,12 +70,11 @@ void textbox_put(TextBox* textbox, char character) {
     if (textbox->cursorX >= textbox->cursorX_limit) // ultrapassou
         textbox_linefeed(textbox);
     // talvez guardar no inicio
-    Bitmap* bitmap = resizeBitmap(letters[(uint8_t)character], textbox->font_size / 16);
     // atualizar char arrays
     char string[2] = {character};
     strcat(textbox->text, string);
     textbox->text_size++;
-    layer_draw_image(textbox->layer, bitmap, textbox->cursorX, textbox->cursorY);
+    draw_char(textbox->layer, character, textbox->cursorX, textbox->cursorY, textbox->font_size / 16, textbox->alignment);
     textbox->cursorX += textbox->font_size;
 }
 
@@ -88,10 +96,19 @@ void textbox_backspace(TextBox* textbox) {
     textbox->text_size--;
     int16_t relative_x = textbox->cursorX - textbox->x;
     int16_t relative_y = textbox->cursorY - textbox->y;
+    int16_t xCoord = textbox->cursorX;
+    int16_t yCoord = textbox->cursorY;
+    if (textbox->alignment == CenterAlign) {
+        relative_x -= textbox->font_size / 2;
+        relative_y -= textbox->font_size / 2;
+        xCoord -= textbox->font_size / 2;
+        yCoord -= textbox->font_size / 2;
+    }
+
     for (int8_t i = 0; i < textbox->font_size; i++) {
         for (int8_t j = 0; j < textbox->font_size; j++) {
             uint32_t color = get_bitmap_color(textbox->bitmap, relative_x + j, relative_y + i);
-            draw_on_layer(textbox->layer, textbox->cursorX + j, textbox->cursorY + i, color);
+            draw_on_layer(textbox->layer, xCoord + j, yCoord + i, color);
         }
     }
     if (textbox->cursorX <= textbox->cursorX_init && textbox->cursorY > textbox->cursorY_init) {
@@ -101,15 +118,26 @@ void textbox_backspace(TextBox* textbox) {
 }
 
 void draw_char(Layer* layer, char character, int16_t x, int16_t y, uint16_t font_scale, TextAlignment alignment){
-    Bitmap* bitmap = resizeBitmap(letters[(uint8_t)character], font_scale);
-    if (alignment == Center)
+    Bitmap* bitmap; 
+    switch (font_scale) {
+        case 0: return;
+        case 1: bitmap = letters_small[(uint8_t)character]; break;
+        case 2: bitmap = letters_medium[(uint8_t)character]; break;
+        case 3: bitmap = letters_big[(uint8_t)character]; break;
+        default: bitmap = resizeBitmap(letters_small[(uint8_t)character], font_scale); break;
+    }
+    if (alignment == CenterAlign) {
         x -= 8 * font_scale;
+        y -= 8 * font_scale;
+    }
     layer_draw_image(layer, bitmap, x, y);
+    if (font_scale > 3)
+        free(bitmap);
 }
 
 void draw_word(Layer* layer, char* word, int16_t x, int16_t y, uint16_t font_scale, uint16_t space_scale, TextAlignment alignment) {
     int16_t xDiff = 16 * (font_scale + space_scale);
-    if (alignment == Center) {
+    if (alignment == CenterAlign) {
         x -= xDiff * (strlen(word) - 1) / 2.0;
     }
     for (int i = 0; word[i] != '\0'; i++) {     

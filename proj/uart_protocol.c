@@ -69,8 +69,8 @@ bool uart_assemble_received_message(uint8_t byte, UARTMessage* msg_ptr) {
     }
 }
 
-void uart_send_draw_line1(uint16_t xi, uint16_t yi, uint16_t xf, uint16_t yf, uint32_t color, uint8_t thickness) {
-    uint8_t bytes[MSG_DRAW_LINE1_SIZE]; // size = 12;
+void uart_send_draw_line(uint16_t xi, uint16_t yi, uint16_t xf, uint16_t yf, uint32_t color, uint8_t thickness) {
+    uint8_t bytes[MSG_DRAW_LINE_SIZE]; // size = 12;
     bytes[0] = (uint8_t)xi;
     bytes[1] = (uint8_t)(xi >> 8);
 
@@ -88,7 +88,7 @@ void uart_send_draw_line1(uint16_t xi, uint16_t yi, uint16_t xf, uint16_t yf, ui
     bytes[10] = (uint8_t)(color >> 16);
 
     bytes[11] = thickness;
-    UARTMessage* message = create_message(MSG_DRAW_LINE1_SIZE, MSG_DRAW_LINE1, bytes);
+    UARTMessage* message = create_message(MSG_DRAW_LINE_SIZE, MSG_DRAW_LINE, bytes);
     uart_send_message(message);   
 }
 
@@ -167,14 +167,14 @@ void uart_send_tick_clock() {
 
 void uart_process_msg(UARTMessage* message) {
     switch (message->type) {
-        case MSG_DRAW_LINE1: {
+        case MSG_DRAW_LINE: {
             uint16_t xi = (uint16_t)message->bytes[0] | (uint16_t)message->bytes[1] << 8;
             uint16_t yi = (uint16_t)message->bytes[2] | (uint16_t)message->bytes[3] << 8;
             uint16_t xf = (uint16_t)message->bytes[4] | (uint16_t)message->bytes[5] << 8;
             uint16_t yf = (uint16_t)message->bytes[6] | (uint16_t)message->bytes[7] << 8;
             uint32_t color = (uint32_t)message->bytes[8] | (uint32_t)message->bytes[9] << 8 | (uint32_t)message->bytes[10] << 16; 
             uint8_t thickness = message->bytes[11];
-            canvas_draw_line1(xi, yi, xf, yf, color, thickness);
+            canvas_draw_line(xi, yi, xf, yf, color, thickness);
             break;
         }
         case MSG_DRAW_LINE2: {

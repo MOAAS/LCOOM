@@ -4,9 +4,11 @@
 #include <math.h>
 
 #include "bitmap.h"
+#include "bitmaps.h"
 #include "canvas.h"
 #include "clock.h"
 #include "event.h"
+#include "flappy.h"
 #include "interrupts.h"
 #include "i8042.h"
 #include "i8254.h"
@@ -15,6 +17,7 @@
 #include "keyboard.h"
 #include "timer.h"
 #include "textbox.h"
+#include "snake.h"
 #include "sprite.h"
 #include "uart_protocol.h"
 #include "vbe.h"
@@ -35,7 +38,8 @@ typedef enum  {
     Training,
     Saving,
     ExitGame,
-    PlayingSnake
+    PlayingSnake,
+    PlayingFlappy
 } GameState;
 
 typedef enum  {
@@ -58,8 +62,10 @@ typedef struct {
 } DrawingState;
 
 void play_snake();
+void play_flappy();
 
 
+void changeState(GameState newState);
 
 void projeto();
 void start_screen();
@@ -73,6 +79,7 @@ void end_game();
 void setup_training();
 void training();
 void save();
+
 
 void wait_for_guesser();
 void wait_for_drawer();

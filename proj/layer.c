@@ -8,7 +8,7 @@
 #include "canvas.h"
 #include "layer.h"
 
-Layer layers[5];
+Layer* layers[60];
 static uint8_t num_layers = 0;
 
 Layer* create_layer(uint16_t x, uint16_t y, uint16_t width, uint16_t height) {
@@ -19,7 +19,7 @@ Layer* create_layer(uint16_t x, uint16_t y, uint16_t width, uint16_t height) {
     layer->height = height;
     layer->map = malloc(vg_get_bytes_pp() * width * height);
     layer->layer_no = num_layers;
-    layers[num_layers] = *layer;
+    layers[num_layers] = layer;
     num_layers++;
     for (uint16_t yCoord = y; yCoord < height + y; yCoord++) {
         for (uint16_t xCoord = x; xCoord < width + x; xCoord++) {
@@ -36,11 +36,12 @@ void destroy_layer(Layer* layer) {
         }
     }
     for (int i = layer->layer_no + 1; i < num_layers; i++) {
-        layers[i].layer_no--;
+        layers[i]->layer_no--;
         layers[i-1] = layers[i];
     }
     num_layers--;
     free(layer);
+    free(layer->map);
 }
 
 void layer_set_pixel(Layer* layer, uint16_t x, uint16_t y, uint32_t color) {
@@ -55,7 +56,7 @@ void layer_erase_pixel(Layer* layer, uint16_t x, uint16_t y) {
         draw_on_layer(layer, x, y, 0);
     }
     else {
-        uint32_t colorUnder = layer_get_pixel_under(&layers[num_layers - 2], x, y);
+        uint32_t colorUnder = layer_get_pixel_under(layers[layer->layer_no - 1], x, y);
         draw_on_layer(layer, x, y, colorUnder);
     }
 }
@@ -69,7 +70,7 @@ uint32_t layer_get_pixel(Layer* layer, uint16_t x, uint16_t y) {
 
 uint32_t layer_get_pixel_under(Layer* layer, uint16_t x, uint16_t y) {
     for (int i = layer->layer_no; i >= 0; i--) {
-        layer = &layers[i];
+        layer = layers[i];
         if (is_within_bounds(layer, x, y))
             break;
         else if (i == 0)
@@ -82,7 +83,7 @@ uint32_t layer_get_pixel_under(Layer* layer, uint16_t x, uint16_t y) {
 Layer* get_highest_layer() {
     if (num_layers == 0)
         return NULL;
-    return &layers[num_layers-1];
+    return layers[num_layers-1];
 }
 
 uint8_t get_num_layers() {
@@ -100,7 +101,7 @@ bool is_top_layer(Layer* layer, uint16_t x, uint16_t y) {
     if (!is_within_bounds(layer, x, y))
         return false;
     for (size_t i = layer->layer_no + 1; i < num_layers; i++) {
-        layer = &layers[i];
+        layer = layers[i];
         if (is_within_bounds(layer, x, y))
             return false;
     }
@@ -155,7 +156,5 @@ void layer_draw_image_color(Layer* layer, Bitmap* bmp, int x, int y, uint32_t ne
         img += bmp->padding;
     }
 }
-
-
 
 

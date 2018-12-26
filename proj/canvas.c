@@ -6,7 +6,8 @@
 
 #include "canvas.h"
 
-Canvas* canvas = NULL;
+static Canvas* canvas = NULL;
+
 void create_canvas(Layer* layer, uint16_t xMin, uint16_t yMin, uint16_t xMax, uint16_t yMax, uint32_t color) {
     canvas = malloc(sizeof(Canvas));
     canvas->layer = layer;
@@ -23,13 +24,11 @@ void create_canvas(Layer* layer, uint16_t xMin, uint16_t yMin, uint16_t xMax, ui
 void destroy_canvas() {
     if (canvas != NULL)
         return;
-    canvas_set_color(WHITE);
-    canvas_set_outline(WHITE);
     free(canvas);
     canvas = NULL;    
 }
 
-void canvas_draw_line1(uint16_t x0, uint16_t y0, uint16_t xf, uint16_t yf, uint32_t color, uint16_t thickness) {
+void canvas_draw_line(uint16_t x0, uint16_t y0, uint16_t xf, uint16_t yf, uint32_t color, uint16_t thickness) {
     int16_t dx = xf - x0, dy = yf - y0;
     if (dx == 0 && dy == 0) { // Single left-click
        canvas_draw_circle(x0, y0, thickness, color);
@@ -120,12 +119,14 @@ void canvas_draw_pixel(uint16_t x, uint16_t y, uint32_t color) {
 
 // usado pelo draw circle, importante estar otimizado
 void canvas_draw_hline(uint16_t x, uint16_t y, uint16_t len, uint32_t color) {
+    if (canvas->layer == NULL)
+        return;
     canvas->isEmpty = false;
     char* layer_addr = calc_address(canvas->layer->map, x, y, canvas->layer->width);
     char* video_addr = calc_address(vg_get_video_mem(), x, y, vg_get_hres());
     uint8_t bytes_pp = vg_get_bytes_pp();
     for (size_t i = 0; i < len; i++, x++) {
-        if (canvas->layer != NULL && is_inside_canvas(x, y)) {
+        if (is_inside_canvas(x, y)) {
             vg_insert(layer_addr, color);
             if (is_top_layer(canvas->layer, x, y))
                 vg_insert(video_addr, color);
@@ -141,13 +142,15 @@ void canvas_draw_vline(uint16_t x, uint16_t y, uint16_t len, uint32_t color) {
 }
 
 void canvas_draw_rectangle(uint16_t x0, uint16_t y0, uint16_t width, uint16_t height, uint32_t color) {
+    if (canvas->layer == NULL)
+        return;
     canvas->isEmpty = false;
     char* layer_addr = calc_address(canvas->layer->map, x0, y0, canvas->layer->width);
     char* video_addr = calc_address(vg_get_video_mem(), x0, y0, vg_get_hres());
     uint8_t bytes_pp = vg_get_bytes_pp();
     for (int i = 0, y = y0; i < height; i++, y++) {
         for (int j = 0, x = x0; j < width; j++, x++) {
-            if (canvas->layer != NULL && is_inside_canvas(x, y)) {
+            if (is_inside_canvas(x, y)) {
                 vg_insert(layer_addr, color);
                 if (is_top_layer(canvas->layer, x, y))
                     vg_insert(video_addr, color);
@@ -161,6 +164,7 @@ void canvas_draw_rectangle(uint16_t x0, uint16_t y0, uint16_t width, uint16_t he
 }
 
 void canvas_draw_rectangle_outline(uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint8_t thickness, uint32_t color) {
+
     for(size_t i = 0; i < thickness; i++) {
         canvas_draw_hline(x, y + i, width, color);
         canvas_draw_hline(x, y - i + height, width, color);
@@ -177,6 +181,8 @@ void canvas_draw_square(uint16_t x, uint16_t y, uint16_t side_len, uint32_t colo
 void canvas_set_outline(uint32_t color) {
     uint16_t x = canvas->xMin - 5, y = canvas->yMin - 5;
     uint16_t width = canvas->width + 10, height = canvas->height + 10;
+    if (!is_within_bounds(canvas->layer, x, y) || !is_within_bounds(canvas->layer, x + width - 1, y + height - 1))
+        return;
     for(size_t i = 0; i < 5; i++) {
         for (size_t j = 0; j < height; j++) { // Vertical
             draw_on_layer(canvas->layer, x + i, y + j, color);
@@ -194,16 +200,17 @@ void canvas_set_color(uint32_t color) {
     canvas->isEmpty = true;
 }
 
-uint32_t rainbow() {
-    static uint32_t R = 255, G = 0 , B = 0;
-    if(G<255 && B==0 && R==255) G+=3;    
-    else if(R>0 && G==255 && B==0 ) R-=3;
-    else if(B<255 && R==0 && G == 255) B+=3;
-    else if(G>0 && R == 0 && B == 255) G-=3;
-    else if(R<255 && G==0 && B == 255) R+=3;
-    else if(B>0 && R==255 && G==0) B-=3;
-    return vg_compose_RGB(R, G, B);
-} 
+uint32_t rainbow(uint32_t old_color) {
+    struct color color = vg_decompose_RGB(old_color);
+    if (color.G < 255 && color.B == 0 && color.R == 255) color.G += 3;    
+    else if (color.R > 0 && color.G == 255 && color.B == 0 ) color.R -= 3;
+    else if (color.B < 255 && color.R == 0 && color.G == 255) color.B += 3;
+    else if (color.G > 0 && color.R == 0 && color.B == 255) color.G -= 3;
+    else if (color.R < 255 && color.G == 0 && color.B == 255) color.R += 3;
+    else if (color.B > 0 && color.R == 255 && color.G == 0) color.B -= 3;
+    else color.B-= 3;
+    return vg_compose_RGB(color.R, color.G, color.B);
+}
 
 bool is_inside_canvas(uint16_t x , uint16_t y) {
     return x >= canvas->xMin && y >= canvas->yMin && x < canvas->xMax && y < canvas->yMax;

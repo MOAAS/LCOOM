@@ -111,6 +111,32 @@ void cursor_change_bmp(Sprite *cursor, Bitmap* bm){
     draw_sprite_color(cursor);
 }
 
+void make_hitbox(Hitbox* hitbox, int16_t x1, int16_t x2, int16_t y1, int16_t y2) {
+    hitbox->x1 = x1;
+    hitbox->x2 = x2;
+    hitbox->y1 = y1;
+    hitbox->y2 = y2;
+    hitbox->height = y2 - y1;
+    hitbox->width = x2 - x1;
+}
+
+void move_hitbox(Hitbox* hitbox, int16_t delx, int16_t dely) {
+    hitbox->x1 += delx;
+    hitbox->x2 += delx;
+    hitbox->y1 += dely;
+    hitbox->y2 += dely;
+}
+
+
+bool check_hitbox_collision(Hitbox hitboxA, Hitbox hitboxB) {
+    return 
+    hitboxA.x1 < hitboxB.x2 && 
+    hitboxA.x2 > hitboxB.x1 &&
+    hitboxA.y1 < hitboxB.y2 && 
+    hitboxA.y2 > hitboxB.y1;
+}
+
+
 // Button
 
 Button* create_button(uint16_t x, uint16_t y, Layer* layer, Bitmap* bitmapIdle, Bitmap* bitmapHighlighted) {

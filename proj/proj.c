@@ -27,7 +27,7 @@ int main(int argc, char *argv[]) {
 
   // enables to log function invocations that are being "wrapped" by LCF
   // [comment this out if you don't want/need it]
- // lcf_trace_calls("/home/lcom/labs/proj/trace.txt");
+  lcf_trace_calls("/home/lcom/labs/proj/trace.txt");
 
   // enables to save the output of printf function calls on a file
   // [comment this out if you don't want/need it]
@@ -46,6 +46,9 @@ int main(int argc, char *argv[]) {
 }
 
 int (proj_main_loop)() { //int argc, char *argv[]) {
+ //timer_enable_speaker();
+ //timer_set_frequency(2, 1000);
+//return 0;
   projeto();
   return 0;
   subscribe_device(SerialPort);

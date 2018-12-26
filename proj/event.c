@@ -116,6 +116,9 @@ KeyboardEvent kbd_detect_ev(uint16_t scancode) {
         case BACKSPACE_MAKE: 
             event.type = BACKSPACE_PRESS; 
             break;
+        case SPACE_BREAK: 
+            event.type = SPACEBAR_RELEASE; 
+            break;
         case ENTER_MAKE: 
             event.type = ENTER_PRESS; 
             break;

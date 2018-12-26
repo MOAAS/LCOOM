@@ -6,20 +6,26 @@
 
 #include "wordpicker.h"
 
-char* word_list[100];
+extern Bitmap* wide_textbox_bmp;
+static Layer* background = NULL;
+
+static uint16_t numRoundsDone = 0;
+static uint16_t maxRounds = 4;
+
+static char* word_list[100];
+static uint16_t word_count = 0;
 
 static const uint8_t FONT_SCALE = 2;
 static const uint8_t SPACE_SCALE = 2;
 
-static uint16_t word_count = 0;
-
-static Bitmap* wordbox_bmp;
-static Layer* background = NULL;
 static char* word;
-static bool* revealed_letters;
-static uint16_t num_revealed_letters = 0;
 static uint16_t word_size = 0;
 
+static bool* revealed_letters;
+static uint16_t num_revealed_letters = 0;
+
+
+// word box
 static uint16_t wordbox_X = 145;
 static uint16_t wordbox_Y = 50;
 static uint16_t wordbox_xMid;
@@ -27,15 +33,10 @@ static uint16_t wordbox_yMid;
 static uint16_t wordbox_width;
 static uint16_t wordbox_height;
 
-char * filename = "palavras.txt";
-
-void loadDictionary(char* folderPath) {
-	char * filePath = malloc(strlen(folderPath) + strlen(filename) + 1);
-    strcpy(filePath, folderPath);
-    strcat(filePath, filename);
-	FILE * fp = fopen(filePath, "r");
+void loadDictionary(char* path) {
+	FILE * fp = fopen(path, "r");
 	if (fp == NULL) {
-        printf("File not found! %s\n", filePath);
+        printf("File not found! %s\n", path);
         return;
     }
 	char c;
@@ -55,7 +56,6 @@ void loadDictionary(char* folderPath) {
 		else strncat(string , &c, 1);
 	}
 	fclose(fp); 
-    free(filePath);
 	return;
 }
 
@@ -64,12 +64,11 @@ void word_pick_start(Layer* bg, char* solution, bool isDrawing) {
         printf("word = %s \n", solution);
     background = bg;
     // Draw the box
-    wordbox_bmp = loadBitmap("wordbox.bmp");
-    layer_draw_image(bg, wordbox_bmp, wordbox_X, wordbox_Y);
-    wordbox_height = wordbox_bmp->bitmapInfoHeader.height;
-    wordbox_width = wordbox_bmp->bitmapInfoHeader.width;
+    layer_draw_image(bg, wide_textbox_bmp, wordbox_X, wordbox_Y);
+    wordbox_height = wide_textbox_bmp->bitmapInfoHeader.height;
+    wordbox_width = wide_textbox_bmp->bitmapInfoHeader.width;
     wordbox_xMid = wordbox_X + wordbox_width / 2;
-    wordbox_yMid = wordbox_Y + wordbox_height / 2;
+    wordbox_yMid = wordbox_Y + wordbox_height / 2 + 8;
     // Getting a random word and moving it to current_word
     word_size = strlen(solution);
     word = malloc(word_size + 1);
@@ -82,28 +81,44 @@ void word_pick_start(Layer* bg, char* solution, bool isDrawing) {
     }
     // Desenha: mostra a palavra
     if (isDrawing)
-        draw_word(background, word, wordbox_xMid, wordbox_yMid, FONT_SCALE, 0, Center);        
+        draw_word(background, word, wordbox_xMid, wordbox_yMid, FONT_SCALE, 0, CenterAlign);        
     else { // Nao desenha: Nao mostra
         char* hidden_word = malloc(word_size * sizeof(char) + 1);
         for (int i = 0; i < word_size; i++)
             hidden_word[i] = '_';
         hidden_word[word_size] = '\0';
-        draw_word(background, hidden_word, wordbox_xMid, wordbox_yMid + 8, FONT_SCALE, SPACE_SCALE, Center);        
+        draw_word(background, hidden_word, wordbox_xMid, wordbox_yMid + 8, FONT_SCALE, SPACE_SCALE, CenterAlign);        
     }
 }
 
 void word_pick_end() {
     free(word);
-    free(wordbox_bmp);
     free(revealed_letters);
     word_size = 0;
     num_revealed_letters = 0;
-    layer_draw_image(background, wordbox_bmp, wordbox_X, wordbox_Y);
+    //layer_draw_image(background, wide_textbox_bmp, wordbox_X, wordbox_Y);
     background = NULL;
+    numRoundsDone++;
+}
+
+void wordgame_set_rounds(uint16_t num_rounds) {
+    maxRounds = num_rounds;
+}
+
+bool is_wordgame_over() {
+    return numRoundsDone == maxRounds;
+}
+
+void reset_wordgame() {
+    numRoundsDone = maxRounds;
 }
 
 char* get_random_word() {
     return word_list[rand() % word_count];
+}
+
+char* get_solution() {
+    return word;
 }
 
 void reveal_letter() {
@@ -115,7 +130,7 @@ void reveal_letter() {
         int16_t xDisp_from_middle = 16 * (FONT_SCALE + SPACE_SCALE) * (letter_no - (word_size - 1) / 2.0);
         revealed_letters[letter_no] = true;
         num_revealed_letters++;
-        draw_char(background, word[letter_no], wordbox_xMid + xDisp_from_middle, wordbox_yMid, FONT_SCALE, Center); 
+        draw_char(background, word[letter_no], wordbox_xMid + xDisp_from_middle, wordbox_yMid, FONT_SCALE, CenterAlign); 
     }
 }
 

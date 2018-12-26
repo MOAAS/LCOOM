@@ -15,7 +15,7 @@ typedef struct {
 void create_canvas(Layer* layer, uint16_t xMin, uint16_t yMin, uint16_t xMax, uint16_t yMax, uint32_t color);
 void destroy_canvas();
 
-void canvas_draw_line1(uint16_t x0, uint16_t y0, uint16_t xf, uint16_t yf, uint32_t color, uint16_t thickness);
+void canvas_draw_line(uint16_t x0, uint16_t y0, uint16_t xf, uint16_t yf, uint32_t color, uint16_t thickness);
 void canvas_draw_line2(uint16_t x0, uint16_t y0, uint16_t xf, uint16_t yf, uint32_t color, uint16_t thickness);
 
 void canvas_draw_circle(uint16_t x, uint16_t y, uint16_t radius, uint32_t color);
@@ -37,7 +37,7 @@ void canvas_draw_square(uint16_t x, uint16_t y, uint16_t side_len, uint32_t colo
 void canvas_set_color(uint32_t color);
 void canvas_set_outline(uint32_t color);
 
-uint32_t rainbow();
+uint32_t rainbow(uint32_t old_color);
 
 void bucket_tool(uint16_t x, uint16_t y, uint32_t cor_balde);
 

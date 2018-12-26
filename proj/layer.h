@@ -20,6 +20,7 @@ Layer* get_highest_layer();
 
 uint8_t get_num_layers();
 
+
 void draw_on_layer(Layer* layer, uint16_t x, uint16_t y, uint32_t color);
 bool is_top_layer(Layer* layer, uint16_t x, uint16_t y);
 

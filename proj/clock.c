@@ -15,7 +15,7 @@ static Layer* clock_layer = NULL;
 
 void create_clock(Bitmap* bmp) {
     clock_layer = create_layer(12, 150, 128, 128);
-    clock_box = create_textbox(clock_layer, bmp, 12, 150, 36, 50, 2);
+    clock_box = create_textbox(clock_layer, bmp, 36, 50, 2, LeftAlign);
     time_left = initial_time_left;
     sprintf(time_left_string, "%d", initial_time_left);
     textbox_write(clock_box, time_left_string); 

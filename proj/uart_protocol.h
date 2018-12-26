@@ -7,7 +7,7 @@
 #define MSG_PREFIX          137
 #define MSG_TRAILER         138
 
-#define MSG_DRAW_LINE1      0
+#define MSG_DRAW_LINE       0
 #define MSG_DRAW_LINE2      1
 #define MSG_TRASH           2
 #define MSG_BUCKET          3
@@ -20,7 +20,7 @@
 
 #define MSG_TICK_CLOCK      8
 
-#define MSG_DRAW_LINE1_SIZE 12
+#define MSG_DRAW_LINE_SIZE  12
 #define MSG_DRAW_LINE2_SIZE 12
 #define MSG_TRASH_SIZE      0
 #define MSG_BUCKET_SIZE     7
@@ -43,7 +43,7 @@ void free_messages(UARTMessage msgs[], uint16_t num_msgs);
 void uart_send_message(UARTMessage* msg);
 bool uart_assemble_received_message(uint8_t byte, UARTMessage* msg_ptr);
 
-void uart_send_draw_line1(uint16_t xi, uint16_t yi, uint16_t xf, uint16_t yf, uint32_t color, uint8_t thickness);
+void uart_send_draw_line(uint16_t xi, uint16_t yi, uint16_t xf, uint16_t yf, uint32_t color, uint8_t thickness);
 void uart_send_draw_line2(uint16_t xi, uint16_t yi, uint16_t xf, uint16_t yf, uint32_t color, uint8_t thickness);
 void uart_send_trash();
 void uart_send_bucket(uint16_t xi, uint16_t yi, uint32_t color);

@@ -1,5 +1,4 @@
 #include <lcom/lcf.h>
-#include <lcom/lab5.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <math.h>
@@ -22,7 +21,7 @@ void vg_draw_pixel(uint16_t x, uint16_t y, uint32_t color) {
     return;
 }
 
-char* calc_address(char* init, uint16_t x, uint16_t y, uint16_t width) {
+char* calc_address(char* init, int16_t x, int16_t y, uint16_t width) {
     return init + (x + width * y) * bytes_per_pixel;
 }
 
@@ -65,10 +64,40 @@ struct color vg_decompose_RGB(uint32_t RGB) {
     return color;
 }
 
+void vg_move(uint16_t y, uint16_t height, int16_t delx, uint32_t fill_color) {
+    int offset = abs(delx) * bytes_per_pixel;
+    unsigned bytes_per_row = h_res * bytes_per_pixel;
+    if (y + height > v_res)
+        height = v_res - y;
+    if (delx < 0) {
+        for (unsigned i = y; i < y + height; i++) {
+            memcpy((char*)video_mem + bytes_per_row * i, (char*)video_mem + bytes_per_row * i + offset, bytes_per_row - offset);
+            for (int j = 0; j < abs(delx); j++) {
+                vg_draw_pixel(vg_get_hres() - j - 1, i, fill_color);
+            }
+        }
+    }
+    else if (delx > 0) {
+        for (unsigned i = y; i < y + height; i++) {
+            memcpy((char*)video_mem + bytes_per_row * i + offset, (char*)video_mem + bytes_per_row * i, bytes_per_row - offset);
+            for (int j = 0; j < abs(delx); j++) {
+                vg_draw_pixel(j, i, fill_color);
+            }
+        }
+    }
+    else return;
+
+}
+
 
 void video_draw_hline(uint16_t x, uint16_t y, uint16_t len, uint32_t color) {
-    for (size_t i = 0; i < len; i++)
-        vg_draw_pixel(x++, y, color);    
+    char* video_addr = calc_address(vg_get_video_mem(), x, y, vg_get_hres());
+    for (size_t i = 0; i < len; i++, x++) {
+        if (x >= h_res || y >= v_res)
+            return;
+        vg_insert(video_addr, color);
+        video_addr += bytes_per_pixel;
+    }
 }
 
 void video_draw_vline(uint16_t x, uint16_t y, uint16_t len, uint32_t color) {
@@ -111,7 +140,7 @@ unsigned int vg_get_vres() {
     return v_res;
 }
 
-void* vg_get_video_mem() {
+char* vg_get_video_mem() {
     return video_mem;
 }
 

@@ -20,6 +20,7 @@ service proj
         io
                 40:4      # Timer
                 60        # KBC
+                61        # Timer 2
                 64        # KBC
                 70:2      # RTC
                 2e8:8     # COM4
