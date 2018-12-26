@@ -285,7 +285,7 @@ void main_menu() {
                 setup_training();
                 break;
             case 3: changeState(ExitGame); break;
-            case 4: changeState(PlayingSnake); break;
+            case 4: changeState(PlayingFlappy); break;
             case -1: break;
         }
         update_cursor(cursor, event);

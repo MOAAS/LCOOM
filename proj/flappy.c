@@ -65,7 +65,7 @@ void flappy_gameover() {
 
 void flappy_showstats() {
     free(score_textbox);
-    score_textbox = create_textbox(score_layer, ultrawide_textbox2_bmp, 150, 50, 3, CenterAlign);
+    score_textbox = create_textbox(score_layer, ultrawide_textbox2_bmp, 175, 50, 3, CenterAlign);
     if (bird.score > highscore) {
         highscore = bird.score;
         saveFlappyHighscore();
@@ -85,7 +85,6 @@ void flappy_update_hitbox() {
 void flappy_tick() {
     flappy_move();
     flappy_update_screen();
-    flappy_move_tubes();
     flappy_clear_dead_tubes();    
     flappy_update_score();
     if (!bird.isDead && flappy_collided()) {
@@ -146,9 +145,9 @@ void flappy_update_score() {
 void flappy_update_screen() {
     sky_color = bird.color = rainbow(sky_color);
     vg_move(bird.min_y, bird.max_y - bird.min_y + 5, -game_speed, sky_color);
-    if (!flappy_collided())
     canvas_draw_line(bird.x, bird.y_prev, bird.x, bird.y, bird.color, 8);
     //canvas_draw_circle(200, bird.y, 4, rainbow());            
+    flappy_move_tubes();
 }
 
 bool flappy_dead() {
