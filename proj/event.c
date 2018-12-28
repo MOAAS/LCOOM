@@ -11,6 +11,7 @@ static bool is_LB_PRESSED = false;
 static bool is_RB_PRESSED = false;
 static bool is_MB_PRESSED = false;
 
+
 Event_t GetEvent() {
     Event_t event;
     Notification notification = GetNotification();

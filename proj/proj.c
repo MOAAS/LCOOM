@@ -65,8 +65,8 @@ int (proj_main_loop)() { //int argc, char *argv[]) {
  unsubscribe_device(RTC);
  */
 
- projeto();
- return 0;
+  projeto();
+  return 0;
   subscribe_device(SerialPort);
   subscribe_device(Keyboard);
   subscribe_device(Mouse);

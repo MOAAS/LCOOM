@@ -2,11 +2,11 @@
 #include <stdint.h>
 #include "uart.h"
 
-static int hook_id_uart = COM1_IRQ;
+static int hook_id_uart = COM2_IRQ;
 
 int uart_subscribe_int(uint8_t *bit_no) {
-    *bit_no = hook_id_uart = COM1_IRQ;
-    if (sys_irqsetpolicy(COM1_IRQ, IRQ_REENABLE | IRQ_EXCLUSIVE , &hook_id_uart) != OK)
+    *bit_no = hook_id_uart = COM2_IRQ;
+    if (sys_irqsetpolicy(COM2_IRQ, IRQ_REENABLE | IRQ_EXCLUSIVE , &hook_id_uart) != OK)
         return 1;
     return 0;
 }
@@ -158,6 +158,8 @@ int uart_fifo_send(uint8_t data) {
     uint8_t status;
     uint8_t byte;
     uart_read_status(&status);
+
+    // ultra test
     while (status & UART_RECEIVER_DATA) {
         uart_read_data(&byte);
         if (status & UART_COM_ERR)
@@ -165,9 +167,11 @@ int uart_fifo_send(uint8_t data) {
         queue_push(uart_int_info.received, byte);
         uart_read_status(&status);
         uart_conflict = true;
+    }
+    if (uart_conflict)
         printf("Uart conflict! \n");
 
-    }
+    
     if (status & UART_THR_EMPTY)
         uart_clear_toSend_queue();
     if (status & UART_COM_ERR) {
@@ -191,5 +195,13 @@ int uart_enable_fifo() {
 }
 
 int uart_disable_fifo() {
-    return uart_write_reg(UART_FCR, 0);
+    uint8_t status;
+    uart_read_status(&status);
+    while (status & UART_RECEIVER_DATA) {
+        uart_read_data(&status);
+        printf("GOT SOMETHING! \n");
+        util_delay(25);
+        uart_read_status(&status);
+    }
+    return uart_write_reg(UART_FCR, UART_FIFO_CLR_RCVR | UART_FIFO_CLR_XMIT);
 }

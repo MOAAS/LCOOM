@@ -149,6 +149,14 @@ void uart_process_msg(UARTMessage* message) {
     }
 }
 
+void uart_process_msgs(UARTMessage messages[], uint16_t num_messages) {
+    for (uint16_t i = 0; i < num_messages; i++) {
+        uart_process_msg(&messages[i]);
+    }
+}
+
+// Emotes
+
 extern Bitmap* emote0_bmp;
 extern Bitmap* emote1_bmp;
 extern Bitmap* emote2_bmp;
@@ -161,13 +169,13 @@ void draw_emote(Emote emote) {
     if (emote_layer != NULL) {
         destroy_layer(emote_layer);
     }
-    emote_layer = create_layer(800, 200, 115, 90);
+    emote_layer = create_layer(900, 30, 115, 90);
     switch (emote) {
-        case Hello: layer_draw_image(emote_layer, emote0_bmp, 800, 200); break;
-        case GoodGame: layer_draw_image(emote_layer, emote1_bmp, 800, 200); break;
-        case ThankYou: layer_draw_image(emote_layer, emote2_bmp, 800, 200); break;
-        case YouWelcome: layer_draw_image(emote_layer, emote3_bmp, 800, 200); break;
-        case GoodLuck: layer_draw_image(emote_layer, emote4_bmp, 800, 200); break;
+        case Hello: layer_draw_image(emote_layer, emote0_bmp, 900, 30); break;
+        case GoodGame: layer_draw_image(emote_layer, emote1_bmp, 900, 30); break;
+        case ThankYou: layer_draw_image(emote_layer, emote2_bmp, 900, 30); break;
+        case YouWelcome: layer_draw_image(emote_layer, emote3_bmp, 900, 30); break;
+        case GoodLuck: layer_draw_image(emote_layer, emote4_bmp, 900, 30); break;
         default: printf("Unknown emote: %d \n", emote); break;
     }
 }
@@ -178,9 +186,4 @@ void destroy_emote() {
     emote_layer = NULL;
 }
 
-void uart_process_msgs(UARTMessage messages[], uint16_t num_messages) {
-    for (uint16_t i = 0; i < num_messages; i++) {
-        uart_process_msg(&messages[i]);
-    }
-}
 

@@ -10,19 +10,19 @@
 #define COM1_BASE           0x3F8
 #define COM2_BASE           0x2F8
 
-#define UART_RBR            0x3F8
-#define UART_THR            0x3F8
-#define UART_IER            0x3F9
-#define UART_IIR            0x3FA
-#define UART_FCR            0x3FA
-#define UART_LCR            0x3FB
-#define UART_MCR            0x3FC
-#define UART_LSR            0x3FD
-#define UART_MSR            0x3FE
-#define UART_SR             0x3FF
+#define UART_RBR            0x2F8
+#define UART_THR            0x2F8
+#define UART_IER            0x2F9
+#define UART_IIR            0x2FA
+#define UART_FCR            0x2FA
+#define UART_LCR            0x2FB
+#define UART_MCR            0x2FC
+#define UART_LSR            0x2FD
+#define UART_MSR            0x2FE
+#define UART_SR             0x2FF
 
-#define UART_DLL            0x3F8
-#define UART_DLM            0x3F8
+#define UART_DLL            0x2F8
+#define UART_DLM            0x2F8
 
 #define UART_RECEIVER_DATA  BIT(0)
 #define UART_OVERRUN_ERR    BIT(1)

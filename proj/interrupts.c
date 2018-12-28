@@ -98,12 +98,13 @@ Notification GetNotification() {
                         gotNotification = true;
                     }
                 }
-                if (msg.m_notify.interrupts & BIT(COM1_IRQ)) { // subscribed interrupt
+                if (msg.m_notify.interrupts & BIT(COM2_IRQ)) { // subscribed interrupt
                     uart_ih();
                     notif.serialPortNotif = true;
                     notif.uart_int_info = uart_int_info;
                     gotNotification = true;
                 }
+                // ultra test
                 if (uart_conflict) {
                     printf("UH OH There was a conflict! \n");
                     notif.serialPortNotif = true;

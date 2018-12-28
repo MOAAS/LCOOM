@@ -173,7 +173,7 @@ void projeto() {
     loadCursor();
     loadLetterMap();    
     loadDictionary(words_path);
-    wordgame_set_rounds(1);
+    wordgame_set_rounds(4);
     loadWordGameHighscore(wordgame_hs_path);
     loadSnakeHighscore(snake_hs_path);
     loadFlappyHighscore(flappy_hs_path);
@@ -551,7 +551,7 @@ void draw() {
             case 1: change_tool(pencil, Bucket);break;
             case 2: change_tool(pencil, ColorPicker); break;
             case 3: change_tool(pencil, Rainbow); break;
-            case 4: uart_send_emote(rand() % 5); break; //change_tool(pencil, Rubber); break;
+            case 4: change_tool(pencil, Rubber); break;
             case 5: canvas_set_color(WHITE); uart_send_trash(); break;
             case 6: changeState(PickingColor); break;
             case -1: 

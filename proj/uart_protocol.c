@@ -29,6 +29,7 @@ void uart_send_message(UARTMessage* msg) {
     uint8_t size_id = (msg->size << 4) | msg->type;
     uart_fifo_send(MSG_PREFIX);
     uart_fifo_send(size_id);
+   // printf("Msg size = %d \n", msg->size);
     for (int i = 0; i < msg->size; i++) {
         uart_fifo_send(msg->bytes[i]);
     }
@@ -39,7 +40,7 @@ void uart_send_message(UARTMessage* msg) {
 bool uart_assemble_received_message(uint8_t byte, UARTMessage* msg_ptr) {
     static uint8_t byte_no = 0;
     static UARTMessage new_message;
-   // printf("BYTE = %d... | byte_no = %d | size = %d\n", byte, byte_no, new_message.size);
+     //   printf("BYTE = %d... | byte_no = %d | size = %d\n", byte, byte_no, new_message.size);
     switch (byte_no) {
         case 0:
             if (byte == 137)
