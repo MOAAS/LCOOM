@@ -37,7 +37,29 @@ typedef struct {
 } vbe_info_block;
 #pragma options align=reset
 
+/**
+ * @brief Converts a far pointer to a virtual address
+ * 
+ * @param far_address Far pointer
+ * @param initial_address Base virtual address
+ * @return unsigned long Virtual address which was calculated
+ */
 unsigned long get_address(phys_bytes far_address, void* initial_address);
 
+/**
+ * @brief Gets the info of the vbe controller.
+ * 
+ * @param vci_p Pointer to the structure that will hold the info
+ * @param initial_address Address returned by lm_init()
+ * @return int 0 upon success. Non-zero otherwise
+ */
 int vbe_get_controllerInfo(vg_vbe_contr_info_t *vci_p, void* initial_address);
+
+/**
+ * @brief Gets the info for a specific VBE mode.
+ * 
+ * @param mode Mode number
+ * @param vmi_p Pointer to the structure that will contain the information
+ * @return int 0 upon success. Non-zero otherwise
+ */
 int vbe_get_modeInfo(uint16_t mode, vbe_mode_info_t * vmi_p);

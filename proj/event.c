@@ -30,8 +30,12 @@ Event_t GetEvent() {
         event.timerEvent.has_second_passed = notification.timer_counter % 60 == 0;
         event.timerEvent.seconds_passed = notification.seconds_passed;
     }
-    else event.isTimerEvent = false;
-    if (notification.serialPortNotif  && notification.uart_int_info.last_int_type == Received && notification.uart_int_info.received->size != 0) {
+    else event.isTimerEvent = false;   
+    if (notification.rtcAlarmNotif) {
+        event.isRtcEvent = true;
+    }
+    else event.isRtcEvent = false;    
+    if (notification.serialPortNotif && notification.uart_int_info.last_int_type == Received && notification.uart_int_info.received->size != 0) {
         event.isUARTEvent = false;
         event.num_uart_messages = 0;
         while(notification.uart_int_info.received->size != 0) {
@@ -214,8 +218,17 @@ KeyboardEvent kbd_detect_ev(uint16_t scancode) {
             default: event.character = toupper(event.character); break;
         }
     }
-    event.scancode = scancode;
     return event;
+}
+
+void wait_ms(uint16_t ms) {
+    uint16_t num_ticks = (ms * 60) / 1000;
+    timer_reset_counter();
+    while(1) {
+        Event_t event = GetEvent();
+        if (event.isTimerEvent && event.timerEvent.timer_counter >= num_ticks)
+            return;
+    }
 }
 
 void print_event(Event_t event) {

@@ -39,6 +39,7 @@ void start_flappy(Layer* background) {
     bird.goingUp = false;
     bird.isDead = false;
     bird.score = 0;
+    bird.radius = 2;
     bird.color = sky_color;
     flappy_update_hitbox();
     game_speed = 2;
@@ -78,7 +79,7 @@ void flappy_showstats() {
 
 
 void flappy_update_hitbox() {
-    make_hitbox(&bird.hitbox, bird.x - 4, bird.x + 4, bird.y - 4, bird.y + 4);
+    make_hitbox(&bird.hitbox, bird.x - bird.radius, bird.x + bird.radius, bird.y - bird.radius, bird.y + bird.radius);
 }
 
 
@@ -123,13 +124,21 @@ void flappy_move() {
     flappy_update_hitbox();
 }
 
+void flappy_increase_score() {
+    bird.score++;
+    bird.radius = log2(bird.score);
+    if (bird.radius > 8)
+        bird.radius = 8;
+    else if (bird.radius < 2)
+        bird.radius = 2;
+}
 void flappy_update_score() {
     if (bird.isDead)
         return;
     bool scoreUpdate = false;
     for (int i = 0; i < num_tubes; i++) {
         if (!tubes[i].passed && tubes[i].hitbox.x2 < bird.hitbox.x1) {
-            bird.score++;
+            flappy_increase_score();
             tubes[i].passed = true;
             scoreUpdate = true;
         }
@@ -145,7 +154,7 @@ void flappy_update_score() {
 void flappy_update_screen() {
     sky_color = bird.color = rainbow(sky_color);
     vg_move(bird.min_y, bird.max_y - bird.min_y + 5, -game_speed, sky_color);
-    canvas_draw_line(bird.x, bird.y_prev, bird.x, bird.y, bird.color, 8);
+    canvas_draw_line(bird.x, bird.y_prev, bird.x, bird.y, bird.color, bird.radius);
     //canvas_draw_circle(200, bird.y, 4, rainbow());            
     flappy_move_tubes();
 }
@@ -178,7 +187,7 @@ void flappy_clear_dead_tubes() {
 void flappy_move_tubes() {
     for (int i = 0; i < num_tubes; i++) {
         move_hitbox(&tubes[i].hitbox, -game_speed, 0);
-        draw_bitmap(tubes[i].bmp, tubes[i].hitbox.x1, tubes[i].hitbox.y1, ALIGN_LEFT);
+        draw_bitmap(tubes[i].bmp, tubes[i].hitbox.x1, tubes[i].hitbox.y1);
     }
 }
 

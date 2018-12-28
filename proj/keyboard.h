@@ -5,8 +5,7 @@
 /**
  * @brief Subscribes and enables keyboard interrupts, in exclusive mode.
  *
- * @param bit_no address of memory to be initialized with the
- *         bit number to be set in the mask returned upon an interrupt
+ * @param bit_no address of memory to be initialized with the bit number to be set in the mask returned upon an interrupt
  * @return Return 0 upon success and non-zero otherwise
  */
 int keyboard_subscribe_int(uint8_t *bit_no);
@@ -18,14 +17,31 @@ int keyboard_subscribe_int(uint8_t *bit_no);
  */
 int keyboard_unsubscribe_int();
 
+/**
+ * @brief Disables keyboard interrupts.
+ * 
+ * @return Return 0 upon success and non-zero otherwise
+ */
 int keyboard_disable_int();
+
+/**
+ * @brief Enables keyboard interrupts.
+ * 
+ * @return Return 0 upon success and non-zero otherwise
+ */
+
 int keyboard_enable_int();
 
 /**
- * @brief While OUT_BUF is full, discards its contents.
+ * @brief While OUT_BUF is "full" with a keyboard byte, discards its contents.
  * 
  */
 void kbc_clear_kbd_OUT_BUF();
+
+/**
+ * @brief While OUT_BUF is "full" with a mouse byte, discards its contents.
+ * 
+ */
 void kbc_clear_mouse_OUT_BUF();
 
 /**
@@ -107,6 +123,12 @@ int kbc_get_out_buf(uint8_t* content);
  */
 int kbc_enable_poll();
 
+/**
+ * @brief Assembles a scancode received by the IH. May also use the previous scancode if it's a 2-byte scancode.
+ * 
+ * @return true The byte is the scancode's final byte
+ * @return false The byte is not the scancode's final byte.
+ */
 bool kbd_assemble_scancode();
 
 /**
@@ -143,4 +165,11 @@ bool kbc_IBF_is_full(uint8_t status);
  */
 bool kbc_OBF_is_full(uint8_t status);
 
+/**
+ * @brief Checks if the OBF contains mouse byte.
+ * 
+ * @param status status byte that will be analyzed, should have the most recent info from the kbc
+ * @return true OBF contains a mouse byte.
+ * @return false OBF does not contain a mouse byte.
+ */
 bool kbc_OBF_is_mouse_data(uint8_t status);

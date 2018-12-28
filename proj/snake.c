@@ -19,6 +19,7 @@ static Obstacle obstacles[30];
 static int timeLeftUntilHp = 0;
 static int num_powerups = 0;
 static Powerup powerups[50];
+static int powerup_types = 7;
 
 static Hitbox hpbar;
 
@@ -41,28 +42,35 @@ extern Bitmap* powerup1_bmp;
 extern Bitmap* powerup2_bmp;
 extern Bitmap* powerup3_bmp;
 extern Bitmap* powerup4_bmp;
+extern Bitmap* powerup5_bmp;
+extern Bitmap* powerup6_bmp;
 
 extern Bitmap* megalarge_textbox_bmp;
 
 static int highscore = 0;
 static char * file_path;
 
-void create_snake(uint16_t x, uint16_t y, double speed, int max_health) { // double max_speed, double angle);
-    snake.x = x;
-    snake.y = y;
+void create_snake(double speed, int max_health) {
+    for (int i = 0; i < 50; i++) {
+        snake.x = arena_get_random_x();
+        snake.y = arena_get_random_y();
+        if (!is_obstacle(snake.x, snake.y))
+            break;
+    }
     snake.speed = speed;
-    snake.max_speed = 20;
+    snake.max_speed = 30;
     snake.angle = M_PI * (rand() % 360) / 180.0;
+    snake.health = max_health;
+    snake.max_health = max_health;
     snake.color = RED;
     snake.turning_left = false;
     snake.turning_right = false;
-    snake.health = max_health;
-    snake.max_health = max_health;
+    snake.ricocheting = false;
     snake.isDead = false;
     snake.timeSinceDeath = 0;
     snake.score = 0;
     snake.top_speed = speed;
-    snake.gracePeriodLeft = 0;
+    snake.obstacleImmunityLeft = 60; // 1 segundo
     snake.invincibilityLeft = 0;
     snake.switcherooLeft = 0;
     for (int i = 0; i < 20; i++) {
@@ -80,7 +88,7 @@ void snake_showstats() {
     }
     else {
         highscore = snake.score;
-        sprintf(highscore_str, "New highscore: %d", highscore);
+        sprintf(highscore_str, "New highscore: %d!", highscore);
         saveSnakeHighscore();
     }
     sprintf(top_speed_str, "Top speed: %.1f", snake.top_speed);
@@ -88,9 +96,9 @@ void snake_showstats() {
     stats_layer = create_layer(60, 250, 1000, 300);
     layer_draw_image(stats_layer, megalarge_textbox_bmp, 60, 250);
     draw_word(stats_layer, score_str, 500, 300, 3, 0, CenterAlign);
-    util_delay(800);
+    wait_ms(800);
     draw_word(stats_layer, top_speed_str, 500, 400, 2, 0, CenterAlign);
-    util_delay(800);
+    wait_ms(800);
     draw_word(stats_layer, highscore_str, 500, 500, 2, 0, CenterAlign);
 
 }
@@ -105,7 +113,7 @@ void snake_game_tick() {
         return;
     }
     snake.switcherooLeft--;
-    snake.gracePeriodLeft--; 
+    snake.obstacleImmunityLeft--; 
     if (snake.invincibilityLeft <= 0)
         snake.health--;
     else snake.invincibilityLeft--;
@@ -145,8 +153,8 @@ void snake_move() {
     double xNext = snake.x + snake.speed * cos(snake.angle);
     double yNext = snake.y + snake.speed * sin(snake.angle);
     // Check obstacle collision
-    if (snake.invincibilityLeft + snake.gracePeriodLeft <= 0 && is_obstacle(xNext, yNext)) {
-        snake.gracePeriodLeft = 60;
+    if (snake.invincibilityLeft <= 0 && snake.obstacleImmunityLeft <= 0 && is_obstacle(xNext, yNext)) {
+        snake.obstacleImmunityLeft = 60;
         snake.health -= 60;
         snake_multiply(rand() % 8 + 3);
     }
@@ -163,10 +171,12 @@ void snake_move() {
     if (xNext > arena.xMax || xNext < arena.xMin) {
         snake.angle = M_PI - snake.angle;
         snake.speed *= 0.8;
+        snake.ricocheting = true;
     }
     else if (yNext > arena.yMax || yNext < arena.yMin) {
         snake.angle = 2 * M_PI - snake.angle;
         snake.speed *= 0.8;
+        snake.ricocheting = true;
     }
     // Move
     else {
@@ -174,6 +184,7 @@ void snake_move() {
         canvas_draw_line((uint16_t)snake.x, (uint16_t)snake.y, (uint16_t)xNext, (uint16_t)yNext, snake.color, 5);
         snake.x = xNext;
         snake.y = yNext;
+        snake.ricocheting = false;
     }
     if (snake.turning_left)
         snake_turn_left();
@@ -281,6 +292,8 @@ void arena_add_powerup(uint8_t powerup_num, uint16_t x, uint16_t y) {
         case 2: bitmap = powerup2_bmp; break;
         case 3: bitmap = powerup3_bmp; break;
         case 4: bitmap = powerup4_bmp; break;
+        case 5: bitmap = powerup5_bmp; break;
+        case 6: bitmap = powerup6_bmp; break;
         default: return;
     }
     // Check arena limits
@@ -289,15 +302,22 @@ void arena_add_powerup(uint8_t powerup_num, uint16_t x, uint16_t y) {
     if (x + width > arena.xMax - 10 || y + height > arena.yMax - 10)
         return;
     make_hitbox(&powerups[num_powerups].hitbox, x - 5, x + bitmap->bitmapInfoHeader.width + 5, y, y - 5+ bitmap->bitmapInfoHeader.height + 5);
-    // Check collision
+    // Check for obstacle collision
     for (int i = 0; i < num_obstacles; i++) {
         if (check_hitbox_collision(powerups[num_powerups].hitbox, obstacles[i].hitbox))
+            return;
+    }
+    // Check for powerup collision
+    for (int i = 0; i < num_powerups; i++) {
+        if (check_hitbox_collision(powerups[num_powerups].hitbox, powerups[i].hitbox))
             return;
     }
     powerups[num_powerups].layer = create_layer(x, y, bitmap->bitmapInfoHeader.width, bitmap->bitmapInfoHeader.height);
     powerups[num_powerups].bmp = bitmap;
     powerups[num_powerups].type = powerup_num;
-    powerups[num_powerups].timeLeft = 300;
+    if (powerups[num_powerups].type == ExtraHp)
+        powerups[num_powerups].timeLeft = 600;
+    else powerups[num_powerups].timeLeft = 300;
     layer_draw_image(powerups[num_powerups].layer, powerups[num_powerups].bmp, x, y);
     num_powerups++;
 }
@@ -319,23 +339,25 @@ void arena_update_powerups() {
         return;
     if (timeLeftUntilHp <= 0) {
         arena_add_powerup(0, arena_get_random_x(), arena_get_random_y());
-        timeLeftUntilHp = 300;
+        timeLeftUntilHp = 130; // 2 secs
     }
-    if (rand() % 200 < snake.speed)
-        arena_add_powerup(rand() % 5, arena_get_random_x(), arena_get_random_y());
+    if (rand() % 200 < snake.speed) 
+        arena_add_powerup(rand() % (powerup_types - 1) + 1, arena_get_random_x(), arena_get_random_y());
 }
 
 void snake_consume_powerup(PowerupType type) {
     switch (type) {
         case ExtraHp: 
-            snake.health *= 2;
+            snake.health +=  snake.max_health * 0.4;
             if (snake.health > snake.max_health)
                 snake.health = snake.max_health;
             break;
-        case Speedy: snake.speed *= 1.4; break;
-        case Slowed: snake.speed *= 0.7; break;
-        case Invincibility: snake.invincibilityLeft = 180; break;
+        case Speedy: snake.speed *= 1.6; break;
+        case Slowed: snake.speed *= 0.8; break;
+        case Invincibility: snake.invincibilityLeft = 120; break;
         case Switcheroo: snake.switcherooLeft = 180; break;
+        case Rotate: if (!snake.ricocheting) snake.angle += M_PI; break;
+        case Random: snake_consume_powerup(rand() % (powerup_types - 1)); break;
         default: printf("Invalid type: %d \n", type); break;
     }
 }
@@ -349,7 +371,7 @@ uint16_t arena_get_random_y() {
 }
 
 void arena_create_hp_bar() {
-    draw_bitmap(hpbar_bmp, 0, 95, ALIGN_LEFT);
+    draw_bitmap(hpbar_bmp, 0, 95);
     hpbar.x1 = 5;
     hpbar.x2 = 95;
     hpbar.y1 = 100;
@@ -358,7 +380,7 @@ void arena_create_hp_bar() {
 
 void arena_create_obstacles() {
     obstacle_map = malloc(vg_get_hres() * vg_get_vres() * vg_get_bytes_pp());
-    int rand_num = rand() % 10 + 5;
+    int rand_num = rand() % 5 + 8;
     for (int i = 0; i < rand_num; i++) {
         arena_add_obstacle(rand() % 4, arena_get_random_x(), arena_get_random_y());
     }
@@ -367,7 +389,7 @@ void arena_create_obstacles() {
 
 void arena_update_obstacles() {
     for (int i = 0; i < num_obstacles; i++) {
-        draw_bitmap(obstacles[i].bmp, obstacles[i].x, obstacles[i].y, ALIGN_LEFT); 
+        draw_bitmap(obstacles[i].bmp, obstacles[i].x, obstacles[i].y); 
     }    
 }
 
@@ -396,7 +418,7 @@ void arena_add_obstacle(uint8_t obstacle_num, uint16_t x, uint16_t y) {
     obstacles[num_obstacles].x = x;
     obstacles[num_obstacles].y = y;
     obstacles[num_obstacles].bmp = bitmap;
-    draw_bitmap(bitmap, x, y, ALIGN_LEFT);     
+    draw_bitmap(bitmap, x, y);     
     num_obstacles++;
 }
 

@@ -9,8 +9,9 @@ static Bitmap* letters_small[256];
 static Bitmap* letters_medium[256];
 static Bitmap* letters_big[256];
 
+extern Bitmap* letters_bmp;
+
 void loadLetterMap() {
-    Bitmap* letters_bmp = loadBitmap("letras.bmp");
     int i = 0;
     for (int y = 256 - 16; y >= 0; y -= 16) {
         for (int x = 0; x < 256; x += 16, i++) {

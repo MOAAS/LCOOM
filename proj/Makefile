@@ -1,6 +1,6 @@
 PROG=proj 
 
-SRCS = proj.c uart.c uart_protocol.c mouse.c keyboard.c timer.c video.c interrupts.c queue.c vbe.c projeto.c bitmap.c bitmaps.c layer.c canvas.c bucketqueue.c sprite.c event.c textbox.c clock.c wordpicker.c snake.c flappy.c
+SRCS = proj.c uart.c uart_protocol.c uart_wordgame.c mouse.c keyboard.c timer.c  rtc.c video.c interrupts.c queue.c vbe.c projeto.c bitmap.c bitmaps.c layer.c canvas.c sprite.c event.c textbox.c wordpicker.c snake.c flappy.c 
 
 CPPFLAGS += -pedantic #-D __LCOM_OPTIMIZED__
 

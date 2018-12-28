@@ -5,6 +5,7 @@
 #include "sprite.h"
 #include "canvas.h"
 #include "bitmap.h"
+#include "textbox.h"
 
 typedef struct {
     double y;
@@ -17,6 +18,7 @@ typedef struct {
     bool goingUp;
     bool isDead;
     int score;
+    uint8_t radius;
     uint32_t color;
     Hitbox hitbox;
 } Bird;

@@ -7,7 +7,6 @@
 #include "canvas.h"
 
 static Canvas* canvas = NULL;
-
 void create_canvas(Layer* layer, uint16_t xMin, uint16_t yMin, uint16_t xMax, uint16_t yMax, uint32_t color) {
     canvas = malloc(sizeof(Canvas));
     canvas->layer = layer;
@@ -113,7 +112,6 @@ void canvas_draw_circumference(uint16_t x, uint16_t y, uint16_t radius, uint32_t
 void canvas_draw_pixel(uint16_t x, uint16_t y, uint32_t color) {
     if (canvas->layer == NULL || !is_inside_canvas(x, y))
         return;
-    canvas->isEmpty = false;
     draw_on_layer(canvas->layer, x, y, color);
 }
 
@@ -121,7 +119,6 @@ void canvas_draw_pixel(uint16_t x, uint16_t y, uint32_t color) {
 void canvas_draw_hline(uint16_t x, uint16_t y, uint16_t len, uint32_t color) {
     if (canvas->layer == NULL)
         return;
-    canvas->isEmpty = false;
     char* layer_addr = calc_address(canvas->layer->map, x, y, canvas->layer->width);
     char* video_addr = calc_address(vg_get_video_mem(), x, y, vg_get_hres());
     uint8_t bytes_pp = vg_get_bytes_pp();
@@ -144,7 +141,7 @@ void canvas_draw_vline(uint16_t x, uint16_t y, uint16_t len, uint32_t color) {
 void canvas_draw_rectangle(uint16_t x0, uint16_t y0, uint16_t width, uint16_t height, uint32_t color) {
     if (canvas->layer == NULL)
         return;
-    canvas->isEmpty = false;
+        
     char* layer_addr = calc_address(canvas->layer->map, x0, y0, canvas->layer->width);
     char* video_addr = calc_address(vg_get_video_mem(), x0, y0, vg_get_hres());
     uint8_t bytes_pp = vg_get_bytes_pp();
@@ -161,6 +158,8 @@ void canvas_draw_rectangle(uint16_t x0, uint16_t y0, uint16_t width, uint16_t he
         layer_addr = layer_addr + (canvas->layer->width - canvas->width) * bytes_pp;
         video_addr = video_addr + (vg_get_hres() - canvas->width) * bytes_pp;
     }
+
+    
 }
 
 void canvas_draw_rectangle_outline(uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint8_t thickness, uint32_t color) {
@@ -195,9 +194,12 @@ void canvas_set_outline(uint32_t color) {
     }
 }
 
+void canvas_draw_image(Bitmap* bitmap) {
+    layer_draw_image(canvas->layer, bitmap, canvas->xMin, canvas->yMin);
+}
+
 void canvas_set_color(uint32_t color) {
     canvas_draw_rectangle(canvas->xMin, canvas->yMin, canvas->width, canvas->height, color);
-    canvas->isEmpty = true;
 }
 
 uint32_t rainbow(uint32_t old_color) {
@@ -246,62 +248,68 @@ int canvas_get_width() {
     return canvas->width;
 }    
 
+void bucket_tool_rec(int x, int y, uint32_t cor_balde, uint32_t cor_inicial) {
+    int minX = x - 1, maxX = x;
+    uint8_t bytes_pp = vg_get_bytes_pp();
+
+    char* layer_addr1 = calc_address(canvas->layer->map, x - 1, y, canvas->layer->width);
+    char* layer_addr2 = layer_addr1 + bytes_pp;
+
+    while (minX >= canvas->xMin && vg_retrieve(layer_addr1) == cor_inicial) {
+        vg_insert(layer_addr1, cor_balde);
+
+        if (is_top_layer(canvas->layer, minX, y))
+            vg_draw_pixel(minX, y, cor_balde);
+
+        layer_addr1 -= bytes_pp;        
+        minX--;
+    }
+    minX++;
+
+    while (maxX < canvas->xMax && vg_retrieve(layer_addr2) == cor_inicial) {
+        vg_insert(layer_addr2, cor_balde);
+
+        if (is_top_layer(canvas->layer, maxX, y))
+            vg_draw_pixel(maxX, y, cor_balde);
+
+        layer_addr2 += bytes_pp;        
+        maxX++;
+    }
+    maxX--;
+
+    layer_addr1 = calc_address(canvas->layer->map, minX, y - 1, canvas->layer->width);
+    layer_addr2 = calc_address(canvas->layer->map, minX, y + 1, canvas->layer->width);
+    for (int i = minX; i < maxX; i++) {                     
+        if (y > canvas->yMin && vg_retrieve(layer_addr1) == cor_inicial) 
+            bucket_tool_rec(i, y - 1, cor_balde, cor_inicial);          
+        if (y < canvas->yMax - 1 && vg_retrieve(layer_addr2) == cor_inicial)
+            bucket_tool_rec(i, y + 1, cor_balde, cor_inicial);  
+        layer_addr1 += bytes_pp;            
+        layer_addr2 += bytes_pp;       
+    }
+}
+
 void bucket_tool(uint16_t x, uint16_t y, uint32_t cor_balde) {
     uint32_t cor_inicial = layer_get_pixel(canvas->layer, x, y);
     if (cor_inicial == cor_balde || !is_inside_canvas(x, y))
         return;
-    if (canvas->isEmpty) {
-        canvas_set_color(cor_balde);
-    }
-    // Cria fila e coloca as posicoes iniciais nela
-    char* layer_map = canvas->layer->map + (x + y * canvas->layer->width) * vg_get_bytes_pp();
-    bqueue_destroy();
-    bqueue_push(x, y, layer_map);
-    BucketQueuePoint P;
+    bucket_tool_rec(x,y,cor_balde, cor_inicial);
+    return;
+
+    // para a maneira clean mas n fast
     uint8_t bytes_pp = vg_get_bytes_pp();
-    uint32_t vertical_diff = vg_get_hres() * bytes_pp;
-    while(!bqueue_isEmpty()) {
-        // Trata as posicoes que estao a frente na fila
-        P = bqueue_pop();
-        // Se estiver a ser tratado um pixel valido, continua
-        if(vg_retrieve(P.layer_address) == cor_inicial) {
-            // Adiciona os 4 pixeis a volta a fila, se nao tiverem sido tratados ainda
-            vg_insert(P.layer_address, cor_balde);
-            P.layer_address -= bytes_pp;
-            if(is_inside_canvas(P.x-1, P.y) && vg_retrieve(P.layer_address) != cor_balde) {
-                bqueue_push(P.x-1, P.y, P.layer_address);
-            }
-            P.layer_address += 2 * bytes_pp;
-            if(is_inside_canvas(P.x+1, P.y) && vg_retrieve(P.layer_address) != cor_balde) {
-                bqueue_push(P.x+1, P.y, P.layer_address);
-            }
-            P.layer_address -= bytes_pp + vertical_diff;
-            if(is_inside_canvas(P.x, P.y-1) && vg_retrieve(P.layer_address) != cor_balde) {
-                bqueue_push(P.x, P.y-1, P.layer_address);
-            }
-            P.layer_address += 2 * vertical_diff;
-            if(is_inside_canvas(P.x, P.y+1) && vg_retrieve(P.layer_address) != cor_balde) {
-                bqueue_push(P.x, P.y+1, P.layer_address);
-            }
-        }
-    }
-    bqueue_destroy();
-    layer_map = canvas->layer->map + (canvas->xMin + canvas->yMin * canvas->layer->width) * bytes_pp;
+    char* layer_map = canvas->layer->map + (canvas->xMin + canvas->yMin * canvas->layer->width) * bytes_pp;
     char* video_mem = (char*)vg_get_video_mem() + (canvas->xMin + canvas->yMin * vg_get_hres()) * bytes_pp;
-    bool isEmpty = true;
     for (int y = canvas->yMin; y < canvas->yMax; y++) {
         for (int x = canvas->xMin; x < canvas->xMax; x++) {
-            uint32_t color = vg_retrieve(layer_map);
             if (is_top_layer(canvas->layer, x, y))
-                vg_insert(video_mem, color);
-            if (color != cor_balde)
-                isEmpty = false;
+                vg_insert(video_mem, vg_retrieve(layer_map));
             layer_map += bytes_pp;
             video_mem += bytes_pp;
         }
         layer_map = layer_map + (canvas->layer->width - canvas->width) * bytes_pp;
         video_mem = video_mem + (vg_get_hres() - canvas->width) * bytes_pp;
     }
-    canvas->isEmpty = isEmpty;
-}
+    //
 
+}

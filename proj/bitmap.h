@@ -41,29 +41,91 @@ typedef struct {
     unsigned int actual_bytes_per_row;
 } Bitmap;
 
+/**
+ * @brief Saves a bitmap in a .bmp file.
+ * 
+ * @param path Full path of the saved file.
+ * @param width Bitmap width, in pixels
+ * @param height Bitmap height, in pixels
+ * @param address Pointer to a pixel map.
+ */
+void saveBitmap(char* path, unsigned int width, unsigned int height, char* address);
 
-typedef enum {
-    ALIGN_LEFT, ALIGN_CENTER, ALIGN_RIGHT
-} Alignment;
+/**
+ * @brief Loads a .bmp file.
+ * 
+ * @param folderPath Full folder path.
+ * @param filename File name, including .bmp
+ * @return Bitmap* Pointer to the respective bitmap structure
+ */
+Bitmap* loadBitmap(const char* folderPath, const char* filename);
 
-
-void saveBitmap(char* filename, unsigned int width, unsigned int height, char* address);
-
-Bitmap* loadBitmap(const char* filename);
-
+/**
+ * @brief Copies part of a bitmap from a given bitmap to another bitmap
+ * 
+ * @param bitmap "Bigger" bitmap to read
+ * @param x X position to start copying the contents from
+ * @param y Y position to start copying the contents from
+ * @param width Width of the area to copy
+ * @param height Height of the area to copy
+ * @return Bitmap* Returns a pointer to the cropped bitmap
+ */
 Bitmap* loadBitmapSection(Bitmap* bitmap, uint16_t x, uint16_t y, uint16_t width, uint16_t height);
 
+/**
+ * @brief Resizes a bitmap by a given factor.
+ * 
+ * @param bitmap Bitmap to resize
+ * @param factor Factor (Must be an integer :( ) 
+ * @return Bitmap* Returns a pointer to the resized bitmap
+ */
 Bitmap* resizeBitmap(Bitmap* bitmap, uint16_t factor);
 
-void draw_bitmap(Bitmap* bmp, int x, int y, Alignment alignment);
+/**
+ * @brief Draws a bitmap on the screen.
+ * 
+ * @param bmp Pointer to the Bitmap that will be drawn
+ * @param x X position of the upper left corner
+ * @param y Y position of the upper left corner
+ */
+void draw_bitmap(Bitmap* bmp, int x, int y);
 
-void draw_bitmap_color(Bitmap* bmp, int x, int y, Alignment alignmentn , uint32_t new_color) ;
+/**
+ * @brief Draws a bitmap on the screen, replacing every GREEN pixel with another color
+ * 
+ * @param bmp Pointer to the Bitmap that will be drawn
+ * @param x X position of the upper left corner
+ * @param y Y position of the upper left corner
+ * @param new_color Color to replace GREEN
+ */
+void draw_bitmap_color(Bitmap* bmp, int x, int y, uint32_t new_color) ;
 
+/**
+ * @brief Gets the color of a certain bitmap pixel
+ * 
+ * @param bmp Pointer to a Bitmap to be read
+ * @param x X position of the pixel, where (0,0) is the upper left corner
+ * @param y Y position of the pixel, where (0,0) is the upper left corner
+ * @return uint32_t Respective color
+ */
 uint32_t get_bitmap_color(Bitmap* bmp, uint16_t x, uint16_t y);
 
+/**
+ * @brief Deletes a bitmap, freeing the used memory
+ * 
+ * @param bmp Bitmap to be deleted
+ */
 void deleteBitmap(Bitmap* bmp);
 
+// n usado
 char *double_buffering();
 
+/**
+ * @brief Checks if a color is transparent (MAGENTA)
+ * 
+ * @param color Color to compare
+ * @return true The color is transparent (MAGENTA)
+ * @return false The color is transparent (MAGENTA)
+ */
 bool is_transparent(uint32_t color);
 

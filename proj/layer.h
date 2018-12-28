@@ -8,6 +8,8 @@ typedef struct {
     char* map;
     uint16_t x;
     uint16_t y;
+    uint16_t xMax;
+    uint16_t yMax;
     uint16_t width;
     uint16_t height;    
     uint8_t layer_no;    

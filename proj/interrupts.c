@@ -7,6 +7,8 @@
 extern uint16_t scancode;
 extern struct packet mouse_packet;
 extern UART_Int_Info uart_int_info;
+extern bool uart_conflict;
+extern bool alarm_int;
 
 int subscribe_device(Device device) {
     uint8_t irq_set;
@@ -27,6 +29,10 @@ int subscribe_device(Device device) {
             uart_enable_ier(UART_IER_RECEIVE | UART_IER_TRANSMIT | UART_IER_STATUS);
             uart_setup_fifo();
             return 0;
+        case RTC:
+            rtc_subscribe_int(&irq_set);
+            enable_alarm_int_sec();
+            return 0;
         default: return 1;
     }
 }
@@ -46,6 +52,10 @@ int unsubscribe_device(Device device) {
             uart_destroy_fifo();
             uart_unsubscribe_int();
             return 0;
+        case RTC:
+            disable_alarm_int();
+            rtc_unsubscribe_int();
+            return 0;
         default: return 1;
     }
 }
@@ -53,7 +63,7 @@ int unsubscribe_device(Device device) {
 Notification GetNotification() {
     bool gotNotification = false;
     Notification notif;
-    notif.timerNotif = notif.keyboardNotif = notif.mouseNotif = notif.serialPortNotif = false;
+    notif.timerNotif = notif.keyboardNotif = notif.mouseNotif = notif.serialPortNotif = notif.rtcAlarmNotif = false;
     int ipc_status; message msg;
     while(!gotNotification) {
         int r; // Get a request message.
@@ -94,6 +104,22 @@ Notification GetNotification() {
                     notif.uart_int_info = uart_int_info;
                     gotNotification = true;
                 }
+                if (uart_conflict) {
+                    printf("UH OH There was a conflict! \n");
+                    notif.serialPortNotif = true;
+                    notif.uart_int_info = uart_int_info;
+                    notif.uart_int_info.last_int_type = Received;
+                    gotNotification = true;
+                    uart_conflict = false;
+                }
+                if (msg.m_notify.interrupts & BIT(RTC_IRQ)) { // subscribed interrupt
+                    rtc_ih();
+                    if(alarm_int){
+                        notif.rtcAlarmNotif = true;
+                        gotNotification = true;
+                    }
+                }
+
                 break;
             default:
               break; // no other notifications expected: do nothing

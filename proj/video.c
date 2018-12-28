@@ -33,18 +33,12 @@ uint32_t vg_get_pixel(uint16_t x, uint16_t y) {
 }
 
 void vg_insert(char* address, uint32_t color) {
-    // Will store each byte in order
-    for (size_t offset = 0; offset < bytes_per_pixel; offset++, color = color >> 8) {
-       *(address + offset) = color;
-    }
+    memcpy(address, &color, bytes_per_pixel);
 }
 
 uint32_t vg_retrieve(char* address) {
     uint32_t color = 0;
-    // Will store each byte in order
-    for (int offset = bytes_per_pixel -  1; offset >= 0; offset--) {
-        color = (color << 8) | *(uint8_t*)(address + offset);
-    }
+    memcpy(&color, address, bytes_per_pixel);
     return color;
 }
 

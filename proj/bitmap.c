@@ -9,11 +9,10 @@
 #include "bitmap.h"
 #include "video.h"
 
-char* bitmap_path = "home/lcom/labs/proj/bitmaps/";
 
-Bitmap* loadBitmap(const char* filename) {
-    char* file_path = malloc((strlen(bitmap_path) + strlen(filename) + 1) * sizeof(char));
-    strcpy(file_path, bitmap_path);
+Bitmap* loadBitmap(const char* folderPath, const char* filename) {
+    char* file_path = malloc((strlen(folderPath) + strlen(filename) + 1) * sizeof(char));
+    strcpy(file_path, folderPath);
     strcat(file_path, filename);
     // allocating necessary size
     Bitmap* bmp = (Bitmap*) malloc(sizeof(Bitmap));
@@ -21,7 +20,7 @@ Bitmap* loadBitmap(const char* filename) {
     FILE *filePtr;
     filePtr = fopen(file_path, "rb");
     if (filePtr == NULL) {
-        printf("File not found! %s (%s)\n", file_path, file_path);
+        printf("File not found! %s\n", file_path);
         return NULL;
     }
     // read the bitmap file header
@@ -64,16 +63,6 @@ Bitmap* loadBitmap(const char* filename) {
         printf("Error reading file: %s! Bad reading.\n", file_path);
         return NULL;
     }
-
-    /* Nao necessario, mas pode ser util mais tarde...
-    unsigned char tempRGB;  //our swap variable
-    //swap the r and b values to get RGB (bitmap is BGR)
-    for (unsigned int imageIdx = 0; imageIdx < bitmapInfoHeader.imageSize; imageIdx += 3) { // fixed semicolon
-        tempRGB = bitmapImage[imageIdx];
-        bitmapImage[imageIdx] = bitmapImage[imageIdx + 2];
-        bitmapImage[imageIdx + 2] = tempRGB;
-    }
-    */
 
     // close file and return bitmap
     fclose(filePtr);
@@ -164,15 +153,11 @@ void saveBitmap(char* filename, unsigned int width, unsigned int height, char* a
 
 }
 
-void draw_bitmap(Bitmap* bmp, int x, int y, Alignment alignment) {
+void draw_bitmap(Bitmap* bmp, int x, int y) {
     if (bmp == NULL)
         return;
     int width = bmp->bitmapInfoHeader.width;
     int height = bmp->bitmapInfoHeader.height;
-    if (alignment == ALIGN_CENTER)
-        x -= width / 2;
-    else if (alignment == ALIGN_RIGHT)
-        x -= width;
     int xCoord = x;
     int yCoord = y + height - 1;  
     char* img = bmp->bitmapData;
@@ -193,15 +178,11 @@ void draw_bitmap(Bitmap* bmp, int x, int y, Alignment alignment) {
     }
 }
 
-void draw_bitmap_color(Bitmap* bmp, int x, int y, Alignment alignment , uint32_t new_color) {
+void draw_bitmap_color(Bitmap* bmp, int x, int y, uint32_t new_color) {
     if (bmp == NULL)
         return;
     int width = bmp->bitmapInfoHeader.width;
     int height = bmp->bitmapInfoHeader.height;
-    if (alignment == ALIGN_CENTER)
-        x -= width / 2;
-    else if (alignment == ALIGN_RIGHT)
-        x -= width;
     uint16_t xCoord = x;
     uint16_t yCoord = y + height - 1;  
     char* img = bmp->bitmapData;

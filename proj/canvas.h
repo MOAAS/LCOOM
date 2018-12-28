@@ -1,10 +1,8 @@
 #pragma once
 #include "layer.h"
 #include "video.h"
-#include "bucketqueue.h"
 
 typedef struct {
-    bool isEmpty;
     uint16_t xMin, xMax;
     uint16_t yMin, yMax;
     uint16_t width;
@@ -34,6 +32,7 @@ void canvas_draw_rectangle_outline(uint16_t x, uint16_t y, uint16_t width, uint1
 
 void canvas_draw_square(uint16_t x, uint16_t y, uint16_t side_len, uint32_t color);
 
+void canvas_draw_image(Bitmap* bitmap);
 void canvas_set_color(uint32_t color);
 void canvas_set_outline(uint32_t color);
 

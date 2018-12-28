@@ -1,9 +1,20 @@
 #pragma once
 #include "i8042.h"
 
-
-int timer_wait(uint32_t time_s);
+/**
+ * @brief Resets the timer auxiliary counter to 0. Useful to synchronize the timer with the program.
+ * 
+ */
 void timer_reset_counter();
+
+/**
+ * @return uint32_t Returns the timer auxiliary counter.
+ */
 uint32_t timer_get_counter();
-uint32_t timer_get_frequency();
+
+/**
+ * @brief Enabler the PC speaker, connected to timer 2.
+ * 
+ * @return int 
+ */
 int timer_enable_speaker();

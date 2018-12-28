@@ -15,6 +15,8 @@ Layer* create_layer(uint16_t x, uint16_t y, uint16_t width, uint16_t height) {
     Layer* layer = malloc(sizeof(Layer));
     layer->x = x;
     layer->y = y;
+    layer->xMax = x + width;
+    layer->yMax = y + height;
     layer->width = width;
     layer->height = height;
     layer->map = malloc(vg_get_bytes_pp() * width * height);
@@ -110,7 +112,7 @@ bool is_top_layer(Layer* layer, uint16_t x, uint16_t y) {
  
 
 bool is_within_bounds(Layer* layer, uint16_t x, uint16_t y) {
-    return x >= layer->x && y >= layer->y && x < layer->x + layer->width && y < layer->y + layer->height;
+    return x >= layer->x && y >= layer->y && x < layer->xMax && y < layer->yMax;
 }
 
 void layer_draw_image(Layer* layer, Bitmap* bmp, int x, int y) {

@@ -20,6 +20,7 @@
 #include "canvas.h"
 #include "layer.h"
 #include "uart.h"
+#include "rtc.h"
 
 int main(int argc, char *argv[]) {
   // sets the language of LCF messages (can be either EN-US or PT-PT)
@@ -27,7 +28,7 @@ int main(int argc, char *argv[]) {
 
   // enables to log function invocations that are being "wrapped" by LCF
   // [comment this out if you don't want/need it]
-  lcf_trace_calls("/home/lcom/labs/proj/trace.txt");
+  //lcf_trace_calls("/home/lcom/labs/proj/trace.txt");
 
   // enables to save the output of printf function calls on a file
   // [comment this out if you don't want/need it]
@@ -49,8 +50,23 @@ int (proj_main_loop)() { //int argc, char *argv[]) {
  //timer_enable_speaker();
  //timer_set_frequency(2, 1000);
 //return 0;
-  projeto();
-  return 0;
+ 
+ 
+ /*
+  subscribe_device(RTC);
+  for(int i=0 ; i< 10 ;){
+    Notification notification = GetNotification();
+    if(notification.rtcAlarmNotif){
+      Mini_Date d = rtc_get_mini_date();
+      print_mini_date(d);
+      i++;
+    }
+  }
+ unsubscribe_device(RTC);
+ */
+
+ projeto();
+ return 0;
   subscribe_device(SerialPort);
   subscribe_device(Keyboard);
   subscribe_device(Mouse);
@@ -59,8 +75,8 @@ int (proj_main_loop)() { //int argc, char *argv[]) {
     Event_t event = GetEvent();
     if (event.isMouseEvent && event.mouseEvent.type == LB_PRESS) {
       printf("Sending...\n");
-      util_delay(1000);
-      uart_send_drawer_ready("HI HOW ARE YOU");
+      util_delay(1500);
+      uart_send_drawer_ready("HI HOW ARE");
      //uart_send_drawer_ready("HI HOW ARE YOU");
      //uart_send_drawer_ready("HI HOW ARE YOU");
      //uart_send_drawer_ready("HI HOW ARE YOU");

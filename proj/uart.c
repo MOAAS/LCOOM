@@ -33,12 +33,6 @@ int uart_read_status(uint8_t* status) {
     return uart_read_reg(UART_LSR, status);
 }
 
-int uart_write_status(uint8_t status) {
-    return uart_write_reg(UART_LSR, status);
-}
-
-
-
 int uart_read_data(uint8_t* data) {    
     return uart_read_reg(UART_RBR, data);
 }
@@ -69,7 +63,7 @@ int uart_receive_poll(uint8_t* data) {
         if (uart_read_status(&status) != 0)
             return 1;
     }
-    return uart_read_data(data) || uart_com_error(status);
+    return uart_read_data(data) || status & UART_COM_ERR;
 }
 
 int uart_transmit_poll(uint8_t data) {
@@ -105,6 +99,7 @@ int uart_get_int_id(uint8_t* id) {
 }
 
 UART_Int_Info uart_int_info;
+bool uart_conflict = false;
 
 void uart_setup_fifo() {
     uart_enable_fifo();
@@ -130,17 +125,19 @@ void uart_ih() {
     switch(int_id & UART_INT_ID) {
         case UART_INT_RECEIVE: 
         case UART_INT_CHAR_TO: // recebe sempre bit(2) | bit(3) !
-           // printf("Receive interrupt \n");
+           // printf("Receive interrupt (status = %d)\n", status);
             while (status & UART_RECEIVER_DATA) {
                 uart_read_data(&data);
-                if (!uart_com_error(status))
-                    queue_push(uart_int_info.received, data);
+                if (status & UART_COM_ERR)
+                    printf("Receiver error!");
+                queue_push(uart_int_info.received, data);
                 uart_read_status(&status);
             }
+            uart_conflict = false;
             uart_int_info.last_int_type = Received;
             break; 
         case UART_INT_TRANSMIT:
-           // printf("Transmit interrupt: Queue size = %d \n", uart_int_info.toSend->size);
+            //printf("Transmit interrupt: Queue size = %d \n", uart_int_info.toSend->size);
             uart_clear_toSend_queue();
             uart_int_info.last_int_type = Transmitted;
             break; 
@@ -159,9 +156,23 @@ void uart_ih() {
 int uart_fifo_send(uint8_t data) {
     queue_push(uart_int_info.toSend, data);
     uint8_t status;
+    uint8_t byte;
     uart_read_status(&status);
+    while (status & UART_RECEIVER_DATA) {
+        uart_read_data(&byte);
+        if (status & UART_COM_ERR)
+            printf("Receiver error (send) : %d!", status);
+        queue_push(uart_int_info.received, byte);
+        uart_read_status(&status);
+        uart_conflict = true;
+        printf("Uart conflict! \n");
+
+    }
     if (status & UART_THR_EMPTY)
         uart_clear_toSend_queue();
+    if (status & UART_COM_ERR) {
+        printf("error status = %d \n", status);
+    }
     return 0;
 }
 
@@ -180,9 +191,5 @@ int uart_enable_fifo() {
 }
 
 int uart_disable_fifo() {
-    return uart_write_reg(UART_FCR, UART_FIFO_CLR_RCVR | UART_FIFO_CLR_XMIT);
-}
-
-bool uart_com_error(uint8_t status) {
-    return status & (UART_OVERRUN_ERR | UART_PARITY_ERR | UART_FRAME_ERR);
+    return uart_write_reg(UART_FCR, 0);
 }

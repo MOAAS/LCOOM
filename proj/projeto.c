@@ -33,6 +33,8 @@ extern Bitmap* mainmenu_button4_hl;
 
 extern Bitmap* snake_button;
 extern Bitmap* snake_button_hl;
+extern Bitmap* bird_button;
+extern Bitmap* bird_button_hl;
 
 extern Bitmap* rainbow_button;
 extern Bitmap* rainbow_hl;
@@ -48,6 +50,10 @@ extern Bitmap* rubber_button;
 extern Bitmap* rubber_hl;
 extern Bitmap* palette_button;
 extern Bitmap* palette_hl;
+
+extern Bitmap* paint_tube_1_bmp;
+extern Bitmap* paint_tube_2_bmp;
+
 extern Bitmap* save_button;
 extern Bitmap* save_hl;
 extern Bitmap* load_button;
@@ -56,26 +62,28 @@ extern Bitmap* load_hl;
 extern Bitmap* textbox_bmp;
 extern Bitmap* wide_textbox_bmp;
 extern Bitmap* ultrawide_textbox_bmp;
+extern Bitmap* megalarge_textbox_bmp;
 extern Bitmap* colorpicker_bmp;
 extern Bitmap* clock_bmp;
-extern Bitmap* paint_tube_1_bmp;
-extern Bitmap* paint_tube_2_bmp;
+extern Bitmap* clockbig_bmp;
+
 
 extern Bitmap* cool_dude_happy;
 extern Bitmap* cool_dude_angry;
 extern Bitmap* cool_dude_happy_big;
 extern Bitmap* cool_dude_angry_big;
 
-static NNY* paint_tube_1;
-static NNY* paint_tube_2;
+static IdleSprite* paint_tube_1;
+static IdleSprite* paint_tube_2;
 
-static int num_menu_buttons = 5;
+static int num_menu_buttons = 6;
 static int num_paint_buttons = 7;
 static int num_training_buttons = 2;
 
 static Button* paint_buttons[7];
 static Button* menu_buttons[10];
 static Button* training_buttons[5];
+static Slider* thickness_slider;
 
 /////////////////
 // Buttons end //
@@ -92,12 +100,18 @@ static Layer* background;
 static Layer* textbox_layer;
 static Layer* color_picker_layer;
 
+static TextBox* big_ben1;
+static TextBox* big_ben2;
 
 static Event_t event;
 
 char* words_path = "home/lcom/labs/proj/palavras/palavras.txt";
 char* snake_hs_path = "home/lcom/labs/proj/highscores/snake.txt";
 char* flappy_hs_path = "home/lcom/labs/proj/highscores/flappy.txt";
+char* wordgame_hs_path = "home/lcom/labs/proj/highscores/wordgame.txt";
+char* bitmap_folder = "home/lcom/labs/proj/bitmaps/";
+char* saved_img_folder = "home/lcom/labs/proj/saved_images/";
+
 
 void loadCursor() {
     cursor = create_sprite(cursor_normal, 0, 0);
@@ -105,12 +119,12 @@ void loadCursor() {
 }
 
 void loadButtons() {
-    paint_buttons[0] = create_button(10, 470, background, brush_button, brush_hl); // normal
-    paint_buttons[1] = create_button(10, 550, background, balde_button, balde_hl); // bucket
-    paint_buttons[2] = create_button(10, 630, background, picker_button, picker_hl); // color coiso
-    paint_buttons[3] = create_button(80, 470, background, rainbow_button, rainbow_hl); // rainbow
-    paint_buttons[4] = create_button(80, 550, background, rubber_button, rubber_hl); // borracha
-    paint_buttons[5] = create_button(80, 630, background, trash_button, trash_hl); // trash
+    paint_buttons[0] = create_button(5, 470, background, brush_button, brush_hl); // normal
+    paint_buttons[1] = create_button(5, 550, background, balde_button, balde_hl); // bucket
+    paint_buttons[2] = create_button(5, 630, background, picker_button, picker_hl); // color coiso
+    paint_buttons[3] = create_button(75, 470, background, rainbow_button, rainbow_hl); // rainbow
+    paint_buttons[4] = create_button(75, 550, background, rubber_button, rubber_hl); // borracha
+    paint_buttons[5] = create_button(75, 630, background, trash_button, trash_hl); // trash
     paint_buttons[6] = create_button(45, 400, background, palette_button, palette_hl); //color picker
     paint_buttons[5]->singleState = true; // trash
     paint_buttons[6]->singleState = true; // color picker
@@ -120,22 +134,29 @@ void loadButtons() {
     menu_buttons[2] = create_button(540, 330, background, mainmenu_button3, mainmenu_button3_hl);
     menu_buttons[3] = create_button(40, 650, background, mainmenu_button4, mainmenu_button4_hl);
     menu_buttons[4] = create_button(703, 462, background, snake_button, snake_button_hl);
+    menu_buttons[5] = create_button(758, 405, background, bird_button, bird_button_hl);
     menu_buttons[0]->singleState = true; 
     menu_buttons[1]->singleState = true; 
     menu_buttons[2]->singleState = true; 
     menu_buttons[3]->singleState = true; 
     menu_buttons[4]->singleState = true; 
+    menu_buttons[5]->singleState = true; 
 
     training_buttons[0] = create_button(10, 100, background, save_button, save_hl); // save
     training_buttons[1] = create_button(77, 100, background, load_button, load_hl); // save
     training_buttons[0]->singleState = true; // save
     training_buttons[1]->singleState = true; // save
+
+    thickness_slider = create_slider(5, 700, 0.4, background, 0xBEC7ED, RED);
 }
 
 void loadBackground() {
     background = create_layer(0, 0, vg_get_hres(), vg_get_vres());
+    paint_tube_1 = create_idle_sprite(45, 280, background, paint_tube_1_bmp, pencil->color1);
+    paint_tube_2 = create_idle_sprite(79, 283, background, paint_tube_2_bmp, pencil->color2);
     layer_draw_image(background, welcome_screen, 0, 0);
 }
+
 
 void reloadBackground() {
     layer_draw_image(background, background_menu, 0, 0);
@@ -148,15 +169,18 @@ void changeState(GameState newState) {
 
 void projeto() {
     srand(time(NULL));
-    loadBitmaps();
+    loadBitmaps(bitmap_folder);
     loadCursor();
     loadLetterMap();    
     loadDictionary(words_path);
+    wordgame_set_rounds(1);
+    loadWordGameHighscore(wordgame_hs_path);
     loadSnakeHighscore(snake_hs_path);
     loadFlappyHighscore(flappy_hs_path);
     video_init(0x118);
     loadBackground();
     loadButtons();
+    subscribe_device(RTC);
     subscribe_device(SerialPort);
     subscribe_device(Mouse);
     subscribe_device(Keyboard);
@@ -174,8 +198,10 @@ void projeto() {
             case TypingGuess: type_guess(); break;
             case Training: training(); break;
             case Saving: save(); break;
-            case EndGameWin: end_game(); break;
-            case EndGameLoss: end_game(); break;
+            case Loading: load(); break;
+            case EndRoundWin: end_round(); break;
+            case EndRoundLoss: end_round(); break;
+            case EndGame: end_game(); break;
             case PlayingSnake: play_snake(); break;
             case PlayingFlappy: play_flappy(); break;
             case ExitGame: break;
@@ -186,80 +212,13 @@ void projeto() {
     unsubscribe_device(Keyboard);
     unsubscribe_device(Mouse);
     unsubscribe_device(SerialPort);
+    unsubscribe_device(RTC);
+
 }
-
-
-// ULTRA TEST //
-// ULTRA TEST //
-// ULTRA TEST //
-
-void play_flappy() {
-    start_flappy(background);
-    while (gameState == PlayingFlappy) {
-        event = GetEvent();
-        if (event.isTimerEvent)
-            flappy_tick();
-        if (event.isKeyboardEvent) {
-            if (event.keyboardEvent.type == CHARACTER_PRESS && event.keyboardEvent.character == ' ')
-                flappy_jump();
-            else if (event.keyboardEvent.type == SPACEBAR_RELEASE)
-                flappy_endjump();
-        }    
-        if (flappy_dead())
-            changeState(MainMenu);
-    }
-    timer_reset_counter();
-    while(1) {
-        event = GetEvent();
-        if (event.isTimerEvent)
-            flappy_tick();
-        if (event.isTimerEvent && event.timerEvent.has_second_passed && event.timerEvent.seconds_passed == 3)
-            flappy_showstats();
-        if (event.isKeyboardEvent && event.keyboardEvent.type == ENTER_PRESS)
-            break;
-    }
-    end_flappy();
-}
-
-
-
-void play_snake() {
-    bool gameOver = false;
-    reloadBackground();
-    create_snake_arena(background);
-    create_snake(500, 500, 1, 1000);
-    while (gameState == PlayingSnake) {
-        event = GetEvent();
-        if (event.isTimerEvent && !gameOver) {
-            snake_game_tick();
-        }
-        if (event.isKeyboardEvent) {
-            if (event.keyboardEvent.type == ARROW_LEFT_PRESS)
-                snake_set_turning(Left, true);
-            else if (event.keyboardEvent.type == ARROW_RIGHT_PRESS)
-                snake_set_turning(Right, true);
-            else if (event.keyboardEvent.type == ARROW_LEFT_RELEASE)
-                snake_set_turning(Left, false);
-            else if (event.keyboardEvent.type == ARROW_RIGHT_RELEASE)
-                snake_set_turning(Right, false);
-        }
-        if (event.isKeyboardEvent && event.keyboardEvent.type == ENTER_PRESS)
-            changeState(MainMenu);
-        if (snake_isGameOver() && !gameOver) {
-            gameOver = true;
-            snake_showstats();
-        }
-    }
-    destroy_snake_arena();
-}
-
-// ULTRA TEST END //
-// ULTRA TEST END //
-// ULTRA TEST END //
-
 
 void start_screen() {
     layer_draw_image(background, welcome_screen, 0, 0);
+    create_big_ben();
     draw_word(background, "WeLCOM user!", vg_get_hres() / 2, 600, 4, 0, CenterAlign);
     draw_word(background, "Press enter to start!", vg_get_hres() / 2, 670, 2, 0, CenterAlign);
     while (gameState == Start) {
@@ -267,7 +226,11 @@ void start_screen() {
         update_cursor(cursor, event);
         if (event.isKeyboardEvent && event.keyboardEvent.type == ENTER_PRESS)
             changeState(MainMenu); 
+        if (event.isRtcEvent) {
+            update_big_ben(false);
+        }
     }
+    destroy_big_ben();
 }
 
 
@@ -285,68 +248,118 @@ void main_menu() {
                 setup_training();
                 break;
             case 3: changeState(ExitGame); break;
-            case 4: changeState(PlayingFlappy); break;
+            case 4: changeState(PlayingSnake); break;
+            case 5: changeState(PlayingFlappy); break;
             case -1: break;
         }
         update_cursor(cursor, event);
     }
 }
 
-void start_game(char* solution) {
+// Big Ben //
+
+void create_big_ben() {
+    textbox_layer = create_layer(10, 10, 181, 181);
+    big_ben1 = create_textbox(textbox_layer, clockbig_bmp, 36, 75, 1, CenterAlign);
+    big_ben2 = create_textbox(textbox_layer, clockbig_bmp, 36, 106, 1, CenterAlign);
+    update_big_ben(true);    
+}
+
+void destroy_big_ben() {
+    free(big_ben2);
+    destroy_textbox(big_ben1);
+}
+
+void update_big_ben(bool force) {
+    char time1_str[100];
+    char time2_str[100];
+    Date d1 = rtc_get_date();
+    if (force || d1.sec == 0) {
+        sprintf(time1_str, "%02x/%02x/%02x", d1.day, d1.mth, d1.yer);
+        sprintf(time2_str, "%02x:%02x:%02x", d1.hor, d1.min, d1.sec);
+        textbox_clear(big_ben1);
+        textbox_write(big_ben1, time1_str);
+        textbox_clear(big_ben2);
+        textbox_write(big_ben2, time2_str);
+    }
+    else {
+        textbox_backspace(big_ben2);
+        textbox_backspace(big_ben2);
+        sprintf(time2_str, "%02x", d1.sec);
+        textbox_write(big_ben2, time2_str);
+    }
+}
+
+void start_round(char* solution) {
     if (gameState == WaitDrawing) {
         changeState(Drawing);
         setupDrawing();
-        word_pick_start(background, solution, true);
+        wordgame_start_round(background, solution, true);
     }
     else if (gameState == WaitGuessing) {
         changeState(Guessing);
         setupGuessing();
-        word_pick_start(background, solution, false);
+        wordgame_start_round(background, solution, false);
     }
     else changeState(MainMenu);
 }
 
-void end_game() {
-    word_pick_end();
+void end_round() {
+    int points = 100 + wordgame_get_time_left() * 5 - 100 * (gameState == EndRoundLoss);
     destroy_canvas();
-    destroy_clock();   
+    destroy_emote();
     reset_pencil(pencil);
-    layer_draw_image(background, background_menu , 0, 0);
-    layer_draw_image(background, wide_textbox_bmp, 100, 200); // 860x100 image
-    if (gameState == EndGameWin) {
-        draw_word(background, "You win!", 530, 235, 2, 0, CenterAlign);
-        layer_draw_image(background, cool_dude_happy_big, 500, 325);
+    reloadBackground();
+    layer_draw_image(background, megalarge_textbox_bmp, 60, 250); // 860x100 image
+    if (gameState == EndRoundWin) {
+        if (lastGameState == TypingGuess || lastGameState == Guessing) {
+            changeState(WaitDrawing);
+            draw_word(background, "You guessed it!", 500, 300, 2, 0, CenterAlign);
+        }
+        else if (lastGameState == Drawing || lastGameState == PickingColor) {
+            changeState(WaitGuessing);
+            draw_word(background, "Your teammate guessed it!", 500, 300, 2, 0, CenterAlign);
+        }
+        else changeState(MainMenu);
+        //layer_draw_image(background, cool_dude_happy_big, 500, 325);
     }
-    else {
-        draw_word(background, "You lose!", 530, 235, 2, 1, CenterAlign);
-        layer_draw_image(background, cool_dude_angry_big, 500, 325);
-    }
-    // Revela a palavra
-    char reveal[100];
-    sprintf(reveal, "The word was: %s", get_solution());
-    draw_word(background, reveal, 530, 275, 1, 0, CenterAlign);
-
-    timer_reset_counter();
-    while(1) {
-        event = GetEvent();
-        if (event.isTimerEvent && event.timerEvent.seconds_passed == 2)
-            break;
-        update_cursor(cursor, event);
-    }
-    if (is_wordgame_over()) {
-        changeState(MainMenu);
-        reset_wordgame();
-    }
-    else if (lastGameState == TypingGuess || lastGameState == Guessing)
+    else if (lastGameState == TypingGuess || lastGameState == Guessing) {
         changeState(WaitDrawing);
-    else if (lastGameState == Drawing || lastGameState == PickingColor)
-        changeState(WaitGuessing);    
+        draw_word(background, "You failed!", 500, 300, 2, 0, CenterAlign);
+        //layer_draw_image(background, cool_dude_angry_big, 500, 325);
+    }
+    else if (lastGameState == Drawing || lastGameState == PickingColor) {
+        changeState(WaitGuessing);
+        draw_word(background, "Your teammate failed!", 500, 300, 2, 0, CenterAlign);
+        //layer_draw_image(background, cool_dude_angry_big, 500, 325);
+    }
+    else changeState(MainMenu);
+    char reveal[100], scoring[100];
+    sprintf(reveal, "The word was: %s", get_solution());
+    sprintf(scoring, "You got %d points!", points);
+    draw_word(background, reveal, 500, 400, 2, 0, CenterAlign);
+    draw_word(background, scoring, 500, 500, 2, 0, CenterAlign);
+    wordgame_end_round(points);
+    wait_ms(3000);
+    if (is_wordgame_over())
+        changeState(EndGame);
 }
 
+void end_game() {
+    reloadBackground();
+    wordgame_showstats();
+    while(gameState == EndGame) {
+        event = GetEvent();
+        update_cursor(cursor, event);
+        if (event.isKeyboardEvent && event.keyboardEvent.type == ENTER_PRESS)
+            changeState(MainMenu); 
+    }
+    reset_wordgame();
+}
 
 void wait_for_guesser() {
-    layer_draw_image(background, wide_textbox_bmp, 85, 428); // 860x100 image
-    draw_word(background, "Waiting for opponent...", 515, 480, 2, 0, CenterAlign);
+    layer_draw_image(background, wide_textbox_bmp, 85, 650); // 860x100 image
+    draw_word(background, "Waiting for opponent...", 515, 700, 2, 0, CenterAlign);
     while (1) {
         event = GetEvent();
         update_cursor(cursor, event);
@@ -354,25 +367,25 @@ void wait_for_guesser() {
             free_messages(event.uart_messages, event.num_uart_messages);
             break;
         }
-        if (event.isKeyboardEvent && event.keyboardEvent.type == ESC_PRESS) {
+        if (is_wordgame_over() && event.isKeyboardEvent && event.keyboardEvent.type == ESC_PRESS) {
             changeState(MainMenu); // Verifica DEPOIS de (nao) receber
             return;
         }
     }
     char* solution = get_random_word();
     uart_send_drawer_ready(solution);
-    start_game(solution);
+    start_round(solution);
 }
 
 void wait_for_drawer() {
     UARTMessage* msg; char* solution = NULL;
-    layer_draw_image(background, wide_textbox_bmp, 85, 428); // 860x100 image
-    draw_word(background, "Waiting for opponent...", 515, 480, 2, 0, CenterAlign);
+    layer_draw_image(background, wide_textbox_bmp, 85, 650); // 860x100 image
+    draw_word(background, "Waiting for opponent...", 515, 700, 2, 0, CenterAlign);
     while (1) {
         event = GetEvent();
         update_cursor(cursor, event);
-        if (event.isKeyboardEvent && event.keyboardEvent.type == ESC_PRESS) {
-            changeState(MainMenu); // Verifica ANTES de mandar
+        if (is_wordgame_over() && event.isKeyboardEvent && event.keyboardEvent.type == ESC_PRESS) {
+            changeState(MainMenu); // Verifica antes de receber
             return;
         }
         if (event.isTimerEvent && event.timerEvent.timer_counter % 30 == 0)
@@ -384,7 +397,7 @@ void wait_for_drawer() {
             break;
         }
     }
-    start_game(solution);
+    start_round(solution);
     free(solution);
 }
 
@@ -395,7 +408,6 @@ void wait_for_drawer() {
 
 void setupGuessing() {
     reloadBackground();
-    create_clock(clock_bmp);
     create_canvas(background, 150, 150, 1000, 750, WHITE);
 }
 
@@ -408,8 +420,8 @@ void guess() {
             changeState(TypingGuess);
         if (event.isUARTEvent)
             uart_process_msgs(event.uart_messages, event.num_uart_messages);
-        if (clock_time_up()) {
-            changeState(EndGameLoss);
+        if (wordgame_time_up()) {
+            changeState(EndRoundLoss);
             uart_send_game_loss();
             break;
         }
@@ -427,16 +439,16 @@ void type_guess() {
             reveal_letter();
         if (event.isUARTEvent)
             uart_process_msgs(event.uart_messages, event.num_uart_messages);
-        if (clock_time_up()) {
-            changeState(EndGameLoss);
+        if (wordgame_time_up()) {
+            changeState(EndRoundLoss);
             uart_send_game_loss();
             break;
         }
         useTextbox(textbox, event, Guessing, Guessing);
         update_cursor(cursor, event);
     }
-    if (verify_guess(textbox->text) && !clock_time_up()) { // if guess is correct 
-        changeState(EndGameWin);
+    if (verify_guess(textbox->text) && !wordgame_time_up()) { // if guess is correct 
+        changeState(EndRoundWin);
         uart_send_game_win();
     }
     destroy_textbox(textbox);
@@ -483,18 +495,17 @@ void reset_pencil(DrawingState* pencil) {
     pencil->color1 = BLACK;
     pencil->color2 = WHITE;
     pencil->thickness = 4;
+    thickness_slider->handle_pos = thickness_slider->x + + 0.4 * thickness_slider->width;
     pencil->rainbowColor= RED;
     change_tool(pencil, None);
 }
 
 void setupDrawing() {
     reloadBackground();
-    create_clock(clock_bmp);
     create_canvas(background, 150, 150, 1000, 750, WHITE);
-    paint_tube_1 = create_NNY(45, 280, background, paint_tube_1_bmp);
-    paint_tube_2 = create_NNY(79, 283, background, paint_tube_2_bmp);
-    nny_change_color(paint_tube_1, pencil->color1);
-    nny_change_color(paint_tube_2, pencil->color2);
+    draw_idle_sprite(paint_tube_1);
+    draw_idle_sprite(paint_tube_2);
+    draw_slider(thickness_slider);
     disable_buttons(paint_buttons, num_paint_buttons);
     draw_buttons(cursor, paint_buttons, num_paint_buttons);
     change_tool(pencil, Brush);
@@ -507,8 +518,8 @@ void color_picker() {
     while(gameState == PickingColor) {
         event = GetEvent();
         update_cursor(cursor, event);
-        if (event.isTimerEvent && event.timerEvent.has_second_passed) {
-            tick_clock();
+        if (event.isRtcEvent) {
+            wordgame_tick_clock();
             uart_send_tick_clock();
         }
         if(event.isMouseEvent && (event.mouseEvent.type == LB_PRESS || event.mouseEvent.type == RB_PRESS)) {
@@ -521,9 +532,9 @@ void color_picker() {
         }
         if (event.isUARTEvent) {
             if (get_msg_by_id(MSG_GAME_WON, event.uart_messages, event.num_uart_messages))
-                changeState(EndGameWin);
+                changeState(EndRoundWin);
             else if (get_msg_by_id(MSG_GAME_LOST, event.uart_messages, event.num_uart_messages))
-                changeState(EndGameLoss);
+                changeState(EndRoundLoss);
             free_messages(event.uart_messages, event.num_uart_messages);    
         }
     }
@@ -540,31 +551,28 @@ void draw() {
             case 1: change_tool(pencil, Bucket);break;
             case 2: change_tool(pencil, ColorPicker); break;
             case 3: change_tool(pencil, Rainbow); break;
-            case 4: change_tool(pencil, Rubber); break;
+            case 4: uart_send_emote(rand() % 5); break; //change_tool(pencil, Rubber); break;
             case 5: canvas_set_color(WHITE); uart_send_trash(); break;
             case 6: changeState(PickingColor); break;
             case -1: 
-                if (!clock_time_up()) 
+                if (!wordgame_time_up()) 
                     usePencil(pencil, event); 
                 break; // Se um botao for carregado o pincel nao e usado (rimou) xd
         }
-        update_cursor(cursor, event);
-        if (event.isTimerEvent && event.timerEvent.has_second_passed) {
-            tick_clock();
-            uart_send_tick_clock();
+        if (update_slider(event, cursor, thickness_slider)) {
+            uint8_t new_thickness = round(slider_get_perc(thickness_slider) * 10) + 1;
+            changeThickness(pencil, new_thickness);
         }
-        if (event.isKeyboardEvent) {
-            switch(event.keyboardEvent.type) {
-                case RSHIFT_PRESS: increaseThickness(pencil); break;
-                case LSHIFT_PRESS: decreaseThickness(pencil); break;
-                default: break;
-            }
+        update_cursor(cursor, event);
+        if (event.isRtcEvent) {
+            wordgame_tick_clock();
+            uart_send_tick_clock();
         }
         if (event.isUARTEvent) {
             if (get_msg_by_id(MSG_GAME_WON, event.uart_messages, event.num_uart_messages))
-                changeState(EndGameWin);
+                changeState(EndRoundWin);
             else if (get_msg_by_id(MSG_GAME_LOST, event.uart_messages, event.num_uart_messages))
-                changeState(EndGameLoss);
+                changeState(EndRoundLoss);
             free_messages(event.uart_messages, event.num_uart_messages);   
         }
     }
@@ -627,8 +635,8 @@ void usePencil(DrawingState* pencil, Event_t event) {
 
 void rainbow_draw(DrawingState* pencil, uint16_t x0, uint16_t y0, uint16_t xf, uint16_t yf) {
     pencil->rainbowColor = rainbow(pencil->rainbowColor);
-    nny_change_color(paint_tube_1, pencil->rainbowColor);
-    nny_change_color(paint_tube_2, pencil->rainbowColor);
+    idle_sprite_change_color(paint_tube_1, pencil->rainbowColor);
+    idle_sprite_change_color(paint_tube_2, pencil->rainbowColor);
     canvas_draw_line(x0, y0, xf, yf, pencil->rainbowColor, pencil->thickness);
 }
 
@@ -642,13 +650,13 @@ void change_tool(DrawingState* pencil, Tool tool) {
         case None: cursor_change_bmp(cursor, cursor_normal); break;
     } 
     if (tool == Rainbow) {
-        nny_change_color(paint_tube_1, pencil->rainbowColor);
-        nny_change_color(paint_tube_2, pencil->rainbowColor);  
+        idle_sprite_change_color(paint_tube_1, pencil->rainbowColor);
+        idle_sprite_change_color(paint_tube_2, pencil->rainbowColor);  
         sprite_set_color(cursor, pencil->rainbowColor);
     }
     else if (tool != None) {
-        nny_change_color(paint_tube_1, pencil->color1);
-        nny_change_color(paint_tube_2, pencil->color2);
+        idle_sprite_change_color(paint_tube_1, pencil->color1);
+        idle_sprite_change_color(paint_tube_2, pencil->color2);
         sprite_set_color(cursor, pencil->color1);
     }
     else sprite_set_color(cursor, WHITE);
@@ -656,14 +664,12 @@ void change_tool(DrawingState* pencil, Tool tool) {
     pencil->tool = tool;
 }
 
-void increaseThickness(DrawingState* pencil) {
-    if (pencil->thickness < 10)
-        pencil->thickness++;
-}
-
-void decreaseThickness(DrawingState* pencil) {
-    if (pencil->thickness > 1)
-        pencil->thickness--;
+void changeThickness(DrawingState* pencil, uint8_t thickness) {
+    if (thickness > 10)
+        pencil->thickness = 10;
+    else if (thickness == 0)
+        pencil->thickness = 1;
+    else pencil->thickness = thickness;
 }
 
 //////////////
@@ -673,10 +679,9 @@ void decreaseThickness(DrawingState* pencil) {
 void setup_training() {
     reloadBackground();
     create_canvas(background, 150, 75, 1000, 750, WHITE);
-    paint_tube_1 = create_NNY(45, 320, background, paint_tube_1_bmp);
-    paint_tube_2 = create_NNY(79, 323, background, paint_tube_2_bmp);
-    nny_change_color(paint_tube_1, pencil->color1);
-    nny_change_color(paint_tube_2, pencil->color2);
+    draw_idle_sprite(paint_tube_1);
+    draw_idle_sprite(paint_tube_2);
+    draw_slider(thickness_slider);
     disable_buttons(paint_buttons, num_paint_buttons);
     disable_buttons(training_buttons, num_training_buttons);
     draw_buttons(cursor, paint_buttons, num_paint_buttons);
@@ -690,6 +695,7 @@ void training() {
         event = GetEvent();
         switch (checkButtonPress(event, cursor, training_buttons, num_training_buttons)) {
             case 0: changeState(Saving); return;
+            case 1: changeState(Loading); return;
             case -1: break; 
         }
         switch (checkButtonPress(event, cursor, paint_buttons, num_paint_buttons)) {
@@ -702,15 +708,13 @@ void training() {
             case 6: changeState(PickingColor); break;
             case -1: usePencil(pencil, event); break; // Se um botao for carregado o pincel nao e usado (rimou) xd
         }
-        update_cursor(cursor, event);
-        if (event.isKeyboardEvent) {
-            switch(event.keyboardEvent.type) {
-                case ESC_PRESS: changeState(MainMenu); return;
-                case RSHIFT_PRESS: increaseThickness(pencil); break;
-                case LSHIFT_PRESS: decreaseThickness(pencil); break;
-                default: break;
-            }
+        if (update_slider(event, cursor, thickness_slider)) {
+            uint8_t new_thickness = round(slider_get_perc(thickness_slider) * 10) + 1;
+            changeThickness(pencil, new_thickness);
         }
+        update_cursor(cursor, event);
+        if (event.isKeyboardEvent && event.keyboardEvent.type == ESC_PRESS)
+            changeState(MainMenu);
     }
 }
 
@@ -724,7 +728,8 @@ void save() {
         useTextbox(textbox, event, Training, Training);
     }
     if (strcmp(textbox->text, "") != 0) {
-        char path[500] = "home/lcom/labs/proj/saved_images/";
+        char path[500];
+        strcpy(path, saved_img_folder);
         strcat(path, textbox->text);
         strcat(path, ".bmp");
         char* canvas_map = canvas_get_map();
@@ -734,4 +739,92 @@ void save() {
     destroy_textbox(textbox);
     unpress_button(training_buttons[0]);
 
+}
+
+void load() {
+    textbox_layer = create_layer(400, 300, 334, 135);
+    TextBox* textbox = create_textbox(textbox_layer, textbox_bmp, 10, 10, 1, LeftAlign);
+    textbox_write(textbox, "Insert file name...");
+    while(gameState == Loading) {
+        event = GetEvent();
+        update_cursor(cursor, event);
+        useTextbox(textbox, event, Training, Training);
+    }
+    Bitmap* bmp = NULL;
+    if (strcmp(textbox->text, "") != 0) {
+        char file_name[500] = "";
+        strcat(file_name, textbox->text);
+        strcat(file_name, ".bmp");
+        bmp = loadBitmap(saved_img_folder, file_name);
+    }
+    destroy_textbox(textbox);
+    unpress_button(training_buttons[0]);
+    if (bmp == NULL)
+        return;
+    canvas_draw_image(bmp);
+    free(bmp);
+}
+
+// Minigames
+
+// FLAPPY //
+
+void play_flappy() {
+    start_flappy(background);
+    while (gameState == PlayingFlappy) {
+        event = GetEvent();
+        if (event.isTimerEvent)
+            flappy_tick();
+        if (event.isKeyboardEvent) {
+            if (event.keyboardEvent.type == CHARACTER_PRESS && event.keyboardEvent.character == ' ')
+                flappy_jump();
+            else if (event.keyboardEvent.type == SPACEBAR_RELEASE)
+                flappy_endjump();
+        }    
+        if (flappy_dead())
+            changeState(MainMenu);
+    }
+    timer_reset_counter();
+    while(1) {
+        event = GetEvent();
+        if (event.isTimerEvent)
+            flappy_tick();
+        if (event.isTimerEvent && event.timerEvent.has_second_passed && event.timerEvent.seconds_passed == 3)
+            flappy_showstats();
+        if (event.isKeyboardEvent && event.keyboardEvent.type == ENTER_PRESS)
+            break;
+    }
+    end_flappy();
+}
+
+// SNAKE //
+
+void play_snake() {
+    bool gameOver = false;
+    reloadBackground();
+    create_snake_arena(background);
+    create_snake(1, 1000);
+    while (gameState == PlayingSnake) {
+        event = GetEvent();
+        if (event.isTimerEvent && !gameOver) {
+            snake_game_tick();
+        }
+        if (event.isKeyboardEvent) {
+            if (event.keyboardEvent.type == ARROW_LEFT_PRESS)
+                snake_set_turning(Left, true);
+            else if (event.keyboardEvent.type == ARROW_RIGHT_PRESS)
+                snake_set_turning(Right, true);
+            else if (event.keyboardEvent.type == ARROW_LEFT_RELEASE)
+                snake_set_turning(Left, false);
+            else if (event.keyboardEvent.type == ARROW_RIGHT_RELEASE)
+                snake_set_turning(Right, false);
+        }
+        if (event.isKeyboardEvent && event.keyboardEvent.type == ENTER_PRESS)
+            changeState(MainMenu);
+        if (snake_isGameOver() && !gameOver) {
+            gameOver = true;
+            snake_showstats();
+        }
+    }
+    destroy_snake_arena();
 }

@@ -67,10 +67,6 @@ uint32_t timer_get_counter() {
   return timer_aux_counter;
 }
 
-uint32_t timer_get_frequency() {
-  return timer_frequency;
-}
-
 int (timer_get_conf)(uint8_t timer, uint8_t *st) {
   if (timer < 0 || timer > 2)
     return BAD_PARAMS;

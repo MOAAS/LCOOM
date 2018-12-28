@@ -6,7 +6,6 @@
 #include "bitmap.h"
 #include "bitmaps.h"
 #include "canvas.h"
-#include "clock.h"
 #include "event.h"
 #include "flappy.h"
 #include "interrupts.h"
@@ -20,6 +19,7 @@
 #include "snake.h"
 #include "sprite.h"
 #include "uart_protocol.h"
+#include "uart_wordgame.h"
 #include "vbe.h"
 #include "video.h"
 #include "wordpicker.h"
@@ -33,9 +33,11 @@ typedef enum  {
     PickingColor,
     Guessing,
     TypingGuess,
-    EndGameWin,
-    EndGameLoss,
+    EndRoundWin,
+    EndRoundLoss,
+    EndGame,
     Training,
+    Loading,
     Saving,
     ExitGame,
     PlayingSnake,
@@ -64,6 +66,9 @@ typedef struct {
 void play_snake();
 void play_flappy();
 
+void create_big_ben();
+void destroy_big_ben();
+void update_big_ben(bool force);
 
 void changeState(GameState newState);
 
@@ -74,12 +79,13 @@ void guess();
 void type_guess();
 void draw();
 void color_picker();
-void start_game(char* solution);
+void start_round(char* solution);
+void end_round();
 void end_game();
 void setup_training();
 void training();
 void save();
-
+void load();
 
 void wait_for_guesser();
 void wait_for_drawer();
@@ -93,6 +99,7 @@ void reset_pencil(DrawingState* pencil);
 void setupDrawing();
 void change_tool(DrawingState* pencil, Tool tool);
 void rainbow_draw(DrawingState* pencil, uint16_t x0, uint16_t y0, uint16_t xf, uint16_t yf);
-void increaseThickness(DrawingState* pencil);
-void decreaseThickness(DrawingState* pencil);
+void changeThickness(DrawingState* pencil, uint8_t thickness);
+
+
 

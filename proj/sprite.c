@@ -38,7 +38,7 @@ void destroy_sprite(Sprite *sp) {
 }
 
 void draw_sprite(Sprite *sp) {
-    draw_bitmap(sp->bitmap, sp->x, sp->y, ALIGN_LEFT);
+    draw_bitmap(sp->bitmap, sp->x, sp->y);
 }
 
 void sprite_set_color(Sprite *sp, uint32_t color) {
@@ -46,7 +46,7 @@ void sprite_set_color(Sprite *sp, uint32_t color) {
 }
 
 void draw_sprite_color(Sprite *sp) {
-    draw_bitmap_color(sp->bitmap, sp->x, sp->y, ALIGN_LEFT, sp->color);
+    draw_bitmap_color(sp->bitmap, sp->x, sp->y, sp->color);
 }
 
 void erase_sprite(Sprite *sp) {
@@ -161,7 +161,7 @@ bool is_on_button(Sprite* cursor, Button* button) {
     cursor->x < button->x + width && 
     cursor->y >= button->y && 
     cursor->y < button->y + height &&
-    layer_get_pixel_under(get_highest_layer(), cursor->x, cursor->y) == get_bitmap_color(button->bitmap, cursor->x - button->x, cursor->y - button->y);
+    !is_transparent(get_bitmap_color(button->bitmap, cursor->x - button->x, cursor->y - button->y));
 }
 
 void draw_button(Sprite* cursor, Button* button) {
@@ -243,19 +243,100 @@ int checkButtonPress(Event_t event, Sprite* cursor, Button* buttons[], uint8_t n
 
 // NNY
 
-NNY* create_NNY(uint16_t x, uint16_t y, Layer* layer, Bitmap* bitmap) {
-    NNY* nny = malloc(sizeof(NNY));
-    nny->x = x;
-    nny->y = y;
-    nny->bitmap = bitmap;
-    nny->layer = layer;
-    return nny;
+IdleSprite* create_idle_sprite(uint16_t x, uint16_t y, Layer* layer, Bitmap* bitmap, uint32_t color) {
+    IdleSprite* idlesprite = malloc(sizeof(IdleSprite));
+    idlesprite->x = x;
+    idlesprite->y = y;
+    idlesprite->bitmap = bitmap;
+    idlesprite->layer = layer;
+    idlesprite->color = color;
+    return idlesprite;
 }
 
-void draw_nny(NNY* nny) {
-    layer_draw_image(nny->layer, nny->bitmap, nny->x, nny->y);
+void destroy_idle_sprite(IdleSprite* idlesprite) {
+    free(idlesprite);
 }
 
-void nny_change_color(NNY* nny,uint32_t color) {
-    layer_draw_image_color(nny->layer, nny->bitmap, nny->x, nny->y,color);
+void draw_idle_sprite(IdleSprite* idlesprite) {
+    layer_draw_image_color(idlesprite->layer, idlesprite->bitmap, idlesprite->x, idlesprite->y, idlesprite->color);
+}
+
+void idle_sprite_change_color(IdleSprite* idlesprite, uint32_t color) {
+    idlesprite->color = color;
+    draw_idle_sprite(idlesprite);
+}
+
+// Slider BEC7ED
+
+extern Bitmap* slider_bmp;
+
+Slider* create_slider(uint16_t x, uint16_t y, double perc_filled, Layer* layer, uint32_t color, uint32_t color_active) {
+    Slider* slider = malloc(sizeof(Slider));
+    slider->x = x;
+    slider->y = y;
+    slider->width = slider_bmp->bitmapInfoHeader.width;
+    slider->height = slider_bmp->bitmapInfoHeader.height;
+    slider->handle_pos = x + perc_filled * slider->width;
+    slider->layer = layer;
+    slider->isPressed = false;
+    slider->color = color;
+    slider->color_active = color_active;
+    return slider;
+}
+
+void draw_slider(Slider* slider) {
+   //if (slider->bmp == NULL || layer == NULL)
+   //    return;
+    //uint16_t xCoord = x;
+    //uint16_t yCoord = height + y - 1;
+    char* img = slider_bmp->bitmapData;    
+    for (uint16_t y = slider->y; y < slider->y + slider->height; y++) {
+        for (uint16_t x = slider->x; x < slider->x + slider->width; x++) {
+            uint32_t color = vg_retrieve(img) & 0xFFFFFF;
+            if (color == GREEN) {
+                if (x >= slider->handle_pos)
+                    draw_on_layer(slider->layer, x, y, slider->color);
+                else draw_on_layer(slider->layer, x, y, slider->color_active);
+            }
+            else if (color != MAGENTA)
+                draw_on_layer(slider->layer, x, y, color);
+            img += slider_bmp->bytes_per_pixel;
+        }
+        img += slider_bmp->padding;
+    }
+}        
+
+bool is_on_slider(Sprite* cursor, Slider* slider) {
+    return cursor->x >= slider->x && cursor->x < slider->x + slider->width && cursor->y >= slider->y && cursor->y < slider->y + slider->height;
+}
+
+
+void slider_move_handle(Slider* slider, uint16_t pos) {
+    if (pos < slider->x)
+        pos = slider->x;
+    else if (pos > slider->x + slider->width)
+        pos = slider->x + slider->width;
+    slider->handle_pos = pos;
+    draw_slider(slider);
+}
+
+double slider_get_perc(Slider* slider) {
+    return (slider->handle_pos - slider->x) / (double)slider->width;
+}
+
+bool update_slider(Event_t event, Sprite* cursor, Slider* slider) {
+    if (!event.isMouseEvent)
+        return false;
+    if (event.isLBPressed) {
+        if (slider->isPressed || is_on_slider(cursor, slider)) {
+            slider->isPressed = true;
+            slider_move_handle(slider, cursor->x);
+            return true;
+        }
+        else return false;
+    }
+    else { 
+        slider->isPressed = false;
+        return false;
+    }
 }

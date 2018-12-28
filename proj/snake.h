@@ -17,9 +17,10 @@ typedef struct {
     uint32_t color;
     int health;
     int max_health;
+    bool ricocheting;
     bool isDead;
     int timeSinceDeath;
-    int gracePeriodLeft;
+    int obstacleImmunityLeft;
 
     // powerup coisas
     int invincibilityLeft;
@@ -33,7 +34,9 @@ typedef enum {
     Speedy = 1,
     Slowed = 2,
     Invincibility = 3,
-    Switcheroo = 4
+    Rotate = 4,
+    Switcheroo = 5,
+    Random = 6
 } PowerupType;
 
 typedef struct {
@@ -68,7 +71,7 @@ void loadSnakeHighscore(char* path);
 void saveSnakeHighscore();
 
 
-void create_snake(uint16_t x, uint16_t y, double speed, int max_health);// double max_speed, double angle);
+void create_snake(double speed, int max_health);// double max_speed, double angle);
 void snake_showstats();
 
 void snake_multiply(int num);
