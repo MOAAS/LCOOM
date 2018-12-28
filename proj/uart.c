@@ -2,11 +2,11 @@
 #include <stdint.h>
 #include "uart.h"
 
-static int hook_id_uart = COM2_IRQ;
+static int hook_id_uart = COM1_IRQ;
 
 int uart_subscribe_int(uint8_t *bit_no) {
-    *bit_no = hook_id_uart = COM2_IRQ;
-    if (sys_irqsetpolicy(COM2_IRQ, IRQ_REENABLE | IRQ_EXCLUSIVE , &hook_id_uart) != OK)
+    *bit_no = hook_id_uart = COM1_IRQ;
+    if (sys_irqsetpolicy(COM1_IRQ, IRQ_REENABLE | IRQ_EXCLUSIVE , &hook_id_uart) != OK)
         return 1;
     return 0;
 }
@@ -115,13 +115,17 @@ void uart_destroy_fifo() {
 }
 
 void uart_ih() {
-    uint8_t status;
-    uint8_t data;
     uint8_t int_id;
-    uart_read_status(&status);
     uart_get_int_id(&int_id);
     if (int_id & UART_NO_INT)
         return;
+    uart_process_int(int_id);
+}
+
+void uart_process_int(uint8_t int_id) {
+    uint8_t status;
+    uint8_t data;
+    uart_read_status(&status);
     switch(int_id & UART_INT_ID) {
         case UART_INT_RECEIVE: 
         case UART_INT_CHAR_TO: // recebe sempre bit(2) | bit(3) !
@@ -149,7 +153,7 @@ void uart_ih() {
                 uart_read_status(&status);
             }
             break; /* notify upper level */
-        default: printf("Unrecognized int: %d \n", int_id & UART_INT_ID);
+        default: printf("Unrecognized int: %d \n", int_id & UART_INT_ID); break;
     }
 }
 
@@ -170,8 +174,8 @@ int uart_fifo_send(uint8_t data) {
     }
     if (uart_conflict)
         printf("Uart conflict! \n");
-
-    
+        
+            
     if (status & UART_THR_EMPTY)
         uart_clear_toSend_queue();
     if (status & UART_COM_ERR) {
@@ -191,7 +195,8 @@ int uart_clear_toSend_queue() {
 
 int uart_enable_fifo() {
     //fcr = (fcr & ~BIT(6)) | BIT(7); // trigger level 8
-    return uart_write_reg(UART_FCR, UART_FIFO_ENABLE | UART_FIFO_CLR_RCVR | UART_FIFO_CLR_XMIT | UART_FIFO64_ENABLE);
+    uart_write_reg(UART_FCR, UART_FIFO_ENABLE | UART_FIFO64_ENABLE | UART_FIFO_CLR_RCVR | UART_FIFO_CLR_XMIT);
+    return 0;
 }
 
 int uart_disable_fifo() {
@@ -203,5 +208,5 @@ int uart_disable_fifo() {
         util_delay(25);
         uart_read_status(&status);
     }
-    return uart_write_reg(UART_FCR, UART_FIFO_CLR_RCVR | UART_FIFO_CLR_XMIT);
+    return uart_write_reg(UART_FCR, UART_FIFO_CLR_XMIT | UART_FIFO_CLR_RCVR);
 }

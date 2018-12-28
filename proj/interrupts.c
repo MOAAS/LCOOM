@@ -98,13 +98,30 @@ Notification GetNotification() {
                         gotNotification = true;
                     }
                 }
-                if (msg.m_notify.interrupts & BIT(COM2_IRQ)) { // subscribed interrupt
+                if (msg.m_notify.interrupts & BIT(COM1_IRQ)) { // subscribed interrupt
                     uart_ih();
                     notif.serialPortNotif = true;
                     notif.uart_int_info = uart_int_info;
                     gotNotification = true;
                 }
+                
                 // ultra test
+                if (!notif.serialPortNotif) {
+                    uint8_t int_id;
+                    uart_get_int_id(&int_id);
+                    if (!(int_id & UART_NO_INT))
+                        switch (int_id & UART_INT_ID) {
+                            case UART_INT_RECEIVE:
+                            case UART_INT_CHAR_TO:
+                                printf("WOAH int id = %d \n", int_id);
+                                uart_process_int(int_id);
+                                notif.serialPortNotif = true;
+                                notif.uart_int_info = uart_int_info;
+                                gotNotification = true;
+                                break;
+                            default: break;
+                    }
+                }        
                 if (uart_conflict) {
                     printf("UH OH There was a conflict! \n");
                     notif.serialPortNotif = true;
@@ -113,6 +130,8 @@ Notification GetNotification() {
                     gotNotification = true;
                     uart_conflict = false;
                 }
+
+
                 if (msg.m_notify.interrupts & BIT(RTC_IRQ)) { // subscribed interrupt
                     rtc_ih();
                     if(alarm_int){

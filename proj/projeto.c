@@ -79,10 +79,13 @@ static IdleSprite* paint_tube_2;
 static int num_menu_buttons = 6;
 static int num_paint_buttons = 7;
 static int num_training_buttons = 2;
+static int num_wordgame_buttons = 1;
 
 static Button* paint_buttons[7];
 static Button* menu_buttons[10];
 static Button* training_buttons[5];
+static Button* wordgame_buttons[5];
+
 static Slider* thickness_slider;
 
 /////////////////
@@ -146,6 +149,8 @@ void loadButtons() {
     training_buttons[1] = create_button(77, 100, background, load_button, load_hl); // save
     training_buttons[0]->singleState = true; // save
     training_buttons[1]->singleState = true; // save
+
+    wordgame_buttons[0] = create_button(10, 10, background, load_button, load_button);
 
     thickness_slider = create_slider(5, 700, 0.4, background, 0xBEC7ED, RED);
 }
@@ -340,7 +345,7 @@ void end_round() {
     draw_word(background, reveal, 500, 400, 2, 0, CenterAlign);
     draw_word(background, scoring, 500, 500, 2, 0, CenterAlign);
     wordgame_end_round(points);
-    wait_ms(3000);
+    wait_ms(2000);
     if (is_wordgame_over())
         changeState(EndGame);
 }
@@ -358,21 +363,19 @@ void end_game() {
 }
 
 void wait_for_guesser() {
+    char* solution = get_random_word();
     layer_draw_image(background, wide_textbox_bmp, 85, 650); // 860x100 image
-    draw_word(background, "Waiting for opponent...", 515, 700, 2, 0, CenterAlign);
+    draw_word(background, "Waiting for guesser...", 515, 700, 2, 0, CenterAlign);
     while (1) {
         event = GetEvent();
         update_cursor(cursor, event);
-        if (event.isUARTEvent && get_msg_by_id(MSG_GUESSER_READY, event.uart_messages, event.num_uart_messages)) {
-            free_messages(event.uart_messages, event.num_uart_messages);
+        if (event.isUARTEvent && get_msg_by_id(MSG_GUESSER_READY, event.uart_messages, event.num_uart_messages))
             break;
-        }
         if (is_wordgame_over() && event.isKeyboardEvent && event.keyboardEvent.type == ESC_PRESS) {
             changeState(MainMenu); // Verifica DEPOIS de (nao) receber
             return;
         }
     }
-    char* solution = get_random_word();
     uart_send_drawer_ready(solution);
     start_round(solution);
 }
@@ -380,7 +383,7 @@ void wait_for_guesser() {
 void wait_for_drawer() {
     UARTMessage* msg; char* solution = NULL;
     layer_draw_image(background, wide_textbox_bmp, 85, 650); // 860x100 image
-    draw_word(background, "Waiting for opponent...", 515, 700, 2, 0, CenterAlign);
+    draw_word(background, "Waiting for drawer...", 515, 700, 2, 0, CenterAlign);
     while (1) {
         event = GetEvent();
         update_cursor(cursor, event);
@@ -393,7 +396,6 @@ void wait_for_drawer() {
         if (event.isUARTEvent && (msg = get_msg_by_id(MSG_DRAWER_READY, event.uart_messages, event.num_uart_messages))) {
             solution = malloc(strlen((char*)msg->bytes + 1) * sizeof(char));
             strcpy(solution, (char*)msg->bytes);
-            free_messages(event.uart_messages, event.num_uart_messages);
             break;
         }
     }
@@ -535,7 +537,6 @@ void color_picker() {
                 changeState(EndRoundWin);
             else if (get_msg_by_id(MSG_GAME_LOST, event.uart_messages, event.num_uart_messages))
                 changeState(EndRoundLoss);
-            free_messages(event.uart_messages, event.num_uart_messages);    
         }
     }
     change_tool(pencil, pencil->tool); // atualiza os paint tubes
@@ -573,7 +574,6 @@ void draw() {
                 changeState(EndRoundWin);
             else if (get_msg_by_id(MSG_GAME_LOST, event.uart_messages, event.num_uart_messages))
                 changeState(EndRoundLoss);
-            free_messages(event.uart_messages, event.num_uart_messages);   
         }
     }
 }
@@ -686,6 +686,7 @@ void setup_training() {
     disable_buttons(training_buttons, num_training_buttons);
     draw_buttons(cursor, paint_buttons, num_paint_buttons);
     draw_buttons(cursor, training_buttons, num_training_buttons);
+    draw_buttons(cursor, wordgame_buttons, num_wordgame_buttons);
     change_tool(pencil, Brush);
     press_button(paint_buttons[0]); // Brush
 }
@@ -693,6 +694,10 @@ void setup_training() {
 void training() {
     while (gameState == Training) {
         event = GetEvent();
+        switch (checkButtonPress(event, cursor, wordgame_buttons, num_wordgame_buttons)) {
+            case 0: toggle_emote_wheel(cursor); break;
+            case -1: break; 
+        }
         switch (checkButtonPress(event, cursor, training_buttons, num_training_buttons)) {
             case 0: changeState(Saving); return;
             case 1: changeState(Loading); return;
@@ -713,8 +718,10 @@ void training() {
             changeThickness(pencil, new_thickness);
         }
         update_cursor(cursor, event);
-        if (event.isKeyboardEvent && event.keyboardEvent.type == ESC_PRESS)
+        if (event.isKeyboardEvent && event.keyboardEvent.type == ESC_PRESS) {
+            destroy_emote_wheel();
             changeState(MainMenu);
+        }
     }
 }
 

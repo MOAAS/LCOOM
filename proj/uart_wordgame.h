@@ -2,7 +2,9 @@
 
 #include "uart_protocol.h"
 #include "canvas.h"
+#include "sprite.h"
 #include "wordpicker.h"
+#include "bitmaps.h"
 
 
 #define MSG_DRAW_LINE       0
@@ -57,4 +59,7 @@ void uart_send_emote(Emote emote);
 void uart_process_msgs(UARTMessage messages[], uint16_t num_messages);
 void uart_process_msg(UARTMessage* message);
 
+void toggle_emote_wheel(Sprite* cursor);
+void draw_emote_wheel(Sprite* cursor);
+void destroy_emote_wheel();
 

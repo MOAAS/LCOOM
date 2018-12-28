@@ -8,14 +8,12 @@
 typedef struct {
     uint8_t size;
     uint8_t type;
-    uint8_t* bytes;
+    uint8_t bytes[20];
 } UARTMessage;
 
 UARTMessage* create_message(uint8_t size, uint8_t type, uint8_t* bytes);
 
 void destroy_message(UARTMessage* msg);
-
-void free_messages(UARTMessage msgs[], uint16_t num_msgs);
 
 void uart_send_message(UARTMessage* msg);
 bool uart_assemble_received_message(uint8_t byte, UARTMessage* msg_ptr);

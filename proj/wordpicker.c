@@ -227,7 +227,8 @@ void wordgame_create_clock(Bitmap* bmp) {
 }
 
 void wordgame_destroy_clock() {
-    destroy_layer(clock_layer);
+    if (clock_layer != NULL)
+        destroy_layer(clock_layer);
     clock_layer = NULL;
     time_left = 0;
 }

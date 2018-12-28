@@ -153,6 +153,10 @@ Button* create_button(uint16_t x, uint16_t y, Layer* layer, Bitmap* bitmapIdle, 
     return button;
 }
 
+void destroy_button(Button* button) {
+    free(button);
+}
+
 bool is_on_button(Sprite* cursor, Button* button) {
     uint16_t height = button->bitmap->bitmapInfoHeader.height;
     uint16_t width = button->bitmap->bitmapInfoHeader.width;

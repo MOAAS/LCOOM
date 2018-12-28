@@ -74,6 +74,7 @@ Bitmap* emote1_bmp;
 Bitmap* emote2_bmp;
 Bitmap* emote3_bmp;
 Bitmap* emote4_bmp;
+Bitmap* emote_wheel_bmp;
 
 Bitmap* obstacle0_bmp;
 Bitmap* obstacle1_bmp;
@@ -183,6 +184,7 @@ void loadBitmaps(const char* folderPath) {
     emote2_bmp = loadBitmap(folderPath, "emote2.bmp");
     emote3_bmp = loadBitmap(folderPath, "emote3.bmp");
     emote4_bmp = loadBitmap(folderPath, "emote4.bmp");
+    emote_wheel_bmp = loadBitmap(folderPath, "emote_wheel.bmp");
 
     // SNAAKE
     obstacle0_bmp = loadBitmap(folderPath, "obstacle0.bmp");

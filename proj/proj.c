@@ -65,22 +65,24 @@ int (proj_main_loop)() { //int argc, char *argv[]) {
  unsubscribe_device(RTC);
  */
 
-  projeto();
-  return 0;
+ projeto();
+ return 0;
   subscribe_device(SerialPort);
   subscribe_device(Keyboard);
   subscribe_device(Mouse);
   subscribe_device(Timer);
+  int rcv_cnt = 0, xmit_cnt = 0;
   while (1) {
     Event_t event = GetEvent();
-    if (event.isMouseEvent && event.mouseEvent.type == LB_PRESS) {
+    if (event.isTimerEvent && event.timerEvent.timer_counter % (rand() % 60 + 1) == 0) {
       printf("Sending...\n");
-      util_delay(1500);
       uart_send_drawer_ready("HI HOW ARE");
      //uart_send_drawer_ready("HI HOW ARE YOU");
      //uart_send_drawer_ready("HI HOW ARE YOU");
      //uart_send_drawer_ready("HI HOW ARE YOU");
      //uart_send_drawer_ready("HI HOW ARE YOU");
+      xmit_cnt++;
+      printf("Transmit count = %d \n", xmit_cnt);
     }
     if (event.isKeyboardEvent && event.keyboardEvent.type == ESC_PRESS)
       break;
@@ -103,6 +105,8 @@ int (proj_main_loop)() { //int argc, char *argv[]) {
         if (event.uart_messages[j].type == MSG_DRAWER_READY) {
           printf ("string: ");
           printf ("\"%s\" \n", event.uart_messages[j].bytes);
+          rcv_cnt++;
+          printf("Receiver count = %d \n", rcv_cnt);
         }
       }
     }

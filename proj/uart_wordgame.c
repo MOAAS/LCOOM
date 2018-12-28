@@ -114,6 +114,13 @@ void uart_process_msg(UARTMessage* message) {
             uint16_t yf = (uint16_t)message->bytes[6] | (uint16_t)message->bytes[7] << 8;
             uint32_t color = (uint32_t)message->bytes[8] | (uint32_t)message->bytes[9] << 8 | (uint32_t)message->bytes[10] << 16; 
             uint8_t thickness = message->bytes[11];
+            if (thickness > 20) {
+                thickness = 4;
+                printf("Wait whaat? \n");
+                for (int i = 0; i < message->size; i++) {
+                    printf("Byte no. %d - %d \n", i, message->bytes[i]);
+                }
+            }
             canvas_draw_line(xi, yi, xf, yf, color, thickness);
             break;
         }
@@ -162,6 +169,7 @@ extern Bitmap* emote1_bmp;
 extern Bitmap* emote2_bmp;
 extern Bitmap* emote3_bmp;
 extern Bitmap* emote4_bmp;
+extern Bitmap* emote_wheel_bmp;
 
 static Layer* emote_layer = NULL;
 
@@ -186,4 +194,42 @@ void destroy_emote() {
     emote_layer = NULL;
 }
 
+static int num_emote_buttons = 5;
+static Button* emote_buttons[10];
+static Layer* emote_wheel_layer = NULL;
+static bool emote_wheel_on = false;
 
+void toggle_emote_wheel(Sprite* cursor) {
+    if (emote_wheel_on) {
+        destroy_emote_wheel();
+        emote_wheel_on = false;
+    }
+    else {
+        draw_emote_wheel(cursor);
+        emote_wheel_on = true;
+    }
+}
+
+void draw_emote_wheel(Sprite* cursor) {
+    if (emote_wheel_layer == NULL)
+        emote_wheel_layer = create_layer(100, 10, 400, 200);
+    layer_draw_image(emote_wheel_layer, emote_wheel_bmp, 100, 10);
+    emote_buttons[0] = create_button(110, 10, emote_wheel_layer, emote0_bmp, emote0_bmp); // normal
+    emote_buttons[1] = create_button(230, 10, emote_wheel_layer, emote1_bmp, emote1_bmp); // normal
+    emote_buttons[2] = create_button(350, 10, emote_wheel_layer, emote2_bmp, emote2_bmp); // normal
+    emote_buttons[3] = create_button(160, 110, emote_wheel_layer, emote3_bmp, emote3_bmp); // normal
+    emote_buttons[4] = create_button(280, 110, emote_wheel_layer, emote4_bmp, emote4_bmp); // normal
+    draw_buttons(cursor, emote_buttons, num_emote_buttons);
+}
+
+void destroy_emote_wheel() {
+    if (emote_wheel_layer == NULL)
+        return;
+    destroy_layer(emote_wheel_layer);
+    emote_wheel_layer = NULL;
+    destroy_button(emote_buttons[0]);
+    destroy_button(emote_buttons[1]);
+    destroy_button(emote_buttons[2]);
+    destroy_button(emote_buttons[3]);
+    destroy_button(emote_buttons[4]);
+}

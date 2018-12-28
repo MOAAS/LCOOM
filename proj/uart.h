@@ -10,19 +10,19 @@
 #define COM1_BASE           0x3F8
 #define COM2_BASE           0x2F8
 
-#define UART_RBR            0x2F8
-#define UART_THR            0x2F8
-#define UART_IER            0x2F9
-#define UART_IIR            0x2FA
-#define UART_FCR            0x2FA
-#define UART_LCR            0x2FB
-#define UART_MCR            0x2FC
-#define UART_LSR            0x2FD
-#define UART_MSR            0x2FE
-#define UART_SR             0x2FF
+#define UART_RBR            0x3F8
+#define UART_THR            0x3F8
+#define UART_IER            0x3F9
+#define UART_IIR            0x3FA
+#define UART_FCR            0x3FA
+#define UART_LCR            0x3FB
+#define UART_MCR            0x3FC
+#define UART_LSR            0x3FD
+#define UART_MSR            0x3FE
+#define UART_SR             0x3FF
 
-#define UART_DLL            0x2F8
-#define UART_DLM            0x2F8
+#define UART_DLL            0x3F8
+#define UART_DLM            0x3F8
 
 #define UART_RECEIVER_DATA  BIT(0)
 #define UART_OVERRUN_ERR    BIT(1)
@@ -170,12 +170,19 @@ int uart_enable_ier(uint8_t bits);
 int uart_get_int_id(uint8_t* id);
 
 /**
- * @brief UART Interrupt handler. Reads the IIR and checks the interrupt type.
- * If it has received something, and there were no communication errors, adds all the bytes to a queue, by order of arrival.
- * If it is ready to send something, clears the toSend queue (16 byte limit).
- * If there was an error, discards the contents of the RBR (if there's any).
+ * @brief UART Interrupt handler. Reads the IIR and processes its contents.
  */
 void uart_ih();
+
+/**
+ * @brief Processes an interrupt, by checks the interrupt type. 
+ * If it has received something, and there were no communication errors, adds all the bytes to a queue, by order of arrival.
+ * If it is ready to send something, clears the toSend queue (16 byte limit).
+ * If there was an error, discards the contents of the RBR (if there's any). 
+ * @param int_id IIR contents.
+ */
+void uart_process_int(uint8_t int_id);
+
 
 /**
  * @brief Pushes a byte to the toSend queue. If the THR is empty, also clears the toSend queue.

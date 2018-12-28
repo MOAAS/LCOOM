@@ -161,6 +161,13 @@ typedef struct {
 Button* create_button(uint16_t x, uint16_t y, Layer* layer, Bitmap* bitmapIdle, Bitmap* bitmapHighlighted);
 
 /**
+ * @brief Frees the memory used by a button
+ * 
+ * @param button Button to be destroyed.
+ */
+void destroy_button(Button* button);
+
+/**
  * @brief Draws a button on the screen, highlighting it if cursor is on the button
  * 
  * @param cursor Cursor being used

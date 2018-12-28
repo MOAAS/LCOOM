@@ -7,7 +7,6 @@ UARTMessage* create_message(uint8_t size, uint8_t type, uint8_t* bytes) {
     UARTMessage* msg = malloc(sizeof(UARTMessage));
     msg->size = size;
     msg->type = type;
-    msg->bytes = malloc(size*sizeof(uint8_t));
     for (uint8_t i = 0; i < size; i++) {
         msg->bytes[i] = bytes[i];
     }
@@ -15,14 +14,7 @@ UARTMessage* create_message(uint8_t size, uint8_t type, uint8_t* bytes) {
 }
 
 void destroy_message(UARTMessage* msg) {
-    free(msg->bytes);
     free(msg);
-}
-
-void free_messages(UARTMessage msgs[], uint16_t num_msgs) {
-    for (uint16_t i = 0; i < num_msgs; i++) {
-        free(msgs[i].bytes);
-    }
 }
 
 void uart_send_message(UARTMessage* msg) {
@@ -48,7 +40,6 @@ bool uart_assemble_received_message(uint8_t byte, UARTMessage* msg_ptr) {
             return false;
         case 1:
             new_message.size = (byte >> 4) & 0xF;
-            new_message.bytes = malloc(new_message.size*sizeof(uint8_t));
             new_message.type = byte & 0xF;
             byte_no = 2;
             return false;
