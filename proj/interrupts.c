@@ -122,7 +122,7 @@ Notification GetNotification() {
                             default: break;
                     }
                 }        
-                if (uart_conflict) {
+                if (uart_conflict) { // acho que j ne necessario
                     printf("UH OH There was a conflict! \n");
                     notif.serialPortNotif = true;
                     notif.uart_int_info = uart_int_info;

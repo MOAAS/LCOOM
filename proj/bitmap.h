@@ -98,7 +98,7 @@ void draw_bitmap(Bitmap* bmp, int x, int y);
  * @param y Y position of the upper left corner
  * @param new_color Color to replace GREEN
  */
-void draw_bitmap_color(Bitmap* bmp, int x, int y, uint32_t new_color) ;
+void draw_bitmap_color(Bitmap* bmp, int x, int y, uint32_t new_color);
 
 /**
  * @brief Gets the color of a certain bitmap pixel

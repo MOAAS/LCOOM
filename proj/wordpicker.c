@@ -17,8 +17,9 @@ static uint16_t wordbox_width;
 static uint16_t wordbox_height;
 
 extern Bitmap* clock_bmp;
-extern Bitmap* wide_textbox_bmp;
-extern Bitmap* megalarge_textbox_bmp;
+extern Bitmap* textbox2_bmp;
+extern Bitmap* textbox6_bmp;
+
 static Layer* background = NULL;
 
 static char* word_list[100];
@@ -62,16 +63,16 @@ void loadDictionary(char* path) {
 		else strncat(string , &c, 1);
 	}
 	fclose(fp); 
-    printf("Successfully loaded %d words.\n", word_count);
+    printf("Successfully loaded %d words. \n", word_count);
 	return;
 }
 
 void wordgame_start_round(Layer* bg, char* solution, bool isDrawing) {
     background = bg;
     // Draw the box
-    layer_draw_image(bg, wide_textbox_bmp, wordbox_X, wordbox_Y);
-    wordbox_height = wide_textbox_bmp->bitmapInfoHeader.height;
-    wordbox_width = wide_textbox_bmp->bitmapInfoHeader.width;
+    layer_draw_image(bg, textbox2_bmp, wordbox_X, wordbox_Y);
+    wordbox_height = textbox2_bmp->bitmapInfoHeader.height;
+    wordbox_width = textbox2_bmp->bitmapInfoHeader.width;
     wordbox_xMid = wordbox_X + wordbox_width / 2;
     wordbox_yMid = wordbox_Y + wordbox_height / 2 + 8;
     // Getting a random word and moving it to current_word
@@ -177,7 +178,7 @@ void wordgame_showstats() {
     }
     sprintf(score_str1, "You scored");
     sprintf(score_str2, "%d points", score);
-    layer_draw_image(background, megalarge_textbox_bmp, 60, 250); // 860x100 image
+    layer_draw_image(background, textbox6_bmp, 60, 250); // 860x100 image
     draw_word(background, score_str1, 500, 300, 3, 0, CenterAlign);
     tickdelay(micros_to_ticks(800000)); // 0.8 s
     draw_word(background, score_str2, 500, 400, 3, 0, CenterAlign);

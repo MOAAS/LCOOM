@@ -16,7 +16,6 @@ extern Bitmap* cursor_balde;
 extern Bitmap* cursor_picker;
 extern Bitmap* cursor_rubber;
 
-//extern Bitmap* ULTRA_BACKGROUND;
 extern Bitmap* welcome_screen;
 extern Bitmap* background_menu;
 
@@ -51,6 +50,9 @@ extern Bitmap* rubber_hl;
 extern Bitmap* palette_button;
 extern Bitmap* palette_hl;
 
+extern Bitmap* emote_icon;
+extern Bitmap* emote_icon_hl;
+
 extern Bitmap* paint_tube_1_bmp;
 extern Bitmap* paint_tube_2_bmp;
 
@@ -59,19 +61,12 @@ extern Bitmap* save_hl;
 extern Bitmap* load_button;
 extern Bitmap* load_hl;
 
-extern Bitmap* textbox_bmp;
-extern Bitmap* wide_textbox_bmp;
-extern Bitmap* ultrawide_textbox_bmp;
-extern Bitmap* megalarge_textbox_bmp;
+extern Bitmap* textbox1_bmp;
+extern Bitmap* textbox2_bmp;
+extern Bitmap* textbox5_bmp;
+extern Bitmap* textbox6_bmp;
 extern Bitmap* colorpicker_bmp;
-extern Bitmap* clock_bmp;
 extern Bitmap* clockbig_bmp;
-
-
-extern Bitmap* cool_dude_happy;
-extern Bitmap* cool_dude_angry;
-extern Bitmap* cool_dude_happy_big;
-extern Bitmap* cool_dude_angry_big;
 
 static IdleSprite* paint_tube_1;
 static IdleSprite* paint_tube_2;
@@ -150,7 +145,7 @@ void loadButtons() {
     training_buttons[0]->singleState = true; // save
     training_buttons[1]->singleState = true; // save
 
-    wordgame_buttons[0] = create_button(10, 10, background, load_button, load_button);
+    wordgame_buttons[0] = create_button(10, 10, background, emote_icon, emote_icon_hl);
 
     thickness_slider = create_slider(5, 700, 0.4, background, 0xBEC7ED, RED);
 }
@@ -195,6 +190,7 @@ void projeto() {
         switch(gameState) {
             case Start: start_screen(); break;
             case MainMenu: main_menu(); break;
+            case StartWordGame: select_drawer(); break;
             case WaitDrawing: wait_for_guesser(); break;
             case WaitGuessing: wait_for_drawer(); break;
             case Drawing: draw(); break;
@@ -204,6 +200,8 @@ void projeto() {
             case Training: training(); break;
             case Saving: save(); break;
             case Loading: load(); break;
+            case WaitCollab: wait_for_collab(); break;
+            case CollabDrawing: collab_drawing(); break;
             case EndRoundWin: end_round(); break;
             case EndRoundLoss: end_round(); break;
             case EndGame: end_game(); break;
@@ -246,12 +244,9 @@ void main_menu() {
     while (gameState == MainMenu) {
         event = GetEvent();
         switch (checkButtonPress(event, cursor, menu_buttons, num_menu_buttons)) {
-            case 0: changeState(WaitDrawing); break;
-            case 1: changeState(WaitGuessing); break;
-            case 2: 
-                changeState(Training); 
-                setup_training();
-                break;
+            case 0: changeState(StartWordGame); break;
+            case 1: changeState(WaitCollab); break;
+            case 2: changeState(Training); setup_canvas(); break;
             case 3: changeState(ExitGame); break;
             case 4: changeState(PlayingSnake); break;
             case 5: changeState(PlayingFlappy); break;
@@ -296,14 +291,12 @@ void update_big_ben(bool force) {
 }
 
 void start_round(char* solution) {
-    if (gameState == WaitDrawing) {
-        changeState(Drawing);
-        setupDrawing();
+    if (gameState == Drawing) {
+        setup_canvas();
         wordgame_start_round(background, solution, true);
     }
-    else if (gameState == WaitGuessing) {
-        changeState(Guessing);
-        setupGuessing();
+    else if (gameState == Guessing) {
+        setup_canvas();
         wordgame_start_round(background, solution, false);
     }
     else changeState(MainMenu);
@@ -313,9 +306,10 @@ void end_round() {
     int points = 100 + wordgame_get_time_left() * 5 - 100 * (gameState == EndRoundLoss);
     destroy_canvas();
     destroy_emote();
+    destroy_emote_wheel();
     reset_pencil(pencil);
     reloadBackground();
-    layer_draw_image(background, megalarge_textbox_bmp, 60, 250); // 860x100 image
+    layer_draw_image(background, textbox6_bmp, 60, 250); // 860x100 image
     if (gameState == EndRoundWin) {
         if (lastGameState == TypingGuess || lastGameState == Guessing) {
             changeState(WaitDrawing);
@@ -326,17 +320,14 @@ void end_round() {
             draw_word(background, "Your teammate guessed it!", 500, 300, 2, 0, CenterAlign);
         }
         else changeState(MainMenu);
-        //layer_draw_image(background, cool_dude_happy_big, 500, 325);
     }
     else if (lastGameState == TypingGuess || lastGameState == Guessing) {
         changeState(WaitDrawing);
         draw_word(background, "You failed!", 500, 300, 2, 0, CenterAlign);
-        //layer_draw_image(background, cool_dude_angry_big, 500, 325);
     }
     else if (lastGameState == Drawing || lastGameState == PickingColor) {
         changeState(WaitGuessing);
         draw_word(background, "Your teammate failed!", 500, 300, 2, 0, CenterAlign);
-        //layer_draw_image(background, cool_dude_angry_big, 500, 325);
     }
     else changeState(MainMenu);
     char reveal[100], scoring[100];
@@ -362,19 +353,43 @@ void end_game() {
     reset_wordgame();
 }
 
+void select_drawer() {
+    UARTMessage* msg; unsigned choice = rand();
+    display_waiting_for_player();
+    while(gameState == StartWordGame) {
+        event = GetEvent();
+        update_cursor(cursor, event);
+        if (event.isTimerEvent)
+            uart_send_number(choice);
+        // recebeu um numero
+        if (event.isUARTEvent && (msg = get_msg_by_id(MSG_NUMBER, event.uart_messages, event.num_uart_messages))) {
+            UARTMessageContents msgCont = uart_process_msg(msg);
+            unsigned opponent_choice = msgCont.number;
+            if (opponent_choice > choice) // quem tem um numero maior desenha
+                changeState(WaitGuessing);
+            else if (opponent_choice < choice)
+                changeState(WaitDrawing);
+            else {
+                printf("this shouldnt happen: %d vs %d \n", choice, opponent_choice);
+                changeState(MainMenu);
+            }
+        }
+        else if (event.isKeyboardEvent && event.keyboardEvent.type == ESC_PRESS) {
+            changeState(MainMenu);
+            return;
+        }
+    }
+    uart_send_number(choice);
+}
+
 void wait_for_guesser() {
     char* solution = get_random_word();
-    layer_draw_image(background, wide_textbox_bmp, 85, 650); // 860x100 image
-    draw_word(background, "Waiting for guesser...", 515, 700, 2, 0, CenterAlign);
-    while (1) {
+    display_waiting_for_player();
+    while (gameState == WaitDrawing) {
         event = GetEvent();
         update_cursor(cursor, event);
         if (event.isUARTEvent && get_msg_by_id(MSG_GUESSER_READY, event.uart_messages, event.num_uart_messages))
-            break;
-        if (is_wordgame_over() && event.isKeyboardEvent && event.keyboardEvent.type == ESC_PRESS) {
-            changeState(MainMenu); // Verifica DEPOIS de (nao) receber
-            return;
-        }
+            changeState(Drawing);
     }
     uart_send_drawer_ready(solution);
     start_round(solution);
@@ -382,21 +397,16 @@ void wait_for_guesser() {
 
 void wait_for_drawer() {
     UARTMessage* msg; char* solution = NULL;
-    layer_draw_image(background, wide_textbox_bmp, 85, 650); // 860x100 image
-    draw_word(background, "Waiting for drawer...", 515, 700, 2, 0, CenterAlign);
-    while (1) {
+    display_waiting_for_player();
+    while (gameState == WaitGuessing) {
         event = GetEvent();
         update_cursor(cursor, event);
-        if (is_wordgame_over() && event.isKeyboardEvent && event.keyboardEvent.type == ESC_PRESS) {
-            changeState(MainMenu); // Verifica antes de receber
-            return;
-        }
-        if (event.isTimerEvent && event.timerEvent.timer_counter % 30 == 0)
-            uart_send_guesser_ready(); // manda de meio em meio segundo
+        if (event.isTimerEvent)
+            uart_send_empty_msg(MSG_GUESSER_READY);
         if (event.isUARTEvent && (msg = get_msg_by_id(MSG_DRAWER_READY, event.uart_messages, event.num_uart_messages))) {
             solution = malloc(strlen((char*)msg->bytes + 1) * sizeof(char));
             strcpy(solution, (char*)msg->bytes);
-            break;
+            changeState(Guessing);
         }
     }
     start_round(solution);
@@ -408,50 +418,69 @@ void wait_for_drawer() {
 // GUESSING //
 //////////////
 
-void setupGuessing() {
-    reloadBackground();
-    create_canvas(background, 150, 150, 1000, 750, WHITE);
-}
-
 void guess() {
     while(gameState == Guessing) {
         event = GetEvent();
-        if (event.isTimerEvent && event.timerEvent.has_second_passed && event.timerEvent.seconds_passed % 12 == 0)
+        // Checking emote wheel pressing
+        if (checkButtonPress(event, cursor, wordgame_buttons, num_wordgame_buttons) == 0)
+            toggle_emote_wheel(wordgame_buttons[0], cursor);
+        int emote_pressed = check_emote_press(event, cursor);
+        if (emote_pressed != -1) {
+            uart_send_emote(emote_pressed);
+            toggle_emote_wheel(wordgame_buttons[0], cursor);
+        }
+        // Checking if enough time has passed to reveal the next letter
+        if (event.isTimerEvent && event.timerEvent.has_second_passed && event.timerEvent.seconds_passed % 15 == 0)
             reveal_letter();
-        if (event.isKeyboardEvent && event.keyboardEvent.type == ENTER_PRESS)
-            changeState(TypingGuess);
+        // Processes received messages (emotes, drawing, etc)
         if (event.isUARTEvent)
             uart_process_msgs(event.uart_messages, event.num_uart_messages);
+        // Checks if time is up, notifies the opponent and ends the round if so
         if (wordgame_time_up()) {
             changeState(EndRoundLoss);
-            uart_send_game_loss();
+            uart_send_empty_msg(MSG_ROUND_LOST);
             break;
         }
+        if (event.isKeyboardEvent && event.keyboardEvent.type == ENTER_PRESS)
+            changeState(TypingGuess);
         update_cursor(cursor, event);
     }
 }
 
 void type_guess() {
-    textbox_layer = create_layer(400, 300, 334, 135);
-    TextBox* textbox = create_textbox(textbox_layer, textbox_bmp, 10, 10, 1, LeftAlign);
+    textbox_layer = create_layer(690, 660, 325, 100);
+    TextBox* textbox = create_textbox(textbox_layer, textbox1_bmp, 10, 10, 1, LeftAlign);
     textbox_write(textbox, "Insert guess...");
     while(gameState == TypingGuess) {
         event = GetEvent();
-        if (event.isTimerEvent && event.timerEvent.has_second_passed && event.timerEvent.seconds_passed % 12 == 0)
+        // Checking emote wheel pressing
+        if (checkButtonPress(event, cursor, wordgame_buttons, num_wordgame_buttons) == 0)
+            toggle_emote_wheel(wordgame_buttons[0], cursor);
+        int emote_pressed = check_emote_press(event, cursor);
+        if (emote_pressed != -1) {
+            uart_send_emote(emote_pressed);
+            toggle_emote_wheel(wordgame_buttons[0], cursor);
+        }
+        // Checking if enough time has passed to reveal the next letter
+        if (event.isTimerEvent && event.timerEvent.has_second_passed && event.timerEvent.seconds_passed % 15 == 0)
             reveal_letter();
+        // Processes received messages (emotes, drawing, etc)
         if (event.isUARTEvent)
             uart_process_msgs(event.uart_messages, event.num_uart_messages);
+        // Checks if time is up, notifies the opponent and ends the round if so
         if (wordgame_time_up()) {
             changeState(EndRoundLoss);
-            uart_send_game_loss();
+            uart_send_empty_msg(MSG_ROUND_LOST);
             break;
         }
+        // Updates the cursor and the textbox if needed (keyboard key pressed)
         useTextbox(textbox, event, Guessing, Guessing);
         update_cursor(cursor, event);
     }
-    if (verify_guess(textbox->text) && !wordgame_time_up()) { // if guess is correct 
+    // Checks if guess is correct and notifies the opponent and ends the round if so
+    if (verify_guess(textbox->text) && !wordgame_time_up()) {
         changeState(EndRoundWin);
-        uart_send_game_win();
+        uart_send_empty_msg(MSG_ROUND_WON);
     }
     destroy_textbox(textbox);
 }
@@ -502,28 +531,14 @@ void reset_pencil(DrawingState* pencil) {
     change_tool(pencil, None);
 }
 
-void setupDrawing() {
-    reloadBackground();
-    create_canvas(background, 150, 150, 1000, 750, WHITE);
-    draw_idle_sprite(paint_tube_1);
-    draw_idle_sprite(paint_tube_2);
-    draw_slider(thickness_slider);
-    disable_buttons(paint_buttons, num_paint_buttons);
-    draw_buttons(cursor, paint_buttons, num_paint_buttons);
-    change_tool(pencil, Brush);
-    press_button(paint_buttons[0]); // Brush
-}
-
 void color_picker() {    
     color_picker_layer = create_layer(45, 440, 538, 323);
     layer_draw_image(color_picker_layer, colorpicker_bmp, 45, 440);
     while(gameState == PickingColor) {
         event = GetEvent();
+        update_emote_wheel(event);
         update_cursor(cursor, event);
-        if (event.isRtcEvent) {
-            wordgame_tick_clock();
-            uart_send_tick_clock();
-        }
+        // Checking if a color was selected
         if(event.isMouseEvent && (event.mouseEvent.type == LB_PRESS || event.mouseEvent.type == RB_PRESS)) {
             if (is_within_bounds(color_picker_layer, cursor->x, cursor->y)) {
                 if (event.mouseEvent.type == LB_PRESS)
@@ -532,11 +547,22 @@ void color_picker() {
             }
             changeState(lastGameState);
         }
+        if (lastGameState == Training)
+            continue;
+        // Checking if the game is over, and processing other messages (emotes)
         if (event.isUARTEvent) {
-            if (get_msg_by_id(MSG_GAME_WON, event.uart_messages, event.num_uart_messages))
+            uart_process_msgs(event.uart_messages, event.num_uart_messages);
+            if (get_msg_by_id(MSG_ROUND_WON, event.uart_messages, event.num_uart_messages))
                 changeState(EndRoundWin);
-            else if (get_msg_by_id(MSG_GAME_LOST, event.uart_messages, event.num_uart_messages))
+            else if (get_msg_by_id(MSG_ROUND_LOST, event.uart_messages, event.num_uart_messages))
                 changeState(EndRoundLoss);
+        }
+        if (lastGameState == CollabDrawing)
+            continue;
+        // Updates clock if needed
+        if (event.isRtcEvent) {
+            wordgame_tick_clock();
+            uart_send_empty_msg(MSG_TICK_CLOCK);
         }
     }
     change_tool(pencil, pencil->tool); // atualiza os paint tubes
@@ -547,37 +573,23 @@ void color_picker() {
 void draw() {
     while (gameState == Drawing) {
         event = GetEvent();
-        switch (checkButtonPress(event, cursor, paint_buttons, num_paint_buttons)) {
-            case 0: change_tool(pencil, Brush); break;
-            case 1: change_tool(pencil, Bucket);break;
-            case 2: change_tool(pencil, ColorPicker); break;
-            case 3: change_tool(pencil, Rainbow); break;
-            case 4: change_tool(pencil, Rubber); break;
-            case 5: canvas_set_color(WHITE); uart_send_trash(); break;
-            case 6: changeState(PickingColor); break;
-            case -1: 
-                if (!wordgame_time_up()) 
-                    usePencil(pencil, event); 
-                break; // Se um botao for carregado o pincel nao e usado (rimou) xd
-        }
-        if (update_slider(event, cursor, thickness_slider)) {
-            uint8_t new_thickness = round(slider_get_perc(thickness_slider) * 10) + 1;
-            changeThickness(pencil, new_thickness);
-        }
-        update_cursor(cursor, event);
+        update_emote_wheel(event);
+        update_pencil(pencil, event);
+        // Updates clock if needed
         if (event.isRtcEvent) {
             wordgame_tick_clock();
-            uart_send_tick_clock();
+            uart_send_empty_msg(MSG_TICK_CLOCK);
         }
+        // Checking if the game is over, and processing other messages (emotes)
         if (event.isUARTEvent) {
-            if (get_msg_by_id(MSG_GAME_WON, event.uart_messages, event.num_uart_messages))
+            uart_process_msgs(event.uart_messages, event.num_uart_messages);
+            if (get_msg_by_id(MSG_ROUND_WON, event.uart_messages, event.num_uart_messages))
                 changeState(EndRoundWin);
-            else if (get_msg_by_id(MSG_GAME_LOST, event.uart_messages, event.num_uart_messages))
+            else if (get_msg_by_id(MSG_ROUND_LOST, event.uart_messages, event.num_uart_messages))
                 changeState(EndRoundLoss);
         }
     }
 }
-
 
 void usePencil(DrawingState* pencil, Event_t event) {
     if (!event.isMouseEvent)
@@ -676,58 +688,23 @@ void changeThickness(DrawingState* pencil, uint8_t thickness) {
 // Training //
 //////////////
 
-void setup_training() {
-    reloadBackground();
-    create_canvas(background, 150, 75, 1000, 750, WHITE);
-    draw_idle_sprite(paint_tube_1);
-    draw_idle_sprite(paint_tube_2);
-    draw_slider(thickness_slider);
-    disable_buttons(paint_buttons, num_paint_buttons);
-    disable_buttons(training_buttons, num_training_buttons);
-    draw_buttons(cursor, paint_buttons, num_paint_buttons);
-    draw_buttons(cursor, training_buttons, num_training_buttons);
-    draw_buttons(cursor, wordgame_buttons, num_wordgame_buttons);
-    change_tool(pencil, Brush);
-    press_button(paint_buttons[0]); // Brush
-}
-
 void training() {
     while (gameState == Training) {
         event = GetEvent();
-        switch (checkButtonPress(event, cursor, wordgame_buttons, num_wordgame_buttons)) {
-            case 0: toggle_emote_wheel(cursor); break;
-            case -1: break; 
-        }
         switch (checkButtonPress(event, cursor, training_buttons, num_training_buttons)) {
             case 0: changeState(Saving); return;
             case 1: changeState(Loading); return;
             case -1: break; 
         }
-        switch (checkButtonPress(event, cursor, paint_buttons, num_paint_buttons)) {
-            case 0: change_tool(pencil, Brush); break;
-            case 1: change_tool(pencil, Bucket); break;
-            case 2: change_tool(pencil, ColorPicker); break;
-            case 3: change_tool(pencil, Rainbow); break;
-            case 4: change_tool(pencil, Rubber); break;
-            case 5: canvas_set_color(WHITE); break;
-            case 6: changeState(PickingColor); break;
-            case -1: usePencil(pencil, event); break; // Se um botao for carregado o pincel nao e usado (rimou) xd
-        }
-        if (update_slider(event, cursor, thickness_slider)) {
-            uint8_t new_thickness = round(slider_get_perc(thickness_slider) * 10) + 1;
-            changeThickness(pencil, new_thickness);
-        }
-        update_cursor(cursor, event);
-        if (event.isKeyboardEvent && event.keyboardEvent.type == ESC_PRESS) {
-            destroy_emote_wheel();
+        update_pencil(pencil, event);
+        if (event.isKeyboardEvent && event.keyboardEvent.type == ESC_PRESS)            
             changeState(MainMenu);
-        }
     }
 }
 
 void save() {
-    textbox_layer = create_layer(400, 300, 334, 135);
-    TextBox* textbox = create_textbox(textbox_layer, textbox_bmp, 10, 10, 1, LeftAlign);
+    textbox_layer = create_layer(25, 175,  325, 100);
+    TextBox* textbox = create_textbox(textbox_layer, textbox1_bmp, 10, 10, 1, LeftAlign);
     textbox_write(textbox, "Insert file name...");
     while(gameState == Saving) {
         event = GetEvent();
@@ -749,8 +726,8 @@ void save() {
 }
 
 void load() {
-    textbox_layer = create_layer(400, 300, 334, 135);
-    TextBox* textbox = create_textbox(textbox_layer, textbox_bmp, 10, 10, 1, LeftAlign);
+    textbox_layer = create_layer(25, 175, 325, 100);
+    TextBox* textbox = create_textbox(textbox_layer, textbox1_bmp, 10, 10, 1, LeftAlign);
     textbox_write(textbox, "Insert file name...");
     while(gameState == Loading) {
         event = GetEvent();
@@ -772,7 +749,115 @@ void load() {
     free(bmp);
 }
 
+///////////////////
+// Multi Drawing //
+///////////////////
+
+void wait_for_collab() {
+    display_waiting_for_player();
+    while (gameState == WaitCollab) {
+        event = GetEvent();
+        update_cursor(cursor, event);
+        if (event.isTimerEvent)
+            uart_send_empty_msg(MSG_COLLAB_READY);
+        if (event.isUARTEvent && get_msg_by_id(MSG_COLLAB_READY, event.uart_messages, event.num_uart_messages)) {
+            changeState(CollabDrawing);
+            setup_canvas();
+        }
+        else if (event.isKeyboardEvent && event.keyboardEvent.type == ESC_PRESS) {
+            changeState(MainMenu);
+            return;
+        }
+    }
+    uart_send_empty_msg(MSG_COLLAB_READY);
+}
+
+void collab_drawing() {
+    while (gameState == CollabDrawing) {
+        event = GetEvent();
+        update_pencil(pencil, event);
+        if (event.isKeyboardEvent && event.keyboardEvent.type == ESC_PRESS)            
+            changeState(MainMenu);
+        if (event.isUARTEvent)
+            uart_process_msgs(event.uart_messages, event.num_uart_messages);
+    }
+}
+
+/// useful functiones
+
+void display_waiting_for_player() {
+    layer_draw_image(background, textbox2_bmp, 85, 650); // 860x100 image
+    draw_word(background, "Waiting for player...", 515, 700, 2, 0, CenterAlign);
+}
+
+void setup_canvas() {
+    reloadBackground();    
+    if (gameState == Drawing || gameState == Guessing)
+        create_canvas(background, 150, 150, 1000, 750, WHITE);
+    else create_canvas(background, 150, 75, 1000, 750, WHITE);
+    if (gameState != Guessing) {
+        draw_idle_sprite(paint_tube_1);
+        draw_idle_sprite(paint_tube_2);
+        draw_slider(thickness_slider);
+        disable_buttons(paint_buttons, num_paint_buttons);
+        draw_buttons(cursor, paint_buttons, num_paint_buttons);
+        change_tool(pencil, Brush);
+        press_button(paint_buttons[0]); // Brush
+    }
+    if (gameState == CollabDrawing)
+        return;
+    if (gameState == Training) {
+        disable_buttons(training_buttons, num_training_buttons);
+        draw_buttons(cursor, training_buttons, num_training_buttons);
+    }
+    else {
+        disable_buttons(wordgame_buttons, num_wordgame_buttons);
+        draw_buttons(cursor, wordgame_buttons, num_wordgame_buttons);
+    }
+}
+
+void update_pencil(DrawingState* pencil, Event_t event) {
+    switch (checkButtonPress(event, cursor, paint_buttons, num_paint_buttons)) {
+        case 0: change_tool(pencil, Brush); break;
+        case 1: change_tool(pencil, Bucket);break;
+        case 2: change_tool(pencil, ColorPicker); break;
+        case 3: change_tool(pencil, Rainbow); break;
+        case 4: change_tool(pencil, Rubber); break;
+        case 5: 
+            canvas_set_color(WHITE); 
+            if (gameState != Training)
+                uart_send_empty_msg(MSG_TRASH); 
+            break;
+        case 6: changeState(PickingColor); break;
+        case -1: 
+            if (gameState == Drawing && (wordgame_time_up() || is_emote_wheel_on()))
+                break;
+            else usePencil(pencil, event); 
+    }
+    // Checking if the thickness slider was updated
+    if (update_slider(event, cursor, thickness_slider)) {
+        uint8_t new_thickness = round(slider_get_perc(thickness_slider) * 10) + 1;
+        changeThickness(pencil, new_thickness);
+    }
+    // Updates cursor and clock if needed
+    update_cursor(cursor, event);
+} 
+
+void update_emote_wheel(Event_t event) {
+    // Checks if the emote wheel button was pressed, toggles it if so
+    if (checkButtonPress(event, cursor, wordgame_buttons, num_wordgame_buttons) == 0)
+        toggle_emote_wheel(wordgame_buttons[0], cursor);
+    // Checks if an emote was presed while the wheel is open, and sends an emote if so
+    int emote_pressed = check_emote_press(event, cursor);
+    if (emote_pressed != -1) {
+        uart_send_emote(emote_pressed);
+        toggle_emote_wheel(wordgame_buttons[0], cursor);
+    }
+}
+
+
 // Minigames
+
 
 // FLAPPY //
 

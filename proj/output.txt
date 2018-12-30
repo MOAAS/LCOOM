@@ -72,5 +72,4 @@ size = 9, word = professor,
 size = 9, word = landscape,  
 size = 11, word = ski goggles,  
 size = 7, word = vitamin,  
-Successfully loaded 74 words.
-File not found! home/lcom/labs/proj/saved_images/pxei.bmp
+Successfully loaded 74 words. 

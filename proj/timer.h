@@ -15,6 +15,6 @@ uint32_t timer_get_counter();
 /**
  * @brief Enabler the PC speaker, connected to timer 2.
  * 
- * @return int 
+ * @return int 0 on success. Non-zero otherwise.
  */
 int timer_enable_speaker();

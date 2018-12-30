@@ -1,5 +1,7 @@
 #pragma once
 
+// Generic linked-list based queue implementation. This implementation was not developed by any group member, so credit goes to the actual creator.
+
 struct Node {
 	uint8_t data;
 	struct Node *next;

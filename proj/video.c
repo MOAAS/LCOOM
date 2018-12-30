@@ -17,7 +17,7 @@ void vg_draw_pixel(uint16_t x, uint16_t y, uint32_t color) {
     if (x >= h_res || y >= v_res)
         return;
     char * pixel_ptr = (char *)video_mem + (x + h_res * y) * bytes_per_pixel;
-    vg_insert(pixel_ptr, color);
+    memcpy(pixel_ptr, &color, bytes_per_pixel);
     return;
 }
 
@@ -29,7 +29,9 @@ uint32_t vg_get_pixel(uint16_t x, uint16_t y) {
     if (x >= h_res || y >= v_res)
         return 0;
     char * pixel_ptr = (char *)video_mem + (x + h_res * y) * bytes_per_pixel;
-    return vg_retrieve(pixel_ptr);
+    uint32_t color = 0;
+    memcpy(&color, pixel_ptr, bytes_per_pixel);
+    return color;
 }
 
 void vg_insert(char* address, uint32_t color) {

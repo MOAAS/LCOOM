@@ -152,6 +152,7 @@ int mouse_read_data() {
 
 void (mouse_ih)() {
     kbc_get_out_buf(&packet_byte); 
+    //printf("Packet byte = %d \n", packet_byte);
 }
 
 

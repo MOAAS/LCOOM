@@ -18,8 +18,8 @@ extern Bitmap* flappy_tube0_bmp;
 extern Bitmap* flappy_tube1_bmp;
 extern Bitmap* flappy_tube2_bmp;
 extern Bitmap* flappy_tube3_bmp;
-extern Bitmap* ultrawide_textbox2_bmp;
-extern Bitmap* megalarge_textbox_bmp;
+extern Bitmap* textbox4_bmp;
+extern Bitmap* textbox5_bmp;
 
 static Layer* score_layer = NULL;
 static TextBox* score_textbox = NULL;
@@ -44,7 +44,7 @@ void start_flappy(Layer* background) {
     flappy_update_hitbox();
     game_speed = 2;
     score_layer = create_layer(0, 0, vg_get_hres(), 100);
-    score_textbox = create_textbox(score_layer, ultrawide_textbox2_bmp, 350, 50, 3, CenterAlign);
+    score_textbox = create_textbox(score_layer, textbox5_bmp, 350, 50, 3, CenterAlign);
     textbox_write(score_textbox, "Score: 0");
 }
 
@@ -57,7 +57,7 @@ void end_flappy() {
 
 void flappy_gameover() {
     free(score_textbox);
-    score_textbox = create_textbox(score_layer, ultrawide_textbox2_bmp, 200, 50, 2, CenterAlign);
+    score_textbox = create_textbox(score_layer, textbox5_bmp, 200, 50, 2, CenterAlign);
     char score[20];
     sprintf(score, "Game Over! Score: %d", bird.score);
     textbox_clear(score_textbox);
@@ -66,7 +66,7 @@ void flappy_gameover() {
 
 void flappy_showstats() {
     free(score_textbox);
-    score_textbox = create_textbox(score_layer, ultrawide_textbox2_bmp, 175, 50, 3, CenterAlign);
+    score_textbox = create_textbox(score_layer, textbox5_bmp, 200, 50, 3, CenterAlign);
     if (bird.score > highscore) {
         highscore = bird.score;
         saveFlappyHighscore();
@@ -132,6 +132,7 @@ void flappy_increase_score() {
     else if (bird.radius < 2)
         bird.radius = 2;
 }
+
 void flappy_update_score() {
     if (bird.isDead)
         return;

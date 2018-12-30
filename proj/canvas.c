@@ -8,6 +8,8 @@
 
 static Canvas* canvas = NULL;
 void create_canvas(Layer* layer, uint16_t xMin, uint16_t yMin, uint16_t xMax, uint16_t yMax, uint32_t color) {
+    if (canvas != NULL)
+        destroy_canvas();
     canvas = malloc(sizeof(Canvas));
     canvas->layer = layer;
     canvas->xMin = xMin;
@@ -218,15 +220,6 @@ bool is_inside_canvas(uint16_t x , uint16_t y) {
     return x >= canvas->xMin && y >= canvas->yMin && x < canvas->xMax && y < canvas->yMax;
 }
 
-bool is_past_hor_bounds(uint16_t x) {
-    return x > canvas->xMax || x < canvas->xMin;
-}
-
-bool is_past_ver_bounds(uint16_t y) {
-    return y > canvas->yMax || y < canvas->yMin;
-}
-
-
 char* canvas_get_map() {
     uint8_t bytes_per_pixel = vg_get_bytes_pp();
     char* canvas_map = malloc(canvas->width * canvas->height * bytes_per_pixel);
@@ -279,7 +272,7 @@ void bucket_tool_rec(int x, int y, uint32_t cor_balde, uint32_t cor_inicial) {
 
     layer_addr1 = calc_address(canvas->layer->map, minX, y - 1, canvas->layer->width);
     layer_addr2 = calc_address(canvas->layer->map, minX, y + 1, canvas->layer->width);
-    for (int i = minX; i < maxX; i++) {                     
+    for (int i = minX; i <= maxX; i++) {                     
         if (y > canvas->yMin && vg_retrieve(layer_addr1) == cor_inicial) 
             bucket_tool_rec(i, y - 1, cor_balde, cor_inicial);          
         if (y < canvas->yMax - 1 && vg_retrieve(layer_addr2) == cor_inicial)

@@ -6,21 +6,7 @@
 
 // Any header files included below this line should have been created by you
 
-#include "video.h"
-#include "keyboard.h"
-#include "timer.h"
-#include "mouse.h"
-#include "i8042.h"
-#include "i8254.h"
-#include "interrupts.h"
-#include "Sprite.h"
-#include "vbe.h"
 #include "projeto.h"
-#include "bitmap.h"
-#include "canvas.h"
-#include "layer.h"
-#include "uart.h"
-#include "rtc.h"
 
 int main(int argc, char *argv[]) {
   // sets the language of LCF messages (can be either EN-US or PT-PT)
@@ -64,29 +50,39 @@ int (proj_main_loop)() { //int argc, char *argv[]) {
   }
  unsubscribe_device(RTC);
  */
-
- projeto();
- return 0;
+  projeto();
+  return 0;
   subscribe_device(SerialPort);
   subscribe_device(Keyboard);
   subscribe_device(Mouse);
   subscribe_device(Timer);
-  int rcv_cnt = 0, xmit_cnt = 0;
   while (1) {
     Event_t event = GetEvent();
     if (event.isTimerEvent && event.timerEvent.timer_counter % (rand() % 60 + 1) == 0) {
-      printf("Sending...\n");
-      uart_send_drawer_ready("HI HOW ARE");
+     //printf("Sending...\n");
+     //uart_send_drawer_ready("HI HOW ARE");
      //uart_send_drawer_ready("HI HOW ARE YOU");
      //uart_send_drawer_ready("HI HOW ARE YOU");
      //uart_send_drawer_ready("HI HOW ARE YOU");
-     //uart_send_drawer_ready("HI HOW ARE YOU");
-      xmit_cnt++;
-      printf("Transmit count = %d \n", xmit_cnt);
     }
     if (event.isKeyboardEvent && event.keyboardEvent.type == ESC_PRESS)
       break;
     if (event.isKeyboardEvent && event.keyboardEvent.type == ENTER_PRESS) {
+      mouse_disable_int();
+      keyboard_disable_int();
+      mouse_write_cmd(MOUSE_STAT_REQ, false, 0);
+      mouse_enable_int();
+      keyboard_enable_int();
+      uint8_t byte1, byte2, byte3;
+      kbc_get_out_buf(&byte1);
+      kbc_get_out_buf(&byte2);
+      kbc_get_out_buf(&byte3);
+      printf("Byte1 = %d \n", byte1);
+      printf("Byte2 = %d \n", byte2);
+      printf("Byte3 = %d \n", byte3);
+     //printf("Sending...\n");
+     //uart_send_number(3984);
+      /*
       uint8_t status;
       uart_read_status(&status);
       while (status & UART_RECEIVER_DATA) {
@@ -95,19 +91,17 @@ int (proj_main_loop)() { //int argc, char *argv[]) {
         uart_read_status(&status);
       }
       printf("done (status = %d)", status);
+      */
 
     }
 
     if (event.isUARTEvent) {
      // printf("num uart_messages: %d\n", event.num_uart_messages);
       for (int j = 0; j < event.num_uart_messages; j++) {
-        //uart_process_msg(&event.uart_messages[j]);
-        if (event.uart_messages[j].type == MSG_DRAWER_READY) {
-          printf ("string: ");
-          printf ("\"%s\" \n", event.uart_messages[j].bytes);
-          rcv_cnt++;
-          printf("Receiver count = %d \n", rcv_cnt);
-        }
+         UARTMessageContents cont = uart_process_msg(&event.uart_messages[j]);
+        if (cont.type == MSG_NUMBER)
+          printf("NUMBER = %d\n", cont.number);
+        
       }
     }
   }

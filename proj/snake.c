@@ -29,7 +29,8 @@ static Layer* stats_layer = NULL;
 static TextBox* score_textbox = NULL;
 static TextBox* speed_textbox = NULL;
 
-extern Bitmap* ultrawide_textbox_bmp;
+extern Bitmap* textbox3_bmp;
+extern Bitmap* textbox4_bmp;
 extern Bitmap* obstacle0_bmp;
 extern Bitmap* obstacle1_bmp;
 extern Bitmap* obstacle2_bmp;
@@ -45,7 +46,6 @@ extern Bitmap* powerup4_bmp;
 extern Bitmap* powerup5_bmp;
 extern Bitmap* powerup6_bmp;
 
-extern Bitmap* megalarge_textbox_bmp;
 
 static int highscore = 0;
 static char * file_path;
@@ -94,7 +94,7 @@ void snake_showstats() {
     sprintf(top_speed_str, "Top speed: %.1f", snake.top_speed);
     sprintf(score_str, "Score: %d", snake.score);
     stats_layer = create_layer(60, 250, 1000, 300);
-    layer_draw_image(stats_layer, megalarge_textbox_bmp, 60, 250);
+    layer_draw_image(stats_layer, textbox4_bmp, 60, 250);
     draw_word(stats_layer, score_str, 500, 300, 3, 0, CenterAlign);
     wait_ms(800);
     draw_word(stats_layer, top_speed_str, 500, 400, 2, 0, CenterAlign);
@@ -102,8 +102,6 @@ void snake_showstats() {
     draw_word(stats_layer, highscore_str, 500, 500, 2, 0, CenterAlign);
 
 }
-
-
 
 void snake_game_tick() {
     snake_move_decoys();
@@ -280,8 +278,8 @@ void create_snake_arena(Layer* layer) {
     arena_create_obstacles();
     arena_create_hp_bar();
     textbox_layer = create_layer(0, 0, vg_get_hres(), 100);
-    score_textbox = create_textbox(textbox_layer, ultrawide_textbox_bmp, 300, 50, 2, CenterAlign);
-    speed_textbox = create_textbox(textbox_layer, ultrawide_textbox_bmp, 875, 50, 2, CenterAlign);
+    score_textbox = create_textbox(textbox_layer, textbox3_bmp, 300, 50, 2, CenterAlign);
+    speed_textbox = create_textbox(textbox_layer, textbox3_bmp, 875, 50, 2, CenterAlign);
 }
 
 void arena_add_powerup(uint8_t powerup_num, uint16_t x, uint16_t y) {

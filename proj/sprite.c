@@ -62,7 +62,7 @@ void erase_sprite(Sprite *sp) {
             }
             img = img + sp->bitmap->bytes_per_pixel;
         }
-        img = img + sp->bitmap->padding * sp->bitmap->bytes_per_pixel;
+        img = img + sp->bitmap->padding; 
     }
     return;
 }
@@ -95,6 +95,9 @@ void update_cursor(Sprite *cursor, Event_t event) {
     }
     erase_sprite(cursor);
     if (event.mouseEvent.type == MOUSE_MOVE) {
+        //if (abs(event.mouseEvent.delta_x) > 200 || abs(event.mouseEvent.delta_y) > 200)
+        //    printf("UH OH! ");
+        //printf("deltax = %d | deltay = %d \n", event.mouseEvent.delta_x, event.mouseEvent.delta_y);
         cursor->x = cursor->x + event.mouseEvent.delta_x;
         cursor->y = cursor->y - event.mouseEvent.delta_y;
         if (cursor->x < 0) cursor->x = 0;
@@ -108,6 +111,8 @@ void update_cursor(Sprite *cursor, Event_t event) {
 void cursor_change_bmp(Sprite *cursor, Bitmap* bm){
     erase_sprite(cursor);
     cursor->bitmap = bm;
+    cursor->width = bm->bitmapInfoHeader.width;
+    cursor->height = bm->bitmapInfoHeader.height;
     draw_sprite_color(cursor);
 }
 

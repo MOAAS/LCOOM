@@ -7,6 +7,7 @@
 #include "bitmaps.h"
 #include "canvas.h"
 #include "event.h"
+#include "emote.h"
 #include "flappy.h"
 #include "interrupts.h"
 #include "i8042.h"
@@ -27,6 +28,7 @@
 typedef enum  {
     Start,
     MainMenu,
+    StartWordGame,
     WaitDrawing,
     WaitGuessing,
     Drawing,
@@ -36,6 +38,8 @@ typedef enum  {
     EndRoundWin,
     EndRoundLoss,
     EndGame,
+    WaitCollab,
+    CollabDrawing,
     Training,
     Loading,
     Saving,
@@ -82,21 +86,28 @@ void color_picker();
 void start_round(char* solution);
 void end_round();
 void end_game();
-void setup_training();
 void training();
 void save();
 void load();
 
+void wait_for_collab();
+void collab_drawing();
+
+void select_drawer();
 void wait_for_guesser();
 void wait_for_drawer();
 
-void setupGuessing();
+void setup_canvas();
+void display_waiting_for_player();
+void update_pencil(DrawingState* pencil, Event_t event);
+void update_emote_wheel(Event_t event);
+
+
 void useTextbox(TextBox* textbox, Event_t event, GameState previous_state, GameState next_state);
 void usePencil(DrawingState* pencil, Event_t event);
 
 DrawingState* create_pencil();
 void reset_pencil(DrawingState* pencil);
-void setupDrawing();
 void change_tool(DrawingState* pencil, Tool tool);
 void rainbow_draw(DrawingState* pencil, uint16_t x0, uint16_t y0, uint16_t xf, uint16_t yf);
 void changeThickness(DrawingState* pencil, uint8_t thickness);

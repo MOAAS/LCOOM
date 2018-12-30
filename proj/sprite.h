@@ -232,7 +232,8 @@ void unpress_button(Button* button);
 
 /**
  * @brief If there was a mouse event, checks the new cursor position and whether it has clicked on a button. If so, it returns its index from the provided array.
- * If the pressed button is not singleState, all the other buttons are released.
+ * If the pressed button is not singleState, all the other buttons are released. 
+ * Also updates buttons based on whether they are highlighted/pressed or not
  * 
  * @param event Event to be read
  * @param cursor Cursor being used

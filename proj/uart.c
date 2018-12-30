@@ -128,7 +128,7 @@ void uart_process_int(uint8_t int_id) {
     uart_read_status(&status);
     switch(int_id & UART_INT_ID) {
         case UART_INT_RECEIVE: 
-        case UART_INT_CHAR_TO: // recebe sempre bit(2) | bit(3) !
+        case UART_INT_CHAR_TO:
            // printf("Receive interrupt (status = %d)\n", status);
             while (status & UART_RECEIVER_DATA) {
                 uart_read_data(&data);
@@ -209,4 +209,9 @@ int uart_disable_fifo() {
         uart_read_status(&status);
     }
     return uart_write_reg(UART_FCR, UART_FIFO_CLR_XMIT | UART_FIFO_CLR_RCVR);
+}
+
+void uart_reset_fifo() {
+    uart_destroy_fifo();
+    uart_setup_fifo();
 }

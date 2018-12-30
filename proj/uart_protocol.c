@@ -17,17 +17,21 @@ void destroy_message(UARTMessage* msg) {
     free(msg);
 }
 
-void uart_send_message(UARTMessage* msg) {
-    uint8_t size_id = (msg->size << 4) | msg->type;
+void uart_send_message(uint8_t type, uint8_t size, uint8_t* bytes) {
+    uint8_t size_id = (size << 4) | (type & 0xF);
     uart_fifo_send(MSG_PREFIX);
     uart_fifo_send(size_id);
    // printf("Msg size = %d \n", msg->size);
-    for (int i = 0; i < msg->size; i++) {
-        uart_fifo_send(msg->bytes[i]);
+    for (int i = 0; i < size; i++) {
+        uart_fifo_send(bytes[i]);
     }
     uart_fifo_send(MSG_TRAILER);
-    destroy_message(msg);
 }
+
+void uart_send_empty_msg(uint8_t id) {
+    uart_send_message(id, 0, NULL);
+}
+
 
 bool uart_assemble_received_message(uint8_t byte, UARTMessage* msg_ptr) {
     static uint8_t byte_no = 0;

@@ -224,3 +224,9 @@ int uart_enable_fifo();
  * @return int Return 0 upon success and non-zero otherwise
  */
 int uart_disable_fifo();
+
+/**
+ * @brief Resets the fifo and clears it.
+ * 
+ */
+void uart_reset_fifo();

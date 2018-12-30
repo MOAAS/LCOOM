@@ -45,17 +45,20 @@ Bitmap* rubber_hl;
 Bitmap* palette_button;
 Bitmap* palette_hl;
 Bitmap* slider_bmp;
+Bitmap* emote_icon;
+Bitmap* emote_icon_hl;
 Bitmap* save_button;
 Bitmap* save_hl;
 Bitmap* load_button;
 Bitmap* load_hl;
 
 Bitmap* letters_bmp;
-Bitmap* textbox_bmp;
-Bitmap* wide_textbox_bmp;
-Bitmap* ultrawide_textbox_bmp;
-Bitmap* megalarge_textbox_bmp;
-Bitmap* ultrawide_textbox2_bmp;
+Bitmap* textbox1_bmp;
+Bitmap* textbox2_bmp;
+Bitmap* textbox3_bmp;
+Bitmap* textbox4_bmp;
+Bitmap* textbox5_bmp;
+Bitmap* textbox6_bmp;
 
 Bitmap* colorpicker_bmp;
 Bitmap* clock_bmp;
@@ -64,16 +67,17 @@ Bitmap* clockbig_bmp;
 Bitmap* paint_tube_1_bmp;
 Bitmap* paint_tube_2_bmp;
 
-Bitmap* cool_dude_happy;
-Bitmap* cool_dude_angry;
-Bitmap* cool_dude_happy_big;
-Bitmap* cool_dude_angry_big;
-
 Bitmap* emote0_bmp;
 Bitmap* emote1_bmp;
 Bitmap* emote2_bmp;
 Bitmap* emote3_bmp;
 Bitmap* emote4_bmp;
+
+Bitmap* emote0_hl_bmp;
+Bitmap* emote1_hl_bmp;
+Bitmap* emote2_hl_bmp;
+Bitmap* emote3_hl_bmp;
+Bitmap* emote4_hl_bmp;
 Bitmap* emote_wheel_bmp;
 
 Bitmap* obstacle0_bmp;
@@ -140,6 +144,9 @@ void loadBitmaps(const char* folderPath) {
 
     slider_bmp = loadBitmap(folderPath, "slider.bmp");
 
+    emote_icon = loadBitmap(folderPath, "emote_wheel_icon.bmp");
+    emote_icon_hl = loadBitmap(folderPath, "emote_wheel_icon_hl.bmp");
+
     // Training mode buttons
 
     save_button = loadBitmap(folderPath, "save.bmp");
@@ -147,21 +154,14 @@ void loadBitmaps(const char* folderPath) {
     load_button = loadBitmap(folderPath, "load.bmp");
     load_hl = loadBitmap(folderPath, "load_hl.bmp");
 
-    // Cool dude! n usado :(
-
-    cool_dude_happy = loadBitmap(folderPath, "cool_dude_happy.bmp");
-    cool_dude_angry = loadBitmap(folderPath, "cool_dude_angry.bmp");
-
-    cool_dude_happy_big = resizeBitmap(cool_dude_happy, 2);
-    cool_dude_angry_big = resizeBitmap(cool_dude_angry, 2);
-
     // coisas da interface
     letters_bmp = loadBitmap(folderPath, "letras.bmp");
-    textbox_bmp = loadBitmap(folderPath, "wordbox1.bmp");
-    wide_textbox_bmp = loadBitmap(folderPath, "wordbox2.bmp");
-    ultrawide_textbox_bmp = loadBitmap(folderPath, "wordbox3.bmp");
-    megalarge_textbox_bmp = loadBitmap(folderPath, "wordbox4.bmp");
-    ultrawide_textbox2_bmp = loadBitmap(folderPath, "wordbox5.bmp");
+    textbox1_bmp = loadBitmap(folderPath, "wordbox1.bmp");
+    textbox2_bmp = loadBitmap(folderPath, "wordbox2.bmp");
+    textbox3_bmp = loadBitmap(folderPath, "wordbox3.bmp");
+    textbox4_bmp = loadBitmap(folderPath, "wordbox4.bmp");
+    textbox5_bmp = loadBitmap(folderPath, "wordbox5.bmp");
+    textbox6_bmp = loadBitmap(folderPath, "wordbox6.bmp");
 
     colorpicker_bmp = loadBitmap(folderPath, "colorpicker.bmp");
     clock_bmp = loadBitmap(folderPath, "clock.bmp");
@@ -184,6 +184,16 @@ void loadBitmaps(const char* folderPath) {
     emote2_bmp = loadBitmap(folderPath, "emote2.bmp");
     emote3_bmp = loadBitmap(folderPath, "emote3.bmp");
     emote4_bmp = loadBitmap(folderPath, "emote4.bmp");
+
+    emote0_hl_bmp = loadBitmap(folderPath, "emote0_hl.bmp");
+    emote1_hl_bmp = loadBitmap(folderPath, "emote1_hl.bmp");
+    emote2_hl_bmp = loadBitmap(folderPath, "emote2_hl.bmp");
+    emote3_hl_bmp = loadBitmap(folderPath, "emote3_hl.bmp");
+    emote4_hl_bmp = loadBitmap(folderPath, "emote4_hl.bmp");
+
+
+
+    
     emote_wheel_bmp = loadBitmap(folderPath, "emote_wheel.bmp");
 
     // SNAAKE
