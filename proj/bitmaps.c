@@ -47,10 +47,17 @@ Bitmap* palette_hl;
 Bitmap* slider_bmp;
 Bitmap* emote_icon;
 Bitmap* emote_icon_hl;
+
+Bitmap* shape0_bmp;
+Bitmap* shape1_bmp;
+Bitmap* shape2_bmp;
+
 Bitmap* save_button;
 Bitmap* save_hl;
 Bitmap* load_button;
 Bitmap* load_hl;
+Bitmap* undo_button;
+Bitmap* undo_hl;
 
 Bitmap* letters_bmp;
 Bitmap* textbox1_bmp;
@@ -147,12 +154,20 @@ void loadBitmaps(const char* folderPath) {
     emote_icon = loadBitmap(folderPath, "emote_wheel_icon.bmp");
     emote_icon_hl = loadBitmap(folderPath, "emote_wheel_icon_hl.bmp");
 
+    // Shape
+
+    shape0_bmp = loadBitmap(folderPath, "shape0.bmp");
+    shape1_bmp = loadBitmap(folderPath, "shape1.bmp");
+    shape2_bmp = loadBitmap(folderPath, "shape2.bmp");
+
     // Training mode buttons
 
     save_button = loadBitmap(folderPath, "save.bmp");
     save_hl = loadBitmap(folderPath, "save_hl.bmp");
     load_button = loadBitmap(folderPath, "load.bmp");
     load_hl = loadBitmap(folderPath, "load_hl.bmp");
+    undo_button = loadBitmap(folderPath, "undo.bmp");
+    undo_hl = loadBitmap(folderPath, "undo_hl.bmp");
 
     // coisas da interface
     letters_bmp = loadBitmap(folderPath, "letras.bmp");

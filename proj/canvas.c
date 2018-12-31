@@ -7,6 +7,9 @@
 #include "canvas.h"
 
 static Canvas* canvas = NULL;
+static char* lastCanvas = NULL;
+static bool isDrawing = false;
+
 void create_canvas(Layer* layer, uint16_t xMin, uint16_t yMin, uint16_t xMax, uint16_t yMax, uint32_t color) {
     if (canvas != NULL)
         destroy_canvas();
@@ -24,9 +27,82 @@ void create_canvas(Layer* layer, uint16_t xMin, uint16_t yMin, uint16_t xMax, ui
 
 void destroy_canvas() {
     if (canvas != NULL)
-        return;
-    free(canvas);
+        free(canvas);
+    if (lastCanvas != NULL)
+        free(lastCanvas);
     canvas = NULL;    
+    lastCanvas = NULL;
+}
+
+void canvas_draw_shape(Shape shape, uint16_t click1_x, uint16_t click1_y, uint16_t click2_x, uint16_t click2_y, uint16_t thickness, uint16_t color) {
+    switch (shape) {
+        case Circle: {
+            uint8_t radius = round(sqrt(pow(click2_x - click1_x, 2) + pow(click2_y - click1_y, 2)));
+            canvas_draw_circle(click1_x, click1_y, radius, color);
+            break;
+        }
+        case Rectangle: {
+            uint16_t top_left_x = fmin(click1_x, click2_x);
+            uint16_t top_left_y = fmin(click1_y, click2_y);
+            printf("click1x = %d \n", click1_x);
+            printf("click1y = %d \n", click1_y);
+            printf("click2x = %d \n", click2_x);
+            printf("click2y = %d \n", click2_y);
+            printf("top_left_x = %d \n", top_left_x);
+            printf("top_left_y = %d \n", top_left_y);
+            canvas_draw_rectangle(top_left_x, top_left_y, abs(click2_x - click1_x), abs(click2_y - click1_y), color);
+            break;
+        }
+        case Circumference: {
+            uint8_t radius = round(sqrt(pow(click2_x - click1_x, 2) + pow(click2_y - click1_y, 2)));
+            canvas_draw_circumference(click1_x, click1_y, radius, thickness, color);
+            break;
+        }
+        default: break;
+    }
+
+
+}
+
+void canvas_save_drawing() {
+    if (lastCanvas == NULL)
+        lastCanvas = malloc(canvas->layer->width * canvas->layer->height * vg_get_bytes_pp());
+    memcpy(lastCanvas, canvas->layer->map, vg_get_bytes_pp() * canvas->layer->width * canvas->layer->height);
+    isDrawing = true;
+}
+
+void canvas_start_drawing(uint16_t x, uint16_t y) {
+    if (!isDrawing && is_inside_canvas(x, y))
+        canvas_save_drawing();       
+}
+
+void canvas_stop_drawing() {
+    isDrawing = false;
+}
+
+void canvas_undo() {
+    if (lastCanvas == NULL)
+        return;
+    char* temp = canvas->layer->map;
+    canvas->layer->map = lastCanvas;
+    lastCanvas = temp;
+    canvas_update();
+}
+
+void canvas_update() {
+    uint8_t bytes_pp = vg_get_bytes_pp();
+    char* layer_map = canvas->layer->map + (canvas->xMin + canvas->yMin * canvas->layer->width) * bytes_pp;
+    char* video_mem = (char*)vg_get_video_mem() + (canvas->xMin + canvas->yMin * vg_get_hres()) * bytes_pp;
+    for (int y = canvas->yMin; y < canvas->yMax; y++) {
+        for (int x = canvas->xMin; x < canvas->xMax; x++) {
+            if (is_top_layer(canvas->layer, x, y))
+                vg_insert(video_mem, vg_retrieve(layer_map));
+            layer_map += bytes_pp;
+            video_mem += bytes_pp;
+        }
+        layer_map = layer_map + (canvas->layer->width - canvas->width) * bytes_pp;
+        video_mem = video_mem + (vg_get_hres() - canvas->width) * bytes_pp;
+    }
 }
 
 void canvas_draw_line(uint16_t x0, uint16_t y0, uint16_t xf, uint16_t yf, uint32_t color, uint16_t thickness) {
@@ -88,19 +164,19 @@ void canvas_draw_circle(uint16_t x, uint16_t y, uint16_t radius, uint32_t color)
     }
 }
 
-void canvas_draw_circumference(uint16_t x, uint16_t y, uint16_t radius, uint32_t color) {
+void canvas_draw_circumference(uint16_t x, uint16_t y, uint16_t radius, uint8_t thickness, uint32_t color) {
     // Bresenham’s Algorithm
     int D = 3 - 2 * (int)radius;
     int P = 0, Q = radius;
     while (P <= Q) {
-        canvas_draw_pixel(x + P, y + Q, color);
-        canvas_draw_pixel(x - P, y + Q, color);
-        canvas_draw_pixel(x + P, y - Q, color);
-        canvas_draw_pixel(x - P, y - Q, color);
-        canvas_draw_pixel(x + Q, y + P, color);
-        canvas_draw_pixel(x - Q, y + P, color);
-        canvas_draw_pixel(x + Q, y - P, color);
-        canvas_draw_pixel(x - Q, y - P, color);
+        canvas_draw_circle(x + P, y + Q, thickness, color);
+        canvas_draw_circle(x - P, y + Q, thickness, color);
+        canvas_draw_circle(x + P, y - Q, thickness, color);
+        canvas_draw_circle(x - P, y - Q, thickness, color);
+        canvas_draw_circle(x + Q, y + P, thickness, color);
+        canvas_draw_circle(x - Q, y + P, thickness, color);
+        canvas_draw_circle(x + Q, y - P, thickness, color);
+        canvas_draw_circle(x - Q, y - P, thickness, color);
         P++;
         if (D <= 0)
             D = D + 4*P + 6;
@@ -142,8 +218,7 @@ void canvas_draw_vline(uint16_t x, uint16_t y, uint16_t len, uint32_t color) {
 
 void canvas_draw_rectangle(uint16_t x0, uint16_t y0, uint16_t width, uint16_t height, uint32_t color) {
     if (canvas->layer == NULL)
-        return;
-        
+        return;        
     char* layer_addr = calc_address(canvas->layer->map, x0, y0, canvas->layer->width);
     char* video_addr = calc_address(vg_get_video_mem(), x0, y0, vg_get_hres());
     uint8_t bytes_pp = vg_get_bytes_pp();
@@ -157,8 +232,8 @@ void canvas_draw_rectangle(uint16_t x0, uint16_t y0, uint16_t width, uint16_t he
             layer_addr += bytes_pp;
             video_addr += bytes_pp;
         }
-        layer_addr = layer_addr + (canvas->layer->width - canvas->width) * bytes_pp;
-        video_addr = video_addr + (vg_get_hres() - canvas->width) * bytes_pp;
+        layer_addr = layer_addr + (canvas->layer->width - width) * bytes_pp;
+        video_addr = video_addr + (vg_get_hres() - width) * bytes_pp;
     }
 
     
@@ -175,8 +250,7 @@ void canvas_draw_rectangle_outline(uint16_t x, uint16_t y, uint16_t width, uint1
 }
 
 void canvas_draw_square(uint16_t x, uint16_t y, uint16_t side_len, uint32_t color) {
-    for (size_t i = 0; i < side_len; i++)
-        canvas_draw_hline(x, y++, side_len, color);
+    canvas_draw_rectangle(x, y, side_len, side_len, color);
 }
 
 void canvas_set_outline(uint32_t color) {
@@ -304,5 +378,4 @@ void bucket_tool(uint16_t x, uint16_t y, uint32_t cor_balde) {
         video_mem = video_mem + (vg_get_hres() - canvas->width) * bytes_pp;
     }
     //
-
 }

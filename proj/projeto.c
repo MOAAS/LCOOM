@@ -50,6 +50,12 @@ extern Bitmap* rubber_hl;
 extern Bitmap* palette_button;
 extern Bitmap* palette_hl;
 
+extern Bitmap* shape0_bmp;
+extern Bitmap* shape1_bmp;
+extern Bitmap* shape2_bmp;
+
+
+
 extern Bitmap* emote_icon;
 extern Bitmap* emote_icon_hl;
 
@@ -60,6 +66,8 @@ extern Bitmap* save_button;
 extern Bitmap* save_hl;
 extern Bitmap* load_button;
 extern Bitmap* load_hl;
+extern Bitmap* undo_button;
+extern Bitmap* undo_hl;
 
 extern Bitmap* textbox1_bmp;
 extern Bitmap* textbox2_bmp;
@@ -72,11 +80,11 @@ static IdleSprite* paint_tube_1;
 static IdleSprite* paint_tube_2;
 
 static int num_menu_buttons = 6;
-static int num_paint_buttons = 7;
-static int num_training_buttons = 2;
+static int num_paint_buttons = 10;
+static int num_training_buttons = 3;
 static int num_wordgame_buttons = 1;
 
-static Button* paint_buttons[7];
+static Button* paint_buttons[10];
 static Button* menu_buttons[10];
 static Button* training_buttons[5];
 static Button* wordgame_buttons[5];
@@ -123,7 +131,12 @@ void loadButtons() {
     paint_buttons[3] = create_button(75, 470, background, rainbow_button, rainbow_hl); // rainbow
     paint_buttons[4] = create_button(75, 550, background, rubber_button, rubber_hl); // borracha
     paint_buttons[5] = create_button(75, 630, background, trash_button, trash_hl); // trash
-    paint_buttons[6] = create_button(45, 400, background, palette_button, palette_hl); //color picker
+    paint_buttons[6] = create_button(45, 355, background, palette_button, palette_hl); //color picker
+
+    paint_buttons[7] = create_button(15, 425, background, shape0_bmp, shape0_bmp); // retangul
+    paint_buttons[8] = create_button(60, 425, background, shape1_bmp, shape1_bmp); // circulo
+    paint_buttons[9] = create_button(105, 425, background, shape2_bmp, shape2_bmp); // circumferencia
+
     paint_buttons[5]->singleState = true; // trash
     paint_buttons[6]->singleState = true; // color picker
 
@@ -140,10 +153,12 @@ void loadButtons() {
     menu_buttons[4]->singleState = true; 
     menu_buttons[5]->singleState = true; 
 
-    training_buttons[0] = create_button(10, 100, background, save_button, save_hl); // save
-    training_buttons[1] = create_button(77, 100, background, load_button, load_hl); // save
-    training_buttons[0]->singleState = true; // save
+    training_buttons[0] = create_button(150, 5, background, undo_button, undo_hl);// undo
+    training_buttons[1] = create_button(225, 5, background, save_button, save_hl);// save
+    training_buttons[2] = create_button(300, 5, background, load_button, load_hl);// load
+    training_buttons[0]->singleState = true; // undo
     training_buttons[1]->singleState = true; // save
+    training_buttons[2]->singleState = true; // load
 
     wordgame_buttons[0] = create_button(10, 10, background, emote_icon, emote_icon_hl);
 
@@ -152,8 +167,8 @@ void loadButtons() {
 
 void loadBackground() {
     background = create_layer(0, 0, vg_get_hres(), vg_get_vres());
-    paint_tube_1 = create_idle_sprite(45, 280, background, paint_tube_1_bmp, pencil->color1);
-    paint_tube_2 = create_idle_sprite(79, 283, background, paint_tube_2_bmp, pencil->color2);
+    paint_tube_1 = create_idle_sprite(45, 270, background, paint_tube_1_bmp, pencil->color1);
+    paint_tube_2 = create_idle_sprite(79, 273, background, paint_tube_2_bmp, pencil->color2);
     layer_draw_image(background, welcome_screen, 0, 0);
 }
 
@@ -515,10 +530,11 @@ DrawingState* create_pencil(Sprite* cursor) {
     DrawingState* pencil = malloc(sizeof(DrawingState));
     pencil->color1 = BLACK;
     pencil->color2 = WHITE;
-    pencil->tool = None;
+    pencil->tool = NoTool;
     pencil->thickness = 4;
     pencil->rainbowColor= RED;
     pencil->cursor = cursor;
+    pencil->midShape = false;
     return pencil;
 }
 
@@ -526,9 +542,10 @@ void reset_pencil(DrawingState* pencil) {
     pencil->color1 = BLACK;
     pencil->color2 = WHITE;
     pencil->thickness = 4;
+    pencil->midShape = false;
     thickness_slider->handle_pos = thickness_slider->x + + 0.4 * thickness_slider->width;
     pencil->rainbowColor= RED;
-    change_tool(pencil, None);
+    change_tool(pencil, NoTool);
 }
 
 void color_picker() {    
@@ -641,6 +658,21 @@ void usePencil(DrawingState* pencil, Event_t event) {
             if (gameState != Training)
                 uart_send_draw_line2(cursor->x, cursor->y, xf, yf, colorRubber, pencil->thickness + 2);
             break;
+        case ShapeDraw:
+            if (event.mouseEvent.type != LB_PRESS && event.mouseEvent.type != RB_PRESS)
+                break; 
+            if (pencil->midShape) {
+                if (is_inside_canvas(cursor->x, cursor->y)) {
+                    canvas_draw_shape(pencil->shape, pencil->x_shapeClick1, pencil->y_shapeClick1, cursor->x, cursor->y, pencil->thickness, color);
+                    pencil->midShape = false;
+                }
+            }
+            else if (is_inside_canvas(cursor->x, cursor->y)) {
+                pencil->midShape = true;
+                pencil->x_shapeClick1 = cursor->x;
+                pencil->y_shapeClick1 = cursor->y;  
+            }
+            break;
         default: break;
     }
 }
@@ -659,14 +691,15 @@ void change_tool(DrawingState* pencil, Tool tool) {
         case ColorPicker: cursor_change_bmp(cursor,cursor_picker); break;
         case Rainbow: cursor_change_bmp(cursor, cursor_rainbow); break;
         case Rubber: cursor_change_bmp(cursor, cursor_rubber); break;
-        case None: cursor_change_bmp(cursor, cursor_normal); break;
+        case ShapeDraw: cursor_change_bmp(cursor, cursor_normal); break;
+        case NoTool: cursor_change_bmp(cursor, cursor_normal); break;
     } 
     if (tool == Rainbow) {
         idle_sprite_change_color(paint_tube_1, pencil->rainbowColor);
         idle_sprite_change_color(paint_tube_2, pencil->rainbowColor);  
         sprite_set_color(cursor, pencil->rainbowColor);
     }
-    else if (tool != None) {
+    else if (tool != NoTool) {
         idle_sprite_change_color(paint_tube_1, pencil->color1);
         idle_sprite_change_color(paint_tube_2, pencil->color2);
         sprite_set_color(cursor, pencil->color1);
@@ -674,6 +707,7 @@ void change_tool(DrawingState* pencil, Tool tool) {
     else sprite_set_color(cursor, WHITE);
     draw_sprite_color(cursor);
     pencil->tool = tool;
+    pencil->midShape = false;
 }
 
 void changeThickness(DrawingState* pencil, uint8_t thickness) {
@@ -692,10 +726,17 @@ void training() {
     while (gameState == Training) {
         event = GetEvent();
         switch (checkButtonPress(event, cursor, training_buttons, num_training_buttons)) {
-            case 0: changeState(Saving); return;
-            case 1: changeState(Loading); return;
+            case 0: canvas_undo(); break;
+            case 1: changeState(Saving); return;
+            case 2: changeState(Loading); return;
             case -1: break; 
         }
+        if (event.isMouseEvent && (pencil->tool == Brush || pencil->tool == Rubber || pencil-> tool == Bucket || pencil->tool == ShapeDraw)) {
+            if (event.mouseEvent.type == LB_PRESS || event.mouseEvent.type == RB_PRESS)
+                canvas_start_drawing(cursor->x, cursor->y);
+            else if (event.mouseEvent.type == LB_RELEASE || event.mouseEvent.type == RB_RELEASE)
+                canvas_stop_drawing();
+        }       
         update_pencil(pencil, event);
         if (event.isKeyboardEvent && event.keyboardEvent.type == ESC_PRESS)            
             changeState(MainMenu);
@@ -817,18 +858,23 @@ void setup_canvas() {
 }
 
 void update_pencil(DrawingState* pencil, Event_t event) {
-    switch (checkButtonPress(event, cursor, paint_buttons, num_paint_buttons)) {
+    int pressed_button = checkButtonPress(event, cursor, paint_buttons, num_paint_buttons);
+    switch (pressed_button) {
         case 0: change_tool(pencil, Brush); break;
         case 1: change_tool(pencil, Bucket);break;
         case 2: change_tool(pencil, ColorPicker); break;
         case 3: change_tool(pencil, Rainbow); break;
         case 4: change_tool(pencil, Rubber); break;
         case 5: 
-            canvas_set_color(WHITE); 
             if (gameState != Training)
-                uart_send_empty_msg(MSG_TRASH); 
+                uart_send_empty_msg(MSG_TRASH);
+            else canvas_save_drawing();
+            canvas_set_color(WHITE); 
             break;
         case 6: changeState(PickingColor); break;
+        case 7: change_tool(pencil, ShapeDraw); pencil->shape = Rectangle; break;
+        case 8: change_tool(pencil, ShapeDraw); pencil->shape = Circle; break;
+        case 9: change_tool(pencil, ShapeDraw); pencil->shape = Circumference; break;
         case -1: 
             if (gameState == Drawing && (wordgame_time_up() || is_emote_wheel_on()))
                 break;

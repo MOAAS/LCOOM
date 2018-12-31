@@ -72,9 +72,10 @@ void canvas_draw_circle(uint16_t x, uint16_t y, uint16_t radius, uint32_t color)
  * @param x X position of the center
  * @param y Y position of the center
  * @param radius circumference radius
+ * @param thickness circumference thickness
  * @param color circumference color
  */
-void canvas_draw_circumference(uint16_t x, uint16_t y, uint16_t radius, uint32_t color);
+void canvas_draw_circumference(uint16_t x, uint16_t y, uint16_t radius, uint8_t thickness, uint32_t color);
 
 
 /**
@@ -201,3 +202,17 @@ int canvas_get_height();
  * @return int Returns the canvas width.
  */
 int canvas_get_width();
+
+typedef enum {
+    NoShape,
+    Circle,
+    Circumference,
+    Rectangle,
+} Shape;
+
+void canvas_draw_shape(Shape shape, uint16_t click1_x, uint16_t click1_y, uint16_t click2_x, uint16_t click2_y, uint16_t thickness, uint16_t color);
+void canvas_save_drawing();
+void canvas_start_drawing(uint16_t x, uint16_t y);
+void canvas_stop_drawing();
+void canvas_undo();
+void canvas_update();

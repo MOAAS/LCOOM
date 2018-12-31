@@ -73,3 +73,15 @@ size = 9, word = landscape,
 size = 11, word = ski goggles,  
 size = 7, word = vitamin,  
 Successfully loaded 74 words. 
+click1x = 225 
+click1y = 284 
+click2x = 361 
+click2y = 408 
+top_left_x = 225 
+top_left_y = 284 
+click1x = 414 
+click1y = 569 
+click2x = 607 
+click2y = 458 
+top_left_x = 414 
+top_left_y = 458 

@@ -188,7 +188,8 @@ void flappy_clear_dead_tubes() {
 void flappy_move_tubes() {
     for (int i = 0; i < num_tubes; i++) {
         move_hitbox(&tubes[i].hitbox, -game_speed, 0);
-        draw_bitmap(tubes[i].bmp, tubes[i].hitbox.x1, tubes[i].hitbox.y1);
+        if (tubes[i].hitbox.x2 + game_speed > (int)vg_get_hres())
+            draw_bitmap(tubes[i].bmp, tubes[i].hitbox.x1, tubes[i].hitbox.y1);
     }
 }
 

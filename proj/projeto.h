@@ -49,22 +49,26 @@ typedef enum  {
 } GameState;
 
 typedef enum  {
-    None,
+    NoTool,
     Brush,
     Rainbow,
     Bucket,
     Rubber,
-    ColorPicker
+    ColorPicker,
+    ShapeDraw
 } Tool;
 
 typedef struct {
     Tool tool;
-    Sprite* cursor;
-    bool isDrawing;
     uint8_t thickness;
     uint32_t color1;
     uint32_t color2;
     uint32_t rainbowColor;
+    Sprite* cursor;
+    bool midShape;
+    Shape shape;
+    uint16_t x_shapeClick1;
+    uint16_t y_shapeClick1;
 } DrawingState;
 
 void play_snake();
