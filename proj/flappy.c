@@ -220,7 +220,11 @@ void flappy_jump() {
     if (bird.isDead || bird.goingUp)  
         return;
     bird.goingUp = true;
-    bird.velocity = -3.5;
+    bird.velocity -= 4;
+    if (bird.velocity > -3)
+        bird.velocity = -3;
+    else if (bird.velocity < -5)
+        bird.velocity = -5;
 }
 
 void flappy_endjump() {

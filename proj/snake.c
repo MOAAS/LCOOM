@@ -265,7 +265,11 @@ void snake_update_hp_bar() {
         hp_left = 0;
     int middle = hpbar.y1 + (1 - hp_left) * (hpbar.y2 - hpbar.y1);
     video_draw_rectangle(hpbar.x1, hpbar.y1, hpbar.x2 - hpbar.x1, middle - hpbar.y1, RED);
-    video_draw_rectangle(hpbar.x1, middle, hpbar.x2 - hpbar.x1, hpbar.y2 - middle, GREEN);
+    if (snake.invincibilityLeft > 0)
+        video_draw_rectangle(hpbar.x1, middle, hpbar.x2 - hpbar.x1, hpbar.y2 - middle, 0xFFD607);
+    else video_draw_rectangle(hpbar.x1, middle, hpbar.x2 - hpbar.x1, hpbar.y2 - middle, GREEN);
+
+        
 }
 
 void create_snake_arena(Layer* layer) {

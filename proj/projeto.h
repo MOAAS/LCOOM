@@ -9,6 +9,7 @@
 #include "event.h"
 #include "emote.h"
 #include "flappy.h"
+#include "game_info.h"
 #include "interrupts.h"
 #include "i8042.h"
 #include "i8254.h"

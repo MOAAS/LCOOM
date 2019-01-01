@@ -25,6 +25,14 @@ Bitmap* mainmenu_button2_hl;
 Bitmap* mainmenu_button3_hl;
 Bitmap* mainmenu_button4_hl;
 
+Bitmap* info_button;
+Bitmap* info_button_hl;
+
+Bitmap* instructions_snake;
+Bitmap* instructions_flappy;
+Bitmap* instructions_draw;
+Bitmap* instructions_wordgame;
+
 Bitmap* snake_button;
 Bitmap* snake_button_hl;
 Bitmap* bird_button;
@@ -125,6 +133,14 @@ void loadBitmaps(const char* folderPath) {
     mainmenu_button2_hl = loadBitmap(folderPath, "mainmenu_button2_hl.bmp");
     mainmenu_button3_hl = loadBitmap(folderPath, "mainmenu_button3_hl.bmp");
     mainmenu_button4_hl = loadBitmap(folderPath, "mainmenu_button4_hl.bmp");
+
+    info_button = loadBitmap(folderPath, "info_button.bmp");
+    info_button_hl = loadBitmap(folderPath, "info_button_hl.bmp");
+
+    instructions_snake= loadBitmap(folderPath, "instructions_snake.bmp");
+    instructions_flappy = loadBitmap(folderPath, "instructions_flappy.bmp");
+    instructions_draw = loadBitmap(folderPath, "instructions_draw.bmp");
+    instructions_wordgame = loadBitmap(folderPath, "instructions_wordgame.bmp");
 
     snake_button = loadBitmap(folderPath, "snake_button.bmp");
     snake_button_hl = loadBitmap(folderPath, "snake_button_hl.bmp");

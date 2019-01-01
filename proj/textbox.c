@@ -59,6 +59,21 @@ void textbox_write(TextBox* textbox, char* string) {
     }
 }
 
+void textbox_write_int(TextBox* textbox, int number) {
+    // Calcula numero de digitos
+    int num_digits;
+    if (abs(number) < 10)
+        num_digits = 1;
+    else num_digits = floor(log10(abs(number))) + 1;
+    if (number < 0)
+        num_digits++;
+    // Copia numero para uma string
+    char* number_str = malloc(num_digits + 5); 
+    sprintf(number_str, "%d", number);
+    textbox_write(textbox, number_str);
+    free(number_str);
+}
+
 void textbox_clear(TextBox* textbox) {
     while (textbox->text_size != 0)
         textbox_backspace(textbox);
@@ -70,9 +85,7 @@ void textbox_put(TextBox* textbox, char character) {
         return;
     if (textbox->cursorX >= textbox->cursorX_limit) // ultrapassou
         textbox_linefeed(textbox);
-    // talvez guardar no inicio
-    // atualizar char arrays
-    char string[2] = {character};
+    char string[2] = {character}; // precisa de null terminator
     strcat(textbox->text, string);
     textbox->text_size++;
     draw_char(textbox->layer, character, textbox->cursorX, textbox->cursorY, textbox->font_size / 16, textbox->alignment);

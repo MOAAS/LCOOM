@@ -93,18 +93,24 @@ void uart_send_drawer_ready(char* solution) {
 }
 
 void uart_send_emote(Emote emote) {
-    uint8_t bytes[1];
+    uint8_t bytes[MSG_EMOTE_SIZE];
     bytes[0] = emote;
     uart_send_message(MSG_EMOTE, MSG_EMOTE_SIZE, bytes);
 }
 
 void uart_send_number(int number) {
-    uint8_t bytes[4];
+    uint8_t bytes[MSG_NUMBER_SIZE];
     bytes[0] = (uint8_t)number;
     bytes[1] = (uint8_t)(number >> 8);
     bytes[2] = (uint8_t)(number >> 16);
     bytes[3] = (uint8_t)(number >> 24);
     uart_send_message(MSG_NUMBER, MSG_NUMBER_SIZE, bytes);
+}
+
+void uart_send_tick_clock(uint8_t time_left) {
+    uint8_t bytes[MSG_TICK_CLOCK_SIZE];
+    bytes[0] = time_left;
+    uart_send_message(MSG_TICK_CLOCK, MSG_TICK_CLOCK_SIZE, bytes);
 }
 
 UARTMessageContents uart_process_msg(UARTMessage* message) {
@@ -147,6 +153,9 @@ UARTMessageContents uart_process_msg(UARTMessage* message) {
         case MSG_NUMBER:
             contents.number = (int)message->bytes[0] | (int)message->bytes[1] << 8 | (int)message->bytes[2] << 16 | (int)message->bytes[3] << 24;
             break;
+        case MSG_TICK_CLOCK:
+            contents.time_left = message->bytes[0];
+            break;
         default: break;
     }
     return contents;
@@ -162,7 +171,7 @@ void uart_process_msgs(UARTMessage messages[], uint16_t num_messages) {
             case MSG_DRAW_SHAPE: canvas_draw_shape(cont.shape, cont.xi, cont.yi, cont.xf, cont.yf, cont.color, cont.thickness); break;
             case MSG_TRASH: canvas_set_color(WHITE); break;
             case MSG_BUCKET: bucket_tool(cont.xi, cont.yi, cont.color); break;
-            case MSG_TICK_CLOCK: wordgame_tick_clock(); break;
+            case MSG_TICK_CLOCK: wordgame_set_clock(cont.time_left); break;
             case MSG_EMOTE: draw_emote(cont.emote); break;
         }
     }

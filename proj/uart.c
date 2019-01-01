@@ -201,10 +201,10 @@ int uart_enable_fifo() {
 
 int uart_disable_fifo() {
     uint8_t status;
+    util_delay(25);
     uart_read_status(&status);
     while (status & UART_RECEIVER_DATA) {
         uart_read_data(&status);
-        printf("GOT SOMETHING! \n");
         util_delay(25);
         uart_read_status(&status);
     }

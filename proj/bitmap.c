@@ -21,6 +21,7 @@ Bitmap* loadBitmap(const char* folderPath, const char* filename) {
     filePtr = fopen(file_path, "rb");
     if (filePtr == NULL) {
         printf("File not found! %s\n", file_path);
+        free(file_path);
         return NULL;
     }
     // read the bitmap file header
@@ -31,6 +32,7 @@ Bitmap* loadBitmap(const char* folderPath, const char* filename) {
     if (bitmapFileHeader.type != 0x4D42) {
         fclose(filePtr);
         printf("Error reading file: %s! Not a BMP!\n", file_path);
+        free(file_path);
         return NULL;
     }
 
@@ -49,18 +51,36 @@ Bitmap* loadBitmap(const char* folderPath, const char* filename) {
     bitmapInfoHeader.imageSize = bitmapInfoHeader.height * bmp->actual_bytes_per_row;
     char* bitmapImage = malloc(bitmapInfoHeader.imageSize);
     // verify memory allocation
-    if (!bitmapImage) {
+    if (bitmapImage == NULL) {
         free(bitmapImage);
         fclose(filePtr);
         printf("Error reading file: %s! Bad allocation.\n", file_path);
+        free(file_path);
         return NULL;
     }
     // read in the bitmap image data
-    fread(bitmapImage, bitmapInfoHeader.imageSize, 1, filePtr);
+    fread((void*)bitmapImage, bitmapInfoHeader.imageSize, 1, filePtr);
+
+    /*
+    uint32_t color;
+    char* bitmoop = bitmapImage;
+    for (int i = 0; i < bitmapInfoHeader.height; i++) { // y
+    	for(int j = 0; j < bitmapInfoHeader.width; j++) { // x
+            memcpy(&color, bitmoop, bytes_per_pixel);
+            if ((color & 0xFFFFFF) == 0xF2FFD6 || (color & 0xFFFFFF) == 0xFFD607)
+                printf("UH OH! Color = %x \n", color);
+            bitmoop += bytes_per_pixel;
+        }
+        bitmoop += bmp->padding; 
+    }
+    */
+
+
     // make sure bitmap image data was read
     if (bitmapImage == NULL) {
         fclose(filePtr);
         printf("Error reading file: %s! Bad reading.\n", file_path);
+        free(file_path);
         return NULL;
     }
 
@@ -70,6 +90,8 @@ Bitmap* loadBitmap(const char* folderPath, const char* filename) {
     bmp->bitmapData = bitmapImage;
     bmp->bitmapInfoHeader = bitmapInfoHeader;
     bmp->bytes_per_pixel = bytes_per_pixel;
+
+
     return bmp;
 }
 
@@ -162,13 +184,16 @@ void draw_bitmap(Bitmap* bmp, int x, int y) {
     int yCoord = y + height - 1;  
     char* img = bmp->bitmapData;
     char* vmem = calc_address(vg_get_video_mem(), xCoord, yCoord, vg_get_hres());
+    uint32_t color;
     for (int i = 0; i < height; i++, yCoord--) { // y
         xCoord = x;
     	for(int j = 0; j < width; j++, xCoord++) { // x
             if (xCoord >= 0 && yCoord >= 0 && xCoord < (int)vg_get_hres() && yCoord < (int)vg_get_vres()) {
-                uint32_t color = vg_retrieve(img);
-                if (!is_transparent(color))
+                memcpy(&color, img, bmp->bytes_per_pixel);
+                if (!is_transparent(color)) {
                     vg_insert(vmem, color);
+                }
+
             }
             img += bmp->bytes_per_pixel;
             vmem += vg_get_bytes_pp();
@@ -183,20 +208,26 @@ void draw_bitmap_color(Bitmap* bmp, int x, int y, uint32_t new_color) {
         return;
     int width = bmp->bitmapInfoHeader.width;
     int height = bmp->bitmapInfoHeader.height;
-    uint16_t xCoord = x;
-    uint16_t yCoord = y + height - 1;  
+    int xCoord = x;
+    int yCoord = y + height - 1;  
     char* img = bmp->bitmapData;
+    char* vmem = calc_address(vg_get_video_mem(), xCoord, yCoord, vg_get_hres());
+    uint32_t color;
     for (int i = 0; i < height; i++, yCoord--) { // y
         xCoord = x;
     	for(int j = 0; j < width; j++, xCoord++) { // x
-            uint32_t color = vg_retrieve(img);
-            if ((color & 0xFFFFFF) == GREEN)
-                vg_draw_pixel(xCoord, yCoord, new_color);
-            else if (!is_transparent(color))
-                vg_draw_pixel(xCoord, yCoord, color);
+            if (xCoord >= 0 && yCoord >= 0 && xCoord < (int)vg_get_hres() && yCoord < (int)vg_get_vres()) {
+                memcpy(&color, img, bmp->bytes_per_pixel);
+                if ((color & 0xFFFFFF) == GREEN)
+                    vg_insert(vmem, new_color);
+                else if (!is_transparent(color))
+                    vg_insert(vmem, color);
+            }
             img += bmp->bytes_per_pixel;
+            vmem += vg_get_bytes_pp();
         }
-        img += bmp->padding; 
+        img += bmp->padding;
+        vmem = vmem - (vg_get_hres() + width) * vg_get_bytes_pp();
     }
 }
 

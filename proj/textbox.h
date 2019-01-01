@@ -1,5 +1,6 @@
 #pragma once
 
+#include <math.h>
 #include "layer.h"
 #include "bitmap.h"
 
@@ -59,6 +60,14 @@ void destroy_textbox(TextBox* textbox);
  * @param string String to write
  */
 void textbox_write(TextBox* textbox, char* string);
+
+/**
+ * @brief Writes a number on a textbox, updating the screen
+ * 
+ * @param textbox Textbox to write on
+ * @param number Number to write
+ */
+void textbox_write_int(TextBox* textbox, int number);
 
 /**
  * @brief Clears all the text in a textbox

@@ -16,13 +16,14 @@ static uint16_t wordbox_yMid;
 static uint16_t wordbox_width;
 static uint16_t wordbox_height;
 
+
 extern Bitmap* clock_bmp;
 extern Bitmap* textbox2_bmp;
 extern Bitmap* textbox6_bmp;
 
 static Layer* background = NULL;
 
-static char* word_list[100];
+static char* word_list[200];
 static uint16_t word_count = 0;
 
 static uint16_t numRoundsDone = 0;
@@ -30,15 +31,14 @@ static uint16_t maxRounds = 6;
 
 static char* word;
 static uint16_t word_size = 0;
+static char * used_words[50];
 
 static bool* revealed_letters;
 static uint16_t num_revealed_letters = 0;
 
-
 static int score = 0;
 static int highscore = 0;
 static char * file_path;
-
 void loadDictionary(char* path) {
 	FILE * fp = fopen(path, "r");
 	if (fp == NULL) {
@@ -67,6 +67,18 @@ void loadDictionary(char* path) {
 	return;
 }
 
+void wordgame_draw_hidden_word() {
+    char* hidden_word = malloc(word_size * sizeof(char) + 1);
+    for (int i = 0; i < word_size; i++) {
+        if (word[i] != ' ')
+            hidden_word[i] = '_';
+        else hidden_word[i] = ' ';
+    }
+    hidden_word[word_size] = '\0';
+    draw_word(background, hidden_word, wordbox_xMid, wordbox_yMid + 8, FONT_SCALE, SPACE_SCALE, CenterAlign);        
+    free(hidden_word);
+}
+
 void wordgame_start_round(Layer* bg, char* solution, bool isDrawing) {
     background = bg;
     // Draw the box
@@ -85,37 +97,27 @@ void wordgame_start_round(Layer* bg, char* solution, bool isDrawing) {
     for (int i = 0; i < word_size; i++) {
         revealed_letters[i] = false;
     }
-    // Desenha: mostra a palavra
     if (isDrawing)
         draw_word(background, word, wordbox_xMid, wordbox_yMid, FONT_SCALE, 0, CenterAlign);        
-    else { // Nao desenha: Nao mostra
-        char* hidden_word = malloc(word_size * sizeof(char) + 1);
-        for (int i = 0; i < word_size; i++) {
-            if (word[i] != ' ')
-                hidden_word[i] = '_';
-            else hidden_word[i] = ' ';
-        }
-        hidden_word[word_size] = '\0';
-        draw_word(background, hidden_word, wordbox_xMid, wordbox_yMid + 8, FONT_SCALE, SPACE_SCALE, CenterAlign);        
-    }
+    else wordgame_draw_hidden_word();
     char round_counter[20];
     sprintf(round_counter, "%d/%d", (int)floor(numRoundsDone / 2) + 1, maxRounds / 2);
     draw_word(background, round_counter, 75, 100, 2, 0, CenterAlign);
-    wordgame_create_clock(clock_bmp);
+    wordgame_create_clock();
 }
 
-void wordgame_end_round(int points) {    
+void wordgame_end_round(int points) {
     wordgame_destroy_clock();
-    free(word);
     free(revealed_letters);
     word_size = 0;
+    used_words[numRoundsDone] = word;    
     num_revealed_letters = 0;
     numRoundsDone++;
     score += points;
 }
 
 void wordgame_set_rounds(uint16_t num_rounds) {
-    if (num_rounds == 0)
+    if (num_rounds == 0 || num_rounds > 20)
         return;
     maxRounds = 2 * num_rounds;
 }
@@ -125,6 +127,8 @@ bool is_wordgame_over() {
 }
 
 void reset_wordgame() {
+    for (int i = 0; i < numRoundsDone; i++)
+        free(used_words[i]);
     score = 0;
     numRoundsDone = 0;
 }
@@ -134,6 +138,19 @@ int wordgame_get_score() {
 }
 
 char* get_random_word() {
+    for (int i = 0; i < 10; i++) {
+        unsigned rand_num = rand() % word_count;
+        bool repeated_word = false;
+        for (int j = 0; j < numRoundsDone; j++) {
+            if (strcmp(word_list[rand_num], used_words[j]) == 0) {
+                repeated_word = true;
+                break;
+            }
+        }
+        if (repeated_word)
+            continue;
+        else return word_list[rand_num];
+    }
     return word_list[rand() % word_count];
 }
 
@@ -214,17 +231,14 @@ void saveWordGameHighscore() {
 static uint16_t initial_time_left = 90;
 
 static TextBox* clock_box;
-static Layer* clock_layer;
 static uint16_t time_left = 0;
-static char time_left_string[12];
 static Layer* clock_layer = NULL;
 
-void wordgame_create_clock(Bitmap* bmp) {
+void wordgame_create_clock() {
     clock_layer = create_layer(12, 150, 128, 128);
-    clock_box = create_textbox(clock_layer, bmp, 36, 50, 2, LeftAlign);
+    clock_box = create_textbox(clock_layer, clock_bmp, 51, 66, 2, CenterAlign);
     time_left = initial_time_left;
-    sprintf(time_left_string, "%d", initial_time_left);
-    textbox_write(clock_box, time_left_string); 
+    textbox_write_int(clock_box, time_left);
 }
 
 void wordgame_destroy_clock() {
@@ -247,10 +261,14 @@ void wordgame_tick_clock() {
         return;
     time_left--;
     textbox_clear(clock_box);
-    sprintf(time_left_string, "%d", time_left);
-    if (time_left == 9) {
-        clock_box->cursorX_init += 16;
-        clock_box->cursorX += 16;
+    if (time_left < 10) {
+        clock_box->cursorX_init = 80;
+        clock_box->cursorX = 80;
     }
-    textbox_write(clock_box, time_left_string);        
+    textbox_write_int(clock_box, time_left);
+}
+
+void wordgame_set_clock(uint8_t t_left) {
+    time_left = t_left + 1;
+    wordgame_tick_clock();
 }

@@ -122,14 +122,14 @@ void layer_draw_image(Layer* layer, Bitmap* bmp, int x, int y) {
     int height = bmp->bitmapInfoHeader.height;
     uint16_t xCoord = x;
     uint16_t yCoord = height + y - 1;
+    uint32_t color;
     char* img = bmp->bitmapData;    
     for (int i = 0; i < height; i++, yCoord--) {
         xCoord = x;
     	for(int j = 0; j < width; j++, xCoord++) {
-            uint32_t color = vg_retrieve(img);
-            if (!is_transparent(color)) {                
+            memcpy(&color, img, bmp->bytes_per_pixel);
+            if (!is_transparent(color))
                 draw_on_layer(layer, xCoord, yCoord, color);
-            }
             img += bmp->bytes_per_pixel;
         }
         img += bmp->padding;
@@ -144,11 +144,12 @@ void layer_draw_image_color(Layer* layer, Bitmap* bmp, int x, int y, uint32_t ne
     int height = bmp->bitmapInfoHeader.height;
     uint16_t xCoord = x;
     uint16_t yCoord = height + y - 1;
+    uint32_t color;
     char* img = bmp->bitmapData;
     for (int i = 0; i < height; i++, yCoord--) {
         xCoord = x;
     	for(int j = 0; j < width; j++, xCoord++) {
-            uint32_t color = vg_retrieve(img);
+            memcpy(&color, img, bmp->bytes_per_pixel);
             if ((color & 0xFFFFFF) == GREEN)
                 draw_on_layer(layer, xCoord, yCoord, new_color);
             else if (!is_transparent(color))

@@ -29,6 +29,8 @@ extern Bitmap* mainmenu_button2_hl;
 extern Bitmap* mainmenu_button3_hl;
 extern Bitmap* mainmenu_button4_hl;
 
+extern Bitmap* info_button;
+extern Bitmap* info_button_hl;
 
 extern Bitmap* snake_button;
 extern Bitmap* snake_button_hl;
@@ -82,7 +84,7 @@ extern Bitmap* clockbig_bmp;
 static IdleSprite* paint_tube_1;
 static IdleSprite* paint_tube_2;
 
-static int num_menu_buttons = 6;
+static int num_menu_buttons = 10;
 static int num_paint_buttons = 10;
 static int num_training_buttons = 3;
 static int num_wordgame_buttons = 1;
@@ -107,12 +109,12 @@ static DrawingState* pencil;
 
 static Sprite* cursor;
 
-static Layer* background;
-static Layer* textbox_layer;
-static Layer* color_picker_layer;
+static Layer* background = NULL;
+static Layer* textbox_layer = NULL;
+static Layer* color_picker_layer = NULL;
 
-static TextBox* big_ben1;
-static TextBox* big_ben2;
+static TextBox* big_ben1 = NULL;
+static TextBox* big_ben2 = NULL;
 
 static Event_t event;
 
@@ -151,12 +153,23 @@ void loadButtons() {
     menu_buttons[3] = create_button(40, 650, background, mainmenu_button4, mainmenu_button4_hl);
     menu_buttons[4] = create_button(703, 462, background, snake_button, snake_button_hl);
     menu_buttons[5] = create_button(758, 405, background, bird_button, bird_button_hl);
+
+    // info_buttons
+    menu_buttons[6] = create_button(190, 250, background, info_button, info_button_hl); // wordgame info
+    menu_buttons[7] = create_button(535, 335, background, info_button, info_button_hl); // singleplayer info
+    menu_buttons[8] = create_button(705, 570, background, info_button, info_button_hl); // snake info
+    menu_buttons[9] = create_button(750, 385, background, info_button, info_button_hl); // flappy info
+
     menu_buttons[0]->singleState = true; 
     menu_buttons[1]->singleState = true; 
     menu_buttons[2]->singleState = true; 
     menu_buttons[3]->singleState = true; 
     menu_buttons[4]->singleState = true; 
     menu_buttons[5]->singleState = true; 
+    menu_buttons[6]->singleState = true; 
+    menu_buttons[7]->singleState = true; 
+    menu_buttons[8]->singleState = true; 
+    menu_buttons[9]->singleState = true; 
 
     training_buttons[0] = create_button(150, 5, background, undo_button, undo_hl);// undo
     training_buttons[1] = create_button(225, 5, background, save_button, save_hl);// save
@@ -272,10 +285,17 @@ void main_menu() {
             case 3: changeState(ExitGame); break;
             case 4: changeState(PlayingSnake); break;
             case 5: changeState(PlayingFlappy); break;
+            case 6: toggle_instructions(WordGameInfo); break;
+            case 7: toggle_instructions(DrawToolInfo); break;
+            case 8: toggle_instructions(SnakeInfo); break;
+            case 9: toggle_instructions(FlappyInfo); break;
             case -1: break;
         }
+        if (event.isKeyboardEvent && event.keyboardEvent.type == ESC_PRESS)
+            clear_instructions();
         update_cursor(cursor, event);
     }
+    clear_instructions();
 }
 
 // Big Ben //
@@ -587,7 +607,7 @@ void color_picker() {
         // Updates clock if needed
         if (event.isRtcEvent) {
             wordgame_tick_clock();
-            uart_send_empty_msg(MSG_TICK_CLOCK);
+            uart_send_tick_clock(wordgame_get_time_left());
         }
     }
     change_tool(pencil, pencil->tool); // atualiza os paint tubes
@@ -603,7 +623,7 @@ void draw() {
         // Updates clock if needed
         if (event.isRtcEvent) {
             wordgame_tick_clock();
-            uart_send_empty_msg(MSG_TICK_CLOCK);
+            uart_send_tick_clock(wordgame_get_time_left());
         }
         // Checking if the game is over, and processing other messages (emotes)
         if (event.isUARTEvent) {

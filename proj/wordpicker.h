@@ -33,6 +33,12 @@ void reset_wordgame();
 void loadDictionary(char* path);
 
 /**
+ * @brief Draws the game solution on the top of the screen, but with '_' instead of letters.
+ * 
+ */
+void wordgame_draw_hidden_word();
+
+/**
  * @brief Starts a wordgame round.
  * 
  * @param bg Layer where the word will be drawn
@@ -103,9 +109,8 @@ void saveWordGameHighscore();
 /**
  * @brief Creates a clock on the top left, starting at 90 seconds left.
  * 
- * @param bmp Bitmap to be drawn
  */
-void wordgame_create_clock(Bitmap* bmp);
+void wordgame_create_clock();
 
 /**
  * @brief Destroys the clock.
@@ -131,3 +136,10 @@ bool wordgame_time_up();
  * 
  */
 void wordgame_tick_clock();
+
+/**
+ * @brief Changes the time left in the clock, updates the screen.
+ * 
+ * @param time_left Time left in the clock
+ */
+void wordgame_set_clock(uint8_t time_left);
