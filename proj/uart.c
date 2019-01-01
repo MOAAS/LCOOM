@@ -103,8 +103,8 @@ bool uart_conflict = false;
 
 void uart_setup_fifo() {
     uart_enable_fifo();
-    uart_int_info.toSend = queue_create();
-    uart_int_info.received = queue_create();
+    uart_int_info.toSend = queue_create(1000);
+    uart_int_info.received = queue_create(1000);
     uart_int_info.last_int_type = Transmitted;
 }
 

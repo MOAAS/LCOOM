@@ -204,15 +204,53 @@ int canvas_get_height();
 int canvas_get_width();
 
 typedef enum {
-    NoShape,
-    Circle,
-    Circumference,
-    Rectangle,
+    NoShape = 0,
+    Circle = 1,
+    Circumference = 2,
+    Rectangle = 3,
 } Shape;
 
-void canvas_draw_shape(Shape shape, uint16_t click1_x, uint16_t click1_y, uint16_t click2_x, uint16_t click2_y, uint16_t thickness, uint16_t color);
+/**
+ * @brief Draws a shape on the canvas, based on two mouse clicks
+ * 
+ * @param shape Shape to draw (Enum)
+ * @param click1_x X position of the first mouse click
+ * @param click1_y Y position of the first mouse click
+ * @param click2_x X position of the second mouse click
+ * @param click2_y Y position of the second mouse click
+ * @param color Color of the shape
+ * @param thickness Shape thickness (if applied)
+ */
+void canvas_draw_shape(Shape shape, uint16_t click1_x, uint16_t click1_y, uint16_t click2_x, uint16_t click2_y,  uint32_t color, uint16_t thickness);
+
+/**
+ * @brief Stores the current canvas pixel map in a buffer (for the next undo action). Sets an internal isDrawing flag.
+ * 
+ */
 void canvas_save_drawing();
+
+/**
+ * @brief Saves drawing for the next undo action, only if the cursor position is inside the canvas and the isDrawing flag is not set.
+ * 
+ * @param x X position of the cursor
+ * @param y Y position of the cursor
+ */
 void canvas_start_drawing(uint16_t x, uint16_t y);
+
+/**
+ * @brief Unsets the isDrawing flag.
+ * 
+ */
 void canvas_stop_drawing();
+
+/**
+ * @brief Edits the canvas to the last saved pixel map.
+ * 
+ */
 void canvas_undo();
+
+/**
+ * @brief Updates the canvas with its layer contents.
+ * 
+ */
 void canvas_update();

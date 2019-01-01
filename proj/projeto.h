@@ -93,6 +93,7 @@ void end_game();
 void training();
 void save();
 void load();
+char* create_bmp_path(char* file_name);
 
 void wait_for_collab();
 void collab_drawing();

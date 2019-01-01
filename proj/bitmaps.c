@@ -52,6 +52,10 @@ Bitmap* shape0_bmp;
 Bitmap* shape1_bmp;
 Bitmap* shape2_bmp;
 
+Bitmap* shape0_hl_bmp;
+Bitmap* shape1_hl_bmp;
+Bitmap* shape2_hl_bmp;
+
 Bitmap* save_button;
 Bitmap* save_hl;
 Bitmap* load_button;
@@ -159,6 +163,10 @@ void loadBitmaps(const char* folderPath) {
     shape0_bmp = loadBitmap(folderPath, "shape0.bmp");
     shape1_bmp = loadBitmap(folderPath, "shape1.bmp");
     shape2_bmp = loadBitmap(folderPath, "shape2.bmp");
+
+    shape0_hl_bmp = loadBitmap(folderPath, "shape0_hl.bmp");
+    shape1_hl_bmp = loadBitmap(folderPath, "shape1_hl.bmp");
+    shape2_hl_bmp = loadBitmap(folderPath, "shape2_hl.bmp");
 
     // Training mode buttons
 

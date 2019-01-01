@@ -54,6 +54,9 @@ extern Bitmap* shape0_bmp;
 extern Bitmap* shape1_bmp;
 extern Bitmap* shape2_bmp;
 
+extern Bitmap* shape0_hl_bmp;
+extern Bitmap* shape1_hl_bmp;
+extern Bitmap* shape2_hl_bmp;
 
 
 extern Bitmap* emote_icon;
@@ -83,11 +86,13 @@ static int num_menu_buttons = 6;
 static int num_paint_buttons = 10;
 static int num_training_buttons = 3;
 static int num_wordgame_buttons = 1;
+static int num_collab_buttons = 1;
 
 static Button* paint_buttons[10];
 static Button* menu_buttons[10];
 static Button* training_buttons[5];
-static Button* wordgame_buttons[5];
+static Button* wordgame_buttons[3];
+static Button* collab_buttons[3];
 
 static Slider* thickness_slider;
 
@@ -133,9 +138,9 @@ void loadButtons() {
     paint_buttons[5] = create_button(75, 630, background, trash_button, trash_hl); // trash
     paint_buttons[6] = create_button(45, 355, background, palette_button, palette_hl); //color picker
 
-    paint_buttons[7] = create_button(15, 425, background, shape0_bmp, shape0_bmp); // retangul
-    paint_buttons[8] = create_button(60, 425, background, shape1_bmp, shape1_bmp); // circulo
-    paint_buttons[9] = create_button(105, 425, background, shape2_bmp, shape2_bmp); // circumferencia
+    paint_buttons[7] = create_button(15, 425, background, shape0_bmp, shape0_hl_bmp); // retangul
+    paint_buttons[8] = create_button(60, 425, background, shape1_bmp, shape1_hl_bmp); // circulo
+    paint_buttons[9] = create_button(105, 425, background, shape2_bmp, shape2_hl_bmp); // circumferencia
 
     paint_buttons[5]->singleState = true; // trash
     paint_buttons[6]->singleState = true; // color picker
@@ -162,13 +167,15 @@ void loadButtons() {
 
     wordgame_buttons[0] = create_button(10, 10, background, emote_icon, emote_icon_hl);
 
+    collab_buttons[0] = create_button(150, 5, background, save_button, save_hl);
+
     thickness_slider = create_slider(5, 700, 0.4, background, 0xBEC7ED, RED);
 }
 
 void loadBackground() {
     background = create_layer(0, 0, vg_get_hres(), vg_get_vres());
-    paint_tube_1 = create_idle_sprite(45, 270, background, paint_tube_1_bmp, pencil->color1);
-    paint_tube_2 = create_idle_sprite(79, 273, background, paint_tube_2_bmp, pencil->color2);
+    paint_tube_1 = create_idle_sprite(45, 280, background, paint_tube_1_bmp, pencil->color1);
+    paint_tube_2 = create_idle_sprite(79, 283, background, paint_tube_2_bmp, pencil->color2);
     layer_draw_image(background, welcome_screen, 0, 0);
 }
 
@@ -463,7 +470,8 @@ void guess() {
 }
 
 void type_guess() {
-    textbox_layer = create_layer(690, 660, 325, 100);
+    
+    textbox_layer = create_layer(690, 660, 330, 100);
     TextBox* textbox = create_textbox(textbox_layer, textbox1_bmp, 10, 10, 1, LeftAlign);
     textbox_write(textbox, "Insert guess...");
     while(gameState == TypingGuess) {
@@ -625,15 +633,15 @@ void usePencil(DrawingState* pencil, Event_t event) {
     else return;
     switch (pencil->tool) {
         case Brush:
-            canvas_draw_line(cursor->x, cursor->y, xf, yf, color, pencil->thickness);
             if (gameState != Training)
                 uart_send_draw_line(cursor->x, cursor->y, xf, yf, color, pencil->thickness);
+            canvas_draw_line(cursor->x, cursor->y, xf, yf, color, pencil->thickness);
             break;
         case Rainbow:
-            rainbow_draw(pencil, cursor->x, cursor->y, xf, yf);
-            sprite_set_color(cursor, pencil->rainbowColor);
             if (gameState != Training)
                 uart_send_draw_line(cursor->x, cursor->y, xf, yf, pencil->rainbowColor, pencil->thickness);
+            rainbow_draw(pencil, cursor->x, cursor->y, xf, yf);
+            sprite_set_color(cursor, pencil->rainbowColor);
             break;
         case ColorPicker:
             if (event.mouseEvent.type == LB_PRESS || event.mouseEvent.type == RB_PRESS) {
@@ -649,21 +657,23 @@ void usePencil(DrawingState* pencil, Event_t event) {
         case Bucket:
             if (event.mouseEvent.type != LB_PRESS && event.mouseEvent.type != RB_PRESS)
                 break;       
-            bucket_tool(cursor->x, cursor->y, color);
             if (gameState != Training)
                 uart_send_bucket(cursor->x, cursor->y, color);
+            bucket_tool(cursor->x, cursor->y, color);
             break;
         case Rubber:
-            canvas_draw_line2(cursor->x, cursor->y, xf, yf, colorRubber, pencil->thickness + 2);
             if (gameState != Training)
                 uart_send_draw_line2(cursor->x, cursor->y, xf, yf, colorRubber, pencil->thickness + 2);
+            canvas_draw_line2(cursor->x, cursor->y, xf, yf, colorRubber, pencil->thickness + 2);
             break;
         case ShapeDraw:
             if (event.mouseEvent.type != LB_PRESS && event.mouseEvent.type != RB_PRESS)
                 break; 
             if (pencil->midShape) {
                 if (is_inside_canvas(cursor->x, cursor->y)) {
-                    canvas_draw_shape(pencil->shape, pencil->x_shapeClick1, pencil->y_shapeClick1, cursor->x, cursor->y, pencil->thickness, color);
+                    if (gameState != Training)
+                        uart_send_draw_shape(pencil->shape, pencil->x_shapeClick1, pencil->y_shapeClick1, cursor->x, cursor->y, color, pencil->thickness);
+                    canvas_draw_shape(pencil->shape, pencil->x_shapeClick1, pencil->y_shapeClick1, cursor->x, cursor->y, color, pencil->thickness);
                     pencil->midShape = false;
                 }
             }
@@ -743,31 +753,62 @@ void training() {
     }
 }
 
+////////////////////////////
+// Drawing Saving/Loading //
+////////////////////////////
+
+char* create_bmp_path(char* file_name) {
+    for (int i = 0; file_name[i] != '\0'; i++) {
+        switch (file_name[i]) {
+            case '\\':
+            case '\"':
+            case '/':
+            case ':':
+            case '*':
+            case '?':
+            case '<':
+            case '>':
+            case '|': file_name[i] = ' '; break;
+            default: break;
+        }
+    }
+    char* path = malloc(strlen(saved_img_folder) + strlen(file_name) + strlen(".bmp") + 1);
+    strcpy(path, saved_img_folder);
+    strcat(path, file_name);
+    strcat(path, ".bmp");
+    return path;
+}
+
 void save() {
-    textbox_layer = create_layer(25, 175,  325, 100);
+    textbox_layer = create_layer(175, 40, 330, 100);
     TextBox* textbox = create_textbox(textbox_layer, textbox1_bmp, 10, 10, 1, LeftAlign);
     textbox_write(textbox, "Insert file name...");
     while(gameState == Saving) {
         event = GetEvent();
         update_cursor(cursor, event);
-        useTextbox(textbox, event, Training, Training);
+        useTextbox(textbox, event, lastGameState, lastGameState);
+        // Only processes received messages in case it's playing with someone else.
+        if ((gameState == CollabDrawing || lastGameState == CollabDrawing) && event.isUARTEvent)
+            uart_process_msgs(event.uart_messages, event.num_uart_messages);
     }
     if (strcmp(textbox->text, "") != 0) {
-        char path[500];
-        strcpy(path, saved_img_folder);
-        strcat(path, textbox->text);
-        strcat(path, ".bmp");
+        char* path = create_bmp_path(textbox->text);
         char* canvas_map = canvas_get_map();
         saveBitmap(path, canvas_get_width(), canvas_get_height(), canvas_map);    
+        free(path);
         free(canvas_map);    
     }
     destroy_textbox(textbox);
-    unpress_button(training_buttons[0]);
-
+    if (gameState == Training)
+        unpress_button(training_buttons[1]); // Releases save button
+    else if (gameState == CollabDrawing)
+        unpress_button(collab_buttons[0]); // Releases Save button
+    else changeState(MainMenu); // nao devia acontecer :O
 }
 
+
 void load() {
-    textbox_layer = create_layer(25, 175, 325, 100);
+    textbox_layer = create_layer(175, 40, 330, 100);
     TextBox* textbox = create_textbox(textbox_layer, textbox1_bmp, 10, 10, 1, LeftAlign);
     textbox_write(textbox, "Insert file name...");
     while(gameState == Loading) {
@@ -783,11 +824,11 @@ void load() {
         bmp = loadBitmap(saved_img_folder, file_name);
     }
     destroy_textbox(textbox);
-    unpress_button(training_buttons[0]);
-    if (bmp == NULL)
-        return;
-    canvas_draw_image(bmp);
-    free(bmp);
+    unpress_button(training_buttons[2]); // Releases load button
+    if (bmp) {
+        canvas_draw_image(bmp);
+        free(bmp);
+    }
 }
 
 ///////////////////
@@ -816,6 +857,10 @@ void wait_for_collab() {
 void collab_drawing() {
     while (gameState == CollabDrawing) {
         event = GetEvent();
+        if (checkButtonPress(event, cursor, collab_buttons, num_collab_buttons) == 0) {
+            changeState(Saving);
+            return;
+        }
         update_pencil(pencil, event);
         if (event.isKeyboardEvent && event.keyboardEvent.type == ESC_PRESS)            
             changeState(MainMenu);
@@ -845,9 +890,11 @@ void setup_canvas() {
         change_tool(pencil, Brush);
         press_button(paint_buttons[0]); // Brush
     }
-    if (gameState == CollabDrawing)
-        return;
-    if (gameState == Training) {
+    if (gameState == CollabDrawing) {
+        disable_buttons(collab_buttons, num_collab_buttons);
+        draw_buttons(cursor, collab_buttons, num_collab_buttons);
+    }
+    else if (gameState == Training) {
         disable_buttons(training_buttons, num_training_buttons);
         draw_buttons(cursor, training_buttons, num_training_buttons);
     }
@@ -858,8 +905,7 @@ void setup_canvas() {
 }
 
 void update_pencil(DrawingState* pencil, Event_t event) {
-    int pressed_button = checkButtonPress(event, cursor, paint_buttons, num_paint_buttons);
-    switch (pressed_button) {
+    switch (checkButtonPress(event, cursor, paint_buttons, num_paint_buttons)) {
         case 0: change_tool(pencil, Brush); break;
         case 1: change_tool(pencil, Bucket);break;
         case 2: change_tool(pencil, ColorPicker); break;

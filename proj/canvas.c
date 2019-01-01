@@ -34,34 +34,26 @@ void destroy_canvas() {
     lastCanvas = NULL;
 }
 
-void canvas_draw_shape(Shape shape, uint16_t click1_x, uint16_t click1_y, uint16_t click2_x, uint16_t click2_y, uint16_t thickness, uint16_t color) {
+void canvas_draw_shape(Shape shape, uint16_t click1_x, uint16_t click1_y, uint16_t click2_x, uint16_t click2_y,  uint32_t color, uint16_t thickness) {
     switch (shape) {
         case Circle: {
-            uint8_t radius = round(sqrt(pow(click2_x - click1_x, 2) + pow(click2_y - click1_y, 2)));
+            uint16_t radius = round(sqrt(pow(click2_x - click1_x, 2) + pow(click2_y - click1_y, 2)));
             canvas_draw_circle(click1_x, click1_y, radius, color);
             break;
         }
         case Rectangle: {
             uint16_t top_left_x = fmin(click1_x, click2_x);
             uint16_t top_left_y = fmin(click1_y, click2_y);
-            printf("click1x = %d \n", click1_x);
-            printf("click1y = %d \n", click1_y);
-            printf("click2x = %d \n", click2_x);
-            printf("click2y = %d \n", click2_y);
-            printf("top_left_x = %d \n", top_left_x);
-            printf("top_left_y = %d \n", top_left_y);
             canvas_draw_rectangle(top_left_x, top_left_y, abs(click2_x - click1_x), abs(click2_y - click1_y), color);
             break;
         }
         case Circumference: {
-            uint8_t radius = round(sqrt(pow(click2_x - click1_x, 2) + pow(click2_y - click1_y, 2)));
+            uint16_t radius = round(sqrt(pow(click2_x - click1_x, 2) + pow(click2_y - click1_y, 2)));
             canvas_draw_circumference(click1_x, click1_y, radius, thickness, color);
             break;
         }
         default: break;
     }
-
-
 }
 
 void canvas_save_drawing() {

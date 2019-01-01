@@ -5,14 +5,59 @@
 
 #include "queue.h"
 
-Queue* queue_create() {
-	Queue* q = malloc(sizeof(Queue));
-	q->front = NULL;
-	q->last = NULL;
-	q->size = 0;
-	return q;
+Queue* queue_create(unsigned capacity) { 
+    Queue* queue = malloc(sizeof(Queue)); 
+    queue->capacity = capacity; 
+    queue->front = queue->size = 0;  
+    queue->rear = capacity - 1;  // This is important, see the enqueue 
+    queue->array = malloc(queue->capacity * sizeof(uint8_t)); 
+    return queue; 
+} 
+
+void queue_destroy(Queue* q) {
+	free(q->array);
+	free(q);
 }
 
+
+
+
+// Queue is full when size becomes equal to the capacity  
+bool isFull(Queue* queue) {  
+	return (queue->size == queue->capacity);  
+} 
+  
+// Queue is empty when size is 0 
+bool isEmpty(Queue* queue) 
+{  return (queue->size == 0); } 
+
+void queue_push(Queue* queue, uint8_t item) { 
+    if (isFull(queue)) {
+		printf("JEEZ QUEUE IS SO FULL!");
+	}
+    queue->size++;
+    queue->rear++;
+	if (queue->rear == queue->capacity) {
+		queue->rear = 0; 
+	}
+    queue->array[queue->rear] = item; 
+    //printf("%d enqueued to queue\n", item); 
+} 
+
+uint8_t queue_pop(Queue* queue) { 
+    int item = queue->array[queue->front]; 
+    queue->size--;
+    queue->front++;
+	if (queue->front == queue->capacity)
+		queue->front = 0; 
+    return item; 
+} 
+  
+uint8_t queue_front(Queue* queue) { 
+    return queue->array[queue->front]; 
+} 
+  
+  /*
 void queue_destroy(Queue* q) {
 	while (q->size != 0)
 		queue_pop(q);
@@ -45,4 +90,5 @@ void queue_push(Queue *q, uint8_t data) {
 		q->last = q->last->next;
 	}
 }
+*/
 
