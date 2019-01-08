@@ -1,0 +1,6 @@
+<map id="video_draw_hline" name="video_draw_hline">
+<area shape="rect" id="node2" href="$group__video.html#ga57014a19e5d9cf805bcf7af1f6bbcec5" title="Given a base address, calculates the address of a specific position. " alt="" coords="188,5,287,32"/>
+<area shape="rect" id="node3" href="$group__video.html#ga0cd2b85b0088ab47b2b7bb6c135ad4b1" title="vg_get_video_mem" alt="" coords="172,56,303,83"/>
+<area shape="rect" id="node4" href="$group__video.html#gaa4a211ebfc5c87a0072eaf9bd03e3a56" title="vg_get_hres" alt="" coords="192,107,283,133"/>
+<area shape="rect" id="node5" href="$group__video.html#ga9ce8b7520a298fda9e59cdeffbbd8670" title="Given a pixel address, inserts a color in it. " alt="" coords="201,157,274,184"/>
+</map>

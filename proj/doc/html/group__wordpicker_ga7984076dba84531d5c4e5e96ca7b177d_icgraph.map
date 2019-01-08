@@ -1,0 +1,11 @@
+<map id="wordgame_set_clock" name="wordgame_set_clock">
+<area shape="rect" id="node2" href="$group__uart__wordgame.html#ga1dbbd888f62428123dfc5bbbfa178134" title="Processes a list of messages, doing what they order. " alt="" coords="197,149,333,176"/>
+<area shape="rect" id="node3" href="$group__pengoo.html#ga089d0f37444b1b486cf98045a512deed" title="Runs the word game, as a guesser. Displays on the screen what the other user draws. User can press ENTER to type a guess. " alt="" coords="406,22,463,49"/>
+<area shape="rect" id="node6" href="$group__pengoo.html#gabe23d2dac0552bf9069a47573770d379" title="Runs the word game, as a guesser. Displays on the screen what the other user draws. User can type a guess, press ESC or ENTER to insert his guess. " alt="" coords="679,73,768,100"/>
+<area shape="rect" id="node7" href="$group__pengoo.html#ga56c5cf8a568cff737ff95520cbe6b405" title="Runs the word game, as a drawer. Sends the drawing to the other user on every move. Sends the clock updates to the other user, every second. User can use the several buttons and mouse to draw on the screen. " alt="" coords="558,124,607,150"/>
+<area shape="rect" id="node8" href="$group__pengoo.html#ga178ee685108a5f6164bf1c1757040ee2" title="Runs the word game, as a drawer. Sends the drawing to the other user on every move. Sends the clock updates to the other user, every second. User can select a color from the open window. " alt="" coords="677,174,769,201"/>
+<area shape="rect" id="node9" href="$group__pengoo.html#ga7be478ae067a8e77c79ece6af6082ce5" title="Runs the saving of the canvas drawing. " alt="" coords="559,225,607,252"/>
+<area shape="rect" id="node10" href="$group__pengoo.html#gaa5d8d3d5af977d3d9e7141bf2693c81e" title="Runs the collab/multi&#45;player mode. Same as training mode, but without the Undo and Load buttons..." alt="" coords="381,276,488,302"/>
+<area shape="rect" id="node4" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="817,149,927,176"/>
+<area shape="rect" id="node5" href="$group__wordpicker.html#ga6353a81725e186791f470cbd96c7ec1b" title="Checks if a guess is correct (case&#45;insensitive) " alt="" coords="536,22,629,49"/>
+</map>

@@ -1,0 +1,56 @@
+\hypertarget{interrupts_8h}{}\section{interrupts.\+h File Reference}
+\label{interrupts_8h}\index{interrupts.\+h@{interrupts.\+h}}
+{\ttfamily \#include \char`\"{}keyboard.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mouse.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}timer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}uart.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}rtc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}video.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}i8254.\+h\char`\"{}}\newline
+Include dependency graph for interrupts.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{interrupts_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{interrupts_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_notification}{Notification}}
+\begin{DoxyCompactList}\small\item\em Represents a received interrupt notification. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{struct_notification}{Notification}} \mbox{\hyperlink{group__interrupts_ga856319b58b1fcbc4b74dc4c26524e7d7}{Notification}}
+\begin{DoxyCompactList}\small\item\em Represents a received interrupt notification. \end{DoxyCompactList}\item 
+typedef enum \mbox{\hyperlink{group__interrupts_gadb53a8cc97236ca207c035241a5b7fb8}{Device}} \mbox{\hyperlink{group__interrupts_ga190b45b11d58f95bf84392b54e437fdd}{Device}}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{group__interrupts_gadb53a8cc97236ca207c035241a5b7fb8}{Device}} \{ \newline
+\mbox{\hyperlink{group__interrupts_ggadb53a8cc97236ca207c035241a5b7fb8a3b83fbd6b78e3a551d1d7577bbee233f}{Timer}}, 
+\mbox{\hyperlink{group__interrupts_ggadb53a8cc97236ca207c035241a5b7fb8a2638745099fac18206ad65ef7479e7f2}{Keyboard}}, 
+\mbox{\hyperlink{group__interrupts_ggadb53a8cc97236ca207c035241a5b7fb8a3f366d19b692520f76c2e34d5dc45ef5}{Mouse}}, 
+\mbox{\hyperlink{group__interrupts_ggadb53a8cc97236ca207c035241a5b7fb8a56c347f79e72faded9bfee74aecf976a}{Serial\+Port}}, 
+\newline
+\mbox{\hyperlink{group__interrupts_ggadb53a8cc97236ca207c035241a5b7fb8a24073a11916b946561b8cb5c9dfe9bce}{R\+TC}}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_notification}{Notification}} \mbox{\hyperlink{group__interrupts_ga378dd2133c078d7995b6c8117739a3c5}{Get\+Notification}} ()
+\begin{DoxyCompactList}\small\item\em Waits until an interrupt is received, processes it to a struct. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__interrupts_ga52c0411fc9786e0c38241ab3584c7dd8}{subscribe\+\_\+device}} (\mbox{\hyperlink{group__interrupts_gadb53a8cc97236ca207c035241a5b7fb8}{Device}} device)
+\begin{DoxyCompactList}\small\item\em Subscribes a device\textquotesingle{}s interrupts. For the mouse, enables data reporting in stream mode. For the U\+A\+RT, enables the 64 Byte F\+I\+FO and all the interrupt types (apart from modem status) For the R\+TC, enables an alarm for every second. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__interrupts_gac34cc7680c64171b47100c01bb019ab4}{unsubscribe\+\_\+device}} (\mbox{\hyperlink{group__interrupts_gadb53a8cc97236ca207c035241a5b7fb8}{Device}} device)
+\begin{DoxyCompactList}\small\item\em Unsubscribes a device\textquotesingle{}s interrupts For the mouse, disables data reporting in stream mode. For the U\+A\+RT, disables the F\+I\+FO and all the interrupt types (apart from modem status) For the R\+TC, enables an alarm for every second. \end{DoxyCompactList}\end{DoxyCompactItemize}

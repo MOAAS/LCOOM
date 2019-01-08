@@ -1,0 +1,68 @@
+\hypertarget{interrupts_8c}{}\section{interrupts.\+c File Reference}
+\label{interrupts_8c}\index{interrupts.\+c@{interrupts.\+c}}
+{\ttfamily \#include $<$lcom/lcf.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}interrupts.\+h\char`\"{}}\newline
+Include dependency graph for interrupts.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{interrupts_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{group__interrupts_ga52c0411fc9786e0c38241ab3584c7dd8}{subscribe\+\_\+device}} (\mbox{\hyperlink{group__interrupts_gadb53a8cc97236ca207c035241a5b7fb8}{Device}} device)
+\begin{DoxyCompactList}\small\item\em Subscribes a device\textquotesingle{}s interrupts. For the mouse, enables data reporting in stream mode. For the U\+A\+RT, enables the 64 Byte F\+I\+FO and all the interrupt types (apart from modem status) For the R\+TC, enables an alarm for every second. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__interrupts_gac34cc7680c64171b47100c01bb019ab4}{unsubscribe\+\_\+device}} (\mbox{\hyperlink{group__interrupts_gadb53a8cc97236ca207c035241a5b7fb8}{Device}} device)
+\begin{DoxyCompactList}\small\item\em Unsubscribes a device\textquotesingle{}s interrupts For the mouse, disables data reporting in stream mode. For the U\+A\+RT, disables the F\+I\+FO and all the interrupt types (apart from modem status) For the R\+TC, enables an alarm for every second. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_notification}{Notification}} \mbox{\hyperlink{group__interrupts_ga378dd2133c078d7995b6c8117739a3c5}{Get\+Notification}} ()
+\begin{DoxyCompactList}\small\item\em Waits until an interrupt is received, processes it to a struct. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{interrupts_8c_ad02fcede5beda1de5da3bc015d0b8927}{scancode}}
+\item 
+struct packet \mbox{\hyperlink{interrupts_8c_a3b2e64ffb96c650d6525c99be01c7331}{mouse\+\_\+packet}}
+\item 
+\mbox{\hyperlink{struct_u_a_r_t___int___info}{U\+A\+R\+T\+\_\+\+Int\+\_\+\+Info}} \mbox{\hyperlink{interrupts_8c_a3e8d9c95ee4ee6fb386b7f321443efac}{uart\+\_\+int\+\_\+info}}
+\item 
+bool \mbox{\hyperlink{interrupts_8c_a91838552da8bbec1935b70262e464d7e}{uart\+\_\+conflict}}
+\item 
+bool \mbox{\hyperlink{interrupts_8c_a42cb1d77142091f1e5dbdc14149622aa}{rtc\+\_\+alarm\+\_\+int}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{interrupts_8c_a3b2e64ffb96c650d6525c99be01c7331}\label{interrupts_8c_a3b2e64ffb96c650d6525c99be01c7331}} 
+\index{interrupts.\+c@{interrupts.\+c}!mouse\+\_\+packet@{mouse\+\_\+packet}}
+\index{mouse\+\_\+packet@{mouse\+\_\+packet}!interrupts.\+c@{interrupts.\+c}}
+\subsubsection{\texorpdfstring{mouse\+\_\+packet}{mouse\_packet}}
+{\footnotesize\ttfamily struct packet mouse\+\_\+packet}
+
+\mbox{\Hypertarget{interrupts_8c_a42cb1d77142091f1e5dbdc14149622aa}\label{interrupts_8c_a42cb1d77142091f1e5dbdc14149622aa}} 
+\index{interrupts.\+c@{interrupts.\+c}!rtc\+\_\+alarm\+\_\+int@{rtc\+\_\+alarm\+\_\+int}}
+\index{rtc\+\_\+alarm\+\_\+int@{rtc\+\_\+alarm\+\_\+int}!interrupts.\+c@{interrupts.\+c}}
+\subsubsection{\texorpdfstring{rtc\+\_\+alarm\+\_\+int}{rtc\_alarm\_int}}
+{\footnotesize\ttfamily bool rtc\+\_\+alarm\+\_\+int}
+
+\mbox{\Hypertarget{interrupts_8c_ad02fcede5beda1de5da3bc015d0b8927}\label{interrupts_8c_ad02fcede5beda1de5da3bc015d0b8927}} 
+\index{interrupts.\+c@{interrupts.\+c}!scancode@{scancode}}
+\index{scancode@{scancode}!interrupts.\+c@{interrupts.\+c}}
+\subsubsection{\texorpdfstring{scancode}{scancode}}
+{\footnotesize\ttfamily uint16\+\_\+t scancode}
+
+\mbox{\Hypertarget{interrupts_8c_a91838552da8bbec1935b70262e464d7e}\label{interrupts_8c_a91838552da8bbec1935b70262e464d7e}} 
+\index{interrupts.\+c@{interrupts.\+c}!uart\+\_\+conflict@{uart\+\_\+conflict}}
+\index{uart\+\_\+conflict@{uart\+\_\+conflict}!interrupts.\+c@{interrupts.\+c}}
+\subsubsection{\texorpdfstring{uart\+\_\+conflict}{uart\_conflict}}
+{\footnotesize\ttfamily bool uart\+\_\+conflict}
+
+\mbox{\Hypertarget{interrupts_8c_a3e8d9c95ee4ee6fb386b7f321443efac}\label{interrupts_8c_a3e8d9c95ee4ee6fb386b7f321443efac}} 
+\index{interrupts.\+c@{interrupts.\+c}!uart\+\_\+int\+\_\+info@{uart\+\_\+int\+\_\+info}}
+\index{uart\+\_\+int\+\_\+info@{uart\+\_\+int\+\_\+info}!interrupts.\+c@{interrupts.\+c}}
+\subsubsection{\texorpdfstring{uart\+\_\+int\+\_\+info}{uart\_int\_info}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_u_a_r_t___int___info}{U\+A\+R\+T\+\_\+\+Int\+\_\+\+Info}} uart\+\_\+int\+\_\+info}
+

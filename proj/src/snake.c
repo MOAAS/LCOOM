@@ -489,8 +489,11 @@ void loadSnakeHighscore(char* path) {
 }
 
 void saveSnakeHighscore() {
-    FILE *filePtr;
-    filePtr = fopen(file_path, "w");
+    FILE *filePtr = fopen(file_path, "w");
+    if (filePtr == NULL) {
+        printf("couldn't save highscore, path: %s \n", file_path);
+        return;
+    }
     fprintf(filePtr, "Highscore: %d", highscore);
     fclose(filePtr);
 }

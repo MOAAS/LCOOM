@@ -1,0 +1,4 @@
+<map id="rainbow" name="rainbow">
+<area shape="rect" id="node2" href="$group__video.html#ga9fcd5199ebdc148ef21c1faea7280d3f" title="Gets the R,G and B components of a color. " alt="" coords="120,5,263,32"/>
+<area shape="rect" id="node3" href="$group__video.html#ga28573f33d778f8dfd39474a8154ef416" title="Given the RGB components, calculates the color value. " alt="" coords="127,56,256,83"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="wordgame_end_round" name="wordgame_end_round">
+<area shape="rect" id="node2" href="$group__pengoo.html#gaf06af764d8b387c19edc38c0effd1115" title="Ends a game round, adding the gained points. Displays on the screen whether they won or not..." alt="" coords="201,5,284,32"/>
+<area shape="rect" id="node3" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="332,5,441,32"/>
+</map>

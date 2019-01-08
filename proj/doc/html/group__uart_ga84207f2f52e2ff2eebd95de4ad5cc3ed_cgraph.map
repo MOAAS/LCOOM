@@ -1,0 +1,6 @@
+<map id="uart_clear_toSend_queue" name="uart_clear_toSend_queue">
+<area shape="rect" id="node2" href="$group__uart.html#gae1d1c17871aeba317b0582a22006aa94" title="Writes a byte to the THR. " alt="" coords="223,5,333,32"/>
+<area shape="rect" id="node4" href="$group__queue.html#ga6916e93facd123dd3fb655965b440e0e" title="Gets the front of the queue. " alt="" coords="233,56,323,83"/>
+<area shape="rect" id="node5" href="$group__queue.html#gaa7c283555566da64b71864f416e0178a" title="Removes the front of the queue. " alt="" coords="235,107,321,133"/>
+<area shape="rect" id="node3" href="$group__uart.html#ga59c922bd359845f14061ced67e74c6b3" title="Writes a byte to a register. " alt="" coords="381,5,484,32"/>
+</map>

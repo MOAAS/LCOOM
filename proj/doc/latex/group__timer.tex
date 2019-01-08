@@ -1,0 +1,78 @@
+\hypertarget{group__timer}{}\section{timer}
+\label{group__timer}\index{timer@{timer}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{group__timer_ga47c90b12223cd6c7dc0cabf83d41ca54}{timer\+\_\+reset\+\_\+counter}} ()
+\begin{DoxyCompactList}\small\item\em Resets the timer auxiliary counter to 0. Useful to synchronize the timer with the program. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{group__timer_ga2a20f5c67ca8817f632167d0a03467dd}{timer\+\_\+get\+\_\+counter}} ()
+\item 
+int \mbox{\hyperlink{group__timer_ga6cfa415109f0af4e5e4aa62cdb445e4c}{timer\+\_\+enable\+\_\+speaker}} ()
+\begin{DoxyCompactList}\small\item\em Enables the PC speaker, connected to timer 2. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__timer_gaed210041d11c686eb05b82e10074ddbf}{timer\+\_\+disable\+\_\+speaker}} ()
+\begin{DoxyCompactList}\small\item\em Disables the PC speaker. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Functions used to program the PC timer, adding to the lab2 timer functions. 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__timer_gaed210041d11c686eb05b82e10074ddbf}\label{group__timer_gaed210041d11c686eb05b82e10074ddbf}} 
+\index{timer@{timer}!timer\+\_\+disable\+\_\+speaker@{timer\+\_\+disable\+\_\+speaker}}
+\index{timer\+\_\+disable\+\_\+speaker@{timer\+\_\+disable\+\_\+speaker}!timer@{timer}}
+\subsubsection{\texorpdfstring{timer\+\_\+disable\+\_\+speaker()}{timer\_disable\_speaker()}}
+{\footnotesize\ttfamily int timer\+\_\+disable\+\_\+speaker (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Disables the PC speaker. 
+
+\begin{DoxyReturn}{Returns}
+int Returns 0 on success. Non-\/zero otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group__timer_ga6cfa415109f0af4e5e4aa62cdb445e4c}\label{group__timer_ga6cfa415109f0af4e5e4aa62cdb445e4c}} 
+\index{timer@{timer}!timer\+\_\+enable\+\_\+speaker@{timer\+\_\+enable\+\_\+speaker}}
+\index{timer\+\_\+enable\+\_\+speaker@{timer\+\_\+enable\+\_\+speaker}!timer@{timer}}
+\subsubsection{\texorpdfstring{timer\+\_\+enable\+\_\+speaker()}{timer\_enable\_speaker()}}
+{\footnotesize\ttfamily int timer\+\_\+enable\+\_\+speaker (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Enables the PC speaker, connected to timer 2. 
+
+\begin{DoxyReturn}{Returns}
+int Returns 0 on success. Non-\/zero otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group__timer_ga2a20f5c67ca8817f632167d0a03467dd}\label{group__timer_ga2a20f5c67ca8817f632167d0a03467dd}} 
+\index{timer@{timer}!timer\+\_\+get\+\_\+counter@{timer\+\_\+get\+\_\+counter}}
+\index{timer\+\_\+get\+\_\+counter@{timer\+\_\+get\+\_\+counter}!timer@{timer}}
+\subsubsection{\texorpdfstring{timer\+\_\+get\+\_\+counter()}{timer\_get\_counter()}}
+{\footnotesize\ttfamily uint32\+\_\+t timer\+\_\+get\+\_\+counter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+uint32\+\_\+t Returns the timer auxiliary counter. 
+\end{DoxyReturn}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__timer_ga2a20f5c67ca8817f632167d0a03467dd_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__timer_ga47c90b12223cd6c7dc0cabf83d41ca54}\label{group__timer_ga47c90b12223cd6c7dc0cabf83d41ca54}} 
+\index{timer@{timer}!timer\+\_\+reset\+\_\+counter@{timer\+\_\+reset\+\_\+counter}}
+\index{timer\+\_\+reset\+\_\+counter@{timer\+\_\+reset\+\_\+counter}!timer@{timer}}
+\subsubsection{\texorpdfstring{timer\+\_\+reset\+\_\+counter()}{timer\_reset\_counter()}}
+{\footnotesize\ttfamily void timer\+\_\+reset\+\_\+counter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Resets the timer auxiliary counter to 0. Useful to synchronize the timer with the program. 
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__timer_ga47c90b12223cd6c7dc0cabf83d41ca54_icgraph}
+\end{center}
+\end{figure}

@@ -1,0 +1,51 @@
+<map id="vg_get_video_mem" name="vg_get_video_mem">
+<area shape="rect" id="node2" href="$group__bitmap.html#ga37e42f0583efd18e7efa5a036798539e" title="Draws a bitmap on the screen. " alt="" coords="401,583,496,609"/>
+<area shape="rect" id="node11" href="$group__snake.html#ga0023b72115390a70c136c27bcd0f7844" title="Creates between 1 and 12 random obstacles, and adds them to the arena. " alt="" coords="807,684,967,711"/>
+<area shape="rect" id="node15" href="$group__bitmap.html#ga0a2714359072f1a1b3f361c89e30be52" title="Draws a bitmap on the screen, replacing every GREEN pixel with another color. " alt="" coords="188,377,319,404"/>
+<area shape="rect" id="node31" href="$group__bitmap.html#ga12d1b6c1fa206ba89cf45d23f6679657" title="Draws a bitmap on the screen, allowing the caller to use transparency. The color BLACK ignores transp..." alt="" coords="184,811,323,837"/>
+<area shape="rect" id="node33" href="$group__canvas.html#gab462a38a3f3a612931c008e28e816a8d" title="Updates the canvas with its layer contents. " alt="" coords="199,873,307,900"/>
+<area shape="rect" id="node35" href="$group__canvas.html#ga6e24c5fefa7848e9a29d146af77356f7" title="Draws a horizontal line on the canvas. " alt="" coords="188,185,319,212"/>
+<area shape="rect" id="node42" href="$group__canvas.html#ga4d89ce4c1a9450f7a5ee8e1281832584" title="Draws a rectangle on the canvas. " alt="" coords="371,417,527,444"/>
+<area shape="rect" id="node47" href="$group__canvas.html#ga40081f7d018fdf95112d5171175fc30c" title="Flood fills the canvas. " alt="" coords="842,25,931,52"/>
+<area shape="rect" id="node48" href="$group__video.html#gaa81a86216d20abdc74fffe6a374d7c84" title="Draws a horizontal line on the screen. " alt="" coords="194,735,313,761"/>
+<area shape="rect" id="node3" href="$group__flappy.html#gaa9297621f8ee414c88d82528044d564e" title="Moves the obstacles hitbox and redraws them. " alt="" coords="601,481,733,508"/>
+<area shape="rect" id="node6" href="$group__snake.html#ga51b55e1ad05667d456ed81db42c26b9f" title="Redraws the UI HP bar. " alt="" coords="592,735,741,761"/>
+<area shape="rect" id="node9" href="$group__snake.html#ga4890845dc17bb18e466ffc2590f1d067" title="Draws all the obstacles on the screen. " alt="" coords="585,633,748,660"/>
+<area shape="rect" id="node10" href="$group__snake.html#ga5b6ba10dffbae055f140e8793d279dbf" title="Adds an obstacle to the arena. " alt="" coords="597,583,736,609"/>
+<area shape="rect" id="node13" href="$group__sprite.html#ga740994f8c16c38bf18eaabac1f5eeeb9" title="Draws a sprite on the screen. " alt="" coords="623,532,711,559"/>
+<area shape="rect" id="node4" href="$group__flappy.html#gaf8e964390506e60ce524b539e98ff4fc" title="Updates the screen, by moving the game area and obstacles, and redrawing the bird. " alt="" coords="813,431,961,457"/>
+<area shape="rect" id="node5" href="$group__flappy.html#ga8efa272248ce46f0bb6081dcb680598d" title="Moves the game forward. Moves the bird vertically, moves the screen to the left, updates the score an..." alt="" coords="1042,431,1126,457"/>
+<area shape="rect" id="node7" href="$group__snake.html#gae59edc17cc6d3f6f1fef0d047304265b" title="Moves the game forward. Moves the snake and decoys, redraws the obstacles and increases the snake&#39;s s..." alt="" coords="825,735,949,761"/>
+<area shape="rect" id="node8" href="$group__pengoo.html#gab63f8a21d8bd92b9f638151a9912fa84" title="Runs the rainbow snake game. User can exit at any time by pressing ESC. " alt="" coords="1209,735,1297,761"/>
+<area shape="rect" id="node12" href="$group__snake.html#gae7016570a88c488abe2dabb31467daf8" title="Creates a snake arena and UI. Adds obstacles and creates the HP bar. Also adds the scoreboard on top..." alt="" coords="1015,684,1153,711"/>
+<area shape="rect" id="node14" href="$group__sprite.html#ga91bbc8d0a30c581a10b9d193d0d77c43" title="Moves a sprite. " alt="" coords="841,633,932,660"/>
+<area shape="rect" id="node16" href="$group__sprite.html#gab5aa8ee6efdb9ebf62df81cad24c445c" title="Draws a sprite on the screen, and replaces every color GREEN with its color atribute. " alt="" coords="387,341,510,368"/>
+<area shape="rect" id="node17" href="$group__pengoo.html#gac36b16b3f3b197d1e93926a0b5ba1396" title="Changes the drawing&#45;state/pencil tool, updating the cursor and the paint tubes as well..." alt="" coords="841,380,933,407"/>
+<area shape="rect" id="node26" href="$group__sprite.html#ga90f5eec8870a027c011108bc4885880c" title="Updates a cursor (sprite), by reading an event. " alt="" coords="1032,177,1136,204"/>
+<area shape="rect" id="node30" href="$group__sprite.html#gad12aa07248bed260a545f3ee69372842" title="Change the bitmap of a sprite. " alt="" coords="597,380,736,407"/>
+<area shape="rect" id="node18" href="$group__pengoo.html#ga30fa7d6f201a425bca137ab6a78e8c82" title="Resets the drawing state to the initial one. (Black/White, thickness 4, NoTool, etc.) " alt="" coords="1038,329,1130,356"/>
+<area shape="rect" id="node19" href="$group__pengoo.html#ga3df244ae6ccf0baca3f8426c306d3802" title="Updates the drawing state, by checking whether or not a painting button was pressed. Updates the thickness slider if needed. Updades the cursor if needed. " alt="" coords="1201,329,1304,356"/>
+<area shape="rect" id="node23" href="$group__pengoo.html#ga6ac5130bfa3fa90697b1368d605563c0" title="Uses the pencil by reading an event. Depending on the tool, it may draw on the screen, update colors, etc. " alt="" coords="1045,228,1123,255"/>
+<area shape="rect" id="node24" href="$group__pengoo.html#ga178ee685108a5f6164bf1c1757040ee2" title="Runs the word game, as a drawer. Sends the drawing to the other user on every move. Sends the clock updates to the other user, every second. User can select a color from the open window. " alt="" coords="1207,279,1299,305"/>
+<area shape="rect" id="node25" href="$group__pengoo.html#ga4de72e6fe25e96efa9d419d420f34fcb" title="Sets the canvas up, along with the buttons, depending on the current gameState. " alt="" coords="1033,481,1135,508"/>
+<area shape="rect" id="node20" href="$group__pengoo.html#ga56c5cf8a568cff737ff95520cbe6b405" title="Runs the word game, as a drawer. Sends the drawing to the other user on every move. Sends the clock updates to the other user, every second. User can use the several buttons and mouse to draw on the screen. " alt="" coords="1381,267,1430,293"/>
+<area shape="rect" id="node21" href="$group__pengoo.html#gae0cdf0dedf98ccbeac43b0300e0d2df1" title="Runs the training/single&#45;player mode. Same as soloing a guessing game but with added Undo..." alt="" coords="1373,608,1437,635"/>
+<area shape="rect" id="node22" href="$group__pengoo.html#gaa5d8d3d5af977d3d9e7141bf2693c81e" title="Runs the collab/multi&#45;player mode. Same as training mode, but without the Undo and Load buttons..." alt="" coords="1352,89,1459,116"/>
+<area shape="rect" id="node27" href="$group__pengoo.html#ga089d0f37444b1b486cf98045a512deed" title="Runs the word game, as a guesser. Displays on the screen what the other user draws. User can press ENTER to type a guess. " alt="" coords="1224,228,1281,255"/>
+<area shape="rect" id="node28" href="$group__pengoo.html#gabe23d2dac0552bf9069a47573770d379" title="Runs the word game, as a guesser. Displays on the screen what the other user draws. User can type a guess, press ESC or ENTER to insert his guess. " alt="" coords="1208,127,1297,153"/>
+<area shape="rect" id="node29" href="$group__pengoo.html#ga7be478ae067a8e77c79ece6af6082ce5" title="Runs the saving of the canvas drawing. " alt="" coords="1229,177,1277,204"/>
+<area shape="rect" id="node32" href="$group__snake.html#ga856dc5c649341abaee91d35bafaa92b9" title="Displays on the screen the highscore, score and top speed of the run. " alt="" coords="1023,811,1145,837"/>
+<area shape="rect" id="node34" href="$group__canvas.html#ga96be607ebdf4fda25a050f017d68db93" title="Edits the canvas to the last saved pixel map. " alt="" coords="1204,836,1301,863"/>
+<area shape="rect" id="node36" href="$group__canvas.html#gabd95ad76b8189badc5d0e84de1bb8987" title="Draws a filled circle on the canvas. " alt="" coords="381,185,516,212"/>
+<area shape="rect" id="node41" href="$group__canvas.html#ga5301d24065ffd6d68ead836aaeb197f3" title="Draws a rectangle outline on the canvas. " alt="" coords="371,119,527,161"/>
+<area shape="rect" id="node37" href="$group__canvas.html#ga62d3a3d77148b1c1ce74a7fd960601f8" title="Draws a shape on the canvas, based on two mouse clicks. " alt="" coords="817,76,956,103"/>
+<area shape="rect" id="node39" href="$group__canvas.html#ga6467ff4e7b1752b7d5e59664a16d3319" title="Draws a line on the canvas, updating the screen. " alt="" coords="605,279,728,305"/>
+<area shape="rect" id="node40" href="$group__canvas.html#ga48f0ded465dd3ec65ac6b748f61f1802" title="Draws a circumference on the canvas. " alt="" coords="575,25,759,52"/>
+<area shape="rect" id="node38" href="$group__uart__wordgame.html#ga1dbbd888f62428123dfc5bbbfa178134" title="Processes a list of messages, doing what they order. " alt="" coords="1016,127,1152,153"/>
+<area shape="rect" id="node43" href="$group__canvas.html#gaa3c801c4663518591f899050db47ad0b" title="Draws a square on the canvas. " alt="" coords="595,228,738,255"/>
+<area shape="rect" id="node45" href="$group__canvas.html#ga82c276340112469fe11a819ade81ead2" title="Sets the canvas color, filling it. " alt="" coords="605,431,728,457"/>
+<area shape="rect" id="node44" href="$group__canvas.html#ga6cdeb1a3e72205082d77d0fb9b61b22f" title="Draws a line on the canvas, updating the screen. Uses a Square pattern. " alt="" coords="821,228,952,255"/>
+<area shape="rect" id="node46" href="$group__canvas.html#ga8ca57c812327763152c635d235e3104e" title="Creates a canvas and draws it on the screen, with a black outline. " alt="" coords="834,583,939,609"/>
+<area shape="rect" id="node49" href="$group__video.html#ga141b925836a12854efeb2d84b6e1542c" title="Draws a rectangle on the screen. " alt="" coords="376,735,521,761"/>
+<area shape="rect" id="node50" href="$group__video.html#ga6e2c7948df1662b15b1977cf20e8e479" title="Fills the screen with a specific color. " alt="" coords="600,785,733,812"/>
+</map>

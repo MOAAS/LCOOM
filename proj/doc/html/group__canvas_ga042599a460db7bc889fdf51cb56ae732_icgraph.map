@@ -1,0 +1,14 @@
+<map id="canvas_set_outline" name="canvas_set_outline">
+<area shape="rect" id="node2" href="$group__canvas.html#ga8ca57c812327763152c635d235e3104e" title="Creates a canvas and draws it on the screen, with a black outline. " alt="" coords="185,151,291,177"/>
+<area shape="rect" id="node3" href="$group__flappy.html#ga5c94499758654ce3c58278cdacb968c2" title="Creates a bird object and starts the game. " alt="" coords="363,75,453,101"/>
+<area shape="rect" id="node6" href="$group__pengoo.html#ga4de72e6fe25e96efa9d419d420f34fcb" title="Sets the canvas up, along with the buttons, depending on the current gameState. " alt="" coords="357,151,459,177"/>
+<area shape="rect" id="node12" href="$group__snake.html#gae7016570a88c488abe2dabb31467daf8" title="Creates a snake arena and UI. Adds obstacles and creates the HP bar. Also adds the scoreboard on top..." alt="" coords="339,227,477,253"/>
+<area shape="rect" id="node4" href="$group__pengoo.html#ga2ef126f11a398bb34f581d5eca368e6b" title="Runs the flappy rainbow game. User can exit at any time by pressing ESC. " alt="" coords="696,5,783,32"/>
+<area shape="rect" id="node5" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="847,132,956,159"/>
+<area shape="rect" id="node7" href="$group__pengoo.html#ga885611589f6294afada89fe88362e863" title="Runs the main hub. Draws all the main menu buttons, allowing the user to proceed by clicking on them..." alt="" coords="695,56,784,83"/>
+<area shape="rect" id="node8" href="$group__pengoo.html#ga02cb99bd23a1083281e874b3b4ebbad5" title="Starts a word game round, setting up the canvas and in case the user is drawing, sets up the pencil a..." alt="" coords="535,151,622,177"/>
+<area shape="rect" id="node11" href="$group__pengoo.html#ga92c88d0b081234c242ddccf22be99782" title="Waits for the other user to show up to the multi&#45;player mode. " alt="" coords="525,201,632,228"/>
+<area shape="rect" id="node9" href="$group__pengoo.html#ga19cfab1706132a19749fc519f84d9445" title="Waits for the guesser to be ready to start a wordgame round (user is drawing) " alt="" coords="680,107,799,133"/>
+<area shape="rect" id="node10" href="$group__pengoo.html#ga45d4be7b19d3dd0ea742f0a489112c80" title="Waits for the drawer to be ready to start a wordgame round (user is guessing) " alt="" coords="684,157,795,184"/>
+<area shape="rect" id="node13" href="$group__pengoo.html#gab63f8a21d8bd92b9f638151a9912fa84" title="Runs the rainbow snake game. User can exit at any time by pressing ESC. " alt="" coords="535,256,623,283"/>
+</map>

@@ -1,0 +1,12 @@
+<map id="interrupts.h" name="interrupts.h">
+<area shape="rect" id="node2" href="$keyboard_8h.html" title="keyboard.h" alt="" coords="97,155,184,181"/>
+<area shape="rect" id="node3" href="$mouse_8h.html" title="mouse.h" alt="" coords="159,80,231,107"/>
+<area shape="rect" id="node5" href="$timer_8h.html" title="timer.h" alt="" coords="328,80,391,107"/>
+<area shape="rect" id="node6" href="$uart_8h.html" title="uart.h" alt="" coords="29,80,84,107"/>
+<area shape="rect" id="node8" href="$rtc_8h.html" title="rtc.h" alt="" coords="255,80,303,107"/>
+<area shape="rect" id="node9" href="$video_8h.html" title="video.h" alt="" coords="415,80,477,107"/>
+<area shape="rect" id="node11" href="$i8254_8h.html" title="i8254.h" alt="" coords="502,80,566,107"/>
+<area shape="rect" id="node4" href="$i8042_8h.html" title="i8042.h" alt="" coords="219,155,283,181"/>
+<area shape="rect" id="node7" href="$queue_8h.html" title="queue.h" alt="" coords="5,155,73,181"/>
+<area shape="rect" id="node10" href="$vbe_8h.html" title="vbe.h" alt="" coords="420,155,472,181"/>
+</map>

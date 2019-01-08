@@ -1,0 +1,542 @@
+\hypertarget{group__layer}{}\section{layer}
+\label{group__layer}\index{layer@{layer}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_layer}{Layer}}
+\begin{DoxyCompactList}\small\item\em Represents a layer, which may be under, or on top of other layers. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_layer}{Layer}} $\ast$ \mbox{\hyperlink{group__layer_gae7f68548d31f2961ac68df03e53558c2}{create\+\_\+layer}} (uint16\+\_\+t x, uint16\+\_\+t y, uint16\+\_\+t width, uint16\+\_\+t height)
+\begin{DoxyCompactList}\small\item\em Creates a layer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__layer_gae89d557f21d9465ba7372ff23cf05ae9}{destroy\+\_\+layer}} (\mbox{\hyperlink{struct_layer}{Layer}} $\ast$layer)
+\begin{DoxyCompactList}\small\item\em Destroys the layer, erasing all the pixels from the screen (draws the ones under it), and deleteing it from the layer array. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_layer}{Layer}} $\ast$ \mbox{\hyperlink{group__layer_gaec705a8cfd8cc0d79ef36fa4f47da621}{get\+\_\+highest\+\_\+layer}} ()
+\item 
+void \mbox{\hyperlink{group__layer_ga04dfe9a97af5089a6b5a5a044d8d7e9c}{draw\+\_\+on\+\_\+layer}} (\mbox{\hyperlink{struct_layer}{Layer}} $\ast$layer, uint16\+\_\+t x, uint16\+\_\+t y, uint32\+\_\+t \mbox{\hyperlink{structcolor}{color}})
+\begin{DoxyCompactList}\small\item\em Draws a pixel on a layer. If that pixel has no other layer above, updates the screen as well. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__layer_ga3eef68dc1d9d6086e747506f82a4eb11}{is\+\_\+top\+\_\+layer}} (\mbox{\hyperlink{struct_layer}{Layer}} $\ast$layer, uint16\+\_\+t x, uint16\+\_\+t y)
+\begin{DoxyCompactList}\small\item\em Checks if layer is the highest on that position. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__layer_ga8bd4001df9f278c1b60a0a7732deef83}{layer\+\_\+set\+\_\+pixel}} (\mbox{\hyperlink{struct_layer}{Layer}} $\ast$layer, uint16\+\_\+t x, uint16\+\_\+t y, uint32\+\_\+t \mbox{\hyperlink{structcolor}{color}})
+\begin{DoxyCompactList}\small\item\em Sets a pixel in the layer map (does not update the screen) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__layer_ga5c826dd6313f240df1df23f9b049e3fd}{layer\+\_\+erase\+\_\+pixel}} (\mbox{\hyperlink{struct_layer}{Layer}} $\ast$layer, uint16\+\_\+t x, uint16\+\_\+t y)
+\begin{DoxyCompactList}\small\item\em Changes a color of a layer position to the one under it. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{group__layer_gab108b73fe8d04f98fa55d281c245179b}{layer\+\_\+get\+\_\+pixel}} (\mbox{\hyperlink{struct_layer}{Layer}} $\ast$layer, uint16\+\_\+t x, uint16\+\_\+t y)
+\begin{DoxyCompactList}\small\item\em Gets the color of a layer pixel. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{group__layer_ga1f190aee16c183dcd256751cdbf41711}{layer\+\_\+get\+\_\+pixel\+\_\+under}} (\mbox{\hyperlink{struct_layer}{Layer}} $\ast$layer, uint16\+\_\+t x, uint16\+\_\+t y)
+\begin{DoxyCompactList}\small\item\em Gets the color of a layer pixel. If out of bounds, checks the one under it until it finds a valid layer. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__layer_ga7f74243f1e256f7977109a1af3cfcaf2}{is\+\_\+within\+\_\+bounds}} (\mbox{\hyperlink{struct_layer}{Layer}} $\ast$layer, uint16\+\_\+t x, uint16\+\_\+t y)
+\begin{DoxyCompactList}\small\item\em Checks if a position is inside a layer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__layer_ga9ac38361f9d11a9948ba299a6a6ad71f}{layer\+\_\+draw\+\_\+image}} (\mbox{\hyperlink{struct_layer}{Layer}} $\ast$layer, \mbox{\hyperlink{struct_bitmap}{Bitmap}} $\ast$bmp, int x, int y)
+\begin{DoxyCompactList}\small\item\em Draws a bitmap on a layer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__layer_gaafecb163f102a681ca44cd542057370a}{layer\+\_\+draw\+\_\+image\+\_\+color}} (\mbox{\hyperlink{struct_layer}{Layer}} $\ast$layer, \mbox{\hyperlink{struct_bitmap}{Bitmap}} $\ast$bmp, int x, int y, uint32\+\_\+t new\+\_\+color)
+\begin{DoxyCompactList}\small\item\em Draws a bitmap on a layer, replacing all the G\+R\+E\+EN with another color. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \mbox{\hyperlink{group__layer_ga4439f4ca4c45e80cb99cf0445226a1c7}{Layer\+::map}}
+\begin{DoxyCompactList}\small\item\em Pixel map, where the first element is the upper left corner. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{group__layer_ga93492d1dfe4b2ba659366efc048f4aa6}{Layer\+::x}}
+\begin{DoxyCompactList}\small\item\em X position of the upper left corner. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{group__layer_ga7748abe8164b906fa159c0d57c7b0909}{Layer\+::y}}
+\begin{DoxyCompactList}\small\item\em Y position of the upper left corner. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{group__layer_gabab5e77cc86413440c0a9f99e851269d}{Layer\+::x\+Max}}
+\begin{DoxyCompactList}\small\item\em x + width \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{group__layer_ga005d97fb2216101a65f274f4e8d609d9}{Layer\+::y\+Max}}
+\begin{DoxyCompactList}\small\item\em y + height \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{group__layer_ga9d1e4ca46204961e88006f131c697e97}{Layer\+::width}}
+\begin{DoxyCompactList}\small\item\em Number of pixels per row. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{group__layer_ga55165612a9f4da7933dde862c7a54406}{Layer\+::height}}
+\begin{DoxyCompactList}\small\item\em Number of pixels per column. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{group__layer_ga0c56f7ad3a85bd2173f52e11176f791c}{Layer\+::layer\+\_\+no}}
+\begin{DoxyCompactList}\small\item\em Position in the layer array. Lower layers go under. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Functions used to create and manipulate simulated layers in an easy way. 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__layer_gae7f68548d31f2961ac68df03e53558c2}\label{group__layer_gae7f68548d31f2961ac68df03e53558c2}} 
+\index{layer@{layer}!create\+\_\+layer@{create\+\_\+layer}}
+\index{create\+\_\+layer@{create\+\_\+layer}!layer@{layer}}
+\subsubsection{\texorpdfstring{create\+\_\+layer()}{create\_layer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_layer}{Layer}}$\ast$ create\+\_\+layer (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{x,  }\item[{uint16\+\_\+t}]{y,  }\item[{uint16\+\_\+t}]{width,  }\item[{uint16\+\_\+t}]{height }\end{DoxyParamCaption})}
+
+
+
+Creates a layer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & X position of the upper left corner ~\newline
+\\
+\hline
+{\em y} & Y position of the upper left corner \\
+\hline
+{\em width} & Number of pixels per row \\
+\hline
+{\em height} & Number of pixels per column \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Layer$\ast$ The created layer. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__layer_gae7f68548d31f2961ac68df03e53558c2_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__layer_gae7f68548d31f2961ac68df03e53558c2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__layer_gae89d557f21d9465ba7372ff23cf05ae9}\label{group__layer_gae89d557f21d9465ba7372ff23cf05ae9}} 
+\index{layer@{layer}!destroy\+\_\+layer@{destroy\+\_\+layer}}
+\index{destroy\+\_\+layer@{destroy\+\_\+layer}!layer@{layer}}
+\subsubsection{\texorpdfstring{destroy\+\_\+layer()}{destroy\_layer()}}
+{\footnotesize\ttfamily void destroy\+\_\+layer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_layer}{Layer}} $\ast$}]{layer }\end{DoxyParamCaption})}
+
+
+
+Destroys the layer, erasing all the pixels from the screen (draws the ones under it), and deleteing it from the layer array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em layer} & \mbox{\hyperlink{struct_layer}{Layer}} to be destroyed. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__layer_gae89d557f21d9465ba7372ff23cf05ae9_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__layer_gae89d557f21d9465ba7372ff23cf05ae9_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__layer_ga04dfe9a97af5089a6b5a5a044d8d7e9c}\label{group__layer_ga04dfe9a97af5089a6b5a5a044d8d7e9c}} 
+\index{layer@{layer}!draw\+\_\+on\+\_\+layer@{draw\+\_\+on\+\_\+layer}}
+\index{draw\+\_\+on\+\_\+layer@{draw\+\_\+on\+\_\+layer}!layer@{layer}}
+\subsubsection{\texorpdfstring{draw\+\_\+on\+\_\+layer()}{draw\_on\_layer()}}
+{\footnotesize\ttfamily void draw\+\_\+on\+\_\+layer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_layer}{Layer}} $\ast$}]{layer,  }\item[{uint16\+\_\+t}]{x,  }\item[{uint16\+\_\+t}]{y,  }\item[{uint32\+\_\+t}]{color }\end{DoxyParamCaption})}
+
+
+
+Draws a pixel on a layer. If that pixel has no other layer above, updates the screen as well. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em layer} & \mbox{\hyperlink{struct_layer}{Layer}} to draw on. \\
+\hline
+{\em x} & X position to draw on \\
+\hline
+{\em y} & Y position to draw on \\
+\hline
+{\em color} & Color to draw with \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__layer_ga04dfe9a97af5089a6b5a5a044d8d7e9c_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__layer_ga04dfe9a97af5089a6b5a5a044d8d7e9c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__layer_gaec705a8cfd8cc0d79ef36fa4f47da621}\label{group__layer_gaec705a8cfd8cc0d79ef36fa4f47da621}} 
+\index{layer@{layer}!get\+\_\+highest\+\_\+layer@{get\+\_\+highest\+\_\+layer}}
+\index{get\+\_\+highest\+\_\+layer@{get\+\_\+highest\+\_\+layer}!layer@{layer}}
+\subsubsection{\texorpdfstring{get\+\_\+highest\+\_\+layer()}{get\_highest\_layer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_layer}{Layer}}$\ast$ get\+\_\+highest\+\_\+layer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+Layer$\ast$ Returns the topmost layer. 
+\end{DoxyReturn}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__layer_gaec705a8cfd8cc0d79ef36fa4f47da621_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__layer_ga3eef68dc1d9d6086e747506f82a4eb11}\label{group__layer_ga3eef68dc1d9d6086e747506f82a4eb11}} 
+\index{layer@{layer}!is\+\_\+top\+\_\+layer@{is\+\_\+top\+\_\+layer}}
+\index{is\+\_\+top\+\_\+layer@{is\+\_\+top\+\_\+layer}!layer@{layer}}
+\subsubsection{\texorpdfstring{is\+\_\+top\+\_\+layer()}{is\_top\_layer()}}
+{\footnotesize\ttfamily bool is\+\_\+top\+\_\+layer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_layer}{Layer}} $\ast$}]{layer,  }\item[{uint16\+\_\+t}]{x,  }\item[{uint16\+\_\+t}]{y }\end{DoxyParamCaption})}
+
+
+
+Checks if layer is the highest on that position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em layer} & \mbox{\hyperlink{struct_layer}{Layer}} to check \\
+\hline
+{\em x} & X position to check \\
+\hline
+{\em y} & Y position to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true \mbox{\hyperlink{struct_layer}{Layer}} is the highest on that position 
+
+false \mbox{\hyperlink{struct_layer}{Layer}} is not the highest on that position 
+\end{DoxyReturn}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=276pt]{group__layer_ga3eef68dc1d9d6086e747506f82a4eb11_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__layer_ga3eef68dc1d9d6086e747506f82a4eb11_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__layer_ga7f74243f1e256f7977109a1af3cfcaf2}\label{group__layer_ga7f74243f1e256f7977109a1af3cfcaf2}} 
+\index{layer@{layer}!is\+\_\+within\+\_\+bounds@{is\+\_\+within\+\_\+bounds}}
+\index{is\+\_\+within\+\_\+bounds@{is\+\_\+within\+\_\+bounds}!layer@{layer}}
+\subsubsection{\texorpdfstring{is\+\_\+within\+\_\+bounds()}{is\_within\_bounds()}}
+{\footnotesize\ttfamily bool is\+\_\+within\+\_\+bounds (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_layer}{Layer}} $\ast$}]{layer,  }\item[{uint16\+\_\+t}]{x,  }\item[{uint16\+\_\+t}]{y }\end{DoxyParamCaption})}
+
+
+
+Checks if a position is inside a layer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em layer} & \mbox{\hyperlink{struct_layer}{Layer}} to check \\
+\hline
+{\em x} & X position \\
+\hline
+{\em y} & Y position \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true The position is inside the layer 
+
+false The position is not inside the layer 
+\end{DoxyReturn}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__layer_ga7f74243f1e256f7977109a1af3cfcaf2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__layer_ga9ac38361f9d11a9948ba299a6a6ad71f}\label{group__layer_ga9ac38361f9d11a9948ba299a6a6ad71f}} 
+\index{layer@{layer}!layer\+\_\+draw\+\_\+image@{layer\+\_\+draw\+\_\+image}}
+\index{layer\+\_\+draw\+\_\+image@{layer\+\_\+draw\+\_\+image}!layer@{layer}}
+\subsubsection{\texorpdfstring{layer\+\_\+draw\+\_\+image()}{layer\_draw\_image()}}
+{\footnotesize\ttfamily void layer\+\_\+draw\+\_\+image (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_layer}{Layer}} $\ast$}]{layer,  }\item[{\mbox{\hyperlink{struct_bitmap}{Bitmap}} $\ast$}]{bmp,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+
+Draws a bitmap on a layer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em layer} & \mbox{\hyperlink{struct_layer}{Layer}} to draw on \\
+\hline
+{\em bmp} & \mbox{\hyperlink{struct_bitmap}{Bitmap}} to draw \\
+\hline
+{\em x} & X position of the upper left corner \\
+\hline
+{\em y} & Y position of the upper left corner \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__layer_ga9ac38361f9d11a9948ba299a6a6ad71f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__layer_ga9ac38361f9d11a9948ba299a6a6ad71f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__layer_gaafecb163f102a681ca44cd542057370a}\label{group__layer_gaafecb163f102a681ca44cd542057370a}} 
+\index{layer@{layer}!layer\+\_\+draw\+\_\+image\+\_\+color@{layer\+\_\+draw\+\_\+image\+\_\+color}}
+\index{layer\+\_\+draw\+\_\+image\+\_\+color@{layer\+\_\+draw\+\_\+image\+\_\+color}!layer@{layer}}
+\subsubsection{\texorpdfstring{layer\+\_\+draw\+\_\+image\+\_\+color()}{layer\_draw\_image\_color()}}
+{\footnotesize\ttfamily void layer\+\_\+draw\+\_\+image\+\_\+color (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_layer}{Layer}} $\ast$}]{layer,  }\item[{\mbox{\hyperlink{struct_bitmap}{Bitmap}} $\ast$}]{bmp,  }\item[{int}]{x,  }\item[{int}]{y,  }\item[{uint32\+\_\+t}]{new\+\_\+color }\end{DoxyParamCaption})}
+
+
+
+Draws a bitmap on a layer, replacing all the G\+R\+E\+EN with another color. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em layer} & \mbox{\hyperlink{struct_layer}{Layer}} to draw on \\
+\hline
+{\em bmp} & \mbox{\hyperlink{struct_bitmap}{Bitmap}} to draw \\
+\hline
+{\em x} & X position of the upper left corner \\
+\hline
+{\em y} & Y position of the upper left corner \\
+\hline
+{\em new\+\_\+color} & Color to replace G\+R\+E\+EN with. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__layer_gaafecb163f102a681ca44cd542057370a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__layer_gaafecb163f102a681ca44cd542057370a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__layer_ga5c826dd6313f240df1df23f9b049e3fd}\label{group__layer_ga5c826dd6313f240df1df23f9b049e3fd}} 
+\index{layer@{layer}!layer\+\_\+erase\+\_\+pixel@{layer\+\_\+erase\+\_\+pixel}}
+\index{layer\+\_\+erase\+\_\+pixel@{layer\+\_\+erase\+\_\+pixel}!layer@{layer}}
+\subsubsection{\texorpdfstring{layer\+\_\+erase\+\_\+pixel()}{layer\_erase\_pixel()}}
+{\footnotesize\ttfamily void layer\+\_\+erase\+\_\+pixel (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_layer}{Layer}} $\ast$}]{layer,  }\item[{uint16\+\_\+t}]{x,  }\item[{uint16\+\_\+t}]{y }\end{DoxyParamCaption})}
+
+
+
+Changes a color of a layer position to the one under it. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em layer} & \mbox{\hyperlink{struct_layer}{Layer}} to draw on \\
+\hline
+{\em x} & X position \\
+\hline
+{\em y} & Y position \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__layer_ga5c826dd6313f240df1df23f9b049e3fd_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__layer_ga5c826dd6313f240df1df23f9b049e3fd_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__layer_gab108b73fe8d04f98fa55d281c245179b}\label{group__layer_gab108b73fe8d04f98fa55d281c245179b}} 
+\index{layer@{layer}!layer\+\_\+get\+\_\+pixel@{layer\+\_\+get\+\_\+pixel}}
+\index{layer\+\_\+get\+\_\+pixel@{layer\+\_\+get\+\_\+pixel}!layer@{layer}}
+\subsubsection{\texorpdfstring{layer\+\_\+get\+\_\+pixel()}{layer\_get\_pixel()}}
+{\footnotesize\ttfamily uint32\+\_\+t layer\+\_\+get\+\_\+pixel (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_layer}{Layer}} $\ast$}]{layer,  }\item[{uint16\+\_\+t}]{x,  }\item[{uint16\+\_\+t}]{y }\end{DoxyParamCaption})}
+
+
+
+Gets the color of a layer pixel. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em layer} & \mbox{\hyperlink{struct_layer}{Layer}} to check. \\
+\hline
+{\em x} & X position of the pixel. \\
+\hline
+{\em y} & Y position of the pixel. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint32\+\_\+t Returns the color 
+\end{DoxyReturn}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=289pt]{group__layer_gab108b73fe8d04f98fa55d281c245179b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__layer_gab108b73fe8d04f98fa55d281c245179b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__layer_ga1f190aee16c183dcd256751cdbf41711}\label{group__layer_ga1f190aee16c183dcd256751cdbf41711}} 
+\index{layer@{layer}!layer\+\_\+get\+\_\+pixel\+\_\+under@{layer\+\_\+get\+\_\+pixel\+\_\+under}}
+\index{layer\+\_\+get\+\_\+pixel\+\_\+under@{layer\+\_\+get\+\_\+pixel\+\_\+under}!layer@{layer}}
+\subsubsection{\texorpdfstring{layer\+\_\+get\+\_\+pixel\+\_\+under()}{layer\_get\_pixel\_under()}}
+{\footnotesize\ttfamily uint32\+\_\+t layer\+\_\+get\+\_\+pixel\+\_\+under (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_layer}{Layer}} $\ast$}]{layer,  }\item[{uint16\+\_\+t}]{x,  }\item[{uint16\+\_\+t}]{y }\end{DoxyParamCaption})}
+
+
+
+Gets the color of a layer pixel. If out of bounds, checks the one under it until it finds a valid layer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em layer} & First layer to check \\
+\hline
+{\em x} & X position of the pixel \\
+\hline
+{\em y} & Y position of the pixel \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint32\+\_\+t Returns the color 
+\end{DoxyReturn}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__layer_ga1f190aee16c183dcd256751cdbf41711_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__layer_ga1f190aee16c183dcd256751cdbf41711_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__layer_ga8bd4001df9f278c1b60a0a7732deef83}\label{group__layer_ga8bd4001df9f278c1b60a0a7732deef83}} 
+\index{layer@{layer}!layer\+\_\+set\+\_\+pixel@{layer\+\_\+set\+\_\+pixel}}
+\index{layer\+\_\+set\+\_\+pixel@{layer\+\_\+set\+\_\+pixel}!layer@{layer}}
+\subsubsection{\texorpdfstring{layer\+\_\+set\+\_\+pixel()}{layer\_set\_pixel()}}
+{\footnotesize\ttfamily void layer\+\_\+set\+\_\+pixel (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_layer}{Layer}} $\ast$}]{layer,  }\item[{uint16\+\_\+t}]{x,  }\item[{uint16\+\_\+t}]{y,  }\item[{uint32\+\_\+t}]{color }\end{DoxyParamCaption})}
+
+
+
+Sets a pixel in the layer map (does not update the screen) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em layer} & \mbox{\hyperlink{struct_layer}{Layer}} to set the pixel \\
+\hline
+{\em x} & X position to draw on \\
+\hline
+{\em y} & Y position to draw on \\
+\hline
+{\em color} & Color of the pixel (Value to insert) \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=289pt]{group__layer_ga8bd4001df9f278c1b60a0a7732deef83_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__layer_ga8bd4001df9f278c1b60a0a7732deef83_icgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{group__layer_ga55165612a9f4da7933dde862c7a54406}\label{group__layer_ga55165612a9f4da7933dde862c7a54406}} 
+\index{layer@{layer}!height@{height}}
+\index{height@{height}!layer@{layer}}
+\subsubsection{\texorpdfstring{height}{height}}
+{\footnotesize\ttfamily uint16\+\_\+t Layer\+::height}
+
+
+
+Number of pixels per column. 
+
+\mbox{\Hypertarget{group__layer_ga0c56f7ad3a85bd2173f52e11176f791c}\label{group__layer_ga0c56f7ad3a85bd2173f52e11176f791c}} 
+\index{layer@{layer}!layer\+\_\+no@{layer\+\_\+no}}
+\index{layer\+\_\+no@{layer\+\_\+no}!layer@{layer}}
+\subsubsection{\texorpdfstring{layer\+\_\+no}{layer\_no}}
+{\footnotesize\ttfamily uint8\+\_\+t Layer\+::layer\+\_\+no}
+
+
+
+Position in the layer array. Lower layers go under. 
+
+\mbox{\Hypertarget{group__layer_ga4439f4ca4c45e80cb99cf0445226a1c7}\label{group__layer_ga4439f4ca4c45e80cb99cf0445226a1c7}} 
+\index{layer@{layer}!map@{map}}
+\index{map@{map}!layer@{layer}}
+\subsubsection{\texorpdfstring{map}{map}}
+{\footnotesize\ttfamily char$\ast$ Layer\+::map}
+
+
+
+Pixel map, where the first element is the upper left corner. 
+
+\mbox{\Hypertarget{group__layer_ga9d1e4ca46204961e88006f131c697e97}\label{group__layer_ga9d1e4ca46204961e88006f131c697e97}} 
+\index{layer@{layer}!width@{width}}
+\index{width@{width}!layer@{layer}}
+\subsubsection{\texorpdfstring{width}{width}}
+{\footnotesize\ttfamily uint16\+\_\+t Layer\+::width}
+
+
+
+Number of pixels per row. 
+
+\mbox{\Hypertarget{group__layer_ga93492d1dfe4b2ba659366efc048f4aa6}\label{group__layer_ga93492d1dfe4b2ba659366efc048f4aa6}} 
+\index{layer@{layer}!x@{x}}
+\index{x@{x}!layer@{layer}}
+\subsubsection{\texorpdfstring{x}{x}}
+{\footnotesize\ttfamily uint16\+\_\+t Layer\+::x}
+
+
+
+X position of the upper left corner. 
+
+\mbox{\Hypertarget{group__layer_gabab5e77cc86413440c0a9f99e851269d}\label{group__layer_gabab5e77cc86413440c0a9f99e851269d}} 
+\index{layer@{layer}!x\+Max@{x\+Max}}
+\index{x\+Max@{x\+Max}!layer@{layer}}
+\subsubsection{\texorpdfstring{x\+Max}{xMax}}
+{\footnotesize\ttfamily uint16\+\_\+t Layer\+::x\+Max}
+
+
+
+x + width 
+
+\mbox{\Hypertarget{group__layer_ga7748abe8164b906fa159c0d57c7b0909}\label{group__layer_ga7748abe8164b906fa159c0d57c7b0909}} 
+\index{layer@{layer}!y@{y}}
+\index{y@{y}!layer@{layer}}
+\subsubsection{\texorpdfstring{y}{y}}
+{\footnotesize\ttfamily uint16\+\_\+t Layer\+::y}
+
+
+
+Y position of the upper left corner. 
+
+\mbox{\Hypertarget{group__layer_ga005d97fb2216101a65f274f4e8d609d9}\label{group__layer_ga005d97fb2216101a65f274f4e8d609d9}} 
+\index{layer@{layer}!y\+Max@{y\+Max}}
+\index{y\+Max@{y\+Max}!layer@{layer}}
+\subsubsection{\texorpdfstring{y\+Max}{yMax}}
+{\footnotesize\ttfamily uint16\+\_\+t Layer\+::y\+Max}
+
+
+
+y + height 
+

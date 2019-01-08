@@ -1,0 +1,3 @@
+<map id="Bird" name="Bird">
+<area shape="rect" id="node2" href="$struct_hitbox.html" title="Rectangle shape representing an area belonging to a sprite. " alt="" coords="5,5,64,32"/>
+</map>

@@ -1,0 +1,34 @@
+\hypertarget{uart__wordgame_8c}{}\section{uart\+\_\+wordgame.\+c File Reference}
+\label{uart__wordgame_8c}\index{uart\+\_\+wordgame.\+c@{uart\+\_\+wordgame.\+c}}
+{\ttfamily \#include $<$lcom/lcf.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}uart\+\_\+wordgame.\+h\char`\"{}}\newline
+Include dependency graph for uart\+\_\+wordgame.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{uart__wordgame_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{group__uart__wordgame_ga1e068477d3dabfe39330ad4efb181c05}{uart\+\_\+send\+\_\+draw\+\_\+line}} (uint16\+\_\+t xi, uint16\+\_\+t yi, uint16\+\_\+t xf, uint16\+\_\+t yf, uint32\+\_\+t \mbox{\hyperlink{structcolor}{color}}, uint8\+\_\+t thickness)
+\begin{DoxyCompactList}\small\item\em Sends a message through the Serial Port, indicating the receiver to draw a line. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__uart__wordgame_ga9c79cd583507ad0387dafa9603428206}{uart\+\_\+send\+\_\+draw\+\_\+line2}} (uint16\+\_\+t xi, uint16\+\_\+t yi, uint16\+\_\+t xf, uint16\+\_\+t yf, uint32\+\_\+t \mbox{\hyperlink{structcolor}{color}}, uint8\+\_\+t thickness)
+\begin{DoxyCompactList}\small\item\em Sends a message through the Serial Port, indicating the receiver to draw a line, using a Square pattern. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__uart__wordgame_gaa1ece807e818a133490fa5f201314981}{uart\+\_\+send\+\_\+draw\+\_\+shape}} (\mbox{\hyperlink{group__canvas_ga55b506070847a13554f8b879c1bfb37c}{Shape}} shape, uint16\+\_\+t click1\+\_\+x, uint16\+\_\+t click1\+\_\+y, uint16\+\_\+t click2\+\_\+x, uint16\+\_\+t click2\+\_\+y, uint32\+\_\+t \mbox{\hyperlink{structcolor}{color}}, uint16\+\_\+t thickness)
+\begin{DoxyCompactList}\small\item\em Sends a message through the Serial Port, indicating the receiver to draw a shape, receiving two mouse clicks only. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__uart__wordgame_ga83e5f9cd1712f2eec7dbdca9704004a5}{uart\+\_\+send\+\_\+bucket}} (uint16\+\_\+t xi, uint16\+\_\+t yi, uint32\+\_\+t \mbox{\hyperlink{structcolor}{color}})
+\begin{DoxyCompactList}\small\item\em Sends a message through the Serial Port, indicating the receiver to flood fill an area. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__uart__wordgame_ga84ae87284e5c2263f8d7c85b560f915a}{uart\+\_\+send\+\_\+drawer\+\_\+ready}} (char $\ast$solution)
+\begin{DoxyCompactList}\small\item\em Sends a message through the U\+A\+RT, indicating the receiver that the sender is drawing this round and it is ready to start $\ast$ Also sends the round solution. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__uart__wordgame_ga5cc4c7bd39ce863e14dde99a5f22f0e4}{uart\+\_\+send\+\_\+emote}} (\mbox{\hyperlink{group__emote_ga0e527855c554e31654c9beb340145574}{Emote}} emote)
+\begin{DoxyCompactList}\small\item\em Sends a message through the U\+A\+RT, indicating the receiver to drawn an emote on the screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__uart__wordgame_ga2fc51e28d4b47e1ff96700527aea6ffd}{uart\+\_\+send\+\_\+number}} (int number)
+\begin{DoxyCompactList}\small\item\em Sends a 4 byte signed integer through the U\+A\+RT. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__uart__wordgame_gaecefc87c97278f130cc9b72b8fa413c8}{uart\+\_\+send\+\_\+tick\+\_\+clock}} (uint8\+\_\+t \mbox{\hyperlink{wordpicker_8c_aad18a277e8cd8821dc805d23b6a70a75}{time\+\_\+left}})
+\begin{DoxyCompactList}\small\item\em Sends a message through the U\+A\+RT, indicating the receiver to change the time left in their game clock. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_u_a_r_t_message_contents}{U\+A\+R\+T\+Message\+Contents}} \mbox{\hyperlink{group__uart__wordgame_gaa1fdee09f3f9af28335a782b49fafffe}{uart\+\_\+process\+\_\+msg}} (\mbox{\hyperlink{struct_u_a_r_t_message}{U\+A\+R\+T\+Message}} $\ast$message)
+\begin{DoxyCompactList}\small\item\em Processes a message, not doing what they order. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__uart__wordgame_ga1dbbd888f62428123dfc5bbbfa178134}{uart\+\_\+process\+\_\+msgs}} (\mbox{\hyperlink{struct_u_a_r_t_message}{U\+A\+R\+T\+Message}} messages\mbox{[}$\,$\mbox{]}, uint16\+\_\+t num\+\_\+messages)
+\begin{DoxyCompactList}\small\item\em Processes a list of messages, doing what they order. \end{DoxyCompactList}\end{DoxyCompactItemize}

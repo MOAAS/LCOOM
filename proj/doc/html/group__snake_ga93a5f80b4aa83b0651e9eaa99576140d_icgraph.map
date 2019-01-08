@@ -1,0 +1,6 @@
+<map id="snake_multiply" name="snake_multiply">
+<area shape="rect" id="node2" href="$group__snake.html#gae59edc17cc6d3f6f1fef0d047304265b" title="Moves the game forward. Moves the snake and decoys, redraws the obstacles and increases the snake&#39;s s..." alt="" coords="305,5,429,32"/>
+<area shape="rect" id="node5" href="$group__snake.html#ga18a5d5f3ad1a2a71338cf50900d6169e" title="Moves the snake, if it&#39;s not dead. Checks if there was obstacle collision (loses health and multiplie..." alt="" coords="163,31,257,57"/>
+<area shape="rect" id="node3" href="$group__pengoo.html#gab63f8a21d8bd92b9f638151a9912fa84" title="Runs the rainbow snake game. User can exit at any time by pressing ESC. " alt="" coords="477,5,565,32"/>
+<area shape="rect" id="node4" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="613,5,723,32"/>
+</map>

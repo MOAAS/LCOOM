@@ -1,0 +1,51 @@
+\hypertarget{struct_notification}{}\section{Notification Struct Reference}
+\label{struct_notification}\index{Notification@{Notification}}
+
+
+Represents a received interrupt notification.  
+
+
+
+
+{\ttfamily \#include $<$interrupts.\+h$>$}
+
+
+
+Collaboration diagram for Notification\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=175pt]{struct_notification__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{group__interrupts_ga4b14f767b21a6ae59f9832df85ac2338}{timer\+\_\+counter}}
+\begin{DoxyCompactList}\small\item\em T\+I\+M\+ER\+: Timer\textquotesingle{}s auxiliary counter. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{group__interrupts_ga7f2430cd3f169c5f1fd04426301adebf}{seconds\+\_\+passed}}
+\begin{DoxyCompactList}\small\item\em T\+I\+M\+ER\+: Seconds passed since the last timer reset. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{group__interrupts_ga9744d7e28d7785b2f3ef9e9dfedcbbf8}{scancode}}
+\begin{DoxyCompactList}\small\item\em K\+BD\+: Received keyboard scancode. \end{DoxyCompactList}\item 
+struct packet \mbox{\hyperlink{group__interrupts_ga44ddd85ef55e76d85d28b611b892ee49}{mouse\+\_\+packet}}
+\begin{DoxyCompactList}\small\item\em M\+O\+U\+SE\+: Mouse packet received. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_u_a_r_t___int___info}{U\+A\+R\+T\+\_\+\+Int\+\_\+\+Info}} \mbox{\hyperlink{group__interrupts_ga440aaa950e50448a628bba417bce3ce7}{uart\+\_\+int\+\_\+info}}
+\begin{DoxyCompactList}\small\item\em U\+A\+RT\+: Information about the interrupt, containing queues for received and to\+Send bytes. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__interrupts_gaba77f917764b3f473bccd4d28f9ab312}{timer\+Notif}}
+\begin{DoxyCompactList}\small\item\em Set to true iff there was a timer interrupt. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__interrupts_ga9bcd8935448dbeb1714a51b8af36c929}{keyboard\+Notif}}
+\begin{DoxyCompactList}\small\item\em Set to true iff there was a kbd interrupt. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__interrupts_ga033b89a1119cf0bf3dea6ba7d9ef1373}{mouse\+Notif}}
+\begin{DoxyCompactList}\small\item\em Set to true iff there was a mouse interrupt. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__interrupts_ga9776a545df6ef8cc680149db59bd8c1c}{serial\+Port\+Notif}}
+\begin{DoxyCompactList}\small\item\em Set to true iff there was a serial port interrupt. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__interrupts_ga429c938e843b61640cb0100efcef89da}{rtc\+Alarm\+Notif}}
+\begin{DoxyCompactList}\small\item\em Set to true iff there was a R\+TC interrupt. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Represents a received interrupt notification. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{interrupts_8h}{interrupts.\+h}}\end{DoxyCompactItemize}

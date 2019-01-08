@@ -1,0 +1,5 @@
+<map id="arena_create_obstacles" name="arena_create_obstacles">
+<area shape="rect" id="node2" href="$group__snake.html#gae7016570a88c488abe2dabb31467daf8" title="Creates a snake arena and UI. Adds obstacles and creates the HP bar. Also adds the scoreboard on top..." alt="" coords="213,5,352,32"/>
+<area shape="rect" id="node3" href="$group__pengoo.html#gab63f8a21d8bd92b9f638151a9912fa84" title="Runs the rainbow snake game. User can exit at any time by pressing ESC. " alt="" coords="400,5,488,32"/>
+<area shape="rect" id="node4" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="536,5,645,32"/>
+</map>

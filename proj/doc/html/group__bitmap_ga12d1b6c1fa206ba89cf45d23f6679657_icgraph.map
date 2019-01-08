@@ -1,0 +1,5 @@
+<map id="draw_bitmap_transp" name="draw_bitmap_transp">
+<area shape="rect" id="node2" href="$group__snake.html#ga856dc5c649341abaee91d35bafaa92b9" title="Displays on the screen the highscore, score and top speed of the run. " alt="" coords="192,5,315,32"/>
+<area shape="rect" id="node3" href="$group__pengoo.html#gab63f8a21d8bd92b9f638151a9912fa84" title="Runs the rainbow snake game. User can exit at any time by pressing ESC. " alt="" coords="363,5,451,32"/>
+<area shape="rect" id="node4" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="499,5,608,32"/>
+</map>

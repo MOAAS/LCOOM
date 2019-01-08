@@ -1,0 +1,5 @@
+<map id="DrawingState" name="DrawingState">
+<area shape="rect" id="node2" href="$struct_sprite.html" title="Represents a 2D sprite. " alt="" coords="39,184,95,211"/>
+<area shape="rect" id="node3" href="$struct_bitmap.html" title="Represents a Bitmap. " alt="" coords="36,95,99,121"/>
+<area shape="rect" id="node4" href="$struct_bitmap_info_header.html" title="Represents a bitmap info header. " alt="" coords="5,5,129,32"/>
+</map>

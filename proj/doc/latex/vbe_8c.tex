@@ -1,0 +1,23 @@
+\hypertarget{vbe_8c}{}\section{vbe.\+c File Reference}
+\label{vbe_8c}\index{vbe.\+c@{vbe.\+c}}
+{\ttfamily \#include $<$lcom/lcf.\+h$>$}\newline
+{\ttfamily \#include $<$lcom/lab5.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}vbe.\+h\char`\"{}}\newline
+Include dependency graph for vbe.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{vbe_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+unsigned long \mbox{\hyperlink{group__vbe_gade4fa75fe0fb04b2752fff230f59ae5b}{get\+\_\+address}} (phys\+\_\+bytes far\+\_\+address, void $\ast$initial\+\_\+address)
+\begin{DoxyCompactList}\small\item\em Converts a far pointer to a virtual address. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__vbe_ga9e78fdbbaab721c0b5075380a0688cff}{vbe\+\_\+get\+\_\+mode\+Info}} (uint16\+\_\+t mode, vbe\+\_\+mode\+\_\+info\+\_\+t $\ast$vmi\+\_\+p)
+\begin{DoxyCompactList}\small\item\em Gets the info for a specific V\+BE mode. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__vbe_gac4f0e0f63a38a9fece2405ffac61618b}{vbe\+\_\+get\+\_\+controller\+Info}} (vg\+\_\+vbe\+\_\+contr\+\_\+info\+\_\+t $\ast$vci\+\_\+p, void $\ast$init\+\_\+address)
+\begin{DoxyCompactList}\small\item\em Gets the info of the vbe controller. \end{DoxyCompactList}\end{DoxyCompactItemize}

@@ -1,0 +1,5 @@
+<map id="IdleSprite" name="IdleSprite">
+<area shape="rect" id="node2" href="$struct_layer.html" title="Represents a layer, which may be under, or on top of other layers. " alt="" coords="5,95,60,121"/>
+<area shape="rect" id="node3" href="$struct_bitmap.html" title="Represents a Bitmap. " alt="" coords="84,95,147,121"/>
+<area shape="rect" id="node4" href="$struct_bitmap_info_header.html" title="Represents a bitmap info header. " alt="" coords="53,5,177,32"/>
+</map>

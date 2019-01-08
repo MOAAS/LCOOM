@@ -1,0 +1,21 @@
+<map id="game_state.c" name="game_state.c">
+<area shape="rect" id="node3" href="$game__state_8h.html" title="game_state.h" alt="" coords="655,80,757,107"/>
+<area shape="rect" id="node4" href="$canvas_8h.html" title="canvas.h" alt="" coords="768,155,841,181"/>
+<area shape="rect" id="node9" href="$sprite_8h.html" title="sprite.h" alt="" coords="567,155,632,181"/>
+<area shape="rect" id="node23" href="$textbox_8h.html" title="textbox.h" alt="" coords="668,155,744,181"/>
+<area shape="rect" id="node5" href="$layer_8h.html" title="layer.h" alt="" coords="687,229,749,256"/>
+<area shape="rect" id="node6" href="$video_8h.html" title="video.h" alt="" coords="613,379,676,405"/>
+<area shape="rect" id="node8" href="$bitmap_8h.html" title="bitmap.h" alt="" coords="609,304,681,331"/>
+<area shape="rect" id="node7" href="$vbe_8h.html" title="vbe.h" alt="" coords="619,453,671,480"/>
+<area shape="rect" id="node10" href="$event_8h.html" title="event.h" alt="" coords="313,229,376,256"/>
+<area shape="rect" id="node13" href="$uart__protocol_8h.html" title="uart_protocol.h" alt="" coords="8,304,116,331"/>
+<area shape="rect" id="node17" href="$interrupts_8h.html" title="interrupts.h" alt="" coords="251,304,337,331"/>
+<area shape="rect" id="node19" href="$i8042_8h.html" title="i8042.h" alt="" coords="405,453,469,480"/>
+<area shape="rect" id="node14" href="$uart_8h.html" title="uart.h" alt="" coords="12,379,67,405"/>
+<area shape="rect" id="node15" href="$queue_8h.html" title="queue.h" alt="" coords="5,453,73,480"/>
+<area shape="rect" id="node16" href="$keyboard_8h.html" title="keyboard.h" alt="" coords="148,453,235,480"/>
+<area shape="rect" id="node18" href="$mouse_8h.html" title="mouse.h" alt="" coords="317,379,389,405"/>
+<area shape="rect" id="node20" href="$timer_8h.html" title="timer.h" alt="" coords="91,379,153,405"/>
+<area shape="rect" id="node21" href="$rtc_8h.html" title="rtc.h" alt="" coords="413,379,461,405"/>
+<area shape="rect" id="node22" href="$i8254_8h.html" title="i8254.h" alt="" coords="229,379,293,405"/>
+</map>

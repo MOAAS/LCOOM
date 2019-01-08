@@ -1,0 +1,311 @@
+\hypertarget{group__interrupts}{}\section{interrupts}
+\label{group__interrupts}\index{interrupts@{interrupts}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_notification}{Notification}}
+\begin{DoxyCompactList}\small\item\em Represents a received interrupt notification. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{struct_notification}{Notification}} \mbox{\hyperlink{group__interrupts_ga856319b58b1fcbc4b74dc4c26524e7d7}{Notification}}
+\begin{DoxyCompactList}\small\item\em Represents a received interrupt notification. \end{DoxyCompactList}\item 
+typedef enum \mbox{\hyperlink{group__interrupts_gadb53a8cc97236ca207c035241a5b7fb8}{Device}} \mbox{\hyperlink{group__interrupts_ga190b45b11d58f95bf84392b54e437fdd}{Device}}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{group__interrupts_gadb53a8cc97236ca207c035241a5b7fb8}{Device}} \{ \newline
+\mbox{\hyperlink{group__interrupts_ggadb53a8cc97236ca207c035241a5b7fb8a3b83fbd6b78e3a551d1d7577bbee233f}{Timer}}, 
+\mbox{\hyperlink{group__interrupts_ggadb53a8cc97236ca207c035241a5b7fb8a2638745099fac18206ad65ef7479e7f2}{Keyboard}}, 
+\mbox{\hyperlink{group__interrupts_ggadb53a8cc97236ca207c035241a5b7fb8a3f366d19b692520f76c2e34d5dc45ef5}{Mouse}}, 
+\mbox{\hyperlink{group__interrupts_ggadb53a8cc97236ca207c035241a5b7fb8a56c347f79e72faded9bfee74aecf976a}{Serial\+Port}}, 
+\newline
+\mbox{\hyperlink{group__interrupts_ggadb53a8cc97236ca207c035241a5b7fb8a24073a11916b946561b8cb5c9dfe9bce}{R\+TC}}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_notification}{Notification}} \mbox{\hyperlink{group__interrupts_ga378dd2133c078d7995b6c8117739a3c5}{Get\+Notification}} ()
+\begin{DoxyCompactList}\small\item\em Waits until an interrupt is received, processes it to a struct. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__interrupts_ga52c0411fc9786e0c38241ab3584c7dd8}{subscribe\+\_\+device}} (\mbox{\hyperlink{group__interrupts_gadb53a8cc97236ca207c035241a5b7fb8}{Device}} device)
+\begin{DoxyCompactList}\small\item\em Subscribes a device\textquotesingle{}s interrupts. For the mouse, enables data reporting in stream mode. For the U\+A\+RT, enables the 64 Byte F\+I\+FO and all the interrupt types (apart from modem status) For the R\+TC, enables an alarm for every second. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__interrupts_gac34cc7680c64171b47100c01bb019ab4}{unsubscribe\+\_\+device}} (\mbox{\hyperlink{group__interrupts_gadb53a8cc97236ca207c035241a5b7fb8}{Device}} device)
+\begin{DoxyCompactList}\small\item\em Unsubscribes a device\textquotesingle{}s interrupts For the mouse, disables data reporting in stream mode. For the U\+A\+RT, disables the F\+I\+FO and all the interrupt types (apart from modem status) For the R\+TC, enables an alarm for every second. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{group__interrupts_ga4b14f767b21a6ae59f9832df85ac2338}{Notification\+::timer\+\_\+counter}}
+\begin{DoxyCompactList}\small\item\em T\+I\+M\+ER\+: Timer\textquotesingle{}s auxiliary counter. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{group__interrupts_ga7f2430cd3f169c5f1fd04426301adebf}{Notification\+::seconds\+\_\+passed}}
+\begin{DoxyCompactList}\small\item\em T\+I\+M\+ER\+: Seconds passed since the last timer reset. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{group__interrupts_ga9744d7e28d7785b2f3ef9e9dfedcbbf8}{Notification\+::scancode}}
+\begin{DoxyCompactList}\small\item\em K\+BD\+: Received keyboard scancode. \end{DoxyCompactList}\item 
+struct packet \mbox{\hyperlink{group__interrupts_ga44ddd85ef55e76d85d28b611b892ee49}{Notification\+::mouse\+\_\+packet}}
+\begin{DoxyCompactList}\small\item\em M\+O\+U\+SE\+: Mouse packet received. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_u_a_r_t___int___info}{U\+A\+R\+T\+\_\+\+Int\+\_\+\+Info}} \mbox{\hyperlink{group__interrupts_ga440aaa950e50448a628bba417bce3ce7}{Notification\+::uart\+\_\+int\+\_\+info}}
+\begin{DoxyCompactList}\small\item\em U\+A\+RT\+: Information about the interrupt, containing queues for received and to\+Send bytes. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__interrupts_gaba77f917764b3f473bccd4d28f9ab312}{Notification\+::timer\+Notif}}
+\begin{DoxyCompactList}\small\item\em Set to true iff there was a timer interrupt. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__interrupts_ga9bcd8935448dbeb1714a51b8af36c929}{Notification\+::keyboard\+Notif}}
+\begin{DoxyCompactList}\small\item\em Set to true iff there was a kbd interrupt. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__interrupts_ga033b89a1119cf0bf3dea6ba7d9ef1373}{Notification\+::mouse\+Notif}}
+\begin{DoxyCompactList}\small\item\em Set to true iff there was a mouse interrupt. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__interrupts_ga9776a545df6ef8cc680149db59bd8c1c}{Notification\+::serial\+Port\+Notif}}
+\begin{DoxyCompactList}\small\item\em Set to true iff there was a serial port interrupt. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__interrupts_ga429c938e843b61640cb0100efcef89da}{Notification\+::rtc\+Alarm\+Notif}}
+\begin{DoxyCompactList}\small\item\em Set to true iff there was a R\+TC interrupt. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Functions used to receive and process interrupt notifications. 
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{group__interrupts_ga190b45b11d58f95bf84392b54e437fdd}\label{group__interrupts_ga190b45b11d58f95bf84392b54e437fdd}} 
+\index{interrupts@{interrupts}!Device@{Device}}
+\index{Device@{Device}!interrupts@{interrupts}}
+\subsubsection{\texorpdfstring{Device}{Device}}
+{\footnotesize\ttfamily typedef enum \mbox{\hyperlink{group__interrupts_gadb53a8cc97236ca207c035241a5b7fb8}{Device}}  \mbox{\hyperlink{group__interrupts_gadb53a8cc97236ca207c035241a5b7fb8}{Device}}}
+
+\mbox{\Hypertarget{group__interrupts_ga856319b58b1fcbc4b74dc4c26524e7d7}\label{group__interrupts_ga856319b58b1fcbc4b74dc4c26524e7d7}} 
+\index{interrupts@{interrupts}!Notification@{Notification}}
+\index{Notification@{Notification}!interrupts@{interrupts}}
+\subsubsection{\texorpdfstring{Notification}{Notification}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{struct_notification}{Notification}}  \mbox{\hyperlink{struct_notification}{Notification}}}
+
+
+
+Represents a received interrupt notification. 
+
+
+
+\subsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{group__interrupts_gadb53a8cc97236ca207c035241a5b7fb8}\label{group__interrupts_gadb53a8cc97236ca207c035241a5b7fb8}} 
+\index{interrupts@{interrupts}!Device@{Device}}
+\index{Device@{Device}!interrupts@{interrupts}}
+\subsubsection{\texorpdfstring{Device}{Device}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{group__interrupts_gadb53a8cc97236ca207c035241a5b7fb8}{Device}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Timer@{Timer}!interrupts@{interrupts}}\index{interrupts@{interrupts}!Timer@{Timer}}}\mbox{\Hypertarget{group__interrupts_ggadb53a8cc97236ca207c035241a5b7fb8a3b83fbd6b78e3a551d1d7577bbee233f}\label{group__interrupts_ggadb53a8cc97236ca207c035241a5b7fb8a3b83fbd6b78e3a551d1d7577bbee233f}} 
+Timer&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Keyboard@{Keyboard}!interrupts@{interrupts}}\index{interrupts@{interrupts}!Keyboard@{Keyboard}}}\mbox{\Hypertarget{group__interrupts_ggadb53a8cc97236ca207c035241a5b7fb8a2638745099fac18206ad65ef7479e7f2}\label{group__interrupts_ggadb53a8cc97236ca207c035241a5b7fb8a2638745099fac18206ad65ef7479e7f2}} 
+Keyboard&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Mouse@{Mouse}!interrupts@{interrupts}}\index{interrupts@{interrupts}!Mouse@{Mouse}}}\mbox{\Hypertarget{group__interrupts_ggadb53a8cc97236ca207c035241a5b7fb8a3f366d19b692520f76c2e34d5dc45ef5}\label{group__interrupts_ggadb53a8cc97236ca207c035241a5b7fb8a3f366d19b692520f76c2e34d5dc45ef5}} 
+Mouse&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Serial\+Port@{Serial\+Port}!interrupts@{interrupts}}\index{interrupts@{interrupts}!Serial\+Port@{Serial\+Port}}}\mbox{\Hypertarget{group__interrupts_ggadb53a8cc97236ca207c035241a5b7fb8a56c347f79e72faded9bfee74aecf976a}\label{group__interrupts_ggadb53a8cc97236ca207c035241a5b7fb8a56c347f79e72faded9bfee74aecf976a}} 
+Serial\+Port&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{R\+TC@{R\+TC}!interrupts@{interrupts}}\index{interrupts@{interrupts}!R\+TC@{R\+TC}}}\mbox{\Hypertarget{group__interrupts_ggadb53a8cc97236ca207c035241a5b7fb8a24073a11916b946561b8cb5c9dfe9bce}\label{group__interrupts_ggadb53a8cc97236ca207c035241a5b7fb8a24073a11916b946561b8cb5c9dfe9bce}} 
+R\+TC&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__interrupts_ga378dd2133c078d7995b6c8117739a3c5}\label{group__interrupts_ga378dd2133c078d7995b6c8117739a3c5}} 
+\index{interrupts@{interrupts}!Get\+Notification@{Get\+Notification}}
+\index{Get\+Notification@{Get\+Notification}!interrupts@{interrupts}}
+\subsubsection{\texorpdfstring{Get\+Notification()}{GetNotification()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_notification}{Notification}} Get\+Notification (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Waits until an interrupt is received, processes it to a struct. 
+
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{struct_notification}{Notification}} Struct containing all the information of the interrupt. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__interrupts_ga378dd2133c078d7995b6c8117739a3c5_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__interrupts_ga378dd2133c078d7995b6c8117739a3c5_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__interrupts_ga52c0411fc9786e0c38241ab3584c7dd8}\label{group__interrupts_ga52c0411fc9786e0c38241ab3584c7dd8}} 
+\index{interrupts@{interrupts}!subscribe\+\_\+device@{subscribe\+\_\+device}}
+\index{subscribe\+\_\+device@{subscribe\+\_\+device}!interrupts@{interrupts}}
+\subsubsection{\texorpdfstring{subscribe\+\_\+device()}{subscribe\_device()}}
+{\footnotesize\ttfamily int subscribe\+\_\+device (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__interrupts_gadb53a8cc97236ca207c035241a5b7fb8}{Device}}}]{device }\end{DoxyParamCaption})}
+
+
+
+Subscribes a device\textquotesingle{}s interrupts. For the mouse, enables data reporting in stream mode. For the U\+A\+RT, enables the 64 Byte F\+I\+FO and all the interrupt types (apart from modem status) For the R\+TC, enables an alarm for every second. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em device} & Device to be subscribed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 0 upon success, non-\/zero otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__interrupts_ga52c0411fc9786e0c38241ab3584c7dd8_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=289pt]{group__interrupts_ga52c0411fc9786e0c38241ab3584c7dd8_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__interrupts_gac34cc7680c64171b47100c01bb019ab4}\label{group__interrupts_gac34cc7680c64171b47100c01bb019ab4}} 
+\index{interrupts@{interrupts}!unsubscribe\+\_\+device@{unsubscribe\+\_\+device}}
+\index{unsubscribe\+\_\+device@{unsubscribe\+\_\+device}!interrupts@{interrupts}}
+\subsubsection{\texorpdfstring{unsubscribe\+\_\+device()}{unsubscribe\_device()}}
+{\footnotesize\ttfamily int unsubscribe\+\_\+device (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__interrupts_gadb53a8cc97236ca207c035241a5b7fb8}{Device}}}]{device }\end{DoxyParamCaption})}
+
+
+
+Unsubscribes a device\textquotesingle{}s interrupts For the mouse, disables data reporting in stream mode. For the U\+A\+RT, disables the F\+I\+FO and all the interrupt types (apart from modem status) For the R\+TC, enables an alarm for every second. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em device} & Device to be unsubscribed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 0 upon success, non-\/zero otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__interrupts_gac34cc7680c64171b47100c01bb019ab4_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=299pt]{group__interrupts_gac34cc7680c64171b47100c01bb019ab4_icgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{group__interrupts_ga9bcd8935448dbeb1714a51b8af36c929}\label{group__interrupts_ga9bcd8935448dbeb1714a51b8af36c929}} 
+\index{interrupts@{interrupts}!keyboard\+Notif@{keyboard\+Notif}}
+\index{keyboard\+Notif@{keyboard\+Notif}!interrupts@{interrupts}}
+\subsubsection{\texorpdfstring{keyboard\+Notif}{keyboardNotif}}
+{\footnotesize\ttfamily bool Notification\+::keyboard\+Notif}
+
+
+
+Set to true iff there was a kbd interrupt. 
+
+\mbox{\Hypertarget{group__interrupts_ga44ddd85ef55e76d85d28b611b892ee49}\label{group__interrupts_ga44ddd85ef55e76d85d28b611b892ee49}} 
+\index{interrupts@{interrupts}!mouse\+\_\+packet@{mouse\+\_\+packet}}
+\index{mouse\+\_\+packet@{mouse\+\_\+packet}!interrupts@{interrupts}}
+\subsubsection{\texorpdfstring{mouse\+\_\+packet}{mouse\_packet}}
+{\footnotesize\ttfamily struct packet Notification\+::mouse\+\_\+packet}
+
+
+
+M\+O\+U\+SE\+: Mouse packet received. 
+
+\mbox{\Hypertarget{group__interrupts_ga033b89a1119cf0bf3dea6ba7d9ef1373}\label{group__interrupts_ga033b89a1119cf0bf3dea6ba7d9ef1373}} 
+\index{interrupts@{interrupts}!mouse\+Notif@{mouse\+Notif}}
+\index{mouse\+Notif@{mouse\+Notif}!interrupts@{interrupts}}
+\subsubsection{\texorpdfstring{mouse\+Notif}{mouseNotif}}
+{\footnotesize\ttfamily bool Notification\+::mouse\+Notif}
+
+
+
+Set to true iff there was a mouse interrupt. 
+
+\mbox{\Hypertarget{group__interrupts_ga429c938e843b61640cb0100efcef89da}\label{group__interrupts_ga429c938e843b61640cb0100efcef89da}} 
+\index{interrupts@{interrupts}!rtc\+Alarm\+Notif@{rtc\+Alarm\+Notif}}
+\index{rtc\+Alarm\+Notif@{rtc\+Alarm\+Notif}!interrupts@{interrupts}}
+\subsubsection{\texorpdfstring{rtc\+Alarm\+Notif}{rtcAlarmNotif}}
+{\footnotesize\ttfamily bool Notification\+::rtc\+Alarm\+Notif}
+
+
+
+Set to true iff there was a R\+TC interrupt. 
+
+\mbox{\Hypertarget{group__interrupts_ga9744d7e28d7785b2f3ef9e9dfedcbbf8}\label{group__interrupts_ga9744d7e28d7785b2f3ef9e9dfedcbbf8}} 
+\index{interrupts@{interrupts}!scancode@{scancode}}
+\index{scancode@{scancode}!interrupts@{interrupts}}
+\subsubsection{\texorpdfstring{scancode}{scancode}}
+{\footnotesize\ttfamily uint16\+\_\+t Notification\+::scancode}
+
+
+
+K\+BD\+: Received keyboard scancode. 
+
+\mbox{\Hypertarget{group__interrupts_ga7f2430cd3f169c5f1fd04426301adebf}\label{group__interrupts_ga7f2430cd3f169c5f1fd04426301adebf}} 
+\index{interrupts@{interrupts}!seconds\+\_\+passed@{seconds\+\_\+passed}}
+\index{seconds\+\_\+passed@{seconds\+\_\+passed}!interrupts@{interrupts}}
+\subsubsection{\texorpdfstring{seconds\+\_\+passed}{seconds\_passed}}
+{\footnotesize\ttfamily uint32\+\_\+t Notification\+::seconds\+\_\+passed}
+
+
+
+T\+I\+M\+ER\+: Seconds passed since the last timer reset. 
+
+\mbox{\Hypertarget{group__interrupts_ga9776a545df6ef8cc680149db59bd8c1c}\label{group__interrupts_ga9776a545df6ef8cc680149db59bd8c1c}} 
+\index{interrupts@{interrupts}!serial\+Port\+Notif@{serial\+Port\+Notif}}
+\index{serial\+Port\+Notif@{serial\+Port\+Notif}!interrupts@{interrupts}}
+\subsubsection{\texorpdfstring{serial\+Port\+Notif}{serialPortNotif}}
+{\footnotesize\ttfamily bool Notification\+::serial\+Port\+Notif}
+
+
+
+Set to true iff there was a serial port interrupt. 
+
+\mbox{\Hypertarget{group__interrupts_ga4b14f767b21a6ae59f9832df85ac2338}\label{group__interrupts_ga4b14f767b21a6ae59f9832df85ac2338}} 
+\index{interrupts@{interrupts}!timer\+\_\+counter@{timer\+\_\+counter}}
+\index{timer\+\_\+counter@{timer\+\_\+counter}!interrupts@{interrupts}}
+\subsubsection{\texorpdfstring{timer\+\_\+counter}{timer\_counter}}
+{\footnotesize\ttfamily uint32\+\_\+t Notification\+::timer\+\_\+counter}
+
+
+
+T\+I\+M\+ER\+: Timer\textquotesingle{}s auxiliary counter. 
+
+\mbox{\Hypertarget{group__interrupts_gaba77f917764b3f473bccd4d28f9ab312}\label{group__interrupts_gaba77f917764b3f473bccd4d28f9ab312}} 
+\index{interrupts@{interrupts}!timer\+Notif@{timer\+Notif}}
+\index{timer\+Notif@{timer\+Notif}!interrupts@{interrupts}}
+\subsubsection{\texorpdfstring{timer\+Notif}{timerNotif}}
+{\footnotesize\ttfamily bool Notification\+::timer\+Notif}
+
+
+
+Set to true iff there was a timer interrupt. 
+
+\mbox{\Hypertarget{group__interrupts_ga440aaa950e50448a628bba417bce3ce7}\label{group__interrupts_ga440aaa950e50448a628bba417bce3ce7}} 
+\index{interrupts@{interrupts}!uart\+\_\+int\+\_\+info@{uart\+\_\+int\+\_\+info}}
+\index{uart\+\_\+int\+\_\+info@{uart\+\_\+int\+\_\+info}!interrupts@{interrupts}}
+\subsubsection{\texorpdfstring{uart\+\_\+int\+\_\+info}{uart\_int\_info}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_u_a_r_t___int___info}{U\+A\+R\+T\+\_\+\+Int\+\_\+\+Info}} Notification\+::uart\+\_\+int\+\_\+info}
+
+
+
+U\+A\+RT\+: Information about the interrupt, containing queues for received and to\+Send bytes. 
+

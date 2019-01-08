@@ -1,0 +1,22 @@
+<map id="wordgame_tick_clock" name="wordgame_tick_clock">
+<area shape="rect" id="node2" href="$group__textbox.html#gad6a37472eecd02e21570d33447c740e8" title="Clears all the text in a textbox. " alt="" coords="210,67,310,93"/>
+<area shape="rect" id="node13" href="$group__textbox.html#ga6a60cec4ef24e6e154b93aa81af2b988" title="Writes a number on a textbox, updating the screen. " alt="" coords="200,129,320,156"/>
+<area shape="rect" id="node3" href="$group__textbox.html#gaa1d2e3ffe1e358b7d2956e2942859d4b" title="Deletes the last written character, updating the screen. " alt="" coords="368,60,503,87"/>
+<area shape="rect" id="node4" href="$textbox_8c.html#a35f0852b486633342d24acbeb67a47ca" title="string_pop_char" alt="" coords="554,5,669,32"/>
+<area shape="rect" id="node5" href="$group__bitmap.html#gad73cdf3b48e5ca2e43ef1fbdd5b061b9" title="Gets the color of a certain bitmap pixel. " alt="" coords="551,56,672,83"/>
+<area shape="rect" id="node6" href="$group__layer.html#ga04dfe9a97af5089a6b5a5a044d8d7e9c" title="Draws a pixel on a layer. If that pixel has no other layer above, updates the screen as well..." alt="" coords="1059,132,1164,159"/>
+<area shape="rect" id="node7" href="$group__layer.html#ga8bd4001df9f278c1b60a0a7732deef83" title="Sets a pixel in the layer map (does not update the screen) " alt="" coords="1212,132,1321,159"/>
+<area shape="rect" id="node11" href="$group__layer.html#ga3eef68dc1d9d6086e747506f82a4eb11" title="Checks if layer is the highest on that position. " alt="" coords="1221,81,1313,108"/>
+<area shape="rect" id="node12" href="$group__video.html#ga26084597ddd2baa0ce4d70003a9492e9" title="Draws a pixel on the screen. " alt="" coords="1215,183,1318,209"/>
+<area shape="rect" id="node8" href="$group__layer.html#ga7f74243f1e256f7977109a1af3cfcaf2" title="Checks if a position is inside a layer. " alt="" coords="1369,81,1491,108"/>
+<area shape="rect" id="node9" href="$group__video.html#gad5d72716b0e4b468c37027482a707763" title="vg_get_bytes_pp" alt="" coords="1371,132,1489,159"/>
+<area shape="rect" id="node10" href="$group__video.html#ga9ce8b7520a298fda9e59cdeffbbd8670" title="Given a pixel address, inserts a color in it. " alt="" coords="1393,183,1467,209"/>
+<area shape="rect" id="node14" href="$group__textbox.html#ga71eed99ce4466e9e7b3ad1b9d61f2312" title="Writes a string on a textbox, updating the screen. " alt="" coords="386,155,485,181"/>
+<area shape="rect" id="node15" href="$group__textbox.html#gab3ac8e604e6b7f8b6b4666d687a09716" title="Writes a character on a textbox, updating the screen. " alt="" coords="566,157,657,184"/>
+<area shape="rect" id="node16" href="$group__textbox.html#gae11fcc3afd300a03b3793eb4ec418207" title="Moves the cursor to its initial X position and moves it down by font_size. " alt="" coords="720,157,836,184"/>
+<area shape="rect" id="node17" href="$group__textbox.html#ga74cef8828b7e729a30291cc8039728b0" title="Draws a character on the screen. " alt="" coords="737,208,819,235"/>
+<area shape="rect" id="node18" href="$group__bitmap.html#gaa19cec779e8cbaf053f3efc749c20c37" title="Resizes a bitmap by a given factor. " alt="" coords="898,157,997,184"/>
+<area shape="rect" id="node19" href="$group__layer.html#ga9ac38361f9d11a9948ba299a6a6ad71f" title="Draws a bitmap on a layer. " alt="" coords="884,208,1011,235"/>
+<area shape="rect" id="node21" href="$group__bitmap.html#ga08c1d4f4fff81df260d979ea8fc1aa61" title="Deletes a bitmap, freeing the used memory. " alt="" coords="898,259,997,285"/>
+<area shape="rect" id="node20" href="$group__bitmap.html#ga4b5b3aefecdb54bfdadbe4995b979c7f" title="Checks if a color is transparent (MAGENTA) " alt="" coords="1059,208,1163,235"/>
+</map>

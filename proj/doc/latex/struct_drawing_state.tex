@@ -1,0 +1,51 @@
+\hypertarget{struct_drawing_state}{}\section{Drawing\+State Struct Reference}
+\label{struct_drawing_state}\index{Drawing\+State@{Drawing\+State}}
+
+
+Contains information about the drawing state.  
+
+
+
+
+{\ttfamily \#include $<$game\+\_\+state.\+h$>$}
+
+
+
+Collaboration diagram for Drawing\+State\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=206pt]{struct_drawing_state__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{group__game__state_ga8cdac3f25ed2be17d210ff50defe0791}{Tool}} \mbox{\hyperlink{group__game__state_ga1e98afd819bebaa1b6bd24c689d870a7}{tool}}
+\begin{DoxyCompactList}\small\item\em Current tool (No\+Tool if not drawing) \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{group__game__state_ga10ed53265f325368bdc3bea0fd0f7e92}{thickness}}
+\begin{DoxyCompactList}\small\item\em Pencil thickness. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{group__game__state_gaad6324a79966f9966c4f45b6f8db1439}{color1}}
+\begin{DoxyCompactList}\small\item\em Primary color. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{group__game__state_ga2b3f5a1ab34c67d534cb90afa8caf6dd}{color2}}
+\begin{DoxyCompactList}\small\item\em Secondary color. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{group__game__state_ga77b100fecc69cfce99634262258a2510}{rainbow\+Color}}
+\begin{DoxyCompactList}\small\item\em Current color on the rainbow tool gradient. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_sprite}{Sprite}} $\ast$ \mbox{\hyperlink{group__game__state_gaf04f059f3cb2049366c3ef91d0ea4ce9}{cursor}}
+\begin{DoxyCompactList}\small\item\em Corresponding cursor. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__game__state_ga62e90a0c5f0cacba70d03d78d1bb3393}{mid\+Shape}}
+\begin{DoxyCompactList}\small\item\em Set to true iff the Tool is Shape\+Draw and the first click has been made. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group__canvas_ga55b506070847a13554f8b879c1bfb37c}{Shape}} \mbox{\hyperlink{group__game__state_ga303447063e848e099650034c763724d7}{shape}}
+\begin{DoxyCompactList}\small\item\em Shape currently being drawn. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{group__game__state_ga2e0a42da2415d5aa408c1bb6f6f5e4c7}{x\+\_\+shape\+Click1}}
+\begin{DoxyCompactList}\small\item\em Position of the first click (unused if tool is not Shape\+Draw) \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{group__game__state_ga9c366a1e61752594e2755c01c9c43dd6}{y\+\_\+shape\+Click1}}
+\begin{DoxyCompactList}\small\item\em Position of the first click (unused if tool is not Shape\+Draw) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Contains information about the drawing state. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{game__state_8h}{game\+\_\+state.\+h}}\end{DoxyCompactItemize}

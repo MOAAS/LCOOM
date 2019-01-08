@@ -1,0 +1,5 @@
+<map id="layer_get_pixel" name="layer_get_pixel">
+<area shape="rect" id="node2" href="$group__layer.html#ga7f74243f1e256f7977109a1af3cfcaf2" title="Checks if a position is inside a layer. " alt="" coords="163,5,284,32"/>
+<area shape="rect" id="node3" href="$group__video.html#gad5d72716b0e4b468c37027482a707763" title="vg_get_bytes_pp" alt="" coords="164,56,283,83"/>
+<area shape="rect" id="node4" href="$group__video.html#ga8ff5bbb05f1cb62f5958290a45723571" title="Given a pixel address, returns the color associated with it. " alt="" coords="182,107,265,133"/>
+</map>

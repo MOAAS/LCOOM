@@ -1,0 +1,8 @@
+<map id="uart_disable_fifo" name="uart_disable_fifo">
+<area shape="rect" id="node2" href="$uart_8c.html#a37a83f9abca5c5d871b80ef18ec7fbca" title="uart_clear_rbr" alt="" coords="169,56,270,83"/>
+<area shape="rect" id="node7" href="$group__uart.html#ga59c922bd359845f14061ced67e74c6b3" title="Writes a byte to a register. " alt="" coords="168,107,271,133"/>
+<area shape="rect" id="node3" href="$group__keyboard.html#ga686f8d95e71a43edaddda1db8b78caa4" title="Waits. " alt="" coords="339,5,417,32"/>
+<area shape="rect" id="node4" href="$group__uart.html#ga2489cf587ed0d39db2aafebba69d6b6d" title="Reads the UART status register. " alt="" coords="319,56,437,83"/>
+<area shape="rect" id="node6" href="$group__uart.html#ga25bafed3ff787360a644c19f0e5acd26" title="Reads a byte from the RBR. " alt="" coords="324,107,432,133"/>
+<area shape="rect" id="node5" href="$group__uart.html#ga072a4cc00030540e86ac100c8e7c8902" title="Reads a one byte register. " alt="" coords="485,81,587,108"/>
+</map>

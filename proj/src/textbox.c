@@ -146,7 +146,7 @@ void draw_char(Layer* layer, char character, int16_t x, int16_t y, uint16_t font
     }
     layer_draw_image(layer, bitmap, x, y);
     if (font_scale > 3)
-        free(bitmap);
+        deleteBitmap(bitmap);
 }
 
 void draw_word(Layer* layer, char* word, int16_t x, int16_t y, uint16_t font_scale, uint16_t space_scale, TextAlignment alignment) {

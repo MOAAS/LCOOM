@@ -1,0 +1,4 @@
+<map id="wait_valid_rtc" name="wait_valid_rtc">
+<area shape="rect" id="node2" href="$group__rtc.html#gaeb55d907395f650cc700c948cfc6eadb" title="disables rtc updates by setting register B bit 7 " alt="" coords="152,5,237,32"/>
+<area shape="rect" id="node3" href="$group__rtc.html#gac9d2c3fa04a4b1bc66a5175136feb12f" title="enable rtc updates " alt="" coords="153,56,236,83"/>
+</map>

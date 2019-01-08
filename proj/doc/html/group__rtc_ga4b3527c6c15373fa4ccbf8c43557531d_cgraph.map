@@ -1,0 +1,5 @@
+<map id="rtc_get_date" name="rtc_get_date">
+<area shape="rect" id="node2" href="$group__rtc.html#ga74509feeac5ce275416f0239f4d92776" title="wait until rtc can be read by checking bit UIP from register A " alt="" coords="148,31,247,57"/>
+<area shape="rect" id="node3" href="$group__rtc.html#gaeb55d907395f650cc700c948cfc6eadb" title="disables rtc updates by setting register B bit 7 " alt="" coords="295,5,380,32"/>
+<area shape="rect" id="node4" href="$group__rtc.html#gac9d2c3fa04a4b1bc66a5175136feb12f" title="enable rtc updates " alt="" coords="296,68,379,95"/>
+</map>

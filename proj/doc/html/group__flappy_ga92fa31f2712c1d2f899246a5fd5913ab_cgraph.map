@@ -1,0 +1,4 @@
+<map id="flappy_move" name="flappy_move">
+<area shape="rect" id="node2" href="$group__flappy.html#ga890241c4d6c50c4a9a15c9b3ac9d0c1a" title="Checks the x and y position, and updates the bird&#39;s hitbox accordingly. " alt="" coords="147,5,291,32"/>
+<area shape="rect" id="node3" href="$group__sprite.html#gadaf8e12cd78fdf0d2ea5b182ed1072c1" title="Creates a hitbox from 2 positions. " alt="" coords="339,5,435,32"/>
+</map>

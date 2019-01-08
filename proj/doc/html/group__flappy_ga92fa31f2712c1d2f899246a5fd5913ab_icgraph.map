@@ -1,0 +1,5 @@
+<map id="flappy_move" name="flappy_move">
+<area shape="rect" id="node2" href="$group__flappy.html#ga8efa272248ce46f0bb6081dcb680598d" title="Moves the game forward. Moves the bird vertically, moves the screen to the left, updates the score an..." alt="" coords="147,5,231,32"/>
+<area shape="rect" id="node3" href="$group__pengoo.html#ga2ef126f11a398bb34f581d5eca368e6b" title="Runs the flappy rainbow game. User can exit at any time by pressing ESC. " alt="" coords="279,5,365,32"/>
+<area shape="rect" id="node4" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="413,5,523,32"/>
+</map>

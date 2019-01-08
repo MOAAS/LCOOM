@@ -1,0 +1,89 @@
+\hypertarget{event_8h}{}\section{event.\+h File Reference}
+\label{event_8h}\index{event.\+h@{event.\+h}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}uart\+\_\+protocol.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}interrupts.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}i8042.\+h\char`\"{}}\newline
+Include dependency graph for event.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{event_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{event_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_mouse_event}{Mouse\+Event}}
+\begin{DoxyCompactList}\small\item\em Represents a mouse event. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{struct_keyboard_event}{Keyboard\+Event}}
+\begin{DoxyCompactList}\small\item\em Represents a keyboard event. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{struct_timer_event}{Timer\+Event}}
+\begin{DoxyCompactList}\small\item\em Represents a timer event. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{struct_event__t}{Event\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Represents an event. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{group__event_ga262cb54ad20544f03867d1962cdf9ec9}{Mouse\+Event\+Type}} \{ \newline
+\mbox{\hyperlink{group__event_gga262cb54ad20544f03867d1962cdf9ec9afa1b8831b57340bca943b97b8853818b}{L\+B\+\_\+\+P\+R\+E\+SS}}, 
+\mbox{\hyperlink{group__event_gga262cb54ad20544f03867d1962cdf9ec9a0ab0a8b785753d0837bc7e29e1b83de6}{R\+B\+\_\+\+P\+R\+E\+SS}}, 
+\mbox{\hyperlink{group__event_gga262cb54ad20544f03867d1962cdf9ec9a76011e5b10c9bf94b4aea02d0d719adb}{M\+B\+\_\+\+P\+R\+E\+SS}}, 
+\mbox{\hyperlink{group__event_gga262cb54ad20544f03867d1962cdf9ec9a038378513bf1be5b1490df842d8d56a9}{L\+B\+\_\+\+R\+E\+L\+E\+A\+SE}}, 
+\newline
+\mbox{\hyperlink{group__event_gga262cb54ad20544f03867d1962cdf9ec9aa40a501bf8ff6ee400d45f7580ce38c0}{R\+B\+\_\+\+R\+E\+L\+E\+A\+SE}}, 
+\mbox{\hyperlink{group__event_gga262cb54ad20544f03867d1962cdf9ec9a6ef72daf455bdaebf96827f746051018}{M\+B\+\_\+\+R\+E\+L\+E\+A\+SE}}, 
+\mbox{\hyperlink{group__event_gga262cb54ad20544f03867d1962cdf9ec9a7513d383f97428a41f8b44594874d469}{M\+O\+U\+S\+E\+\_\+\+M\+O\+VE}}, 
+\mbox{\hyperlink{group__event_gga262cb54ad20544f03867d1962cdf9ec9af7e4981795eba073f809409945cb99ce}{B\+U\+T\+T\+O\+N\+\_\+\+E\+VT}}
+ \}
+\begin{DoxyCompactList}\small\item\em Enumerates all the possible mouse events. \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{group__event_ga65afc57ec37493fc7409f26a189ab104}{Keyboard\+Event\+Type}} \{ \newline
+\mbox{\hyperlink{group__event_gga65afc57ec37493fc7409f26a189ab104ac1cc9e2ca126bb40a75c2156dffaa978}{C\+T\+R\+L\+\_\+\+P\+R\+E\+SS}}, 
+\mbox{\hyperlink{group__event_gga65afc57ec37493fc7409f26a189ab104aaa0bce25d9c1183b1499d3dfa1bf0519}{C\+T\+R\+L\+\_\+\+R\+E\+L\+E\+A\+SE}}, 
+\mbox{\hyperlink{group__event_gga65afc57ec37493fc7409f26a189ab104ad910aa2988b1930ee81b0de7181a2e36}{L\+S\+H\+I\+F\+T\+\_\+\+P\+R\+E\+SS}}, 
+\mbox{\hyperlink{group__event_gga65afc57ec37493fc7409f26a189ab104a2b364d73cd401179987032a861012935}{L\+S\+H\+I\+F\+T\+\_\+\+R\+E\+L\+E\+A\+SE}}, 
+\newline
+\mbox{\hyperlink{group__event_gga65afc57ec37493fc7409f26a189ab104ae04885e3bb64f79de694c38581909ab0}{R\+S\+H\+I\+F\+T\+\_\+\+P\+R\+E\+SS}}, 
+\mbox{\hyperlink{group__event_gga65afc57ec37493fc7409f26a189ab104aabc528ec7a0f1c7504aecc9ffe6d7b41}{R\+S\+H\+I\+F\+T\+\_\+\+R\+E\+L\+E\+A\+SE}}, 
+\mbox{\hyperlink{group__event_gga65afc57ec37493fc7409f26a189ab104aeba1159f19911b54bc268b45aad82bad}{E\+S\+C\+\_\+\+P\+R\+E\+SS}}, 
+\mbox{\hyperlink{group__event_gga65afc57ec37493fc7409f26a189ab104ab5f7675c6d1441f28e46ae73e4ba4939}{B\+A\+C\+K\+S\+P\+A\+C\+E\+\_\+\+P\+R\+E\+SS}}, 
+\newline
+\mbox{\hyperlink{group__event_gga65afc57ec37493fc7409f26a189ab104a40a875d9589e324ccd2de06c2606298b}{S\+P\+A\+C\+E\+B\+A\+R\+\_\+\+R\+E\+L\+E\+A\+SE}}, 
+\mbox{\hyperlink{group__event_gga65afc57ec37493fc7409f26a189ab104a2ec3831a0c3d92fa79711ea7062c440d}{E\+N\+T\+E\+R\+\_\+\+P\+R\+E\+SS}}, 
+\mbox{\hyperlink{group__event_gga65afc57ec37493fc7409f26a189ab104a65e4c0d7b42eae6ee38f3afcf88ccd76}{E\+N\+T\+E\+R\+\_\+\+R\+E\+L\+E\+A\+SE}}, 
+\mbox{\hyperlink{group__event_gga65afc57ec37493fc7409f26a189ab104a8531607ffa0a507e55a971cdaadf0930}{C\+H\+A\+R\+A\+C\+T\+E\+R\+\_\+\+P\+R\+E\+SS}}, 
+\newline
+\mbox{\hyperlink{group__event_gga65afc57ec37493fc7409f26a189ab104a0a6dec7ce8d134caf4faa191a9482198}{A\+R\+R\+O\+W\+\_\+\+U\+P\+\_\+\+P\+R\+E\+SS}}, 
+\mbox{\hyperlink{group__event_gga65afc57ec37493fc7409f26a189ab104aa32cc8d8d6ec6791fe7a647bb69f3cf2}{A\+R\+R\+O\+W\+\_\+\+U\+P\+\_\+\+R\+E\+L\+E\+A\+SE}}, 
+\mbox{\hyperlink{group__event_gga65afc57ec37493fc7409f26a189ab104a81439f80aa42206814824d95b1ca571f}{A\+R\+R\+O\+W\+\_\+\+L\+E\+F\+T\+\_\+\+P\+R\+E\+SS}}, 
+\mbox{\hyperlink{group__event_gga65afc57ec37493fc7409f26a189ab104a4c2db9a42d7d3231fdf9ae4afbfd2528}{A\+R\+R\+O\+W\+\_\+\+L\+E\+F\+T\+\_\+\+R\+E\+L\+E\+A\+SE}}, 
+\newline
+\mbox{\hyperlink{group__event_gga65afc57ec37493fc7409f26a189ab104ab8f116e0983adebe4cb135792ca2636f}{A\+R\+R\+O\+W\+\_\+\+D\+O\+W\+N\+\_\+\+P\+R\+E\+SS}}, 
+\mbox{\hyperlink{group__event_gga65afc57ec37493fc7409f26a189ab104ab964fecbab1a124b3710386e6f63e27b}{A\+R\+R\+O\+W\+\_\+\+D\+O\+W\+N\+\_\+\+R\+E\+L\+E\+A\+SE}}, 
+\mbox{\hyperlink{group__event_gga65afc57ec37493fc7409f26a189ab104a1794dac28044002c756e019be4c6e7e6}{A\+R\+R\+O\+W\+\_\+\+R\+I\+G\+H\+T\+\_\+\+P\+R\+E\+SS}}, 
+\mbox{\hyperlink{group__event_gga65afc57ec37493fc7409f26a189ab104ac3507a6321c76f6cbf6387de0adfffa3}{A\+R\+R\+O\+W\+\_\+\+R\+I\+G\+H\+T\+\_\+\+R\+E\+L\+E\+A\+SE}}, 
+\newline
+\mbox{\hyperlink{group__event_gga65afc57ec37493fc7409f26a189ab104a48f26e11799d0997b4cfa5af07fdd173}{O\+T\+H\+E\+R\+\_\+\+K\+EY}}
+ \}
+\begin{DoxyCompactList}\small\item\em Enumerates all the possible keyboard events. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_event__t}{Event\+\_\+t}} \mbox{\hyperlink{group__event_ga34dd154f7f761279e2526c29360523a8}{Get\+Event}} ()
+\begin{DoxyCompactList}\small\item\em Waits until a notification is received, processes it to an \mbox{\hyperlink{struct_event__t}{Event\+\_\+t}} struct. For the U\+A\+RT\+: \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_mouse_event}{Mouse\+Event}} \mbox{\hyperlink{group__event_ga556d3da45a1dc6de5d205d92b4b275b3}{mouse\+\_\+detect\+\_\+ev}} (struct packet $\ast$pp)
+\begin{DoxyCompactList}\small\item\em Processes a mouse packet. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_keyboard_event}{Keyboard\+Event}} \mbox{\hyperlink{group__event_ga971796fc84ffc34d36bcb9d073a94e31}{kbd\+\_\+detect\+\_\+ev}} (uint16\+\_\+t \mbox{\hyperlink{keyboard_8c_ad02fcede5beda1de5da3bc015d0b8927}{scancode}})
+\begin{DoxyCompactList}\small\item\em Processes a keyboard scancode. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__event_gad74e39179573fc99ba50e3dddef67ac5}{print\+\_\+event}} (\mbox{\hyperlink{struct_event__t}{Event\+\_\+t}} \mbox{\hyperlink{pengoo_8c_af662780d461acf9ac3b1321884e7cb01}{event}})
+\begin{DoxyCompactList}\small\item\em Prints on the console the event name (for debug). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__event_ga4e73585bc921a75ae4b4cac67b718d67}{wait\+\_\+ms}} (uint16\+\_\+t ms)
+\begin{DoxyCompactList}\small\item\em Waits. (Timer interrupts must be subscribed) \end{DoxyCompactList}\end{DoxyCompactItemize}

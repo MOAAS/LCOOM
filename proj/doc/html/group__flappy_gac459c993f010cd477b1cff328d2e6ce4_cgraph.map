@@ -1,0 +1,3 @@
+<map id="flappy_clear_dead_tubes" name="flappy_clear_dead_tubes">
+<area shape="rect" id="node2" href="$group__flappy.html#ga674a35d4936f4ab784c85addd4b4b830" title="Removes an obstacle from the array. The array order may change. " alt="" coords="219,5,355,32"/>
+</map>

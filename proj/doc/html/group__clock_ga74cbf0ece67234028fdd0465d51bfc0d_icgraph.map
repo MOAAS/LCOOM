@@ -1,0 +1,4 @@
+<map id="destroy_big_ben" name="destroy_big_ben">
+<area shape="rect" id="node2" href="$group__pengoo.html#gadeb18b17fc386f53c77fbcd19dc7a8e6" title="Runs the welcome screen. Waits until the user presses enter to continue. Updates the clock on the top..." alt="" coords="171,5,265,32"/>
+<area shape="rect" id="node3" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="313,5,423,32"/>
+</map>

@@ -1,0 +1,51 @@
+<map id="training" name="training">
+<area shape="rect" id="node2" href="$group__event.html#ga34dd154f7f761279e2526c29360523a8" title="Waits until a notification is received, processes it to an Event_t struct. For the UART: ..." alt="" coords="153,251,228,278"/>
+<area shape="rect" id="node19" href="$group__sprite.html#ga34874b7023163a28e2d314d7ab833da1" title="If there was a mouse event, checks the new cursor position and whether it has clicked on a button..." alt="" coords="328,808,457,835"/>
+<area shape="rect" id="node28" href="$group__canvas.html#ga96be607ebdf4fda25a050f017d68db93" title="Edits the canvas to the last saved pixel map. " alt="" coords="142,670,239,696"/>
+<area shape="rect" id="node35" href="$group__game__state.html#ga903c5ec1f682a02fdf7213d99031ff8b" title="Changes the game state. Saving the current state on lastGameState. " alt="" coords="345,1366,440,1392"/>
+<area shape="rect" id="node36" href="$group__canvas.html#ga3a6a181542db6b70c3aadc411073943d" title="Saves drawing for the next undo action, only if the cursor position is inside the canvas and the isDr..." alt="" coords="117,898,264,924"/>
+<area shape="rect" id="node39" href="$group__canvas.html#ga95994c1c125e70ef4d9380e80ed9c3ab" title="Unsets the isDrawing flag. " alt="" coords="118,1112,263,1139"/>
+<area shape="rect" id="node40" href="$group__pengoo.html#ga3df244ae6ccf0baca3f8426c306d3802" title="Updates the drawing state, by checking whether or not a painting button was pressed. Updates the thickness slider if needed. Updades the cursor if needed. " alt="" coords="139,1011,242,1038"/>
+<area shape="rect" id="node3" href="$group__interrupts.html#ga378dd2133c078d7995b6c8117739a3c5" title="Waits until an interrupt is received, processes it to a struct. " alt="" coords="339,251,446,278"/>
+<area shape="rect" id="node14" href="$group__event.html#ga971796fc84ffc34d36bcb9d073a94e31" title="Processes a keyboard scancode. " alt="" coords="340,302,445,328"/>
+<area shape="rect" id="node15" href="$group__event.html#ga556d3da45a1dc6de5d205d92b4b275b3" title="Processes a mouse packet. " alt="" coords="331,352,454,379"/>
+<area shape="rect" id="node16" href="$group__uart__protocol.html#gaf24bc3ddb7d648a8a12a221c7a2e75af" title="Reads a received byte and starts to compose a message. Should be called every time a byte is received..." alt="" coords="312,84,473,125"/>
+<area shape="rect" id="node17" href="$group__queue.html#ga6916e93facd123dd3fb655965b440e0e" title="Gets the front of the queue. " alt="" coords="348,150,437,176"/>
+<area shape="rect" id="node18" href="$group__queue.html#gaa7c283555566da64b71864f416e0178a" title="Removes the front of the queue. " alt="" coords="350,200,435,227"/>
+<area shape="rect" id="node4" href="$timer_8c.html#a91a2072306c68353712a6b771287dc2c" title="timer_int_handler" alt="" coords="546,99,667,126"/>
+<area shape="rect" id="node5" href="$group__timer.html#ga2a20f5c67ca8817f632167d0a03467dd" title="timer_get_counter" alt="" coords="543,150,670,176"/>
+<area shape="rect" id="node6" href="$keyboard_8c.html#aea970a154161a35f6894898a092ed70a" title="kbc_ih" alt="" coords="577,200,637,227"/>
+<area shape="rect" id="node7" href="$group__keyboard.html#ga32e63cb280df583f193cbc065b0b327e" title="Assembles a scancode received by the IH. May also use the previous scancode if it&#39;s a 2&#45;byte scancode..." alt="" coords="522,251,691,278"/>
+<area shape="rect" id="node8" href="$mouse_8c.html#a210374b50462acdedab00df64d5cea3c" title="mouse_ih" alt="" coords="567,302,646,328"/>
+<area shape="rect" id="node9" href="$group__mouse.html#gac86505acc047efa4adb87f0fa6d4319f" title="Assembles the global struct variable mouse_packet, by using another global variable packet_byte..." alt="" coords="521,352,692,379"/>
+<area shape="rect" id="node10" href="$group__uart.html#ga67d2da4dd20c731989c130bbe2cd4c85" title="UART Interrupt handler. Reads the IIR and processes its contents. " alt="" coords="576,403,637,430"/>
+<area shape="rect" id="node11" href="$group__uart.html#ga488f8e4b1795dcbe268f9629176c0740" title="Reads the IIR. " alt="" coords="750,428,857,455"/>
+<area shape="rect" id="node12" href="$group__uart.html#ga1eb7fd21c4d53e035f6d522a81563ac2" title="Processes an interrupt, by checks the interrupt type. If it has received something, and there were no communication errors, adds all the bytes to a queue, by order of arrival. If it is ready to send something, clears the toSend queue (16 byte limit). If there was an error, discards the contents of the RBR (if there&#39;s any). " alt="" coords="744,175,863,202"/>
+<area shape="rect" id="node13" href="$group__rtc.html#ga75dad42881d64cf07cf1bdc2979a7056" title="checks if it is an alarm interrupt clears alarm interrupt bit from register C " alt="" coords="579,48,634,75"/>
+<area shape="rect" id="node20" href="$group__sprite.html#ga8fe18a5b062a81b4b99dc62f0643446c" title="Checks if a cursor is on a button. " alt="" coords="559,758,655,784"/>
+<area shape="rect" id="node23" href="$group__sprite.html#ga5c42751a94b0c5695a62506fc2011d80" title="Presses a button, updating it. " alt="" coords="558,960,655,987"/>
+<area shape="rect" id="node24" href="$group__sprite.html#ga1a1688248ec81812ca2c738584e323a4" title="Highlights a button, updating it. " alt="" coords="747,910,860,936"/>
+<area shape="rect" id="node26" href="$group__sprite.html#gaa28b2a8d13a3ab9e23c3d91691614c81" title="Unghlights a button, updating it. " alt="" coords="740,859,867,886"/>
+<area shape="rect" id="node27" href="$group__sprite.html#gae98d092189bc279e8a79ce65a4d7f436" title="Releases a button, updating it. " alt="" coords="551,859,662,886"/>
+<area shape="rect" id="node21" href="$group__bitmap.html#ga4b5b3aefecdb54bfdadbe4995b979c7f" title="Checks if a color is transparent (MAGENTA) " alt="" coords="1089,808,1193,835"/>
+<area shape="rect" id="node22" href="$group__bitmap.html#gad73cdf3b48e5ca2e43ef1fbdd5b061b9" title="Gets the color of a certain bitmap pixel. " alt="" coords="743,808,864,835"/>
+<area shape="rect" id="node25" href="$group__layer.html#ga9ac38361f9d11a9948ba299a6a6ad71f" title="Draws a bitmap on a layer. " alt="" coords="915,859,1041,886"/>
+<area shape="rect" id="node29" href="$group__canvas.html#gab462a38a3f3a612931c008e28e816a8d" title="Updates the canvas with its layer contents. " alt="" coords="339,631,447,658"/>
+<area shape="rect" id="node30" href="$group__video.html#gad5d72716b0e4b468c37027482a707763" title="vg_get_bytes_pp" alt="" coords="547,656,666,683"/>
+<area shape="rect" id="node31" href="$group__video.html#ga0cd2b85b0088ab47b2b7bb6c135ad4b1" title="vg_get_video_mem" alt="" coords="541,555,672,582"/>
+<area shape="rect" id="node32" href="$group__video.html#gaa4a211ebfc5c87a0072eaf9bd03e3a56" title="vg_get_hres" alt="" coords="561,707,652,734"/>
+<area shape="rect" id="node33" href="$group__layer.html#ga3eef68dc1d9d6086e747506f82a4eb11" title="Checks if layer is the highest on that position. " alt="" coords="561,606,653,632"/>
+<area shape="rect" id="node34" href="$group__video.html#ga9ce8b7520a298fda9e59cdeffbbd8670" title="Given a pixel address, inserts a color in it. " alt="" coords="570,504,643,531"/>
+<area shape="rect" id="node37" href="$group__canvas.html#ga85fca0492c1f7ec8e1d20a9b5e48be1c" title="Checks if a position is inside the canvas. " alt="" coords="547,1011,667,1038"/>
+<area shape="rect" id="node38" href="$group__canvas.html#ga3c9ed75a75ae36bc6fc7591952fccf17" title="Stores the current canvas pixel map in a buffer (for the next undo action). Sets an internal isDrawin..." alt="" coords="319,707,466,734"/>
+<area shape="rect" id="node41" href="$group__wordpicker.html#ga9ec7ee484cb29f6d473530e913fe02f9" title="Checks if the time is up. " alt="" coords="325,1062,460,1088"/>
+<area shape="rect" id="node42" href="$group__sprite.html#ga90f5eec8870a027c011108bc4885880c" title="Updates a cursor (sprite), by reading an event. " alt="" coords="341,758,445,784"/>
+<area shape="rect" id="node43" href="$group__pengoo.html#gac36b16b3f3b197d1e93926a0b5ba1396" title="Changes the drawing&#45;state/pencil tool, updating the cursor and the paint tubes as well..." alt="" coords="561,1163,653,1190"/>
+<area shape="rect" id="node44" href="$group__uart__protocol.html#ga135e4c7043b1c4cd01caa52830b459de" title="Sends a message of size 0. " alt="" coords="315,1112,470,1139"/>
+<area shape="rect" id="node45" href="$group__canvas.html#ga82c276340112469fe11a819ade81ead2" title="Sets the canvas color, filling it. " alt="" coords="331,1163,454,1190"/>
+<area shape="rect" id="node46" href="$group__emote.html#gac9359f9dfee500c297df48a9cdb2fb11" title="Checks if the emote &quot;wheel&quot; pop&#45;up is open and showing up on screen or not. " alt="" coords="325,1214,461,1240"/>
+<area shape="rect" id="node47" href="$group__pengoo.html#ga6ac5130bfa3fa90697b1368d605563c0" title="Uses the pencil by reading an event. Depending on the tool, it may draw on the screen, update colors, etc. " alt="" coords="353,859,432,886"/>
+<area shape="rect" id="node48" href="$group__sprite.html#ga912de7c5bbbc103cb804e3bd76ba770a" title="Updates a slider, based on an event and a cursor. If the cursor presses the LB on the slider..." alt="" coords="343,1315,442,1342"/>
+<area shape="rect" id="node49" href="$group__sprite.html#ga3ac8528c0dc7f14cd06be7fd636fd6d7" title="Calculates how much of the slider is &quot;filled&quot; (how much to the right the handle is) ..." alt="" coords="337,960,448,987"/>
+<area shape="rect" id="node50" href="$group__pengoo.html#ga771576cc26d893bc389c414f151af27f" title="Changes the pencil thickness, to a maximum of 10. " alt="" coords="331,1011,454,1038"/>
+</map>

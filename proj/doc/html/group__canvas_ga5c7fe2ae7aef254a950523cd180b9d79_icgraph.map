@@ -1,0 +1,4 @@
+<map id="canvas_draw_pixel" name="canvas_draw_pixel">
+<area shape="rect" id="node2" href="$group__canvas.html#gae2adf4c3c6c687a5b8885b6a2fa45b3a" title="Draws a vertical line on the canvas. " alt="" coords="184,13,312,39"/>
+<area shape="rect" id="node3" href="$group__canvas.html#ga5301d24065ffd6d68ead836aaeb197f3" title="Draws a rectangle outline on the canvas. " alt="" coords="360,5,516,47"/>
+</map>

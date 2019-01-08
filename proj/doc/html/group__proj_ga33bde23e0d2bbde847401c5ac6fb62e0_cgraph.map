@@ -1,0 +1,51 @@
+<map id="proj_main_loop" name="proj_main_loop">
+<area shape="rect" id="node2" href="$group__bitmaps.html#ga5a66eb06403c650e88bc9463e79bf9bc" title="Looks for specific .bmp files in a folder and loads them. " alt="" coords="201,993,295,1020"/>
+<area shape="rect" id="node4" href="$group__pengoo.html#ga099795341d84ce8caa2e79aeccfff34f" title="Loads the cursor and initializes the DrawingState. " alt="" coords="206,56,290,83"/>
+<area shape="rect" id="node7" href="$group__textbox.html#gac90ac8157e721b0af9b86534c5a93047" title="Loads the bitmap arrays, from the letters_bmp Bitmap, in order to make drawing of larger letters less..." alt="" coords="196,132,300,159"/>
+<area shape="rect" id="node10" href="$group__wordpicker.html#ga1a2589aeb050207591f4e9645a352296" title="Sets the wordgame round count. (1 round means both players get to draw) " alt="" coords="172,233,324,260"/>
+<area shape="rect" id="node11" href="$group__wordpicker.html#ga7ae040ad09e5ee83b7d121c4290d79b6" title="Loads a list of words from a .txt fill to an array. " alt="" coords="196,284,300,311"/>
+<area shape="rect" id="node12" href="$group__wordpicker.html#gab63191abcd00066c036c0b26e148651a" title="reads the highscore .txt file for the wordgame. Sets highscore to 0 if the file does not exist..." alt="" coords="163,335,333,361"/>
+<area shape="rect" id="node13" href="$group__snake.html#gab02c25b496104c83c594be691eb32683" title="reads the highscore .txt file for the snake minigame. Sets highscore to 0 if the file does not exist..." alt="" coords="177,385,319,412"/>
+<area shape="rect" id="node14" href="$group__flappy.html#ga48334c3029c7f0bbe6b07d3423a6702e" title="reads the highscore .txt file for the flappy minigame. Sets highscore to 0 if the file does not exist..." alt="" coords="177,436,319,463"/>
+<area shape="rect" id="node15" href="$group__video.html#gad5c198bac564055e1866fd5ac6152308" title="Initializes MINIX in graphics mode. " alt="" coords="211,183,285,209"/>
+<area shape="rect" id="node20" href="$group__pengoo.html#gab9e42b0ec1e9c9ffdf1edd5dec1b0ddd" title="Loads the game background layer and draws it. Also initializes sprites that go on the background laye..." alt="" coords="191,487,305,513"/>
+<area shape="rect" id="node24" href="$group__pengoo.html#ga95635b27f6c1165153d2c11de57e60a8" title="Initializes the used buttons. " alt="" coords="203,689,293,716"/>
+<area shape="rect" id="node27" href="$group__interrupts.html#ga52c0411fc9786e0c38241ab3584c7dd8" title="Subscribes a device&#39;s interrupts. For the mouse, enables data reporting in stream mode..." alt="" coords="187,1399,309,1425"/>
+<area shape="rect" id="node32" href="$group__pengoo.html#gadeb18b17fc386f53c77fbcd19dc7a8e6" title="Runs the welcome screen. Waits until the user presses enter to continue. Updates the clock on the top..." alt="" coords="201,537,295,564"/>
+<area shape="rect" id="node33" href="$group__pengoo.html#ga885611589f6294afada89fe88362e863" title="Runs the main hub. Draws all the main menu buttons, allowing the user to proceed by clicking on them..." alt="" coords="203,740,293,767"/>
+<area shape="rect" id="node34" href="$group__pengoo.html#gab4e279f31fb3e6e034e2b173aaa1a2fb" title="Waits for the other user, and randomly decide who is drawing first in the word game. They do this by choosing a random number and sending it every clock tick. The highest number draws first. " alt="" coords="197,791,299,817"/>
+<area shape="rect" id="node35" href="$group__pengoo.html#ga19cfab1706132a19749fc519f84d9445" title="Waits for the guesser to be ready to start a wordgame round (user is drawing) " alt="" coords="189,841,307,868"/>
+<area shape="rect" id="node36" href="$group__pengoo.html#ga45d4be7b19d3dd0ea742f0a489112c80" title="Waits for the drawer to be ready to start a wordgame round (user is guessing) " alt="" coords="193,892,303,919"/>
+<area shape="rect" id="node37" href="$group__pengoo.html#ga56c5cf8a568cff737ff95520cbe6b405" title="Runs the word game, as a drawer. Sends the drawing to the other user on every move. Sends the clock updates to the other user, every second. User can use the several buttons and mouse to draw on the screen. " alt="" coords="223,943,273,969"/>
+<area shape="rect" id="node38" href="$group__pengoo.html#ga178ee685108a5f6164bf1c1757040ee2" title="Runs the word game, as a drawer. Sends the drawing to the other user on every move. Sends the clock updates to the other user, every second. User can select a color from the open window. " alt="" coords="202,639,294,665"/>
+<area shape="rect" id="node39" href="$group__pengoo.html#ga089d0f37444b1b486cf98045a512deed" title="Runs the word game, as a guesser. Displays on the screen what the other user draws. User can press ENTER to type a guess. " alt="" coords="219,1044,277,1071"/>
+<area shape="rect" id="node40" href="$group__pengoo.html#gabe23d2dac0552bf9069a47573770d379" title="Runs the word game, as a guesser. Displays on the screen what the other user draws. User can type a guess, press ESC or ENTER to insert his guess. " alt="" coords="203,1247,293,1273"/>
+<area shape="rect" id="node41" href="$group__pengoo.html#gae0cdf0dedf98ccbeac43b0300e0d2df1" title="Runs the training/single&#45;player mode. Same as soloing a guessing game but with added Undo..." alt="" coords="216,1145,280,1172"/>
+<area shape="rect" id="node42" href="$group__pengoo.html#ga7be478ae067a8e77c79ece6af6082ce5" title="Runs the saving of the canvas drawing. " alt="" coords="224,1196,272,1223"/>
+<area shape="rect" id="node43" href="$group__pengoo.html#ga476146a203654a545a8493d3ebeaaf70" title="Runs the loading of a .bmp file to the canvas. " alt="" coords="225,1095,271,1121"/>
+<area shape="rect" id="node44" href="$group__pengoo.html#ga92c88d0b081234c242ddccf22be99782" title="Waits for the other user to show up to the multi&#45;player mode. " alt="" coords="195,1297,301,1324"/>
+<area shape="rect" id="node45" href="$group__pengoo.html#gaa5d8d3d5af977d3d9e7141bf2693c81e" title="Runs the collab/multi&#45;player mode. Same as training mode, but without the Undo and Load buttons..." alt="" coords="195,1348,301,1375"/>
+<area shape="rect" id="node46" href="$group__pengoo.html#gaf06af764d8b387c19edc38c0effd1115" title="Ends a game round, adding the gained points. Displays on the screen whether they won or not..." alt="" coords="207,588,289,615"/>
+<area shape="rect" id="node47" href="$group__pengoo.html#ga4202fa5c5191c7e387d7570da6c8cd8c" title="Ends and resets the game, showing the total amount of points. The user can return to the main menu by..." alt="" coords="207,1449,289,1476"/>
+<area shape="rect" id="node48" href="$group__pengoo.html#gab63f8a21d8bd92b9f638151a9912fa84" title="Runs the rainbow snake game. User can exit at any time by pressing ESC. " alt="" coords="204,1500,292,1527"/>
+<area shape="rect" id="node49" href="$group__pengoo.html#ga2ef126f11a398bb34f581d5eca368e6b" title="Runs the flappy rainbow game. User can exit at any time by pressing ESC. " alt="" coords="205,1551,291,1577"/>
+<area shape="rect" id="node50" href="$group__interrupts.html#gac34cc7680c64171b47100c01bb019ab4" title="Unsubscribes a device&#39;s interrupts For the mouse, disables data reporting in stream mode..." alt="" coords="181,1601,315,1628"/>
+<area shape="rect" id="node3" href="$group__bitmap.html#ga627d64d58e9bf487fb6e326ea65df57b" title="Loads a .bmp file. " alt="" coords="417,1019,504,1045"/>
+<area shape="rect" id="node5" href="$group__sprite.html#ga419fef722f3afd383e6d4171ffb54fb1" title="create_sprite" alt="" coords="412,5,509,32"/>
+<area shape="rect" id="node6" href="$group__game__state.html#ga91d8df875d55d73e7d41279389adc390" title="Creates a pencil. " alt="" coords="411,56,510,83"/>
+<area shape="rect" id="node8" href="$group__bitmap.html#ga3f8f5ad40944f2db40792d7c4fe5b96e" title="Copies part of a bitmap from a given bitmap to another bitmap. " alt="" coords="395,107,526,133"/>
+<area shape="rect" id="node9" href="$group__bitmap.html#gaa19cec779e8cbaf053f3efc749c20c37" title="Resizes a bitmap by a given factor. " alt="" coords="411,157,510,184"/>
+<area shape="rect" id="node16" href="$group__vbe.html#ga9e78fdbbaab721c0b5075380a0688cff" title="Gets the info for a specific VBE mode. " alt="" coords="398,208,523,235"/>
+<area shape="rect" id="node17" href="$group__video.html#gaa4a211ebfc5c87a0072eaf9bd03e3a56" title="vg_get_hres" alt="" coords="415,461,506,488"/>
+<area shape="rect" id="node18" href="$group__video.html#ga4633499e0f197ac855f56473fc9fb291" title="vg_get_vres" alt="" coords="416,347,505,373"/>
+<area shape="rect" id="node19" href="$group__video.html#gad5d72716b0e4b468c37027482a707763" title="vg_get_bytes_pp" alt="" coords="588,677,707,704"/>
+<area shape="rect" id="node21" href="$group__layer.html#gae7f68548d31f2961ac68df03e53558c2" title="Creates a layer. " alt="" coords="414,1083,507,1109"/>
+<area shape="rect" id="node22" href="$group__sprite.html#ga802ed6ffe723a0df6e97ab0dd5006e0f" title="Create an idle sprite. " alt="" coords="399,512,523,539"/>
+<area shape="rect" id="node23" href="$group__layer.html#ga9ac38361f9d11a9948ba299a6a6ad71f" title="Draws a bitmap on a layer. " alt="" coords="397,576,524,603"/>
+<area shape="rect" id="node25" href="$group__sprite.html#gae13b75db5ceecfd2fc00a030910c8e7a" title="Creates a button. " alt="" coords="410,664,511,691"/>
+<area shape="rect" id="node26" href="$group__sprite.html#gac479773f83a2e428343ce29e775d90ec" title="Creates a slider object. " alt="" coords="413,715,509,741"/>
+<area shape="rect" id="node28" href="$timer_8c.html#ac57a7e1140a7e00ad95ac5488d2a671b" title="timer_subscribe_int" alt="" coords="393,1348,528,1375"/>
+<area shape="rect" id="node29" href="$group__keyboard.html#ga8eee4d0a15beada731a514481b5ad4bf" title="Subscribes and enables keyboard interrupts, in exclusive mode. " alt="" coords="381,1399,540,1425"/>
+<area shape="rect" id="node30" href="$group__mouse.html#ga9da18257ff113b686bb826d154bfaa87" title="Subscribes mouse interrupts in exclusive mode. " alt="" coords="388,1449,533,1476"/>
+<area shape="rect" id="node31" href="$group__mouse.html#ga9b5d5366f7067f50586c03e9a3f000cd" title="Disables mouse interrupts. " alt="" coords="395,1551,526,1577"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="FlappyTube" name="FlappyTube">
+<area shape="rect" id="node2" href="$struct_hitbox.html" title="Rectangle shape representing an area belonging to a sprite. " alt="" coords="5,95,64,121"/>
+<area shape="rect" id="node3" href="$struct_bitmap.html" title="Represents a Bitmap. " alt="" coords="89,95,151,121"/>
+<area shape="rect" id="node4" href="$struct_bitmap_info_header.html" title="Represents a bitmap info header. " alt="" coords="58,5,182,32"/>
+</map>

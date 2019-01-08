@@ -1,0 +1,22 @@
+var searchData=
+[
+  ['r',['R',['../group__video.html#gacb56ae92e569346b946b93e1723bdcf0',1,'color']]],
+  ['radius',['radius',['../group__flappy.html#ga01e57038bda03482df87afc78bc2e0e1',1,'Bird']]],
+  ['rainbow_5fbutton',['rainbow_button',['../bitmaps_8c.html#ab10e1fd2e44341f49065fb666d76fb2a',1,'rainbow_button():&#160;bitmaps.c'],['../pengoo_8c.html#ab10e1fd2e44341f49065fb666d76fb2a',1,'rainbow_button():&#160;bitmaps.c']]],
+  ['rainbow_5fhl',['rainbow_hl',['../bitmaps_8c.html#ab9ddfb2d19ef77b2f90467e3568ad0ea',1,'rainbow_hl():&#160;bitmaps.c'],['../pengoo_8c.html#ab9ddfb2d19ef77b2f90467e3568ad0ea',1,'rainbow_hl():&#160;bitmaps.c']]],
+  ['rainbowcolor',['rainbowColor',['../group__game__state.html#ga77b100fecc69cfce99634262258a2510',1,'DrawingState']]],
+  ['rear',['rear',['../group__queue.html#ga8303807ce298d63d958f7e5765034d70',1,'Queue']]],
+  ['received',['received',['../group__uart.html#gaa2ce8acb1a0127464440fd3ca00cc283',1,'UART_Int_Info']]],
+  ['rega',['regA',['../rtc_8c.html#a7db25588fc239eca7b82c458ff6d5673',1,'rtc.c']]],
+  ['regb',['regB',['../rtc_8c.html#adb31ed295ad8a343c6cffeca766c8649',1,'rtc.c']]],
+  ['regc',['regC',['../rtc_8c.html#a91cd899fb09411a019f1c64413217bd0',1,'rtc.c']]],
+  ['reserved',['Reserved',['../group__vbe.html#ga8e317dcd4697215e49f95fca709bc05e',1,'vbe_info_block']]],
+  ['reserved1',['reserved1',['../group__bitmap.html#ga16d8cfe2edb9d109cea44ab94d1b701a',1,'BitmapFileHeader']]],
+  ['reserved2',['reserved2',['../group__bitmap.html#ga24130729dee5b8b9c1bd45f0a73c9a9d',1,'BitmapFileHeader']]],
+  ['revealed_5fletters',['revealed_letters',['../wordpicker_8c.html#ae5bd0b9e04e267599b06562c440e813d',1,'wordpicker.c']]],
+  ['ricocheting',['ricocheting',['../group__snake.html#ga7fa12626da8070f765499c9dae661271',1,'Snake']]],
+  ['rtc_5falarm_5fint',['rtc_alarm_int',['../interrupts_8c.html#a42cb1d77142091f1e5dbdc14149622aa',1,'rtc_alarm_int():&#160;rtc.c'],['../rtc_8c.html#a42cb1d77142091f1e5dbdc14149622aa',1,'rtc_alarm_int():&#160;rtc.c']]],
+  ['rtcalarmnotif',['rtcAlarmNotif',['../group__interrupts.html#ga429c938e843b61640cb0100efcef89da',1,'Notification']]],
+  ['rubber_5fbutton',['rubber_button',['../bitmaps_8c.html#a464946b3fb32533aee52eaeb7db795e4',1,'rubber_button():&#160;bitmaps.c'],['../pengoo_8c.html#a464946b3fb32533aee52eaeb7db795e4',1,'rubber_button():&#160;bitmaps.c']]],
+  ['rubber_5fhl',['rubber_hl',['../bitmaps_8c.html#a64c4049e6aef25e08c535e6fe3a65e7d',1,'rubber_hl():&#160;bitmaps.c'],['../pengoo_8c.html#a64c4049e6aef25e08c535e6fe3a65e7d',1,'rubber_hl():&#160;bitmaps.c']]]
+];

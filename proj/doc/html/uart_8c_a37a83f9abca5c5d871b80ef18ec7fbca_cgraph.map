@@ -1,0 +1,6 @@
+<map id="uart_clear_rbr" name="uart_clear_rbr">
+<area shape="rect" id="node2" href="$group__keyboard.html#ga686f8d95e71a43edaddda1db8b78caa4" title="Waits. " alt="" coords="175,5,253,32"/>
+<area shape="rect" id="node3" href="$group__uart.html#ga2489cf587ed0d39db2aafebba69d6b6d" title="Reads the UART status register. " alt="" coords="155,56,273,83"/>
+<area shape="rect" id="node5" href="$group__uart.html#ga25bafed3ff787360a644c19f0e5acd26" title="Reads a byte from the RBR. " alt="" coords="160,107,268,133"/>
+<area shape="rect" id="node4" href="$group__uart.html#ga072a4cc00030540e86ac100c8e7c8902" title="Reads a one byte register. " alt="" coords="321,81,423,108"/>
+</map>

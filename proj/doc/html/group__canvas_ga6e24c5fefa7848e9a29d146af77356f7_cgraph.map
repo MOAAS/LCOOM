@@ -1,0 +1,10 @@
+<map id="canvas_draw_hline" name="canvas_draw_hline">
+<area shape="rect" id="node2" href="$group__video.html#ga57014a19e5d9cf805bcf7af1f6bbcec5" title="Given a base address, calculates the address of a specific position. " alt="" coords="200,5,299,32"/>
+<area shape="rect" id="node3" href="$group__video.html#ga0cd2b85b0088ab47b2b7bb6c135ad4b1" title="vg_get_video_mem" alt="" coords="184,56,315,83"/>
+<area shape="rect" id="node4" href="$group__video.html#gaa4a211ebfc5c87a0072eaf9bd03e3a56" title="vg_get_hres" alt="" coords="204,107,295,133"/>
+<area shape="rect" id="node5" href="$group__video.html#gad5d72716b0e4b468c37027482a707763" title="vg_get_bytes_pp" alt="" coords="190,157,309,184"/>
+<area shape="rect" id="node6" href="$group__canvas.html#ga85fca0492c1f7ec8e1d20a9b5e48be1c" title="Checks if a position is inside the canvas. " alt="" coords="189,208,309,235"/>
+<area shape="rect" id="node7" href="$group__video.html#ga9ce8b7520a298fda9e59cdeffbbd8670" title="Given a pixel address, inserts a color in it. " alt="" coords="213,259,286,285"/>
+<area shape="rect" id="node8" href="$group__layer.html#ga3eef68dc1d9d6086e747506f82a4eb11" title="Checks if layer is the highest on that position. " alt="" coords="203,309,295,336"/>
+<area shape="rect" id="node9" href="$group__layer.html#ga7f74243f1e256f7977109a1af3cfcaf2" title="Checks if a position is inside a layer. " alt="" coords="363,309,484,336"/>
+</map>

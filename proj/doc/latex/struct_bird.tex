@@ -1,0 +1,57 @@
+\hypertarget{struct_bird}{}\section{Bird Struct Reference}
+\label{struct_bird}\index{Bird@{Bird}}
+
+
+Structure that represents the controlled object in the minigame.  
+
+
+
+
+{\ttfamily \#include $<$flappy.\+h$>$}
+
+
+
+Collaboration diagram for Bird\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=132pt]{struct_bird__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{group__flappy_ga15a7c5b25ca78cfeb5602ccbcdc3c791}{y}}
+\begin{DoxyCompactList}\small\item\em Current Y position (higher as it goes down) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{group__flappy_gaf76198a3e19591093eac03361d16f009}{y\+\_\+prev}}
+\begin{DoxyCompactList}\small\item\em Previous Y position. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__flappy_gaf9332ac0c4adb80502608cdfa72ff81b}{min\+\_\+y}}
+\begin{DoxyCompactList}\small\item\em Upper limit for the Y position. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__flappy_ga4f989e709d0c300ac4fdd9e29a8d3307}{max\+\_\+y}}
+\begin{DoxyCompactList}\small\item\em Lower limit for the Y position. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__flappy_gae4657ec5b3f2a736b7a17951590e5bea}{x}}
+\begin{DoxyCompactList}\small\item\em X position (constant) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{group__flappy_gac9e51902eab494c5688633c5c56b5a1a}{velocity}}
+\begin{DoxyCompactList}\small\item\em Y velocity. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{group__flappy_gaacd6cd48cfa7bd2824488c23fa64396c}{acceleration}}
+\begin{DoxyCompactList}\small\item\em Y acceleration. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__flappy_ga4bdcadd04d95df1a76b650b03e103522}{going\+Up}}
+\begin{DoxyCompactList}\small\item\em Set to true iff space bar is pressed. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__flappy_gaf4f24b08e29e948d98b6014bb745c395}{is\+Dead}}
+\begin{DoxyCompactList}\small\item\em Set to true iff the object is no longer playable (dead) \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__flappy_ga09a00f6fd91f17cf0d2b1b301c6a9da7}{score}}
+\begin{DoxyCompactList}\small\item\em Player score. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{group__flappy_ga01e57038bda03482df87afc78bc2e0e1}{radius}}
+\begin{DoxyCompactList}\small\item\em Radius of the circle to be drawn on the bird\textquotesingle{}s position. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{group__flappy_ga99a3ab5ac95874c8563f8c24aa79ae54}{color}}
+\begin{DoxyCompactList}\small\item\em Color to be drawn on the current position update. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_hitbox}{Hitbox}} \mbox{\hyperlink{group__flappy_ga22c913a0e2c2eb7faceaf256ffc2a21f}{hitbox}}
+\begin{DoxyCompactList}\small\item\em Player hitbox. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Structure that represents the controlled object in the minigame. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{flappy_8h}{flappy.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,14 @@
+<map id="bucket_tool" name="bucket_tool">
+<area shape="rect" id="node2" href="$group__layer.html#gab108b73fe8d04f98fa55d281c245179b" title="Gets the color of a layer pixel. " alt="" coords="153,5,263,32"/>
+<area shape="rect" id="node4" href="$group__video.html#gad5d72716b0e4b468c37027482a707763" title="vg_get_bytes_pp" alt="" coords="321,56,440,83"/>
+<area shape="rect" id="node5" href="$group__video.html#ga8ff5bbb05f1cb62f5958290a45723571" title="Given a pixel address, returns the color associated with it. " alt="" coords="339,107,422,133"/>
+<area shape="rect" id="node6" href="$group__canvas.html#ga85fca0492c1f7ec8e1d20a9b5e48be1c" title="Checks if a position is inside the canvas. " alt="" coords="148,157,268,184"/>
+<area shape="rect" id="node7" href="$canvas_8c.html#ae3d79336a40536f6c83e998957efd1a3" title="bucket_tool_rec" alt="" coords="151,208,265,235"/>
+<area shape="rect" id="node9" href="$group__video.html#ga9ce8b7520a298fda9e59cdeffbbd8670" title="Given a pixel address, inserts a color in it. " alt="" coords="344,259,417,285"/>
+<area shape="rect" id="node10" href="$group__layer.html#ga3eef68dc1d9d6086e747506f82a4eb11" title="Checks if layer is the highest on that position. " alt="" coords="335,309,427,336"/>
+<area shape="rect" id="node12" href="$group__video.html#ga0cd2b85b0088ab47b2b7bb6c135ad4b1" title="vg_get_video_mem" alt="" coords="143,360,273,387"/>
+<area shape="rect" id="node13" href="$group__video.html#gaa4a211ebfc5c87a0072eaf9bd03e3a56" title="vg_get_hres" alt="" coords="163,411,253,437"/>
+<area shape="rect" id="node3" href="$group__layer.html#ga7f74243f1e256f7977109a1af3cfcaf2" title="Checks if a position is inside a layer. " alt="" coords="488,157,609,184"/>
+<area shape="rect" id="node8" href="$group__video.html#ga57014a19e5d9cf805bcf7af1f6bbcec5" title="Given a base address, calculates the address of a specific position. " alt="" coords="331,157,430,184"/>
+<area shape="rect" id="node11" href="$group__video.html#ga26084597ddd2baa0ce4d70003a9492e9" title="Draws a pixel on the screen. " alt="" coords="329,208,432,235"/>
+</map>

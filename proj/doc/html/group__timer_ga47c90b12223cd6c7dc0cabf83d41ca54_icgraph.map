@@ -1,0 +1,9 @@
+<map id="timer_reset_counter" name="timer_reset_counter">
+<area shape="rect" id="node2" href="$group__event.html#ga4e73585bc921a75ae4b4cac67b718d67" title="Waits. (Timer interrupts must be subscribed) " alt="" coords="199,56,269,83"/>
+<area shape="rect" id="node7" href="$group__pengoo.html#ga4202fa5c5191c7e387d7570da6c8cd8c" title="Ends and resets the game, showing the total amount of points. The user can return to the main menu by..." alt="" coords="345,107,428,133"/>
+<area shape="rect" id="node8" href="$group__pengoo.html#ga2ef126f11a398bb34f581d5eca368e6b" title="Runs the flappy rainbow game. User can exit at any time by pressing ESC. " alt="" coords="191,157,277,184"/>
+<area shape="rect" id="node3" href="$group__pengoo.html#gaf06af764d8b387c19edc38c0effd1115" title="Ends a game round, adding the gained points. Displays on the screen whether they won or not..." alt="" coords="499,5,581,32"/>
+<area shape="rect" id="node5" href="$group__snake.html#ga856dc5c649341abaee91d35bafaa92b9" title="Displays on the screen the highscore, score and top speed of the run. " alt="" coords="325,56,448,83"/>
+<area shape="rect" id="node4" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="632,81,741,108"/>
+<area shape="rect" id="node6" href="$group__pengoo.html#gab63f8a21d8bd92b9f638151a9912fa84" title="Runs the rainbow snake game. User can exit at any time by pressing ESC. " alt="" coords="496,56,584,83"/>
+</map>

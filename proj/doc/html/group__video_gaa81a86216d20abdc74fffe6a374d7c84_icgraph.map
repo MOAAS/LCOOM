@@ -1,0 +1,8 @@
+<map id="video_draw_hline" name="video_draw_hline">
+<area shape="rect" id="node2" href="$group__video.html#ga141b925836a12854efeb2d84b6e1542c" title="Draws a rectangle on the screen. " alt="" coords="172,31,317,57"/>
+<area shape="rect" id="node3" href="$group__snake.html#ga51b55e1ad05667d456ed81db42c26b9f" title="Redraws the UI HP bar. " alt="" coords="365,5,515,32"/>
+<area shape="rect" id="node7" href="$group__video.html#ga6e2c7948df1662b15b1977cf20e8e479" title="Fills the screen with a specific color. " alt="" coords="373,56,507,83"/>
+<area shape="rect" id="node4" href="$group__snake.html#gae59edc17cc6d3f6f1fef0d047304265b" title="Moves the game forward. Moves the snake and decoys, redraws the obstacles and increases the snake&#39;s s..." alt="" coords="563,5,687,32"/>
+<area shape="rect" id="node5" href="$group__pengoo.html#gab63f8a21d8bd92b9f638151a9912fa84" title="Runs the rainbow snake game. User can exit at any time by pressing ESC. " alt="" coords="735,5,823,32"/>
+<area shape="rect" id="node6" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="871,5,980,32"/>
+</map>

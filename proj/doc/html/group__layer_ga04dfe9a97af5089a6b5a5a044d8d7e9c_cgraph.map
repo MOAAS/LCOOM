@@ -1,0 +1,8 @@
+<map id="draw_on_layer" name="draw_on_layer">
+<area shape="rect" id="node2" href="$group__layer.html#ga8bd4001df9f278c1b60a0a7732deef83" title="Sets a pixel in the layer map (does not update the screen) " alt="" coords="159,56,268,83"/>
+<area shape="rect" id="node6" href="$group__layer.html#ga3eef68dc1d9d6086e747506f82a4eb11" title="Checks if layer is the highest on that position. " alt="" coords="167,5,259,32"/>
+<area shape="rect" id="node7" href="$group__video.html#ga26084597ddd2baa0ce4d70003a9492e9" title="Draws a pixel on the screen. " alt="" coords="162,107,265,133"/>
+<area shape="rect" id="node3" href="$group__layer.html#ga7f74243f1e256f7977109a1af3cfcaf2" title="Checks if a position is inside a layer. " alt="" coords="316,5,437,32"/>
+<area shape="rect" id="node4" href="$group__video.html#gad5d72716b0e4b468c37027482a707763" title="vg_get_bytes_pp" alt="" coords="317,56,436,83"/>
+<area shape="rect" id="node5" href="$group__video.html#ga9ce8b7520a298fda9e59cdeffbbd8670" title="Given a pixel address, inserts a color in it. " alt="" coords="340,107,413,133"/>
+</map>

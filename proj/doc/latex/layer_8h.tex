@@ -1,0 +1,50 @@
+\hypertarget{layer_8h}{}\section{layer.\+h File Reference}
+\label{layer_8h}\index{layer.\+h@{layer.\+h}}
+{\ttfamily \#include \char`\"{}video.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}bitmap.\+h\char`\"{}}\newline
+Include dependency graph for layer.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=159pt]{layer_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{layer_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_layer}{Layer}}
+\begin{DoxyCompactList}\small\item\em Represents a layer, which may be under, or on top of other layers. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_layer}{Layer}} $\ast$ \mbox{\hyperlink{group__layer_gae7f68548d31f2961ac68df03e53558c2}{create\+\_\+layer}} (uint16\+\_\+t x, uint16\+\_\+t y, uint16\+\_\+t width, uint16\+\_\+t height)
+\begin{DoxyCompactList}\small\item\em Creates a layer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__layer_gae89d557f21d9465ba7372ff23cf05ae9}{destroy\+\_\+layer}} (\mbox{\hyperlink{struct_layer}{Layer}} $\ast$layer)
+\begin{DoxyCompactList}\small\item\em Destroys the layer, erasing all the pixels from the screen (draws the ones under it), and deleteing it from the layer array. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_layer}{Layer}} $\ast$ \mbox{\hyperlink{group__layer_gaec705a8cfd8cc0d79ef36fa4f47da621}{get\+\_\+highest\+\_\+layer}} ()
+\item 
+void \mbox{\hyperlink{group__layer_ga04dfe9a97af5089a6b5a5a044d8d7e9c}{draw\+\_\+on\+\_\+layer}} (\mbox{\hyperlink{struct_layer}{Layer}} $\ast$layer, uint16\+\_\+t x, uint16\+\_\+t y, uint32\+\_\+t \mbox{\hyperlink{structcolor}{color}})
+\begin{DoxyCompactList}\small\item\em Draws a pixel on a layer. If that pixel has no other layer above, updates the screen as well. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__layer_ga3eef68dc1d9d6086e747506f82a4eb11}{is\+\_\+top\+\_\+layer}} (\mbox{\hyperlink{struct_layer}{Layer}} $\ast$layer, uint16\+\_\+t x, uint16\+\_\+t y)
+\begin{DoxyCompactList}\small\item\em Checks if layer is the highest on that position. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__layer_ga8bd4001df9f278c1b60a0a7732deef83}{layer\+\_\+set\+\_\+pixel}} (\mbox{\hyperlink{struct_layer}{Layer}} $\ast$layer, uint16\+\_\+t x, uint16\+\_\+t y, uint32\+\_\+t \mbox{\hyperlink{structcolor}{color}})
+\begin{DoxyCompactList}\small\item\em Sets a pixel in the layer map (does not update the screen) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__layer_ga5c826dd6313f240df1df23f9b049e3fd}{layer\+\_\+erase\+\_\+pixel}} (\mbox{\hyperlink{struct_layer}{Layer}} $\ast$layer, uint16\+\_\+t x, uint16\+\_\+t y)
+\begin{DoxyCompactList}\small\item\em Changes a color of a layer position to the one under it. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{group__layer_gab108b73fe8d04f98fa55d281c245179b}{layer\+\_\+get\+\_\+pixel}} (\mbox{\hyperlink{struct_layer}{Layer}} $\ast$layer, uint16\+\_\+t x, uint16\+\_\+t y)
+\begin{DoxyCompactList}\small\item\em Gets the color of a layer pixel. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{group__layer_ga1f190aee16c183dcd256751cdbf41711}{layer\+\_\+get\+\_\+pixel\+\_\+under}} (\mbox{\hyperlink{struct_layer}{Layer}} $\ast$layer, uint16\+\_\+t x, uint16\+\_\+t y)
+\begin{DoxyCompactList}\small\item\em Gets the color of a layer pixel. If out of bounds, checks the one under it until it finds a valid layer. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__layer_ga7f74243f1e256f7977109a1af3cfcaf2}{is\+\_\+within\+\_\+bounds}} (\mbox{\hyperlink{struct_layer}{Layer}} $\ast$layer, uint16\+\_\+t x, uint16\+\_\+t y)
+\begin{DoxyCompactList}\small\item\em Checks if a position is inside a layer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__layer_ga9ac38361f9d11a9948ba299a6a6ad71f}{layer\+\_\+draw\+\_\+image}} (\mbox{\hyperlink{struct_layer}{Layer}} $\ast$layer, \mbox{\hyperlink{struct_bitmap}{Bitmap}} $\ast$bmp, int x, int y)
+\begin{DoxyCompactList}\small\item\em Draws a bitmap on a layer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__layer_gaafecb163f102a681ca44cd542057370a}{layer\+\_\+draw\+\_\+image\+\_\+color}} (\mbox{\hyperlink{struct_layer}{Layer}} $\ast$layer, \mbox{\hyperlink{struct_bitmap}{Bitmap}} $\ast$bmp, int x, int y, uint32\+\_\+t new\+\_\+color)
+\begin{DoxyCompactList}\small\item\em Draws a bitmap on a layer, replacing all the G\+R\+E\+EN with another color. \end{DoxyCompactList}\end{DoxyCompactItemize}

@@ -1,0 +1,1491 @@
+\hypertarget{group__sprite}{}\section{sprite}
+\label{group__sprite}\index{sprite@{sprite}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_sprite}{Sprite}}
+\begin{DoxyCompactList}\small\item\em Represents a 2D sprite. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{struct_hitbox}{Hitbox}}
+\begin{DoxyCompactList}\small\item\em Rectangle shape representing an area belonging to a sprite. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{struct_button}{Button}}
+\begin{DoxyCompactList}\small\item\em Represents a button, which can be pressed by a cursor. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{struct_idle_sprite}{Idle\+Sprite}}
+\begin{DoxyCompactList}\small\item\em Same as a regular sprite, except G\+R\+E\+EN is always replaced by its color when drawn, cannot be moved, and is not necessarily drawn on top of all the other elements. (It\textquotesingle{}s on a layer) \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{struct_slider}{Slider}}
+\begin{DoxyCompactList}\small\item\em Represents a slider, whose handle the user can drag with the mouse. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_sprite}{Sprite}} $\ast$ \mbox{\hyperlink{group__sprite_ga419fef722f3afd383e6d4171ffb54fb1}{create\+\_\+sprite}} (\mbox{\hyperlink{struct_bitmap}{Bitmap}} $\ast$bitmap, int x, int y)
+\item 
+void \mbox{\hyperlink{group__sprite_ga0b9702271420a69a1603d0a3768fda67}{destroy\+\_\+sprite}} (\mbox{\hyperlink{struct_sprite}{Sprite}} $\ast$fig)
+\item 
+void \mbox{\hyperlink{group__sprite_ga740994f8c16c38bf18eaabac1f5eeeb9}{draw\+\_\+sprite}} (\mbox{\hyperlink{struct_sprite}{Sprite}} $\ast$sp)
+\begin{DoxyCompactList}\small\item\em Draws a sprite on the screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__sprite_gab5aa8ee6efdb9ebf62df81cad24c445c}{draw\+\_\+sprite\+\_\+color}} (\mbox{\hyperlink{struct_sprite}{Sprite}} $\ast$sp)
+\begin{DoxyCompactList}\small\item\em Draws a sprite on the screen, and replaces every color G\+R\+E\+EN with its color atribute. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__sprite_ga9c7e23b48dc8ea0f565655744cbae06c}{erase\+\_\+sprite}} (\mbox{\hyperlink{struct_sprite}{Sprite}} $\ast$sp)
+\begin{DoxyCompactList}\small\item\em Erases a sprite from the screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__sprite_ga91bbc8d0a30c581a10b9d193d0d77c43}{move\+\_\+sprite}} (\mbox{\hyperlink{struct_sprite}{Sprite}} $\ast$sp, int16\+\_\+t delX, int16\+\_\+t delY)
+\begin{DoxyCompactList}\small\item\em Moves a sprite. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__sprite_ga9b18b2f3de6d4ee00e344881a08b17d6}{sprite\+\_\+set\+\_\+color}} (\mbox{\hyperlink{struct_sprite}{Sprite}} $\ast$sp, uint32\+\_\+t \mbox{\hyperlink{structcolor}{color}})
+\begin{DoxyCompactList}\small\item\em Changes the color of a sprite. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{group__sprite_gae179135dc9bd1c7da4a8eb774237ec7e}{cursor\+\_\+get\+\_\+xf}} (\mbox{\hyperlink{struct_sprite}{Sprite}} $\ast$\mbox{\hyperlink{pengoo_8c_a3a7ea4305773abf5347bb261a8a5c16b}{cursor}}, int16\+\_\+t delX)
+\begin{DoxyCompactList}\small\item\em Gets the x position a cursor (sprite) would be on after moving a horizontal amount. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{group__sprite_gabfdb11ab1c80b5083fd8b64320139924}{cursor\+\_\+get\+\_\+yf}} (\mbox{\hyperlink{struct_sprite}{Sprite}} $\ast$\mbox{\hyperlink{pengoo_8c_a3a7ea4305773abf5347bb261a8a5c16b}{cursor}}, int16\+\_\+t delY)
+\begin{DoxyCompactList}\small\item\em Gets the y position a cursor (sprite) would be on after moving a vertical amount. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__sprite_ga90f5eec8870a027c011108bc4885880c}{update\+\_\+cursor}} (\mbox{\hyperlink{struct_sprite}{Sprite}} $\ast$\mbox{\hyperlink{pengoo_8c_a3a7ea4305773abf5347bb261a8a5c16b}{cursor}}, \mbox{\hyperlink{struct_event__t}{Event\+\_\+t}} \mbox{\hyperlink{pengoo_8c_af662780d461acf9ac3b1321884e7cb01}{event}})
+\begin{DoxyCompactList}\small\item\em Updates a cursor (sprite), by reading an event. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__sprite_gad12aa07248bed260a545f3ee69372842}{cursor\+\_\+change\+\_\+bmp}} (\mbox{\hyperlink{struct_sprite}{Sprite}} $\ast$\mbox{\hyperlink{pengoo_8c_a3a7ea4305773abf5347bb261a8a5c16b}{cursor}}, \mbox{\hyperlink{struct_bitmap}{Bitmap}} $\ast$bitmap)
+\begin{DoxyCompactList}\small\item\em Change the bitmap of a sprite. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__sprite_gadaf8e12cd78fdf0d2ea5b182ed1072c1}{make\+\_\+hitbox}} (\mbox{\hyperlink{struct_hitbox}{Hitbox}} $\ast$hitbox, int16\+\_\+t x1, int16\+\_\+t x2, int16\+\_\+t y1, int16\+\_\+t y2)
+\begin{DoxyCompactList}\small\item\em Creates a hitbox from 2 positions. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__sprite_ga71d979b14726234dc84191b6e5534b5e}{move\+\_\+hitbox}} (\mbox{\hyperlink{struct_hitbox}{Hitbox}} $\ast$hitbox, int16\+\_\+t delx, int16\+\_\+t dely)
+\begin{DoxyCompactList}\small\item\em Moves a hitbox a certain amount. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__sprite_gace4cfe7bbf61f89e7342615ed1dccf56}{check\+\_\+hitbox\+\_\+collision}} (\mbox{\hyperlink{struct_hitbox}{Hitbox}} hitboxA, \mbox{\hyperlink{struct_hitbox}{Hitbox}} hitboxB)
+\begin{DoxyCompactList}\small\item\em Checks if two hitboxs collided. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_button}{Button}} $\ast$ \mbox{\hyperlink{group__sprite_gae13b75db5ceecfd2fc00a030910c8e7a}{create\+\_\+button}} (uint16\+\_\+t x, uint16\+\_\+t y, \mbox{\hyperlink{struct_layer}{Layer}} $\ast$layer, \mbox{\hyperlink{struct_bitmap}{Bitmap}} $\ast$bitmap\+Idle, \mbox{\hyperlink{struct_bitmap}{Bitmap}} $\ast$bitmap\+Highlighted)
+\begin{DoxyCompactList}\small\item\em Creates a button. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__sprite_ga6b75c612ee123b9b3261a831fd6d805b}{destroy\+\_\+button}} (\mbox{\hyperlink{struct_button}{Button}} $\ast$button)
+\begin{DoxyCompactList}\small\item\em Frees the memory used by a button. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__sprite_ga39cf20a4f80d3e42f7ecc3dab4bd7b65}{draw\+\_\+button}} (\mbox{\hyperlink{struct_sprite}{Sprite}} $\ast$\mbox{\hyperlink{pengoo_8c_a3a7ea4305773abf5347bb261a8a5c16b}{cursor}}, \mbox{\hyperlink{struct_button}{Button}} $\ast$button)
+\begin{DoxyCompactList}\small\item\em Draws a button on the screen, highlighting it if cursor is on the button. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__sprite_ga73cc8ddf6dbcb83935fabd2443251edd}{draw\+\_\+buttons}} (\mbox{\hyperlink{struct_sprite}{Sprite}} $\ast$\mbox{\hyperlink{pengoo_8c_a3a7ea4305773abf5347bb261a8a5c16b}{cursor}}, \mbox{\hyperlink{struct_button}{Button}} $\ast$buttons\mbox{[}$\,$\mbox{]}, uint8\+\_\+t num\+\_\+buttons)
+\begin{DoxyCompactList}\small\item\em Draws a number of buttons on the screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__sprite_ga7438e498241a820e8b1f4ab63e42c99b}{disable\+\_\+buttons}} (\mbox{\hyperlink{struct_button}{Button}} $\ast$buttons\mbox{[}$\,$\mbox{]}, uint8\+\_\+t num\+\_\+buttons)
+\begin{DoxyCompactList}\small\item\em Unpresses and unhighlights all the buttons. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__sprite_ga8fe18a5b062a81b4b99dc62f0643446c}{is\+\_\+on\+\_\+button}} (\mbox{\hyperlink{struct_sprite}{Sprite}} $\ast$\mbox{\hyperlink{pengoo_8c_a3a7ea4305773abf5347bb261a8a5c16b}{cursor}}, \mbox{\hyperlink{struct_button}{Button}} $\ast$button)
+\begin{DoxyCompactList}\small\item\em Checks if a cursor is on a button. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__sprite_ga1a1688248ec81812ca2c738584e323a4}{highlight\+\_\+button}} (\mbox{\hyperlink{struct_button}{Button}} $\ast$button)
+\begin{DoxyCompactList}\small\item\em Highlights a button, updating it. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__sprite_gaa28b2a8d13a3ab9e23c3d91691614c81}{unhighlight\+\_\+button}} (\mbox{\hyperlink{struct_button}{Button}} $\ast$button)
+\begin{DoxyCompactList}\small\item\em Unghlights a button, updating it. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__sprite_ga5c42751a94b0c5695a62506fc2011d80}{press\+\_\+button}} (\mbox{\hyperlink{struct_button}{Button}} $\ast$button)
+\begin{DoxyCompactList}\small\item\em Presses a button, updating it. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__sprite_gae98d092189bc279e8a79ce65a4d7f436}{unpress\+\_\+button}} (\mbox{\hyperlink{struct_button}{Button}} $\ast$button)
+\begin{DoxyCompactList}\small\item\em Releases a button, updating it. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__sprite_ga34874b7023163a28e2d314d7ab833da1}{check\+Button\+Press}} (\mbox{\hyperlink{struct_event__t}{Event\+\_\+t}} \mbox{\hyperlink{pengoo_8c_af662780d461acf9ac3b1321884e7cb01}{event}}, \mbox{\hyperlink{struct_sprite}{Sprite}} $\ast$\mbox{\hyperlink{pengoo_8c_a3a7ea4305773abf5347bb261a8a5c16b}{cursor}}, \mbox{\hyperlink{struct_button}{Button}} $\ast$buttons\mbox{[}$\,$\mbox{]}, uint8\+\_\+t num\+\_\+buttons)
+\begin{DoxyCompactList}\small\item\em If there was a mouse event, checks the new cursor position and whether it has clicked on a button. If so, it returns its index from the provided array. If the pressed button is not single\+State, all the other buttons are released. Also updates buttons based on whether they are highlighted/pressed or not. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_idle_sprite}{Idle\+Sprite}} $\ast$ \mbox{\hyperlink{group__sprite_ga802ed6ffe723a0df6e97ab0dd5006e0f}{create\+\_\+idle\+\_\+sprite}} (uint16\+\_\+t x, uint16\+\_\+t y, \mbox{\hyperlink{struct_layer}{Layer}} $\ast$layer, \mbox{\hyperlink{struct_bitmap}{Bitmap}} $\ast$bitmap, uint32\+\_\+t \mbox{\hyperlink{structcolor}{color}})
+\begin{DoxyCompactList}\small\item\em Create an idle sprite. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__sprite_ga61aab38a0e3013985ea15998cc898846}{destroy\+\_\+idle\+\_\+sprite}} (\mbox{\hyperlink{struct_idle_sprite}{Idle\+Sprite}} $\ast$idlesprite)
+\begin{DoxyCompactList}\small\item\em Destroys an \mbox{\hyperlink{struct_idle_sprite}{Idle\+Sprite}} object, freeing all used memory. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__sprite_gaeee668e211c134def251f737269b9d5e}{draw\+\_\+idle\+\_\+sprite}} (\mbox{\hyperlink{struct_idle_sprite}{Idle\+Sprite}} $\ast$idlesprite)
+\begin{DoxyCompactList}\small\item\em Draws an \mbox{\hyperlink{struct_idle_sprite}{Idle\+Sprite}} on its layer, replacing all G\+R\+E\+EN in its B\+MP with its color attribute. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__sprite_gabae3594520c7d515ffda965caae199af}{idle\+\_\+sprite\+\_\+change\+\_\+color}} (\mbox{\hyperlink{struct_idle_sprite}{Idle\+Sprite}} $\ast$idlesprite, uint32\+\_\+t \mbox{\hyperlink{structcolor}{color}})
+\begin{DoxyCompactList}\small\item\em Changes the \mbox{\hyperlink{struct_idle_sprite}{Idle\+Sprite}}\textquotesingle{}s color. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_slider}{Slider}} $\ast$ \mbox{\hyperlink{group__sprite_gac479773f83a2e428343ce29e775d90ec}{create\+\_\+slider}} (uint16\+\_\+t x, uint16\+\_\+t y, double perc\+\_\+filled, \mbox{\hyperlink{struct_layer}{Layer}} $\ast$layer, uint32\+\_\+t \mbox{\hyperlink{structcolor}{color}}, uint32\+\_\+t color\+\_\+active)
+\begin{DoxyCompactList}\small\item\em Creates a slider object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__sprite_ga68e5ecf620b6fc346c992ef0eb49535f}{draw\+\_\+slider}} (\mbox{\hyperlink{struct_slider}{Slider}} $\ast$slider)
+\begin{DoxyCompactList}\small\item\em Draws a slider on its layer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__sprite_ga3f6696185609cd55e3535258deb30ea7}{slider\+\_\+move\+\_\+handle}} (\mbox{\hyperlink{struct_slider}{Slider}} $\ast$slider, uint16\+\_\+t pos)
+\begin{DoxyCompactList}\small\item\em Moves the sliders handle, and updates its sprite. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__sprite_gaa77fff83958c7ed7ab6e99a25d574ce2}{is\+\_\+on\+\_\+slider}} (\mbox{\hyperlink{struct_sprite}{Sprite}} $\ast$\mbox{\hyperlink{pengoo_8c_a3a7ea4305773abf5347bb261a8a5c16b}{cursor}}, \mbox{\hyperlink{struct_slider}{Slider}} $\ast$slider)
+\begin{DoxyCompactList}\small\item\em Checks if a cursor (sprite) is on a slider. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{group__sprite_ga3ac8528c0dc7f14cd06be7fd636fd6d7}{slider\+\_\+get\+\_\+perc}} (\mbox{\hyperlink{struct_slider}{Slider}} $\ast$slider)
+\begin{DoxyCompactList}\small\item\em Calculates how much of the slider is \char`\"{}filled\char`\"{} (how much to the right the handle is) \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__sprite_ga912de7c5bbbc103cb804e3bd76ba770a}{update\+\_\+slider}} (\mbox{\hyperlink{struct_event__t}{Event\+\_\+t}} \mbox{\hyperlink{pengoo_8c_af662780d461acf9ac3b1321884e7cb01}{event}}, \mbox{\hyperlink{struct_sprite}{Sprite}} $\ast$\mbox{\hyperlink{pengoo_8c_a3a7ea4305773abf5347bb261a8a5c16b}{cursor}}, \mbox{\hyperlink{struct_slider}{Slider}} $\ast$slider)
+\begin{DoxyCompactList}\small\item\em Updates a slider, based on an event and a cursor. If the cursor presses the LB on the slider, or if it\textquotesingle{}s holding the left button while the slider still wasn\textquotesingle{}t released, it moves the handle to the cursor\textquotesingle{}s x position. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{group__sprite_gab36028dcefdd4bf024c52c8d9519a283}{Sprite\+::x}}
+\begin{DoxyCompactList}\small\item\em Current sprite X position. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__sprite_ga363e26017ee2aaed8636f7dab92af2cd}{Sprite\+::y}}
+\begin{DoxyCompactList}\small\item\em Current sprite Y position. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__sprite_ga0a3364944c5e361fc9e7ae406224d682}{Sprite\+::width}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{struct_sprite}{Sprite}} width. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__sprite_ga1f07c8f2080c193759aec0e13503d7ab}{Sprite\+::height}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{struct_sprite}{Sprite}} height. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_bitmap}{Bitmap}} $\ast$ \mbox{\hyperlink{group__sprite_ga626b702203ed42c3cd2af8f159eced42}{Sprite\+::bitmap}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{struct_sprite}{Sprite}} bitmap. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{group__sprite_ga925050b598e308e3da33683aa2cb2aa7}{Sprite\+::color}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{struct_sprite}{Sprite}}\textquotesingle{}s color (if applied) \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__sprite_gaac205203fe002b67015db70c9c19c6a2}{Hitbox\+::x1}}
+\begin{DoxyCompactList}\small\item\em X position of the Upper left corner. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__sprite_gae4b2bb3a226633c413ecc01795f1dec9}{Hitbox\+::y1}}
+\begin{DoxyCompactList}\small\item\em Y position of the Upper left corner. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__sprite_ga5e8a3444550e7d6219148cdf421068b8}{Hitbox\+::x2}}
+\begin{DoxyCompactList}\small\item\em X position of the Lower right corner. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__sprite_ga4786580e4912ad08c39f12150bdde84f}{Hitbox\+::y2}}
+\begin{DoxyCompactList}\small\item\em Y position of the Lower right corner. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__sprite_ga1eddadd54a3cd0e831f55c322892e687}{Hitbox\+::width}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{struct_hitbox}{Hitbox}} width (redundant) \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__sprite_ga4510d5b903afe522c6b1e964016d988c}{Hitbox\+::height}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{struct_hitbox}{Hitbox}} height (redundant) \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{group__sprite_ga7e12fd65ad1fdbd19721a3c109efd3bf}{Button\+::x}}
+\begin{DoxyCompactList}\small\item\em button X position \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{group__sprite_ga0e057db96fd0683cd5236af8921671a6}{Button\+::y}}
+\begin{DoxyCompactList}\small\item\em button Y position \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_bitmap}{Bitmap}} $\ast$ \mbox{\hyperlink{group__sprite_gaa57f73b6227397e025dc60e8c460fcb3}{Button\+::bitmap}}
+\begin{DoxyCompactList}\small\item\em bitmap being used \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_bitmap}{Bitmap}} $\ast$ \mbox{\hyperlink{group__sprite_ga509d33b7b3b9dd4f7c10c3c05c0a6ca0}{Button\+::bitmap\+Idle}}
+\begin{DoxyCompactList}\small\item\em bitmap used when idle \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_bitmap}{Bitmap}} $\ast$ \mbox{\hyperlink{group__sprite_gaf915bef19af626f44f41a7513feaef7e}{Button\+::bitmap\+Highlighted}}
+\begin{DoxyCompactList}\small\item\em bitmap used when cursor hovers the button \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_layer}{Layer}} $\ast$ \mbox{\hyperlink{group__sprite_ga76e365a5ffde4b0759c8bbd1cc7b932c}{Button\+::layer}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{struct_layer}{Layer}} where the button is drawn on. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__sprite_ga582e96a8182496689178c543a86d3401}{Button\+::single\+State}}
+\begin{DoxyCompactList}\small\item\em Set to false only if the button can both be \char`\"{}on\char`\"{} or \char`\"{}off\char`\"{}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__sprite_ga0d0eccfb33156acc548e70e09bfbf69b}{Button\+::is\+Highlighted}}
+\begin{DoxyCompactList}\small\item\em Set to true if the cursor is hovering. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__sprite_gaf40951436602ca874e5a7bc90774a71b}{Button\+::is\+Pressed}}
+\begin{DoxyCompactList}\small\item\em Set to true if the button is pressed. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{group__sprite_gaccc6cfeb632527dbc79a1017f8f3a237}{Idle\+Sprite\+::x}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{group__sprite_ga63da8969e319d653ed0608c49056bcde}{Idle\+Sprite\+::y}}
+\item 
+\mbox{\hyperlink{struct_bitmap}{Bitmap}} $\ast$ \mbox{\hyperlink{group__sprite_ga43ec29869061c84e407f6351ce4e8efe}{Idle\+Sprite\+::bitmap}}
+\item 
+\mbox{\hyperlink{struct_layer}{Layer}} $\ast$ \mbox{\hyperlink{group__sprite_ga30536ca9bdfd98e84322bb2275f59d1a}{Idle\+Sprite\+::layer}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{group__sprite_gaf2cfbfe5f907f5f0abbd8d673bce19db}{Idle\+Sprite\+::color}}
+\item 
+\mbox{\hyperlink{struct_layer}{Layer}} $\ast$ \mbox{\hyperlink{group__sprite_gaed3e78bd2a3a88c5b0a02ff128d8dd85}{Slider\+::layer}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{struct_layer}{Layer}} the slider is drawn on. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{group__sprite_ga3f0f16473e1534d0d73d917e6212b4f1}{Slider\+::x}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{group__sprite_ga4568c992e8bb68bfdf407242af502928}{Slider\+::y}}
+\begin{DoxyCompactList}\small\item\em Coordinates of the top left position. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{group__sprite_gaa0b70313a61d3490712dc4c269e0bea4}{Slider\+::height}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{group__sprite_ga4ccd5dd9d8b0c329101310f2dd24fbe5}{Slider\+::width}}
+\begin{DoxyCompactList}\small\item\em Height and witch of the slider. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{group__sprite_gac1256085ee6a3241fb177a28befc0eef}{Slider\+::handle\+\_\+pos}}
+\begin{DoxyCompactList}\small\item\em absolute X position of the \mbox{\hyperlink{struct_slider}{Slider}}\textquotesingle{}s handle \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{group__sprite_ga0ec90999b2ad7a80de51ebbf6603af87}{Slider\+::color}}
+\begin{DoxyCompactList}\small\item\em Color that replaces G\+R\+E\+EN for the \char`\"{}inactive\char`\"{} part of the slider. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{group__sprite_ga30afc9a607e8770d283f7219d837bfc2}{Slider\+::color\+\_\+active}}
+\begin{DoxyCompactList}\small\item\em Color that replaces G\+R\+E\+EN for the \char`\"{}active\char`\"{} part of the slider. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__sprite_gafebb65462372e968ef98ad909aa6413a}{Slider\+::is\+Pressed}}
+\begin{DoxyCompactList}\small\item\em Set to true if slider is pressed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Functions used to create and manipulate sprites. 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__sprite_gace4cfe7bbf61f89e7342615ed1dccf56}\label{group__sprite_gace4cfe7bbf61f89e7342615ed1dccf56}} 
+\index{sprite@{sprite}!check\+\_\+hitbox\+\_\+collision@{check\+\_\+hitbox\+\_\+collision}}
+\index{check\+\_\+hitbox\+\_\+collision@{check\+\_\+hitbox\+\_\+collision}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{check\+\_\+hitbox\+\_\+collision()}{check\_hitbox\_collision()}}
+{\footnotesize\ttfamily bool check\+\_\+hitbox\+\_\+collision (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_hitbox}{Hitbox}}}]{hitboxA,  }\item[{\mbox{\hyperlink{struct_hitbox}{Hitbox}}}]{hitboxB }\end{DoxyParamCaption})}
+
+
+
+Checks if two hitboxs collided. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hitboxA} & \mbox{\hyperlink{struct_hitbox}{Hitbox}} 1 \\
+\hline
+{\em hitboxB} & \mbox{\hyperlink{struct_hitbox}{Hitbox}} 2 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true \mbox{\hyperlink{struct_hitbox}{Hitbox}} 1 and 2 collided 
+
+false \mbox{\hyperlink{struct_hitbox}{Hitbox}} 1 and 2 did not collide 
+\end{DoxyReturn}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_gace4cfe7bbf61f89e7342615ed1dccf56_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__sprite_ga34874b7023163a28e2d314d7ab833da1}\label{group__sprite_ga34874b7023163a28e2d314d7ab833da1}} 
+\index{sprite@{sprite}!check\+Button\+Press@{check\+Button\+Press}}
+\index{check\+Button\+Press@{check\+Button\+Press}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{check\+Button\+Press()}{checkButtonPress()}}
+{\footnotesize\ttfamily int check\+Button\+Press (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_event__t}{Event\+\_\+t}}}]{event,  }\item[{\mbox{\hyperlink{struct_sprite}{Sprite}} $\ast$}]{cursor,  }\item[{\mbox{\hyperlink{struct_button}{Button}} $\ast$}]{buttons\mbox{[}$\,$\mbox{]},  }\item[{uint8\+\_\+t}]{num\+\_\+buttons }\end{DoxyParamCaption})}
+
+
+
+If there was a mouse event, checks the new cursor position and whether it has clicked on a button. If so, it returns its index from the provided array. If the pressed button is not single\+State, all the other buttons are released. Also updates buttons based on whether they are highlighted/pressed or not. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & Event to be read \\
+\hline
+{\em cursor} & Cursor being used \\
+\hline
+{\em buttons} & Array of buttons to be drawn \\
+\hline
+{\em num\+\_\+buttons} & Size of the array \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int Index of the pressed button. Returns -\/1 if no buttons were pressed. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_ga34874b7023163a28e2d314d7ab833da1_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_ga34874b7023163a28e2d314d7ab833da1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__sprite_gae13b75db5ceecfd2fc00a030910c8e7a}\label{group__sprite_gae13b75db5ceecfd2fc00a030910c8e7a}} 
+\index{sprite@{sprite}!create\+\_\+button@{create\+\_\+button}}
+\index{create\+\_\+button@{create\+\_\+button}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{create\+\_\+button()}{create\_button()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_button}{Button}}$\ast$ create\+\_\+button (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{x,  }\item[{uint16\+\_\+t}]{y,  }\item[{\mbox{\hyperlink{struct_layer}{Layer}} $\ast$}]{layer,  }\item[{\mbox{\hyperlink{struct_bitmap}{Bitmap}} $\ast$}]{bitmap\+Idle,  }\item[{\mbox{\hyperlink{struct_bitmap}{Bitmap}} $\ast$}]{bitmap\+Highlighted }\end{DoxyParamCaption})}
+
+
+
+Creates a button. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & X position \\
+\hline
+{\em y} & Y position \\
+\hline
+{\em layer} & \mbox{\hyperlink{struct_layer}{Layer}} to place the button on \\
+\hline
+{\em bitmap\+Idle} & \mbox{\hyperlink{struct_bitmap}{Bitmap}} when idle \\
+\hline
+{\em bitmap\+Highlighted} & \mbox{\hyperlink{struct_bitmap}{Bitmap}} when highlighted \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Button$\ast$ The created button 
+\end{DoxyReturn}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_gae13b75db5ceecfd2fc00a030910c8e7a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__sprite_ga802ed6ffe723a0df6e97ab0dd5006e0f}\label{group__sprite_ga802ed6ffe723a0df6e97ab0dd5006e0f}} 
+\index{sprite@{sprite}!create\+\_\+idle\+\_\+sprite@{create\+\_\+idle\+\_\+sprite}}
+\index{create\+\_\+idle\+\_\+sprite@{create\+\_\+idle\+\_\+sprite}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{create\+\_\+idle\+\_\+sprite()}{create\_idle\_sprite()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_idle_sprite}{Idle\+Sprite}}$\ast$ create\+\_\+idle\+\_\+sprite (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{x,  }\item[{uint16\+\_\+t}]{y,  }\item[{\mbox{\hyperlink{struct_layer}{Layer}} $\ast$}]{layer,  }\item[{\mbox{\hyperlink{struct_bitmap}{Bitmap}} $\ast$}]{bitmap,  }\item[{uint32\+\_\+t}]{color }\end{DoxyParamCaption})}
+
+
+
+Create an idle sprite. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & X position \\
+\hline
+{\em y} & Y position \\
+\hline
+{\em layer} & Respective layer \\
+\hline
+{\em bitmap} & \mbox{\hyperlink{struct_sprite}{Sprite}} bitmap \\
+\hline
+{\em color} & Color to replace G\+R\+E\+EN on the B\+MP \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Idle\+Sprite$\ast$ Returns the \mbox{\hyperlink{struct_idle_sprite}{Idle\+Sprite}} object 
+\end{DoxyReturn}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_ga802ed6ffe723a0df6e97ab0dd5006e0f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__sprite_gac479773f83a2e428343ce29e775d90ec}\label{group__sprite_gac479773f83a2e428343ce29e775d90ec}} 
+\index{sprite@{sprite}!create\+\_\+slider@{create\+\_\+slider}}
+\index{create\+\_\+slider@{create\+\_\+slider}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{create\+\_\+slider()}{create\_slider()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_slider}{Slider}}$\ast$ create\+\_\+slider (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{x,  }\item[{uint16\+\_\+t}]{y,  }\item[{double}]{perc\+\_\+filled,  }\item[{\mbox{\hyperlink{struct_layer}{Layer}} $\ast$}]{layer,  }\item[{uint32\+\_\+t}]{color,  }\item[{uint32\+\_\+t}]{color\+\_\+active }\end{DoxyParamCaption})}
+
+
+
+Creates a slider object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & X position \\
+\hline
+{\em y} & Y position \\
+\hline
+{\em perc\+\_\+filled} & How much of the slider is \char`\"{}filled\char`\"{} with active color \\
+\hline
+{\em layer} & \mbox{\hyperlink{struct_layer}{Layer}} to place it on \\
+\hline
+{\em color} & color attribute \\
+\hline
+{\em color\+\_\+active} & color\+\_\+active attribute \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Slider$\ast$ 
+\end{DoxyReturn}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_gac479773f83a2e428343ce29e775d90ec_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__sprite_ga419fef722f3afd383e6d4171ffb54fb1}\label{group__sprite_ga419fef722f3afd383e6d4171ffb54fb1}} 
+\index{sprite@{sprite}!create\+\_\+sprite@{create\+\_\+sprite}}
+\index{create\+\_\+sprite@{create\+\_\+sprite}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{create\+\_\+sprite()}{create\_sprite()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_sprite}{Sprite}}$\ast$ create\+\_\+sprite (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_bitmap}{Bitmap}} $\ast$}]{bitmap,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+Creates a new sprite with pixmap \char`\"{}pic\char`\"{}, with specified position (within the screen limits). Does not draw the sprite on the screen Returns N\+U\+LL on invalid pixmap. Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_ga419fef722f3afd383e6d4171ffb54fb1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__sprite_gad12aa07248bed260a545f3ee69372842}\label{group__sprite_gad12aa07248bed260a545f3ee69372842}} 
+\index{sprite@{sprite}!cursor\+\_\+change\+\_\+bmp@{cursor\+\_\+change\+\_\+bmp}}
+\index{cursor\+\_\+change\+\_\+bmp@{cursor\+\_\+change\+\_\+bmp}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{cursor\+\_\+change\+\_\+bmp()}{cursor\_change\_bmp()}}
+{\footnotesize\ttfamily void cursor\+\_\+change\+\_\+bmp (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_sprite}{Sprite}} $\ast$}]{cursor,  }\item[{\mbox{\hyperlink{struct_bitmap}{Bitmap}} $\ast$}]{bitmap }\end{DoxyParamCaption})}
+
+
+
+Change the bitmap of a sprite. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cursor} & \mbox{\hyperlink{struct_sprite}{Sprite}} to be changed \\
+\hline
+{\em bitmap} & New bitmap \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_gad12aa07248bed260a545f3ee69372842_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_gad12aa07248bed260a545f3ee69372842_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__sprite_gae179135dc9bd1c7da4a8eb774237ec7e}\label{group__sprite_gae179135dc9bd1c7da4a8eb774237ec7e}} 
+\index{sprite@{sprite}!cursor\+\_\+get\+\_\+xf@{cursor\+\_\+get\+\_\+xf}}
+\index{cursor\+\_\+get\+\_\+xf@{cursor\+\_\+get\+\_\+xf}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{cursor\+\_\+get\+\_\+xf()}{cursor\_get\_xf()}}
+{\footnotesize\ttfamily uint16\+\_\+t cursor\+\_\+get\+\_\+xf (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_sprite}{Sprite}} $\ast$}]{cursor,  }\item[{int16\+\_\+t}]{delX }\end{DoxyParamCaption})}
+
+
+
+Gets the x position a cursor (sprite) would be on after moving a horizontal amount. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cursor} & \mbox{\hyperlink{struct_sprite}{Sprite}} to check for \\
+\hline
+{\em delX} & Distance moved \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint16\+\_\+t Future position 
+\end{DoxyReturn}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=259pt]{group__sprite_gae179135dc9bd1c7da4a8eb774237ec7e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_gae179135dc9bd1c7da4a8eb774237ec7e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__sprite_gabfdb11ab1c80b5083fd8b64320139924}\label{group__sprite_gabfdb11ab1c80b5083fd8b64320139924}} 
+\index{sprite@{sprite}!cursor\+\_\+get\+\_\+yf@{cursor\+\_\+get\+\_\+yf}}
+\index{cursor\+\_\+get\+\_\+yf@{cursor\+\_\+get\+\_\+yf}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{cursor\+\_\+get\+\_\+yf()}{cursor\_get\_yf()}}
+{\footnotesize\ttfamily uint16\+\_\+t cursor\+\_\+get\+\_\+yf (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_sprite}{Sprite}} $\ast$}]{cursor,  }\item[{int16\+\_\+t}]{delY }\end{DoxyParamCaption})}
+
+
+
+Gets the y position a cursor (sprite) would be on after moving a vertical amount. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cursor} & \mbox{\hyperlink{struct_sprite}{Sprite}} to check for \\
+\hline
+{\em delY} & Distance moved \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint16\+\_\+t Future position 
+\end{DoxyReturn}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=258pt]{group__sprite_gabfdb11ab1c80b5083fd8b64320139924_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_gabfdb11ab1c80b5083fd8b64320139924_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__sprite_ga6b75c612ee123b9b3261a831fd6d805b}\label{group__sprite_ga6b75c612ee123b9b3261a831fd6d805b}} 
+\index{sprite@{sprite}!destroy\+\_\+button@{destroy\+\_\+button}}
+\index{destroy\+\_\+button@{destroy\+\_\+button}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{destroy\+\_\+button()}{destroy\_button()}}
+{\footnotesize\ttfamily void destroy\+\_\+button (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_button}{Button}} $\ast$}]{button }\end{DoxyParamCaption})}
+
+
+
+Frees the memory used by a button. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em button} & \mbox{\hyperlink{struct_button}{Button}} to be destroyed. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_ga6b75c612ee123b9b3261a831fd6d805b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__sprite_ga61aab38a0e3013985ea15998cc898846}\label{group__sprite_ga61aab38a0e3013985ea15998cc898846}} 
+\index{sprite@{sprite}!destroy\+\_\+idle\+\_\+sprite@{destroy\+\_\+idle\+\_\+sprite}}
+\index{destroy\+\_\+idle\+\_\+sprite@{destroy\+\_\+idle\+\_\+sprite}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{destroy\+\_\+idle\+\_\+sprite()}{destroy\_idle\_sprite()}}
+{\footnotesize\ttfamily void destroy\+\_\+idle\+\_\+sprite (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_idle_sprite}{Idle\+Sprite}} $\ast$}]{idlesprite }\end{DoxyParamCaption})}
+
+
+
+Destroys an \mbox{\hyperlink{struct_idle_sprite}{Idle\+Sprite}} object, freeing all used memory. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em idlesprite} & \mbox{\hyperlink{struct_sprite}{Sprite}} to be destroyed. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__sprite_ga0b9702271420a69a1603d0a3768fda67}\label{group__sprite_ga0b9702271420a69a1603d0a3768fda67}} 
+\index{sprite@{sprite}!destroy\+\_\+sprite@{destroy\+\_\+sprite}}
+\index{destroy\+\_\+sprite@{destroy\+\_\+sprite}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{destroy\+\_\+sprite()}{destroy\_sprite()}}
+{\footnotesize\ttfamily void destroy\+\_\+sprite (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_sprite}{Sprite}} $\ast$}]{fig }\end{DoxyParamCaption})}
+
+The \char`\"{}fig\char`\"{} sprite is erased from memory whose address is \char`\"{}base\char`\"{} and used resources released. \mbox{\Hypertarget{group__sprite_ga7438e498241a820e8b1f4ab63e42c99b}\label{group__sprite_ga7438e498241a820e8b1f4ab63e42c99b}} 
+\index{sprite@{sprite}!disable\+\_\+buttons@{disable\+\_\+buttons}}
+\index{disable\+\_\+buttons@{disable\+\_\+buttons}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{disable\+\_\+buttons()}{disable\_buttons()}}
+{\footnotesize\ttfamily void disable\+\_\+buttons (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_button}{Button}} $\ast$}]{buttons\mbox{[}$\,$\mbox{]},  }\item[{uint8\+\_\+t}]{num\+\_\+buttons }\end{DoxyParamCaption})}
+
+
+
+Unpresses and unhighlights all the buttons. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buttons} & Array of buttons to be drawn \\
+\hline
+{\em num\+\_\+buttons} & Size of the array \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_ga7438e498241a820e8b1f4ab63e42c99b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__sprite_ga39cf20a4f80d3e42f7ecc3dab4bd7b65}\label{group__sprite_ga39cf20a4f80d3e42f7ecc3dab4bd7b65}} 
+\index{sprite@{sprite}!draw\+\_\+button@{draw\+\_\+button}}
+\index{draw\+\_\+button@{draw\+\_\+button}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{draw\+\_\+button()}{draw\_button()}}
+{\footnotesize\ttfamily void draw\+\_\+button (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_sprite}{Sprite}} $\ast$}]{cursor,  }\item[{\mbox{\hyperlink{struct_button}{Button}} $\ast$}]{button }\end{DoxyParamCaption})}
+
+
+
+Draws a button on the screen, highlighting it if cursor is on the button. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cursor} & Cursor being used \\
+\hline
+{\em button} & \mbox{\hyperlink{struct_button}{Button}} to be drawn \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_ga39cf20a4f80d3e42f7ecc3dab4bd7b65_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_ga39cf20a4f80d3e42f7ecc3dab4bd7b65_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__sprite_ga73cc8ddf6dbcb83935fabd2443251edd}\label{group__sprite_ga73cc8ddf6dbcb83935fabd2443251edd}} 
+\index{sprite@{sprite}!draw\+\_\+buttons@{draw\+\_\+buttons}}
+\index{draw\+\_\+buttons@{draw\+\_\+buttons}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{draw\+\_\+buttons()}{draw\_buttons()}}
+{\footnotesize\ttfamily void draw\+\_\+buttons (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_sprite}{Sprite}} $\ast$}]{cursor,  }\item[{\mbox{\hyperlink{struct_button}{Button}} $\ast$}]{buttons\mbox{[}$\,$\mbox{]},  }\item[{uint8\+\_\+t}]{num\+\_\+buttons }\end{DoxyParamCaption})}
+
+
+
+Draws a number of buttons on the screen. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cursor} & Cursor being used. \\
+\hline
+{\em buttons} & Array of buttons to be drawn \\
+\hline
+{\em num\+\_\+buttons} & Size of the array \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_ga73cc8ddf6dbcb83935fabd2443251edd_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_ga73cc8ddf6dbcb83935fabd2443251edd_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__sprite_gaeee668e211c134def251f737269b9d5e}\label{group__sprite_gaeee668e211c134def251f737269b9d5e}} 
+\index{sprite@{sprite}!draw\+\_\+idle\+\_\+sprite@{draw\+\_\+idle\+\_\+sprite}}
+\index{draw\+\_\+idle\+\_\+sprite@{draw\+\_\+idle\+\_\+sprite}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{draw\+\_\+idle\+\_\+sprite()}{draw\_idle\_sprite()}}
+{\footnotesize\ttfamily void draw\+\_\+idle\+\_\+sprite (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_idle_sprite}{Idle\+Sprite}} $\ast$}]{idlesprite }\end{DoxyParamCaption})}
+
+
+
+Draws an \mbox{\hyperlink{struct_idle_sprite}{Idle\+Sprite}} on its layer, replacing all G\+R\+E\+EN in its B\+MP with its color attribute. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em idlesprite} & \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_gaeee668e211c134def251f737269b9d5e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_gaeee668e211c134def251f737269b9d5e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__sprite_ga68e5ecf620b6fc346c992ef0eb49535f}\label{group__sprite_ga68e5ecf620b6fc346c992ef0eb49535f}} 
+\index{sprite@{sprite}!draw\+\_\+slider@{draw\+\_\+slider}}
+\index{draw\+\_\+slider@{draw\+\_\+slider}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{draw\+\_\+slider()}{draw\_slider()}}
+{\footnotesize\ttfamily void draw\+\_\+slider (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_slider}{Slider}} $\ast$}]{slider }\end{DoxyParamCaption})}
+
+
+
+Draws a slider on its layer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em slider} & \mbox{\hyperlink{struct_slider}{Slider}} to be drawn. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_ga68e5ecf620b6fc346c992ef0eb49535f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_ga68e5ecf620b6fc346c992ef0eb49535f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__sprite_ga740994f8c16c38bf18eaabac1f5eeeb9}\label{group__sprite_ga740994f8c16c38bf18eaabac1f5eeeb9}} 
+\index{sprite@{sprite}!draw\+\_\+sprite@{draw\+\_\+sprite}}
+\index{draw\+\_\+sprite@{draw\+\_\+sprite}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{draw\+\_\+sprite()}{draw\_sprite()}}
+{\footnotesize\ttfamily void draw\+\_\+sprite (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_sprite}{Sprite}} $\ast$}]{sp }\end{DoxyParamCaption})}
+
+
+
+Draws a sprite on the screen. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sp} & \mbox{\hyperlink{struct_sprite}{Sprite}} to be drawn \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_ga740994f8c16c38bf18eaabac1f5eeeb9_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=250pt]{group__sprite_ga740994f8c16c38bf18eaabac1f5eeeb9_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__sprite_gab5aa8ee6efdb9ebf62df81cad24c445c}\label{group__sprite_gab5aa8ee6efdb9ebf62df81cad24c445c}} 
+\index{sprite@{sprite}!draw\+\_\+sprite\+\_\+color@{draw\+\_\+sprite\+\_\+color}}
+\index{draw\+\_\+sprite\+\_\+color@{draw\+\_\+sprite\+\_\+color}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{draw\+\_\+sprite\+\_\+color()}{draw\_sprite\_color()}}
+{\footnotesize\ttfamily void draw\+\_\+sprite\+\_\+color (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_sprite}{Sprite}} $\ast$}]{sp }\end{DoxyParamCaption})}
+
+
+
+Draws a sprite on the screen, and replaces every color G\+R\+E\+EN with its color atribute. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sp} & \mbox{\hyperlink{struct_sprite}{Sprite}} to be drawn \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_gab5aa8ee6efdb9ebf62df81cad24c445c_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_gab5aa8ee6efdb9ebf62df81cad24c445c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__sprite_ga9c7e23b48dc8ea0f565655744cbae06c}\label{group__sprite_ga9c7e23b48dc8ea0f565655744cbae06c}} 
+\index{sprite@{sprite}!erase\+\_\+sprite@{erase\+\_\+sprite}}
+\index{erase\+\_\+sprite@{erase\+\_\+sprite}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{erase\+\_\+sprite()}{erase\_sprite()}}
+{\footnotesize\ttfamily void erase\+\_\+sprite (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_sprite}{Sprite}} $\ast$}]{sp }\end{DoxyParamCaption})}
+
+
+
+Erases a sprite from the screen. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sp} & \mbox{\hyperlink{struct_sprite}{Sprite}} to be erased \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_ga9c7e23b48dc8ea0f565655744cbae06c_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_ga9c7e23b48dc8ea0f565655744cbae06c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__sprite_ga1a1688248ec81812ca2c738584e323a4}\label{group__sprite_ga1a1688248ec81812ca2c738584e323a4}} 
+\index{sprite@{sprite}!highlight\+\_\+button@{highlight\+\_\+button}}
+\index{highlight\+\_\+button@{highlight\+\_\+button}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{highlight\+\_\+button()}{highlight\_button()}}
+{\footnotesize\ttfamily void highlight\+\_\+button (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_button}{Button}} $\ast$}]{button }\end{DoxyParamCaption})}
+
+
+
+Highlights a button, updating it. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em button} & \mbox{\hyperlink{struct_button}{Button}} to be highlighted \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_ga1a1688248ec81812ca2c738584e323a4_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_ga1a1688248ec81812ca2c738584e323a4_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__sprite_gabae3594520c7d515ffda965caae199af}\label{group__sprite_gabae3594520c7d515ffda965caae199af}} 
+\index{sprite@{sprite}!idle\+\_\+sprite\+\_\+change\+\_\+color@{idle\+\_\+sprite\+\_\+change\+\_\+color}}
+\index{idle\+\_\+sprite\+\_\+change\+\_\+color@{idle\+\_\+sprite\+\_\+change\+\_\+color}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{idle\+\_\+sprite\+\_\+change\+\_\+color()}{idle\_sprite\_change\_color()}}
+{\footnotesize\ttfamily void idle\+\_\+sprite\+\_\+change\+\_\+color (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_idle_sprite}{Idle\+Sprite}} $\ast$}]{idlesprite,  }\item[{uint32\+\_\+t}]{color }\end{DoxyParamCaption})}
+
+
+
+Changes the \mbox{\hyperlink{struct_idle_sprite}{Idle\+Sprite}}\textquotesingle{}s color. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em idlesprite} & Object to be changed \\
+\hline
+{\em color} & New color \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_gabae3594520c7d515ffda965caae199af_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_gabae3594520c7d515ffda965caae199af_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__sprite_ga8fe18a5b062a81b4b99dc62f0643446c}\label{group__sprite_ga8fe18a5b062a81b4b99dc62f0643446c}} 
+\index{sprite@{sprite}!is\+\_\+on\+\_\+button@{is\+\_\+on\+\_\+button}}
+\index{is\+\_\+on\+\_\+button@{is\+\_\+on\+\_\+button}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{is\+\_\+on\+\_\+button()}{is\_on\_button()}}
+{\footnotesize\ttfamily bool is\+\_\+on\+\_\+button (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_sprite}{Sprite}} $\ast$}]{cursor,  }\item[{\mbox{\hyperlink{struct_button}{Button}} $\ast$}]{button }\end{DoxyParamCaption})}
+
+
+
+Checks if a cursor is on a button. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cursor} & Cursor being used \\
+\hline
+{\em button} & \mbox{\hyperlink{struct_button}{Button}} to be checked \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true The cursor is on the button 
+
+false The cursor is not on the button 
+\end{DoxyReturn}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=279pt]{group__sprite_ga8fe18a5b062a81b4b99dc62f0643446c_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_ga8fe18a5b062a81b4b99dc62f0643446c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__sprite_gaa77fff83958c7ed7ab6e99a25d574ce2}\label{group__sprite_gaa77fff83958c7ed7ab6e99a25d574ce2}} 
+\index{sprite@{sprite}!is\+\_\+on\+\_\+slider@{is\+\_\+on\+\_\+slider}}
+\index{is\+\_\+on\+\_\+slider@{is\+\_\+on\+\_\+slider}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{is\+\_\+on\+\_\+slider()}{is\_on\_slider()}}
+{\footnotesize\ttfamily bool is\+\_\+on\+\_\+slider (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_sprite}{Sprite}} $\ast$}]{cursor,  }\item[{\mbox{\hyperlink{struct_slider}{Slider}} $\ast$}]{slider }\end{DoxyParamCaption})}
+
+
+
+Checks if a cursor (sprite) is on a slider. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cursor} & Cursor being used \\
+\hline
+{\em slider} & \mbox{\hyperlink{struct_slider}{Slider}} to be checked \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true The cursor is on the slider 
+
+false The cursor is not on the slider 
+\end{DoxyReturn}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_gaa77fff83958c7ed7ab6e99a25d574ce2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__sprite_gadaf8e12cd78fdf0d2ea5b182ed1072c1}\label{group__sprite_gadaf8e12cd78fdf0d2ea5b182ed1072c1}} 
+\index{sprite@{sprite}!make\+\_\+hitbox@{make\+\_\+hitbox}}
+\index{make\+\_\+hitbox@{make\+\_\+hitbox}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{make\+\_\+hitbox()}{make\_hitbox()}}
+{\footnotesize\ttfamily void make\+\_\+hitbox (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_hitbox}{Hitbox}} $\ast$}]{hitbox,  }\item[{int16\+\_\+t}]{x1,  }\item[{int16\+\_\+t}]{x2,  }\item[{int16\+\_\+t}]{y1,  }\item[{int16\+\_\+t}]{y2 }\end{DoxyParamCaption})}
+
+
+
+Creates a hitbox from 2 positions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hitbox} & \mbox{\hyperlink{struct_hitbox}{Hitbox}} to be created \\
+\hline
+{\em x1} & Leftmost x \\
+\hline
+{\em x2} & Rightmost x \\
+\hline
+{\em y1} & Uppermost y \\
+\hline
+{\em y2} & Downmost y \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_gadaf8e12cd78fdf0d2ea5b182ed1072c1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__sprite_ga71d979b14726234dc84191b6e5534b5e}\label{group__sprite_ga71d979b14726234dc84191b6e5534b5e}} 
+\index{sprite@{sprite}!move\+\_\+hitbox@{move\+\_\+hitbox}}
+\index{move\+\_\+hitbox@{move\+\_\+hitbox}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{move\+\_\+hitbox()}{move\_hitbox()}}
+{\footnotesize\ttfamily void move\+\_\+hitbox (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_hitbox}{Hitbox}} $\ast$}]{hitbox,  }\item[{int16\+\_\+t}]{delx,  }\item[{int16\+\_\+t}]{dely }\end{DoxyParamCaption})}
+
+
+
+Moves a hitbox a certain amount. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hitbox} & \mbox{\hyperlink{struct_hitbox}{Hitbox}} to be altered \\
+\hline
+{\em delx} & Delta X \\
+\hline
+{\em dely} & Delta Y \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_ga71d979b14726234dc84191b6e5534b5e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__sprite_ga91bbc8d0a30c581a10b9d193d0d77c43}\label{group__sprite_ga91bbc8d0a30c581a10b9d193d0d77c43}} 
+\index{sprite@{sprite}!move\+\_\+sprite@{move\+\_\+sprite}}
+\index{move\+\_\+sprite@{move\+\_\+sprite}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{move\+\_\+sprite()}{move\_sprite()}}
+{\footnotesize\ttfamily void move\+\_\+sprite (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_sprite}{Sprite}} $\ast$}]{sp,  }\item[{int16\+\_\+t}]{delX,  }\item[{int16\+\_\+t}]{delY }\end{DoxyParamCaption})}
+
+
+
+Moves a sprite. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sp} & \mbox{\hyperlink{struct_sprite}{Sprite}} to move \\
+\hline
+{\em delX} & Delta X (x difference) \\
+\hline
+{\em delY} & Delta Y (y difference) \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_ga91bbc8d0a30c581a10b9d193d0d77c43_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__sprite_ga5c42751a94b0c5695a62506fc2011d80}\label{group__sprite_ga5c42751a94b0c5695a62506fc2011d80}} 
+\index{sprite@{sprite}!press\+\_\+button@{press\+\_\+button}}
+\index{press\+\_\+button@{press\+\_\+button}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{press\+\_\+button()}{press\_button()}}
+{\footnotesize\ttfamily void press\+\_\+button (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_button}{Button}} $\ast$}]{button }\end{DoxyParamCaption})}
+
+
+
+Presses a button, updating it. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em button} & \mbox{\hyperlink{struct_button}{Button}} to be pressed \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_ga5c42751a94b0c5695a62506fc2011d80_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_ga5c42751a94b0c5695a62506fc2011d80_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__sprite_ga3ac8528c0dc7f14cd06be7fd636fd6d7}\label{group__sprite_ga3ac8528c0dc7f14cd06be7fd636fd6d7}} 
+\index{sprite@{sprite}!slider\+\_\+get\+\_\+perc@{slider\+\_\+get\+\_\+perc}}
+\index{slider\+\_\+get\+\_\+perc@{slider\+\_\+get\+\_\+perc}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{slider\+\_\+get\+\_\+perc()}{slider\_get\_perc()}}
+{\footnotesize\ttfamily double slider\+\_\+get\+\_\+perc (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_slider}{Slider}} $\ast$}]{slider }\end{DoxyParamCaption})}
+
+
+
+Calculates how much of the slider is \char`\"{}filled\char`\"{} (how much to the right the handle is) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em slider} & \mbox{\hyperlink{struct_slider}{Slider}} to be checked \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double Returns the calculated percentage 
+\end{DoxyReturn}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_ga3ac8528c0dc7f14cd06be7fd636fd6d7_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__sprite_ga3f6696185609cd55e3535258deb30ea7}\label{group__sprite_ga3f6696185609cd55e3535258deb30ea7}} 
+\index{sprite@{sprite}!slider\+\_\+move\+\_\+handle@{slider\+\_\+move\+\_\+handle}}
+\index{slider\+\_\+move\+\_\+handle@{slider\+\_\+move\+\_\+handle}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{slider\+\_\+move\+\_\+handle()}{slider\_move\_handle()}}
+{\footnotesize\ttfamily void slider\+\_\+move\+\_\+handle (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_slider}{Slider}} $\ast$}]{slider,  }\item[{uint16\+\_\+t}]{pos }\end{DoxyParamCaption})}
+
+
+
+Moves the sliders handle, and updates its sprite. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em slider} & \mbox{\hyperlink{struct_slider}{Slider}} to alter \\
+\hline
+{\em pos} & New X position of the handle \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_ga3f6696185609cd55e3535258deb30ea7_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_ga3f6696185609cd55e3535258deb30ea7_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__sprite_ga9b18b2f3de6d4ee00e344881a08b17d6}\label{group__sprite_ga9b18b2f3de6d4ee00e344881a08b17d6}} 
+\index{sprite@{sprite}!sprite\+\_\+set\+\_\+color@{sprite\+\_\+set\+\_\+color}}
+\index{sprite\+\_\+set\+\_\+color@{sprite\+\_\+set\+\_\+color}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{sprite\+\_\+set\+\_\+color()}{sprite\_set\_color()}}
+{\footnotesize\ttfamily void sprite\+\_\+set\+\_\+color (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_sprite}{Sprite}} $\ast$}]{sp,  }\item[{uint32\+\_\+t}]{color }\end{DoxyParamCaption})}
+
+
+
+Changes the color of a sprite. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sp} & \mbox{\hyperlink{struct_sprite}{Sprite}} to alter \\
+\hline
+{\em color} & New color \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_ga9b18b2f3de6d4ee00e344881a08b17d6_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__sprite_gaa28b2a8d13a3ab9e23c3d91691614c81}\label{group__sprite_gaa28b2a8d13a3ab9e23c3d91691614c81}} 
+\index{sprite@{sprite}!unhighlight\+\_\+button@{unhighlight\+\_\+button}}
+\index{unhighlight\+\_\+button@{unhighlight\+\_\+button}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{unhighlight\+\_\+button()}{unhighlight\_button()}}
+{\footnotesize\ttfamily void unhighlight\+\_\+button (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_button}{Button}} $\ast$}]{button }\end{DoxyParamCaption})}
+
+
+
+Unghlights a button, updating it. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em button} & \mbox{\hyperlink{struct_button}{Button}} to be unhighlighted \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_gaa28b2a8d13a3ab9e23c3d91691614c81_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_gaa28b2a8d13a3ab9e23c3d91691614c81_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__sprite_gae98d092189bc279e8a79ce65a4d7f436}\label{group__sprite_gae98d092189bc279e8a79ce65a4d7f436}} 
+\index{sprite@{sprite}!unpress\+\_\+button@{unpress\+\_\+button}}
+\index{unpress\+\_\+button@{unpress\+\_\+button}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{unpress\+\_\+button()}{unpress\_button()}}
+{\footnotesize\ttfamily void unpress\+\_\+button (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_button}{Button}} $\ast$}]{button }\end{DoxyParamCaption})}
+
+
+
+Releases a button, updating it. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em button} & \mbox{\hyperlink{struct_button}{Button}} to be released \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_gae98d092189bc279e8a79ce65a4d7f436_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_gae98d092189bc279e8a79ce65a4d7f436_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__sprite_ga90f5eec8870a027c011108bc4885880c}\label{group__sprite_ga90f5eec8870a027c011108bc4885880c}} 
+\index{sprite@{sprite}!update\+\_\+cursor@{update\+\_\+cursor}}
+\index{update\+\_\+cursor@{update\+\_\+cursor}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{update\+\_\+cursor()}{update\_cursor()}}
+{\footnotesize\ttfamily void update\+\_\+cursor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_sprite}{Sprite}} $\ast$}]{cursor,  }\item[{\mbox{\hyperlink{struct_event__t}{Event\+\_\+t}}}]{event }\end{DoxyParamCaption})}
+
+
+
+Updates a cursor (sprite), by reading an event. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cursor} & \mbox{\hyperlink{struct_sprite}{Sprite}} to be updated \\
+\hline
+{\em event} & Event to read \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_ga90f5eec8870a027c011108bc4885880c_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_ga90f5eec8870a027c011108bc4885880c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__sprite_ga912de7c5bbbc103cb804e3bd76ba770a}\label{group__sprite_ga912de7c5bbbc103cb804e3bd76ba770a}} 
+\index{sprite@{sprite}!update\+\_\+slider@{update\+\_\+slider}}
+\index{update\+\_\+slider@{update\+\_\+slider}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{update\+\_\+slider()}{update\_slider()}}
+{\footnotesize\ttfamily bool update\+\_\+slider (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_event__t}{Event\+\_\+t}}}]{event,  }\item[{\mbox{\hyperlink{struct_sprite}{Sprite}} $\ast$}]{cursor,  }\item[{\mbox{\hyperlink{struct_slider}{Slider}} $\ast$}]{slider }\end{DoxyParamCaption})}
+
+
+
+Updates a slider, based on an event and a cursor. If the cursor presses the LB on the slider, or if it\textquotesingle{}s holding the left button while the slider still wasn\textquotesingle{}t released, it moves the handle to the cursor\textquotesingle{}s x position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & Event to be read. \\
+\hline
+{\em cursor} & Cursor being used \\
+\hline
+{\em slider} & \mbox{\hyperlink{struct_slider}{Slider}} to update \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true The slider\textquotesingle{}s handle was moved 
+
+false The slider\textquotesingle{}s handle was not moved 
+\end{DoxyReturn}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_ga912de7c5bbbc103cb804e3bd76ba770a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__sprite_ga912de7c5bbbc103cb804e3bd76ba770a_icgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{group__sprite_ga626b702203ed42c3cd2af8f159eced42}\label{group__sprite_ga626b702203ed42c3cd2af8f159eced42}} 
+\index{sprite@{sprite}!bitmap@{bitmap}}
+\index{bitmap@{bitmap}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{bitmap}{bitmap}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_bitmap}{Bitmap}}$\ast$ Sprite\+::bitmap}
+
+
+
+\mbox{\hyperlink{struct_sprite}{Sprite}} bitmap. 
+
+\mbox{\Hypertarget{group__sprite_gaa57f73b6227397e025dc60e8c460fcb3}\label{group__sprite_gaa57f73b6227397e025dc60e8c460fcb3}} 
+\index{sprite@{sprite}!bitmap@{bitmap}}
+\index{bitmap@{bitmap}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{bitmap}{bitmap}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_bitmap}{Bitmap}}$\ast$ Button\+::bitmap}
+
+
+
+bitmap being used 
+
+\mbox{\Hypertarget{group__sprite_ga43ec29869061c84e407f6351ce4e8efe}\label{group__sprite_ga43ec29869061c84e407f6351ce4e8efe}} 
+\index{sprite@{sprite}!bitmap@{bitmap}}
+\index{bitmap@{bitmap}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{bitmap}{bitmap}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_bitmap}{Bitmap}}$\ast$ Idle\+Sprite\+::bitmap}
+
+\mbox{\Hypertarget{group__sprite_gaf915bef19af626f44f41a7513feaef7e}\label{group__sprite_gaf915bef19af626f44f41a7513feaef7e}} 
+\index{sprite@{sprite}!bitmap\+Highlighted@{bitmap\+Highlighted}}
+\index{bitmap\+Highlighted@{bitmap\+Highlighted}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{bitmap\+Highlighted}{bitmapHighlighted}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_bitmap}{Bitmap}}$\ast$ Button\+::bitmap\+Highlighted}
+
+
+
+bitmap used when cursor hovers the button 
+
+\mbox{\Hypertarget{group__sprite_ga509d33b7b3b9dd4f7c10c3c05c0a6ca0}\label{group__sprite_ga509d33b7b3b9dd4f7c10c3c05c0a6ca0}} 
+\index{sprite@{sprite}!bitmap\+Idle@{bitmap\+Idle}}
+\index{bitmap\+Idle@{bitmap\+Idle}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{bitmap\+Idle}{bitmapIdle}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_bitmap}{Bitmap}}$\ast$ Button\+::bitmap\+Idle}
+
+
+
+bitmap used when idle 
+
+\mbox{\Hypertarget{group__sprite_ga925050b598e308e3da33683aa2cb2aa7}\label{group__sprite_ga925050b598e308e3da33683aa2cb2aa7}} 
+\index{sprite@{sprite}!color@{color}}
+\index{color@{color}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{color}{color}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily uint32\+\_\+t Sprite\+::color}
+
+
+
+\mbox{\hyperlink{struct_sprite}{Sprite}}\textquotesingle{}s color (if applied) 
+
+\mbox{\Hypertarget{group__sprite_gaf2cfbfe5f907f5f0abbd8d673bce19db}\label{group__sprite_gaf2cfbfe5f907f5f0abbd8d673bce19db}} 
+\index{sprite@{sprite}!color@{color}}
+\index{color@{color}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{color}{color}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily uint32\+\_\+t Idle\+Sprite\+::color}
+
+\mbox{\Hypertarget{group__sprite_ga0ec90999b2ad7a80de51ebbf6603af87}\label{group__sprite_ga0ec90999b2ad7a80de51ebbf6603af87}} 
+\index{sprite@{sprite}!color@{color}}
+\index{color@{color}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{color}{color}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily uint32\+\_\+t Slider\+::color}
+
+
+
+Color that replaces G\+R\+E\+EN for the \char`\"{}inactive\char`\"{} part of the slider. 
+
+\mbox{\Hypertarget{group__sprite_ga30afc9a607e8770d283f7219d837bfc2}\label{group__sprite_ga30afc9a607e8770d283f7219d837bfc2}} 
+\index{sprite@{sprite}!color\+\_\+active@{color\+\_\+active}}
+\index{color\+\_\+active@{color\+\_\+active}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{color\+\_\+active}{color\_active}}
+{\footnotesize\ttfamily uint32\+\_\+t Slider\+::color\+\_\+active}
+
+
+
+Color that replaces G\+R\+E\+EN for the \char`\"{}active\char`\"{} part of the slider. 
+
+\mbox{\Hypertarget{group__sprite_gac1256085ee6a3241fb177a28befc0eef}\label{group__sprite_gac1256085ee6a3241fb177a28befc0eef}} 
+\index{sprite@{sprite}!handle\+\_\+pos@{handle\+\_\+pos}}
+\index{handle\+\_\+pos@{handle\+\_\+pos}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{handle\+\_\+pos}{handle\_pos}}
+{\footnotesize\ttfamily uint16\+\_\+t Slider\+::handle\+\_\+pos}
+
+
+
+absolute X position of the \mbox{\hyperlink{struct_slider}{Slider}}\textquotesingle{}s handle 
+
+\mbox{\Hypertarget{group__sprite_ga1f07c8f2080c193759aec0e13503d7ab}\label{group__sprite_ga1f07c8f2080c193759aec0e13503d7ab}} 
+\index{sprite@{sprite}!height@{height}}
+\index{height@{height}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{height}{height}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily int Sprite\+::height}
+
+
+
+\mbox{\hyperlink{struct_sprite}{Sprite}} height. 
+
+\mbox{\Hypertarget{group__sprite_ga4510d5b903afe522c6b1e964016d988c}\label{group__sprite_ga4510d5b903afe522c6b1e964016d988c}} 
+\index{sprite@{sprite}!height@{height}}
+\index{height@{height}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{height}{height}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily int Hitbox\+::height}
+
+
+
+\mbox{\hyperlink{struct_hitbox}{Hitbox}} height (redundant) 
+
+\mbox{\Hypertarget{group__sprite_gaa0b70313a61d3490712dc4c269e0bea4}\label{group__sprite_gaa0b70313a61d3490712dc4c269e0bea4}} 
+\index{sprite@{sprite}!height@{height}}
+\index{height@{height}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{height}{height}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily uint16\+\_\+t Slider\+::height}
+
+\mbox{\Hypertarget{group__sprite_ga0d0eccfb33156acc548e70e09bfbf69b}\label{group__sprite_ga0d0eccfb33156acc548e70e09bfbf69b}} 
+\index{sprite@{sprite}!is\+Highlighted@{is\+Highlighted}}
+\index{is\+Highlighted@{is\+Highlighted}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{is\+Highlighted}{isHighlighted}}
+{\footnotesize\ttfamily bool Button\+::is\+Highlighted}
+
+
+
+Set to true if the cursor is hovering. 
+
+\mbox{\Hypertarget{group__sprite_gaf40951436602ca874e5a7bc90774a71b}\label{group__sprite_gaf40951436602ca874e5a7bc90774a71b}} 
+\index{sprite@{sprite}!is\+Pressed@{is\+Pressed}}
+\index{is\+Pressed@{is\+Pressed}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{is\+Pressed}{isPressed}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool Button\+::is\+Pressed}
+
+
+
+Set to true if the button is pressed. 
+
+\mbox{\Hypertarget{group__sprite_gafebb65462372e968ef98ad909aa6413a}\label{group__sprite_gafebb65462372e968ef98ad909aa6413a}} 
+\index{sprite@{sprite}!is\+Pressed@{is\+Pressed}}
+\index{is\+Pressed@{is\+Pressed}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{is\+Pressed}{isPressed}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool Slider\+::is\+Pressed}
+
+
+
+Set to true if slider is pressed. 
+
+\mbox{\Hypertarget{group__sprite_ga76e365a5ffde4b0759c8bbd1cc7b932c}\label{group__sprite_ga76e365a5ffde4b0759c8bbd1cc7b932c}} 
+\index{sprite@{sprite}!layer@{layer}}
+\index{layer@{layer}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{layer}{layer}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_layer}{Layer}}$\ast$ Button\+::layer}
+
+
+
+\mbox{\hyperlink{struct_layer}{Layer}} where the button is drawn on. 
+
+\mbox{\Hypertarget{group__sprite_ga30536ca9bdfd98e84322bb2275f59d1a}\label{group__sprite_ga30536ca9bdfd98e84322bb2275f59d1a}} 
+\index{sprite@{sprite}!layer@{layer}}
+\index{layer@{layer}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{layer}{layer}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_layer}{Layer}}$\ast$ Idle\+Sprite\+::layer}
+
+\mbox{\Hypertarget{group__sprite_gaed3e78bd2a3a88c5b0a02ff128d8dd85}\label{group__sprite_gaed3e78bd2a3a88c5b0a02ff128d8dd85}} 
+\index{sprite@{sprite}!layer@{layer}}
+\index{layer@{layer}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{layer}{layer}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_layer}{Layer}}$\ast$ Slider\+::layer}
+
+
+
+\mbox{\hyperlink{struct_layer}{Layer}} the slider is drawn on. 
+
+\mbox{\Hypertarget{group__sprite_ga582e96a8182496689178c543a86d3401}\label{group__sprite_ga582e96a8182496689178c543a86d3401}} 
+\index{sprite@{sprite}!single\+State@{single\+State}}
+\index{single\+State@{single\+State}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{single\+State}{singleState}}
+{\footnotesize\ttfamily bool Button\+::single\+State}
+
+
+
+Set to false only if the button can both be \char`\"{}on\char`\"{} or \char`\"{}off\char`\"{}. 
+
+\mbox{\Hypertarget{group__sprite_ga0a3364944c5e361fc9e7ae406224d682}\label{group__sprite_ga0a3364944c5e361fc9e7ae406224d682}} 
+\index{sprite@{sprite}!width@{width}}
+\index{width@{width}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{width}{width}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily int Sprite\+::width}
+
+
+
+\mbox{\hyperlink{struct_sprite}{Sprite}} width. 
+
+\mbox{\Hypertarget{group__sprite_ga1eddadd54a3cd0e831f55c322892e687}\label{group__sprite_ga1eddadd54a3cd0e831f55c322892e687}} 
+\index{sprite@{sprite}!width@{width}}
+\index{width@{width}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{width}{width}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily int Hitbox\+::width}
+
+
+
+\mbox{\hyperlink{struct_hitbox}{Hitbox}} width (redundant) 
+
+\mbox{\Hypertarget{group__sprite_ga4ccd5dd9d8b0c329101310f2dd24fbe5}\label{group__sprite_ga4ccd5dd9d8b0c329101310f2dd24fbe5}} 
+\index{sprite@{sprite}!width@{width}}
+\index{width@{width}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{width}{width}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily uint16\+\_\+t Slider\+::width}
+
+
+
+Height and witch of the slider. 
+
+\mbox{\Hypertarget{group__sprite_gab36028dcefdd4bf024c52c8d9519a283}\label{group__sprite_gab36028dcefdd4bf024c52c8d9519a283}} 
+\index{sprite@{sprite}!x@{x}}
+\index{x@{x}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{x}{x}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily int Sprite\+::x}
+
+
+
+Current sprite X position. 
+
+\mbox{\Hypertarget{group__sprite_ga7e12fd65ad1fdbd19721a3c109efd3bf}\label{group__sprite_ga7e12fd65ad1fdbd19721a3c109efd3bf}} 
+\index{sprite@{sprite}!x@{x}}
+\index{x@{x}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{x}{x}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily uint16\+\_\+t Button\+::x}
+
+
+
+button X position 
+
+\mbox{\Hypertarget{group__sprite_gaccc6cfeb632527dbc79a1017f8f3a237}\label{group__sprite_gaccc6cfeb632527dbc79a1017f8f3a237}} 
+\index{sprite@{sprite}!x@{x}}
+\index{x@{x}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{x}{x}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily uint16\+\_\+t Idle\+Sprite\+::x}
+
+\mbox{\Hypertarget{group__sprite_ga3f0f16473e1534d0d73d917e6212b4f1}\label{group__sprite_ga3f0f16473e1534d0d73d917e6212b4f1}} 
+\index{sprite@{sprite}!x@{x}}
+\index{x@{x}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{x}{x}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily uint16\+\_\+t Slider\+::x}
+
+\mbox{\Hypertarget{group__sprite_gaac205203fe002b67015db70c9c19c6a2}\label{group__sprite_gaac205203fe002b67015db70c9c19c6a2}} 
+\index{sprite@{sprite}!x1@{x1}}
+\index{x1@{x1}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{x1}{x1}}
+{\footnotesize\ttfamily int Hitbox\+::x1}
+
+
+
+X position of the Upper left corner. 
+
+\mbox{\Hypertarget{group__sprite_ga5e8a3444550e7d6219148cdf421068b8}\label{group__sprite_ga5e8a3444550e7d6219148cdf421068b8}} 
+\index{sprite@{sprite}!x2@{x2}}
+\index{x2@{x2}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{x2}{x2}}
+{\footnotesize\ttfamily int Hitbox\+::x2}
+
+
+
+X position of the Lower right corner. 
+
+\mbox{\Hypertarget{group__sprite_ga363e26017ee2aaed8636f7dab92af2cd}\label{group__sprite_ga363e26017ee2aaed8636f7dab92af2cd}} 
+\index{sprite@{sprite}!y@{y}}
+\index{y@{y}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{y}{y}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily int Sprite\+::y}
+
+
+
+Current sprite Y position. 
+
+\mbox{\Hypertarget{group__sprite_ga0e057db96fd0683cd5236af8921671a6}\label{group__sprite_ga0e057db96fd0683cd5236af8921671a6}} 
+\index{sprite@{sprite}!y@{y}}
+\index{y@{y}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{y}{y}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily uint16\+\_\+t Button\+::y}
+
+
+
+button Y position 
+
+\mbox{\Hypertarget{group__sprite_ga63da8969e319d653ed0608c49056bcde}\label{group__sprite_ga63da8969e319d653ed0608c49056bcde}} 
+\index{sprite@{sprite}!y@{y}}
+\index{y@{y}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{y}{y}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily uint16\+\_\+t Idle\+Sprite\+::y}
+
+\mbox{\Hypertarget{group__sprite_ga4568c992e8bb68bfdf407242af502928}\label{group__sprite_ga4568c992e8bb68bfdf407242af502928}} 
+\index{sprite@{sprite}!y@{y}}
+\index{y@{y}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{y}{y}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily uint16\+\_\+t Slider\+::y}
+
+
+
+Coordinates of the top left position. 
+
+\mbox{\Hypertarget{group__sprite_gae4b2bb3a226633c413ecc01795f1dec9}\label{group__sprite_gae4b2bb3a226633c413ecc01795f1dec9}} 
+\index{sprite@{sprite}!y1@{y1}}
+\index{y1@{y1}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{y1}{y1}}
+{\footnotesize\ttfamily int Hitbox\+::y1}
+
+
+
+Y position of the Upper left corner. 
+
+\mbox{\Hypertarget{group__sprite_ga4786580e4912ad08c39f12150bdde84f}\label{group__sprite_ga4786580e4912ad08c39f12150bdde84f}} 
+\index{sprite@{sprite}!y2@{y2}}
+\index{y2@{y2}!sprite@{sprite}}
+\subsubsection{\texorpdfstring{y2}{y2}}
+{\footnotesize\ttfamily int Hitbox\+::y2}
+
+
+
+Y position of the Lower right corner. 
+

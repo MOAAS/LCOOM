@@ -1,0 +1,33 @@
+\hypertarget{queue_8h}{}\section{queue.\+h File Reference}
+\label{queue_8h}\index{queue.\+h@{queue.\+h}}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{queue_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_queue}{Queue}}
+\begin{DoxyCompactList}\small\item\em Represents a queue. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_queue}{Queue}} $\ast$ \mbox{\hyperlink{group__queue_ga735dfbf59094f36f47a83d3a139c9b09}{queue\+\_\+create}} (unsigned capacity)
+\begin{DoxyCompactList}\small\item\em Creates a queue. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__queue_gad21ee75924298937673e2b8d66665466}{queue\+\_\+destroy}} (\mbox{\hyperlink{struct_queue}{Queue}} $\ast$q)
+\begin{DoxyCompactList}\small\item\em Destroys a queue, freeing all used memory. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{group__queue_ga6916e93facd123dd3fb655965b440e0e}{queue\+\_\+front}} (\mbox{\hyperlink{struct_queue}{Queue}} $\ast$q)
+\begin{DoxyCompactList}\small\item\em Gets the front of the queue. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{group__queue_gaa7c283555566da64b71864f416e0178a}{queue\+\_\+pop}} (\mbox{\hyperlink{struct_queue}{Queue}} $\ast$q)
+\begin{DoxyCompactList}\small\item\em Removes the front of the queue. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__queue_ga056bdcedf660416247cdb05759766702}{queue\+\_\+push}} (\mbox{\hyperlink{struct_queue}{Queue}} $\ast$q, uint8\+\_\+t data)
+\begin{DoxyCompactList}\small\item\em Pushes an item to the end of the queue. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__queue_gaca6621b01a2bae967c3c747bb6d855db}{queue\+\_\+full}} (\mbox{\hyperlink{struct_queue}{Queue}} $\ast$queue)
+\begin{DoxyCompactList}\small\item\em Checks if a queue is full. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__queue_gac13fbf345e3ce6a0136afac6cbc039ad}{queue\+\_\+empty}} (\mbox{\hyperlink{struct_queue}{Queue}} $\ast$queue)
+\begin{DoxyCompactList}\small\item\em Checks if a queue is empty. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__queue_ga017ba4cb33cd9d231b0071fa8d9190cc}{queue\+\_\+resize}} (\mbox{\hyperlink{struct_queue}{Queue}} $\ast$queue)
+\begin{DoxyCompactList}\small\item\em Doubles a queue\textquotesingle{}s capacity. Called by queue\+\_\+push when needed. \end{DoxyCompactList}\end{DoxyCompactItemize}

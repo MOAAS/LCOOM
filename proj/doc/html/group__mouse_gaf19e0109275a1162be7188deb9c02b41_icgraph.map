@@ -1,0 +1,6 @@
+<map id="mouse_enable_int" name="mouse_enable_int">
+<area shape="rect" id="node2" href="$group__interrupts.html#ga52c0411fc9786e0c38241ab3584c7dd8" title="Subscribes a device&#39;s interrupts. For the mouse, enables data reporting in stream mode..." alt="" coords="393,5,515,32"/>
+<area shape="rect" id="node4" href="$group__interrupts.html#gac34cc7680c64171b47100c01bb019ab4" title="Unsubscribes a device&#39;s interrupts For the mouse, disables data reporting in stream mode..." alt="" coords="387,56,521,83"/>
+<area shape="rect" id="node5" href="$group__mouse.html#ga685ad2706aca36d9869a30a19b9f446a" title="Unsubscribes mouse interrupts. " alt="" coords="180,107,339,133"/>
+<area shape="rect" id="node3" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="569,31,679,57"/>
+</map>

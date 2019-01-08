@@ -1,0 +1,682 @@
+\hypertarget{group__video}{}\section{video}
+\label{group__video}\index{video@{video}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structcolor}{color}}
+\begin{DoxyCompactList}\small\item\em Represents a pixel in direct color mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{group__video_ga7b3b25cba33b07c303f3060fe41887f6}{B\+L\+A\+CK}}~0x000000
+\item 
+\#define \mbox{\hyperlink{group__video_ga8d23feea868a983c8c2b661e1e16972f}{R\+ED}}~0x\+F\+F0000
+\item 
+\#define \mbox{\hyperlink{group__video_gacfbc006ea433ad708fdee3e82996e721}{G\+R\+E\+EN}}~0x00\+F\+F00
+\item 
+\#define \mbox{\hyperlink{group__video_ga79d10e672abb49ad63eeaa8aaef57c38}{B\+L\+UE}}~0x0000\+FF
+\item 
+\#define \mbox{\hyperlink{group__video_gad243f93c16bc4c1d3e0a13b84421d760}{C\+Y\+AN}}~0x00\+F\+F\+FF
+\item 
+\#define \mbox{\hyperlink{group__video_gabf681265909adf3d3e8116c93c0ba179}{Y\+E\+L\+L\+OW}}~0x\+F\+F\+F\+F00
+\item 
+\#define \mbox{\hyperlink{group__video_ga6f699060902f800f12aaae150f3a708e}{M\+A\+G\+E\+N\+TA}}~0x\+F\+F00\+FF
+\item 
+\#define \mbox{\hyperlink{group__video_ga87b537f5fa5c109d3c05c13d6b18f382}{W\+H\+I\+TE}}~0x\+F\+F\+F\+F\+FF
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{group__video_ga0cd4e06d6e2ee5a7737483d2d36caab1}{vg\+\_\+page\+\_\+flip}} ()
+\begin{DoxyCompactList}\small\item\em Copies double buffer\textquotesingle{}s contents to V\+R\+AM (Unused) \end{DoxyCompactList}\item 
+void $\ast$ \mbox{\hyperlink{group__video_gad5c198bac564055e1866fd5ac6152308}{video\+\_\+init}} (uint16\+\_\+t mode)
+\begin{DoxyCompactList}\small\item\em Initializes M\+I\+N\+IX in graphics mode. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{group__video_ga205ab9910f679634b489672fa90212c3}{vg\+\_\+get\+\_\+pixel}} (uint16\+\_\+t x, uint16\+\_\+t y)
+\begin{DoxyCompactList}\small\item\em Gets the color of a pixel. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__video_ga26084597ddd2baa0ce4d70003a9492e9}{vg\+\_\+draw\+\_\+pixel}} (uint16\+\_\+t x, uint16\+\_\+t y, uint32\+\_\+t \mbox{\hyperlink{structcolor}{color}})
+\begin{DoxyCompactList}\small\item\em Draws a pixel on the screen. \end{DoxyCompactList}\item 
+char $\ast$ \mbox{\hyperlink{group__video_ga57014a19e5d9cf805bcf7af1f6bbcec5}{calc\+\_\+address}} (char $\ast$init, int16\+\_\+t x, int16\+\_\+t y, uint16\+\_\+t width)
+\begin{DoxyCompactList}\small\item\em Given a base address, calculates the address of a specific position. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__video_ga9ce8b7520a298fda9e59cdeffbbd8670}{vg\+\_\+insert}} (char $\ast$address, uint32\+\_\+t \mbox{\hyperlink{structcolor}{color}})
+\begin{DoxyCompactList}\small\item\em Given a pixel address, inserts a color in it. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{group__video_ga8ff5bbb05f1cb62f5958290a45723571}{vg\+\_\+retrieve}} (char $\ast$address)
+\begin{DoxyCompactList}\small\item\em Given a pixel address, returns the color associated with it. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__video_ga1362f68261a0b7dcb4d00ca0a3ebb238}{vg\+\_\+draw\+\_\+image}} (char $\ast$map, uint16\+\_\+t width, uint16\+\_\+t height, uint16\+\_\+t x, uint16\+\_\+t y)
+\begin{DoxyCompactList}\small\item\em Draws an image on the screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__video_ga1ff6d214ea6b767e283a9973bd129c7e}{vg\+\_\+move}} (uint16\+\_\+t y, uint16\+\_\+t height, int16\+\_\+t delx, uint32\+\_\+t fill\+\_\+color)
+\begin{DoxyCompactList}\small\item\em Moves a portion of the screen in an horizontal direction. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{group__video_ga28573f33d778f8dfd39474a8154ef416}{vg\+\_\+compose\+\_\+\+R\+GB}} (uint8\+\_\+t R, uint8\+\_\+t G, uint8\+\_\+t B)
+\begin{DoxyCompactList}\small\item\em Given the R\+GB components, calculates the color value. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structcolor}{color}} \mbox{\hyperlink{group__video_ga9fcd5199ebdc148ef21c1faea7280d3f}{vg\+\_\+decompose\+\_\+\+R\+GB}} (uint32\+\_\+t R\+GB)
+\begin{DoxyCompactList}\small\item\em Gets the R,G and B components of a color. \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{group__video_gaa4a211ebfc5c87a0072eaf9bd03e3a56}{vg\+\_\+get\+\_\+hres}} ()
+\item 
+unsigned int \mbox{\hyperlink{group__video_ga4633499e0f197ac855f56473fc9fb291}{vg\+\_\+get\+\_\+vres}} ()
+\item 
+unsigned int \mbox{\hyperlink{group__video_gad5d72716b0e4b468c37027482a707763}{vg\+\_\+get\+\_\+bytes\+\_\+pp}} ()
+\item 
+unsigned int \mbox{\hyperlink{group__video_ga6db41c530c9cfe3cb6fb0d553abd6bc4}{vg\+\_\+get\+\_\+bits\+\_\+pp}} ()
+\item 
+char $\ast$ \mbox{\hyperlink{group__video_ga0cd2b85b0088ab47b2b7bb6c135ad4b1}{vg\+\_\+get\+\_\+video\+\_\+mem}} ()
+\item 
+bool \mbox{\hyperlink{group__video_ga045a67e6823cba5cf0778c4bc7440b5b}{vg\+\_\+mode\+\_\+is\+\_\+indexed}} ()
+\begin{DoxyCompactList}\small\item\em Checks if an indexed mode is being used. \end{DoxyCompactList}\item 
+vbe\+\_\+mode\+\_\+info\+\_\+t \mbox{\hyperlink{group__video_ga01a3ec260077196f30943673a3d4b451}{vg\+\_\+get\+\_\+mode}} ()
+\begin{DoxyCompactList}\small\item\em Gets the currently used V\+BE mode. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__video_gaa81a86216d20abdc74fffe6a374d7c84}{video\+\_\+draw\+\_\+hline}} (uint16\+\_\+t x, uint16\+\_\+t y, uint16\+\_\+t len, uint32\+\_\+t \mbox{\hyperlink{structcolor}{color}})
+\begin{DoxyCompactList}\small\item\em Draws a horizontal line on the screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__video_ga5176eeba2bfc4ebcf67374bda8aceb19}{video\+\_\+draw\+\_\+vline}} (uint16\+\_\+t x, uint16\+\_\+t y, uint16\+\_\+t len, uint32\+\_\+t \mbox{\hyperlink{structcolor}{color}})
+\begin{DoxyCompactList}\small\item\em Draws a vertical line on the screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__video_ga141b925836a12854efeb2d84b6e1542c}{video\+\_\+draw\+\_\+rectangle}} (uint16\+\_\+t x, uint16\+\_\+t y, uint16\+\_\+t width, uint16\+\_\+t height, uint32\+\_\+t \mbox{\hyperlink{structcolor}{color}})
+\begin{DoxyCompactList}\small\item\em Draws a rectangle on the screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__video_ga6e2c7948df1662b15b1977cf20e8e479}{vg\+\_\+set\+\_\+background}} (uint32\+\_\+t \mbox{\hyperlink{structcolor}{color}})
+\begin{DoxyCompactList}\small\item\em Fills the screen with a specific color. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{group__video_gacb56ae92e569346b946b93e1723bdcf0}{color\+::R}}
+\begin{DoxyCompactList}\small\item\em Red value. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{group__video_ga4eca011840c222b0813c622714e7a2b5}{color\+::G}}
+\begin{DoxyCompactList}\small\item\em Green value. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{group__video_gaf8420cf3aa35448f046467969f1f9775}{color\+::B}}
+\begin{DoxyCompactList}\small\item\em Blue value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Functions and constants used to program the video card 
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{group__video_ga7b3b25cba33b07c303f3060fe41887f6}\label{group__video_ga7b3b25cba33b07c303f3060fe41887f6}} 
+\index{video@{video}!B\+L\+A\+CK@{B\+L\+A\+CK}}
+\index{B\+L\+A\+CK@{B\+L\+A\+CK}!video@{video}}
+\subsubsection{\texorpdfstring{B\+L\+A\+CK}{BLACK}}
+{\footnotesize\ttfamily \#define B\+L\+A\+CK~0x000000}
+
+\mbox{\Hypertarget{group__video_ga79d10e672abb49ad63eeaa8aaef57c38}\label{group__video_ga79d10e672abb49ad63eeaa8aaef57c38}} 
+\index{video@{video}!B\+L\+UE@{B\+L\+UE}}
+\index{B\+L\+UE@{B\+L\+UE}!video@{video}}
+\subsubsection{\texorpdfstring{B\+L\+UE}{BLUE}}
+{\footnotesize\ttfamily \#define B\+L\+UE~0x0000\+FF}
+
+\mbox{\Hypertarget{group__video_gad243f93c16bc4c1d3e0a13b84421d760}\label{group__video_gad243f93c16bc4c1d3e0a13b84421d760}} 
+\index{video@{video}!C\+Y\+AN@{C\+Y\+AN}}
+\index{C\+Y\+AN@{C\+Y\+AN}!video@{video}}
+\subsubsection{\texorpdfstring{C\+Y\+AN}{CYAN}}
+{\footnotesize\ttfamily \#define C\+Y\+AN~0x00\+F\+F\+FF}
+
+\mbox{\Hypertarget{group__video_gacfbc006ea433ad708fdee3e82996e721}\label{group__video_gacfbc006ea433ad708fdee3e82996e721}} 
+\index{video@{video}!G\+R\+E\+EN@{G\+R\+E\+EN}}
+\index{G\+R\+E\+EN@{G\+R\+E\+EN}!video@{video}}
+\subsubsection{\texorpdfstring{G\+R\+E\+EN}{GREEN}}
+{\footnotesize\ttfamily \#define G\+R\+E\+EN~0x00\+F\+F00}
+
+\mbox{\Hypertarget{group__video_ga6f699060902f800f12aaae150f3a708e}\label{group__video_ga6f699060902f800f12aaae150f3a708e}} 
+\index{video@{video}!M\+A\+G\+E\+N\+TA@{M\+A\+G\+E\+N\+TA}}
+\index{M\+A\+G\+E\+N\+TA@{M\+A\+G\+E\+N\+TA}!video@{video}}
+\subsubsection{\texorpdfstring{M\+A\+G\+E\+N\+TA}{MAGENTA}}
+{\footnotesize\ttfamily \#define M\+A\+G\+E\+N\+TA~0x\+F\+F00\+FF}
+
+\mbox{\Hypertarget{group__video_ga8d23feea868a983c8c2b661e1e16972f}\label{group__video_ga8d23feea868a983c8c2b661e1e16972f}} 
+\index{video@{video}!R\+ED@{R\+ED}}
+\index{R\+ED@{R\+ED}!video@{video}}
+\subsubsection{\texorpdfstring{R\+ED}{RED}}
+{\footnotesize\ttfamily \#define R\+ED~0x\+F\+F0000}
+
+\mbox{\Hypertarget{group__video_ga87b537f5fa5c109d3c05c13d6b18f382}\label{group__video_ga87b537f5fa5c109d3c05c13d6b18f382}} 
+\index{video@{video}!W\+H\+I\+TE@{W\+H\+I\+TE}}
+\index{W\+H\+I\+TE@{W\+H\+I\+TE}!video@{video}}
+\subsubsection{\texorpdfstring{W\+H\+I\+TE}{WHITE}}
+{\footnotesize\ttfamily \#define W\+H\+I\+TE~0x\+F\+F\+F\+F\+FF}
+
+\mbox{\Hypertarget{group__video_gabf681265909adf3d3e8116c93c0ba179}\label{group__video_gabf681265909adf3d3e8116c93c0ba179}} 
+\index{video@{video}!Y\+E\+L\+L\+OW@{Y\+E\+L\+L\+OW}}
+\index{Y\+E\+L\+L\+OW@{Y\+E\+L\+L\+OW}!video@{video}}
+\subsubsection{\texorpdfstring{Y\+E\+L\+L\+OW}{YELLOW}}
+{\footnotesize\ttfamily \#define Y\+E\+L\+L\+OW~0x\+F\+F\+F\+F00}
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__video_ga57014a19e5d9cf805bcf7af1f6bbcec5}\label{group__video_ga57014a19e5d9cf805bcf7af1f6bbcec5}} 
+\index{video@{video}!calc\+\_\+address@{calc\+\_\+address}}
+\index{calc\+\_\+address@{calc\+\_\+address}!video@{video}}
+\subsubsection{\texorpdfstring{calc\+\_\+address()}{calc\_address()}}
+{\footnotesize\ttfamily char$\ast$ calc\+\_\+address (\begin{DoxyParamCaption}\item[{char $\ast$}]{init,  }\item[{int16\+\_\+t}]{x,  }\item[{int16\+\_\+t}]{y,  }\item[{uint16\+\_\+t}]{width }\end{DoxyParamCaption})}
+
+
+
+Given a base address, calculates the address of a specific position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em init} & Base address \\
+\hline
+{\em x} & X position \\
+\hline
+{\em y} & Y position \\
+\hline
+{\em width} & Pixels per row \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+char$\ast$ Returns the corresponding address 
+\end{DoxyReturn}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__video_ga57014a19e5d9cf805bcf7af1f6bbcec5_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__video_ga28573f33d778f8dfd39474a8154ef416}\label{group__video_ga28573f33d778f8dfd39474a8154ef416}} 
+\index{video@{video}!vg\+\_\+compose\+\_\+\+R\+GB@{vg\+\_\+compose\+\_\+\+R\+GB}}
+\index{vg\+\_\+compose\+\_\+\+R\+GB@{vg\+\_\+compose\+\_\+\+R\+GB}!video@{video}}
+\subsubsection{\texorpdfstring{vg\+\_\+compose\+\_\+\+R\+G\+B()}{vg\_compose\_RGB()}}
+{\footnotesize\ttfamily uint32\+\_\+t vg\+\_\+compose\+\_\+\+R\+GB (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{R,  }\item[{uint8\+\_\+t}]{G,  }\item[{uint8\+\_\+t}]{B }\end{DoxyParamCaption})}
+
+
+
+Given the R\+GB components, calculates the color value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em R} & Red component \\
+\hline
+{\em G} & Green component \\
+\hline
+{\em B} & Blue component \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint32\+\_\+t 
+\end{DoxyReturn}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__video_ga28573f33d778f8dfd39474a8154ef416_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__video_ga9fcd5199ebdc148ef21c1faea7280d3f}\label{group__video_ga9fcd5199ebdc148ef21c1faea7280d3f}} 
+\index{video@{video}!vg\+\_\+decompose\+\_\+\+R\+GB@{vg\+\_\+decompose\+\_\+\+R\+GB}}
+\index{vg\+\_\+decompose\+\_\+\+R\+GB@{vg\+\_\+decompose\+\_\+\+R\+GB}!video@{video}}
+\subsubsection{\texorpdfstring{vg\+\_\+decompose\+\_\+\+R\+G\+B()}{vg\_decompose\_RGB()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structcolor}{color}} vg\+\_\+decompose\+\_\+\+R\+GB (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{R\+GB }\end{DoxyParamCaption})}
+
+
+
+Gets the R,G and B components of a color. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em R\+GB} & Direct color \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+struct color R, G and B components 
+\end{DoxyReturn}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__video_ga9fcd5199ebdc148ef21c1faea7280d3f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__video_ga1362f68261a0b7dcb4d00ca0a3ebb238}\label{group__video_ga1362f68261a0b7dcb4d00ca0a3ebb238}} 
+\index{video@{video}!vg\+\_\+draw\+\_\+image@{vg\+\_\+draw\+\_\+image}}
+\index{vg\+\_\+draw\+\_\+image@{vg\+\_\+draw\+\_\+image}!video@{video}}
+\subsubsection{\texorpdfstring{vg\+\_\+draw\+\_\+image()}{vg\_draw\_image()}}
+{\footnotesize\ttfamily void vg\+\_\+draw\+\_\+image (\begin{DoxyParamCaption}\item[{char $\ast$}]{map,  }\item[{uint16\+\_\+t}]{width,  }\item[{uint16\+\_\+t}]{height,  }\item[{uint16\+\_\+t}]{x,  }\item[{uint16\+\_\+t}]{y }\end{DoxyParamCaption})}
+
+
+
+Draws an image on the screen. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em map} & Color map \\
+\hline
+{\em width} & Image width \\
+\hline
+{\em height} & Image height \\
+\hline
+{\em x} & X position of the uppermost corner \\
+\hline
+{\em y} & Y position of the uppermost corner \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=276pt]{group__video_ga1362f68261a0b7dcb4d00ca0a3ebb238_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__video_ga26084597ddd2baa0ce4d70003a9492e9}\label{group__video_ga26084597ddd2baa0ce4d70003a9492e9}} 
+\index{video@{video}!vg\+\_\+draw\+\_\+pixel@{vg\+\_\+draw\+\_\+pixel}}
+\index{vg\+\_\+draw\+\_\+pixel@{vg\+\_\+draw\+\_\+pixel}!video@{video}}
+\subsubsection{\texorpdfstring{vg\+\_\+draw\+\_\+pixel()}{vg\_draw\_pixel()}}
+{\footnotesize\ttfamily void vg\+\_\+draw\+\_\+pixel (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{x,  }\item[{uint16\+\_\+t}]{y,  }\item[{uint32\+\_\+t}]{color }\end{DoxyParamCaption})}
+
+
+
+Draws a pixel on the screen. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & X position \\
+\hline
+{\em y} & Y position \\
+\hline
+{\em color} & Pixel color \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__video_ga26084597ddd2baa0ce4d70003a9492e9_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__video_ga6db41c530c9cfe3cb6fb0d553abd6bc4}\label{group__video_ga6db41c530c9cfe3cb6fb0d553abd6bc4}} 
+\index{video@{video}!vg\+\_\+get\+\_\+bits\+\_\+pp@{vg\+\_\+get\+\_\+bits\+\_\+pp}}
+\index{vg\+\_\+get\+\_\+bits\+\_\+pp@{vg\+\_\+get\+\_\+bits\+\_\+pp}!video@{video}}
+\subsubsection{\texorpdfstring{vg\+\_\+get\+\_\+bits\+\_\+pp()}{vg\_get\_bits\_pp()}}
+{\footnotesize\ttfamily unsigned int vg\+\_\+get\+\_\+bits\+\_\+pp (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+unsigned int Returns the bits per pixel 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group__video_gad5d72716b0e4b468c37027482a707763}\label{group__video_gad5d72716b0e4b468c37027482a707763}} 
+\index{video@{video}!vg\+\_\+get\+\_\+bytes\+\_\+pp@{vg\+\_\+get\+\_\+bytes\+\_\+pp}}
+\index{vg\+\_\+get\+\_\+bytes\+\_\+pp@{vg\+\_\+get\+\_\+bytes\+\_\+pp}!video@{video}}
+\subsubsection{\texorpdfstring{vg\+\_\+get\+\_\+bytes\+\_\+pp()}{vg\_get\_bytes\_pp()}}
+{\footnotesize\ttfamily unsigned int vg\+\_\+get\+\_\+bytes\+\_\+pp (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+unsigned int Returns the bytes per pixel 
+\end{DoxyReturn}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__video_gad5d72716b0e4b468c37027482a707763_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__video_gaa4a211ebfc5c87a0072eaf9bd03e3a56}\label{group__video_gaa4a211ebfc5c87a0072eaf9bd03e3a56}} 
+\index{video@{video}!vg\+\_\+get\+\_\+hres@{vg\+\_\+get\+\_\+hres}}
+\index{vg\+\_\+get\+\_\+hres@{vg\+\_\+get\+\_\+hres}!video@{video}}
+\subsubsection{\texorpdfstring{vg\+\_\+get\+\_\+hres()}{vg\_get\_hres()}}
+{\footnotesize\ttfamily unsigned int vg\+\_\+get\+\_\+hres (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+unsigned int Returns the number of pixels per row 
+\end{DoxyReturn}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__video_gaa4a211ebfc5c87a0072eaf9bd03e3a56_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__video_ga01a3ec260077196f30943673a3d4b451}\label{group__video_ga01a3ec260077196f30943673a3d4b451}} 
+\index{video@{video}!vg\+\_\+get\+\_\+mode@{vg\+\_\+get\+\_\+mode}}
+\index{vg\+\_\+get\+\_\+mode@{vg\+\_\+get\+\_\+mode}!video@{video}}
+\subsubsection{\texorpdfstring{vg\+\_\+get\+\_\+mode()}{vg\_get\_mode()}}
+{\footnotesize\ttfamily vbe\+\_\+mode\+\_\+info\+\_\+t vg\+\_\+get\+\_\+mode (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Gets the currently used V\+BE mode. 
+
+\begin{DoxyReturn}{Returns}
+vbe\+\_\+mode\+\_\+info\+\_\+t Returns the V\+BE mode structure. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group__video_ga205ab9910f679634b489672fa90212c3}\label{group__video_ga205ab9910f679634b489672fa90212c3}} 
+\index{video@{video}!vg\+\_\+get\+\_\+pixel@{vg\+\_\+get\+\_\+pixel}}
+\index{vg\+\_\+get\+\_\+pixel@{vg\+\_\+get\+\_\+pixel}!video@{video}}
+\subsubsection{\texorpdfstring{vg\+\_\+get\+\_\+pixel()}{vg\_get\_pixel()}}
+{\footnotesize\ttfamily uint32\+\_\+t vg\+\_\+get\+\_\+pixel (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{x,  }\item[{uint16\+\_\+t}]{y }\end{DoxyParamCaption})}
+
+
+
+Gets the color of a pixel. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & X position \\
+\hline
+{\em y} & Y position \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint32\+\_\+t Pixel color 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group__video_ga0cd2b85b0088ab47b2b7bb6c135ad4b1}\label{group__video_ga0cd2b85b0088ab47b2b7bb6c135ad4b1}} 
+\index{video@{video}!vg\+\_\+get\+\_\+video\+\_\+mem@{vg\+\_\+get\+\_\+video\+\_\+mem}}
+\index{vg\+\_\+get\+\_\+video\+\_\+mem@{vg\+\_\+get\+\_\+video\+\_\+mem}!video@{video}}
+\subsubsection{\texorpdfstring{vg\+\_\+get\+\_\+video\+\_\+mem()}{vg\_get\_video\_mem()}}
+{\footnotesize\ttfamily char$\ast$ vg\+\_\+get\+\_\+video\+\_\+mem (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+char$\ast$ Returns the address to the Video memory 
+\end{DoxyReturn}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__video_ga0cd2b85b0088ab47b2b7bb6c135ad4b1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__video_ga4633499e0f197ac855f56473fc9fb291}\label{group__video_ga4633499e0f197ac855f56473fc9fb291}} 
+\index{video@{video}!vg\+\_\+get\+\_\+vres@{vg\+\_\+get\+\_\+vres}}
+\index{vg\+\_\+get\+\_\+vres@{vg\+\_\+get\+\_\+vres}!video@{video}}
+\subsubsection{\texorpdfstring{vg\+\_\+get\+\_\+vres()}{vg\_get\_vres()}}
+{\footnotesize\ttfamily unsigned int vg\+\_\+get\+\_\+vres (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+unsigned int Returns the number of pixels per column 
+\end{DoxyReturn}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__video_ga4633499e0f197ac855f56473fc9fb291_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__video_ga9ce8b7520a298fda9e59cdeffbbd8670}\label{group__video_ga9ce8b7520a298fda9e59cdeffbbd8670}} 
+\index{video@{video}!vg\+\_\+insert@{vg\+\_\+insert}}
+\index{vg\+\_\+insert@{vg\+\_\+insert}!video@{video}}
+\subsubsection{\texorpdfstring{vg\+\_\+insert()}{vg\_insert()}}
+{\footnotesize\ttfamily void vg\+\_\+insert (\begin{DoxyParamCaption}\item[{char $\ast$}]{address,  }\item[{uint32\+\_\+t}]{color }\end{DoxyParamCaption})}
+
+
+
+Given a pixel address, inserts a color in it. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & Pointer to a pixel \\
+\hline
+{\em color} & Color to insert \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__video_ga9ce8b7520a298fda9e59cdeffbbd8670_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__video_ga045a67e6823cba5cf0778c4bc7440b5b}\label{group__video_ga045a67e6823cba5cf0778c4bc7440b5b}} 
+\index{video@{video}!vg\+\_\+mode\+\_\+is\+\_\+indexed@{vg\+\_\+mode\+\_\+is\+\_\+indexed}}
+\index{vg\+\_\+mode\+\_\+is\+\_\+indexed@{vg\+\_\+mode\+\_\+is\+\_\+indexed}!video@{video}}
+\subsubsection{\texorpdfstring{vg\+\_\+mode\+\_\+is\+\_\+indexed()}{vg\_mode\_is\_indexed()}}
+{\footnotesize\ttfamily bool vg\+\_\+mode\+\_\+is\+\_\+indexed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Checks if an indexed mode is being used. 
+
+\begin{DoxyReturn}{Returns}
+true The current mode is indexed 
+
+false The current mode is not indexed 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group__video_ga1ff6d214ea6b767e283a9973bd129c7e}\label{group__video_ga1ff6d214ea6b767e283a9973bd129c7e}} 
+\index{video@{video}!vg\+\_\+move@{vg\+\_\+move}}
+\index{vg\+\_\+move@{vg\+\_\+move}!video@{video}}
+\subsubsection{\texorpdfstring{vg\+\_\+move()}{vg\_move()}}
+{\footnotesize\ttfamily void vg\+\_\+move (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{y,  }\item[{uint16\+\_\+t}]{height,  }\item[{int16\+\_\+t}]{delx,  }\item[{uint32\+\_\+t}]{fill\+\_\+color }\end{DoxyParamCaption})}
+
+
+
+Moves a portion of the screen in an horizontal direction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & Y position from which to move the screen \\
+\hline
+{\em height} & Height of the portion to move \\
+\hline
+{\em delx} & X distance to move the screen \\
+\hline
+{\em fill\+\_\+color} & Color to fill the \char`\"{}empty\char`\"{} area with \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=246pt]{group__video_ga1ff6d214ea6b767e283a9973bd129c7e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__video_ga1ff6d214ea6b767e283a9973bd129c7e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__video_ga0cd4e06d6e2ee5a7737483d2d36caab1}\label{group__video_ga0cd4e06d6e2ee5a7737483d2d36caab1}} 
+\index{video@{video}!vg\+\_\+page\+\_\+flip@{vg\+\_\+page\+\_\+flip}}
+\index{vg\+\_\+page\+\_\+flip@{vg\+\_\+page\+\_\+flip}!video@{video}}
+\subsubsection{\texorpdfstring{vg\+\_\+page\+\_\+flip()}{vg\_page\_flip()}}
+{\footnotesize\ttfamily void vg\+\_\+page\+\_\+flip (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Copies double buffer\textquotesingle{}s contents to V\+R\+AM (Unused) 
+
+\mbox{\Hypertarget{group__video_ga8ff5bbb05f1cb62f5958290a45723571}\label{group__video_ga8ff5bbb05f1cb62f5958290a45723571}} 
+\index{video@{video}!vg\+\_\+retrieve@{vg\+\_\+retrieve}}
+\index{vg\+\_\+retrieve@{vg\+\_\+retrieve}!video@{video}}
+\subsubsection{\texorpdfstring{vg\+\_\+retrieve()}{vg\_retrieve()}}
+{\footnotesize\ttfamily uint32\+\_\+t vg\+\_\+retrieve (\begin{DoxyParamCaption}\item[{char $\ast$}]{address }\end{DoxyParamCaption})}
+
+
+
+Given a pixel address, returns the color associated with it. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & Pointer to a pixel \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint32\+\_\+t Returns the color 
+\end{DoxyReturn}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__video_ga8ff5bbb05f1cb62f5958290a45723571_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__video_ga6e2c7948df1662b15b1977cf20e8e479}\label{group__video_ga6e2c7948df1662b15b1977cf20e8e479}} 
+\index{video@{video}!vg\+\_\+set\+\_\+background@{vg\+\_\+set\+\_\+background}}
+\index{vg\+\_\+set\+\_\+background@{vg\+\_\+set\+\_\+background}!video@{video}}
+\subsubsection{\texorpdfstring{vg\+\_\+set\+\_\+background()}{vg\_set\_background()}}
+{\footnotesize\ttfamily void vg\+\_\+set\+\_\+background (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{color }\end{DoxyParamCaption})}
+
+
+
+Fills the screen with a specific color. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em color} & Color to fill the screen with \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__video_ga6e2c7948df1662b15b1977cf20e8e479_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__video_gaa81a86216d20abdc74fffe6a374d7c84}\label{group__video_gaa81a86216d20abdc74fffe6a374d7c84}} 
+\index{video@{video}!video\+\_\+draw\+\_\+hline@{video\+\_\+draw\+\_\+hline}}
+\index{video\+\_\+draw\+\_\+hline@{video\+\_\+draw\+\_\+hline}!video@{video}}
+\subsubsection{\texorpdfstring{video\+\_\+draw\+\_\+hline()}{video\_draw\_hline()}}
+{\footnotesize\ttfamily void video\+\_\+draw\+\_\+hline (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{x,  }\item[{uint16\+\_\+t}]{y,  }\item[{uint16\+\_\+t}]{len,  }\item[{uint32\+\_\+t}]{color }\end{DoxyParamCaption})}
+
+
+
+Draws a horizontal line on the screen. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & X position of the leftmost end \\
+\hline
+{\em y} & Y position of the leftmost end \\
+\hline
+{\em len} & Line length \\
+\hline
+{\em color} & Line color \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=303pt]{group__video_gaa81a86216d20abdc74fffe6a374d7c84_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__video_gaa81a86216d20abdc74fffe6a374d7c84_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__video_ga141b925836a12854efeb2d84b6e1542c}\label{group__video_ga141b925836a12854efeb2d84b6e1542c}} 
+\index{video@{video}!video\+\_\+draw\+\_\+rectangle@{video\+\_\+draw\+\_\+rectangle}}
+\index{video\+\_\+draw\+\_\+rectangle@{video\+\_\+draw\+\_\+rectangle}!video@{video}}
+\subsubsection{\texorpdfstring{video\+\_\+draw\+\_\+rectangle()}{video\_draw\_rectangle()}}
+{\footnotesize\ttfamily void video\+\_\+draw\+\_\+rectangle (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{x,  }\item[{uint16\+\_\+t}]{y,  }\item[{uint16\+\_\+t}]{width,  }\item[{uint16\+\_\+t}]{height,  }\item[{uint32\+\_\+t}]{color }\end{DoxyParamCaption})}
+
+
+
+Draws a rectangle on the screen. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & X Position of the upper left corner \\
+\hline
+{\em y} & Y Position of the upper left corner \\
+\hline
+{\em width} & Rectangle width \\
+\hline
+{\em height} & Rectangle height \\
+\hline
+{\em color} & Rectangle color \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__video_ga141b925836a12854efeb2d84b6e1542c_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__video_ga141b925836a12854efeb2d84b6e1542c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__video_ga5176eeba2bfc4ebcf67374bda8aceb19}\label{group__video_ga5176eeba2bfc4ebcf67374bda8aceb19}} 
+\index{video@{video}!video\+\_\+draw\+\_\+vline@{video\+\_\+draw\+\_\+vline}}
+\index{video\+\_\+draw\+\_\+vline@{video\+\_\+draw\+\_\+vline}!video@{video}}
+\subsubsection{\texorpdfstring{video\+\_\+draw\+\_\+vline()}{video\_draw\_vline()}}
+{\footnotesize\ttfamily void video\+\_\+draw\+\_\+vline (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{x,  }\item[{uint16\+\_\+t}]{y,  }\item[{uint16\+\_\+t}]{len,  }\item[{uint32\+\_\+t}]{color }\end{DoxyParamCaption})}
+
+
+
+Draws a vertical line on the screen. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & X position of the uppermost end \\
+\hline
+{\em y} & Y position of the uppermost end \\
+\hline
+{\em len} & Line length \\
+\hline
+{\em color} & Line color \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=281pt]{group__video_ga5176eeba2bfc4ebcf67374bda8aceb19_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{group__video_gad5c198bac564055e1866fd5ac6152308}\label{group__video_gad5c198bac564055e1866fd5ac6152308}} 
+\index{video@{video}!video\+\_\+init@{video\+\_\+init}}
+\index{video\+\_\+init@{video\+\_\+init}!video@{video}}
+\subsubsection{\texorpdfstring{video\+\_\+init()}{video\_init()}}
+{\footnotesize\ttfamily void$\ast$ video\+\_\+init (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{mode }\end{DoxyParamCaption})}
+
+
+
+Initializes M\+I\+N\+IX in graphics mode. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mode} & Mode to be set \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void$\ast$ Pointer to the video memory on success, N\+U\+LL otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=266pt]{group__video_gad5c198bac564055e1866fd5ac6152308_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=254pt]{group__video_gad5c198bac564055e1866fd5ac6152308_icgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{group__video_gaf8420cf3aa35448f046467969f1f9775}\label{group__video_gaf8420cf3aa35448f046467969f1f9775}} 
+\index{video@{video}!B@{B}}
+\index{B@{B}!video@{video}}
+\subsubsection{\texorpdfstring{B}{B}}
+{\footnotesize\ttfamily uint8\+\_\+t color\+::B}
+
+
+
+Blue value. 
+
+\mbox{\Hypertarget{group__video_ga4eca011840c222b0813c622714e7a2b5}\label{group__video_ga4eca011840c222b0813c622714e7a2b5}} 
+\index{video@{video}!G@{G}}
+\index{G@{G}!video@{video}}
+\subsubsection{\texorpdfstring{G}{G}}
+{\footnotesize\ttfamily uint8\+\_\+t color\+::G}
+
+
+
+Green value. 
+
+\mbox{\Hypertarget{group__video_gacb56ae92e569346b946b93e1723bdcf0}\label{group__video_gacb56ae92e569346b946b93e1723bdcf0}} 
+\index{video@{video}!R@{R}}
+\index{R@{R}!video@{video}}
+\subsubsection{\texorpdfstring{R}{R}}
+{\footnotesize\ttfamily uint8\+\_\+t color\+::R}
+
+
+
+Red value. 
+

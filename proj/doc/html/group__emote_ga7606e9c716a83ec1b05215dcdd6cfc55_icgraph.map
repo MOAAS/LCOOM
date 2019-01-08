@@ -1,0 +1,9 @@
+<map id="check_emote_press" name="check_emote_press">
+<area shape="rect" id="node2" href="$group__pengoo.html#ga089d0f37444b1b486cf98045a512deed" title="Runs the word game, as a guesser. Displays on the screen what the other user draws. User can press ENTER to type a guess. " alt="" coords="192,36,249,63"/>
+<area shape="rect" id="node5" href="$group__pengoo.html#gabe23d2dac0552bf9069a47573770d379" title="Runs the word game, as a guesser. Displays on the screen what the other user draws. User can type a guess, press ESC or ENTER to insert his guess. " alt="" coords="491,36,580,63"/>
+<area shape="rect" id="node6" href="$group__pengoo.html#ga60a599fe4cffb804d5375495cdc35d9c" title="Reads an event and the cursor and updates the emote &quot;wheel&quot; accordingly (applies in the word game)..." alt="" coords="297,138,441,164"/>
+<area shape="rect" id="node3" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="629,62,739,88"/>
+<area shape="rect" id="node4" href="$group__wordpicker.html#ga6353a81725e186791f470cbd96c7ec1b" title="Checks if a guess is correct (case&#45;insensitive) " alt="" coords="323,36,416,63"/>
+<area shape="rect" id="node7" href="$group__pengoo.html#ga56c5cf8a568cff737ff95520cbe6b405" title="Runs the word game, as a drawer. Sends the drawing to the other user on every move. Sends the clock updates to the other user, every second. User can use the several buttons and mouse to draw on the screen. " alt="" coords="511,87,560,114"/>
+<area shape="rect" id="node8" href="$group__pengoo.html#ga178ee685108a5f6164bf1c1757040ee2" title="Runs the word game, as a drawer. Sends the drawing to the other user on every move. Sends the clock updates to the other user, every second. User can select a color from the open window. " alt="" coords="489,138,581,164"/>
+</map>

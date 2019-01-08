@@ -1,0 +1,7 @@
+<map id="kbc_ih" name="kbc_ih">
+<area shape="rect" id="node2" href="$group__keyboard.html#gaa7f7b14e556eec81eb7b4eae1d63ec85" title="Gets the contents from the output buffer, if they exist. " alt="" coords="113,81,231,108"/>
+<area shape="rect" id="node3" href="$group__keyboard.html#ga54c1dc87fd33a133b8c1eaf08bc51a99" title="Gets the status byte from the KBC status register. " alt="" coords="317,5,428,32"/>
+<area shape="rect" id="node4" href="$group__keyboard.html#ga8348b9b1e74639dd7edf7e939ea2e1d1" title="Checks if there was any communication error between Keyboard and KBC. " alt="" coords="279,56,467,83"/>
+<area shape="rect" id="node5" href="$group__keyboard.html#ga870b444bcf2b470834d2027dc30bb46e" title="Reads keyboard&#39;s output buffer. " alt="" coords="302,107,443,133"/>
+<area shape="rect" id="node6" href="$group__keyboard.html#ga4e0b2a8300752760d8c7f10fcb55b67a" title="Checks if the Output buffer is full. " alt="" coords="314,157,431,184"/>
+</map>

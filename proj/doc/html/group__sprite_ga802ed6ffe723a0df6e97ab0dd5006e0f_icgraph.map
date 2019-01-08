@@ -1,0 +1,4 @@
+<map id="create_idle_sprite" name="create_idle_sprite">
+<area shape="rect" id="node2" href="$group__pengoo.html#gab9e42b0ec1e9c9ffdf1edd5dec1b0ddd" title="Loads the game background layer and draws it. Also initializes sprites that go on the background laye..." alt="" coords="177,5,292,32"/>
+<area shape="rect" id="node3" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="340,5,449,32"/>
+</map>

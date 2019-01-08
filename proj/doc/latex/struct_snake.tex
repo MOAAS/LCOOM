@@ -1,0 +1,64 @@
+\hypertarget{struct_snake}{}\section{Snake Struct Reference}
+\label{struct_snake}\index{Snake@{Snake}}
+
+
+Structure that represents the controlled object in the snake minigame.  
+
+
+
+
+{\ttfamily \#include $<$snake.\+h$>$}
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{group__snake_ga785740f93d9f05bf6821595b78000b64}{x}}
+\begin{DoxyCompactList}\small\item\em X position. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{group__snake_gac2c669473500f0d409a6e809700f537d}{y}}
+\begin{DoxyCompactList}\small\item\em Y position. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{group__snake_ga203349d9342db170b9745c3da26dbcbe}{speed}}
+\begin{DoxyCompactList}\small\item\em Current speed. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{group__snake_ga52857dbba7b74ca5c06b9b872cc1fb67}{max\+\_\+speed}}
+\begin{DoxyCompactList}\small\item\em Maximum snake speed. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{group__snake_ga74c9d3c783fec83cb7efbdd228821fe7}{angle}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{struct_snake}{Snake}} direction. 0 is east, 90 is south, 180 is west, 270 is north. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__snake_ga2c1982167b9cfb8ead89775dbef75be3}{turning\+\_\+left}}
+\begin{DoxyCompactList}\small\item\em Set to true iff the player is pressing the A\+R\+R\+O\+W\+\_\+\+L\+E\+FT key. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__snake_ga3c8626bc3f65ba80fb852c3cfeaf356c}{turning\+\_\+right}}
+\begin{DoxyCompactList}\small\item\em Set to true iff the player is pressing the A\+R\+R\+O\+W\+\_\+\+R\+I\+G\+HT key. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{group__snake_gaeaaf26de3f02db45a8bab738d4b2ca64}{color}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{struct_snake}{Snake}} color. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__snake_ga9579d3c93826054b42af664d0a4919d6}{health}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{struct_snake}{Snake}} health points. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__snake_ga1150d62946b0817287c3a23597993d08}{max\+\_\+health}}
+\begin{DoxyCompactList}\small\item\em Initial (maximum) health points. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__snake_ga7fa12626da8070f765499c9dae661271}{ricocheting}}
+\begin{DoxyCompactList}\small\item\em Set to true iff the snake has just bounced off a wall. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__snake_ga781e80a4c24c09fbe284d49097e6c334}{is\+Dead}}
+\begin{DoxyCompactList}\small\item\em Set to true iff the snake\textquotesingle{}s health dropped below 0. Cannot move if set to true. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__snake_gad5771c4485a61c0bbbc101ce0b1fe81f}{time\+Since\+Death}}
+\begin{DoxyCompactList}\small\item\em Ticks since snake death (0 if alive, 60 after 1 second dead) \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__snake_ga7296bc0cf6f2410a20eb48fda726a8f6}{obstacle\+Immunity\+Left}}
+\begin{DoxyCompactList}\small\item\em Amount of time until obstacle immunity wears off (60 = 1 second) \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__snake_gae942bd8af663886b8e1c4274062174b5}{invincibility\+Left}}
+\begin{DoxyCompactList}\small\item\em Amount of time until invincibility wears off (60 = 1 second) \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__snake_ga66233a102458e305c73cbfdb6d40100f}{switcheroo\+Left}}
+\begin{DoxyCompactList}\small\item\em Amount of time until control switch wears off (60 = 1 second) \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__snake_gadc0bae4f8aea84e975419c3186008be3}{blind\+Left}}
+\begin{DoxyCompactList}\small\item\em Amount of time until blind debuff wears off (60 = 1 seconds) \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__snake_gadc6fa6383ebace6fbeb2e6a2ebcbb04a}{double\+Left}}
+\begin{DoxyCompactList}\small\item\em Amount of time until double points wears off (60 = 1 seconds) \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__snake_ga7b1c76ccd41a023734f3fe689279bace}{bleeding\+Left}}
+\begin{DoxyCompactList}\small\item\em Amount of time until bleeding debuff wears off (60 = 1 seconds) \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__snake_gae5b13aadb0092ce8c45e04de9024444f}{score}}
+\begin{DoxyCompactList}\small\item\em Score. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{group__snake_ga26df95d629329c163a1153f81e1c8b17}{top\+\_\+speed}}
+\begin{DoxyCompactList}\small\item\em Top reached speed (not maximum speed) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Structure that represents the controlled object in the snake minigame. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{snake_8h}{snake.\+h}}\end{DoxyCompactItemize}

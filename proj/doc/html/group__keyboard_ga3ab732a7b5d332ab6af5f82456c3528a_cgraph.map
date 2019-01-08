@@ -1,0 +1,10 @@
+<map id="kbc_get_cmd_byte" name="kbc_get_cmd_byte">
+<area shape="rect" id="node2" href="$group__keyboard.html#gaa1dcd642657d7da0376e36cda809b0e3" title="Issues a command to the kbc. " alt="" coords="190,107,299,133"/>
+<area shape="rect" id="node7" href="$group__keyboard.html#ga203a4c111fbe4b4fe6946a77bebbc171" title="Polls the out buffer until it has something, in which case reads it. Returns after several failed att..." alt="" coords="185,157,304,184"/>
+<area shape="rect" id="node3" href="$group__keyboard.html#ga54c1dc87fd33a133b8c1eaf08bc51a99" title="Gets the status byte from the KBC status register. " alt="" coords="391,56,501,83"/>
+<area shape="rect" id="node4" href="$group__keyboard.html#ga8348b9b1e74639dd7edf7e939ea2e1d1" title="Checks if there was any communication error between Keyboard and KBC. " alt="" coords="352,107,540,133"/>
+<area shape="rect" id="node5" href="$group__keyboard.html#ga710a06495d4ad2c8afba84634ec89984" title="Checks if the Input buffer is full. " alt="" coords="391,5,501,32"/>
+<area shape="rect" id="node6" href="$group__keyboard.html#ga686f8d95e71a43edaddda1db8b78caa4" title="Waits. " alt="" coords="407,157,485,184"/>
+<area shape="rect" id="node8" href="$group__keyboard.html#ga4e0b2a8300752760d8c7f10fcb55b67a" title="Checks if the Output buffer is full. " alt="" coords="387,208,505,235"/>
+<area shape="rect" id="node9" href="$group__keyboard.html#ga870b444bcf2b470834d2027dc30bb46e" title="Reads keyboard&#39;s output buffer. " alt="" coords="375,259,517,285"/>
+</map>

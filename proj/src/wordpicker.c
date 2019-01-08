@@ -39,6 +39,7 @@ static uint16_t num_revealed_letters = 0;
 static int score = 0;
 static int highscore = 0;
 static char * file_path;
+
 void loadDictionary(char* path) {
 	FILE * fp = fopen(path, "r");
 	if (fp == NULL) {
@@ -220,8 +221,11 @@ void loadWordGameHighscore(char* path) {
 }
 
 void saveWordGameHighscore() {
-    FILE *filePtr;
-    filePtr = fopen(file_path, "w");
+    FILE *filePtr = fopen(file_path, "w");
+    if (filePtr == NULL) {
+        printf("couldn't save highscore, path: %s \n", file_path);
+        return;
+    }
     fprintf(filePtr, "Highscore: %d", highscore);
     fclose(filePtr);
 }

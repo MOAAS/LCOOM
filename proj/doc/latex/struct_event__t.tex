@@ -1,0 +1,63 @@
+\hypertarget{struct_event__t}{}\section{Event\+\_\+t Struct Reference}
+\label{struct_event__t}\index{Event\+\_\+t@{Event\+\_\+t}}
+
+
+Represents an event.  
+
+
+
+
+{\ttfamily \#include $<$event.\+h$>$}
+
+
+
+Collaboration diagram for Event\+\_\+t\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{struct_event__t__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{group__event_ga9ed8eea2d6d0593ed3dd328c0d39cff4}{is\+Timer\+Event}}
+\begin{DoxyCompactList}\small\item\em Set to true iff there was a timer interrupt/event. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__event_ga8161d752a03a628ed75607ba51dcf534}{is\+Rtc\+Event}}
+\begin{DoxyCompactList}\small\item\em Set to true iff there was a R\+TC interrupt/event. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__event_ga7a5c0340c7ca96d9e3b888d9adeb7953}{is\+Keyboard\+Event}}
+\begin{DoxyCompactList}\small\item\em Set to true iff there was a K\+BD interrupt/event. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__event_gad4c9f151571424b2fbf072c61a6b8d49}{is\+Mouse\+Event}}
+\begin{DoxyCompactList}\small\item\em Set to true iff there was a mouse interrupt/event. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__event_ga90aa0e2d62ddd6a7df1d4028f5598871}{is\+U\+A\+R\+T\+Event}}
+\begin{DoxyCompactList}\small\item\em Set to true iff there was a U\+A\+RT interrupt/event. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_keyboard_event}{Keyboard\+Event}} \mbox{\hyperlink{group__event_ga7754ae75522696c89ae768740cb2720c}{keyboard\+Event}}
+\begin{DoxyCompactList}\small\item\em K\+E\+Y\+B\+O\+A\+RD\+: Keyboard interrupt information. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_mouse_event}{Mouse\+Event}} \mbox{\hyperlink{group__event_ga0cf4f0e41d1890283cf4ac717a7caee7}{mouse\+Event}}
+\begin{DoxyCompactList}\small\item\em M\+O\+U\+SE\+: Mouse interrupt information. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_timer_event}{Timer\+Event}} \mbox{\hyperlink{group__event_ga00faceeda48c11ab73d93386410fb947}{timer\+Event}}
+\begin{DoxyCompactList}\small\item\em T\+I\+M\+ER\+: Timer interrupt information. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_u_a_r_t_message}{U\+A\+R\+T\+Message}} \mbox{\hyperlink{group__event_ga5328c084dbec907fc5764e3bc22d15c1}{uart\+\_\+messages}} \mbox{[}5000\mbox{]}
+\begin{DoxyCompactList}\small\item\em U\+A\+RT\+: Array containing the unprocessed serial port message. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{group__event_ga06510bc0368c992c639e98d32ddf1f08}{num\+\_\+uart\+\_\+messages}}
+\begin{DoxyCompactList}\small\item\em U\+A\+RT\+: Array size. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__event_ga6889574ecb91bfdbfb6970744500343d}{is\+Ctrl\+Pressed}}
+\begin{DoxyCompactList}\small\item\em Set to true iff Left Ctrl is pressed. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__event_gad1fa4519784799da6a38747199ff898f}{is\+L\+Shift\+Pressed}}
+\begin{DoxyCompactList}\small\item\em Set to true iff Left Shift is pressed. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__event_ga63dc7ccca6afe5c67f51147f763e851d}{is\+R\+Shift\+Pressed}}
+\begin{DoxyCompactList}\small\item\em Set to true iff Right Shift is pressed. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__event_ga6bd25b846a78fabf96eaa267cdead1a0}{is\+L\+B\+Pressed}}
+\begin{DoxyCompactList}\small\item\em Set to true iff LB is pressed. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__event_ga736bfa60cc90cc6f8e11fb555520545e}{is\+M\+B\+Pressed}}
+\begin{DoxyCompactList}\small\item\em Set to true iff MB is pressed. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__event_ga82fc1d867f7a90159e8b05cba5e5ee96}{is\+R\+B\+Pressed}}
+\begin{DoxyCompactList}\small\item\em Set to true iff RB is pressed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Represents an event. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{event_8h}{event.\+h}}\end{DoxyCompactItemize}

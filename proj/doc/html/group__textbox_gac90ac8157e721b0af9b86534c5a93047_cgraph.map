@@ -1,0 +1,4 @@
+<map id="loadLetterMap" name="loadLetterMap">
+<area shape="rect" id="node2" href="$group__bitmap.html#ga3f8f5ad40944f2db40792d7c4fe5b96e" title="Copies part of a bitmap from a given bitmap to another bitmap. " alt="" coords="157,5,288,32"/>
+<area shape="rect" id="node3" href="$group__bitmap.html#gaa19cec779e8cbaf053f3efc749c20c37" title="Resizes a bitmap by a given factor. " alt="" coords="173,56,272,83"/>
+</map>

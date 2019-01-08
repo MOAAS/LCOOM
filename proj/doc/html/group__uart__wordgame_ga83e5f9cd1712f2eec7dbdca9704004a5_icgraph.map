@@ -1,0 +1,8 @@
+<map id="uart_send_bucket" name="uart_send_bucket">
+<area shape="rect" id="node2" href="$group__pengoo.html#ga6ac5130bfa3fa90697b1368d605563c0" title="Uses the pencil by reading an event. Depending on the tool, it may draw on the screen, update colors, etc. " alt="" coords="179,56,257,83"/>
+<area shape="rect" id="node3" href="$group__pengoo.html#ga3df244ae6ccf0baca3f8426c306d3802" title="Updates the drawing state, by checking whether or not a painting button was pressed. Updates the thickness slider if needed. Updades the cursor if needed. " alt="" coords="305,56,408,83"/>
+<area shape="rect" id="node4" href="$group__pengoo.html#ga56c5cf8a568cff737ff95520cbe6b405" title="Runs the word game, as a drawer. Sends the drawing to the other user on every move. Sends the clock updates to the other user, every second. User can use the several buttons and mouse to draw on the screen. " alt="" coords="485,5,534,32"/>
+<area shape="rect" id="node6" href="$group__pengoo.html#gae0cdf0dedf98ccbeac43b0300e0d2df1" title="Runs the training/single&#45;player mode. Same as soloing a guessing game but with added Undo..." alt="" coords="477,56,541,83"/>
+<area shape="rect" id="node7" href="$group__pengoo.html#gaa5d8d3d5af977d3d9e7141bf2693c81e" title="Runs the collab/multi&#45;player mode. Same as training mode, but without the Undo and Load buttons..." alt="" coords="456,107,563,133"/>
+<area shape="rect" id="node5" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="611,56,720,83"/>
+</map>

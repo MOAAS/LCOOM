@@ -1,0 +1,16 @@
+<map id="draw_bitmap" name="draw_bitmap">
+<area shape="rect" id="node2" href="$group__flappy.html#gaa9297621f8ee414c88d82528044d564e" title="Moves the obstacles hitbox and redraws them. " alt="" coords="163,5,295,32"/>
+<area shape="rect" id="node7" href="$group__snake.html#ga51b55e1ad05667d456ed81db42c26b9f" title="Redraws the UI HP bar. " alt="" coords="155,56,304,83"/>
+<area shape="rect" id="node10" href="$group__snake.html#ga4890845dc17bb18e466ffc2590f1d067" title="Draws all the obstacles on the screen. " alt="" coords="148,107,311,133"/>
+<area shape="rect" id="node11" href="$group__snake.html#ga5b6ba10dffbae055f140e8793d279dbf" title="Adds an obstacle to the arena. " alt="" coords="160,157,299,184"/>
+<area shape="rect" id="node14" href="$group__sprite.html#ga740994f8c16c38bf18eaabac1f5eeeb9" title="Draws a sprite on the screen. " alt="" coords="185,208,273,235"/>
+<area shape="rect" id="node3" href="$group__flappy.html#gaf8e964390506e60ce524b539e98ff4fc" title="Updates the screen, by moving the game area and obstacles, and redrawing the bird. " alt="" coords="365,8,513,35"/>
+<area shape="rect" id="node4" href="$group__flappy.html#ga8efa272248ce46f0bb6081dcb680598d" title="Moves the game forward. Moves the bird vertically, moves the screen to the left, updates the score an..." alt="" coords="594,20,678,47"/>
+<area shape="rect" id="node5" href="$group__pengoo.html#ga2ef126f11a398bb34f581d5eca368e6b" title="Runs the flappy rainbow game. User can exit at any time by pressing ESC. " alt="" coords="754,27,841,53"/>
+<area shape="rect" id="node6" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="889,53,999,80"/>
+<area shape="rect" id="node8" href="$group__snake.html#gae59edc17cc6d3f6f1fef0d047304265b" title="Moves the game forward. Moves the snake and decoys, redraws the obstacles and increases the snake&#39;s s..." alt="" coords="377,80,501,107"/>
+<area shape="rect" id="node9" href="$group__pengoo.html#gab63f8a21d8bd92b9f638151a9912fa84" title="Runs the rainbow snake game. User can exit at any time by pressing ESC. " alt="" coords="753,80,841,107"/>
+<area shape="rect" id="node12" href="$group__snake.html#ga0023b72115390a70c136c27bcd0f7844" title="Creates between 1 and 12 random obstacles, and adds them to the arena. " alt="" coords="359,156,519,183"/>
+<area shape="rect" id="node13" href="$group__snake.html#gae7016570a88c488abe2dabb31467daf8" title="Creates a snake arena and UI. Adds obstacles and creates the HP bar. Also adds the scoreboard on top..." alt="" coords="567,144,705,171"/>
+<area shape="rect" id="node15" href="$group__sprite.html#ga91bbc8d0a30c581a10b9d193d0d77c43" title="Moves a sprite. " alt="" coords="393,208,484,235"/>
+</map>

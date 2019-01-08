@@ -1,0 +1,6 @@
+<map id="uart_disable_fifo" name="uart_disable_fifo">
+<area shape="rect" id="node2" href="$group__uart.html#ga5eb3f3881ed8e1ff240400ecc1c7d20c" title="Disables the 64 Byte FIfo, destroys the toSend and received queues. " alt="" coords="168,31,285,57"/>
+<area shape="rect" id="node3" href="$group__interrupts.html#gac34cc7680c64171b47100c01bb019ab4" title="Unsubscribes a device&#39;s interrupts For the mouse, disables data reporting in stream mode..." alt="" coords="333,5,468,32"/>
+<area shape="rect" id="node5" href="$group__uart.html#ga63d2125ea0329330a0efd87bb7f4a42f" title="Resets the fifo and clears it. " alt="" coords="349,56,452,83"/>
+<area shape="rect" id="node4" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="516,5,625,32"/>
+</map>

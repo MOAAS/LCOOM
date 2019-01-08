@@ -1,0 +1,72 @@
+\hypertarget{flappy_8h}{}\section{flappy.\+h File Reference}
+\label{flappy_8h}\index{flappy.\+h@{flappy.\+h}}
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}video.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sprite.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}canvas.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}bitmap.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}textbox.\+h\char`\"{}}\newline
+Include dependency graph for flappy.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{flappy_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=230pt]{flappy_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_bird}{Bird}}
+\begin{DoxyCompactList}\small\item\em Structure that represents the controlled object in the minigame. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{struct_flappy_tube}{Flappy\+Tube}}
+\begin{DoxyCompactList}\small\item\em Represents an obstacle in the minigame. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{group__flappy_ga48334c3029c7f0bbe6b07d3423a6702e}{load\+Flappy\+Highscore}} (char $\ast$path)
+\begin{DoxyCompactList}\small\item\em reads the highscore .txt file for the flappy minigame. Sets highscore to 0 if the file does not exist. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__flappy_ga9932d7d9d11b03bcbd7d82d8c6c36a22}{save\+Flappy\+Highscore}} ()
+\begin{DoxyCompactList}\small\item\em Saves the highscore .txt file for the flappy minigame. Assumes \mbox{\hyperlink{group__flappy_ga48334c3029c7f0bbe6b07d3423a6702e}{load\+Flappy\+Highscore()}} was previously called. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__flappy_gab4a401acb5fffbf99413000dcdff3486}{flappy\+\_\+gameover}} ()
+\begin{DoxyCompactList}\small\item\em Displays, on the screen, that the game is over and the score as well. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__flappy_ga92fa31f2712c1d2f899246a5fd5913ab}{flappy\+\_\+move}} ()
+\begin{DoxyCompactList}\small\item\em Alters the bird\textquotesingle{}s position, based on its acceleration and velocity. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__flappy_ga890241c4d6c50c4a9a15c9b3ac9d0c1a}{flappy\+\_\+update\+\_\+hitbox}} ()
+\begin{DoxyCompactList}\small\item\em Checks the x and y position, and updates the bird\textquotesingle{}s hitbox accordingly. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__flappy_gadf33bb76c8456ea822eb71ecc5325ee3}{flappy\+\_\+increase\+\_\+score}} ()
+\begin{DoxyCompactList}\small\item\em Increases the score by 1. Updates the radius depending on its score, for a minimum of 2 and maximum of 8. Formula\+: radius = log2(score);. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__flappy_gaa49e826d675bb2a5271332a23831fcd1}{flappy\+\_\+update\+\_\+score}} ()
+\begin{DoxyCompactList}\small\item\em Updates the score area, checking if any new obstacle was passed. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__flappy_gaf8e964390506e60ce524b539e98ff4fc}{flappy\+\_\+update\+\_\+screen}} ()
+\begin{DoxyCompactList}\small\item\em Updates the screen, by moving the game area and obstacles, and redrawing the bird. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__flappy_ga2b239332f6f259b99e59203e1ae3de43}{flappy\+\_\+collided}} ()
+\begin{DoxyCompactList}\small\item\em Checks if the bird is on the hitbox of any obstacle. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__flappy_gaa9297621f8ee414c88d82528044d564e}{flappy\+\_\+move\+\_\+tubes}} ()
+\begin{DoxyCompactList}\small\item\em Moves the obstacles hitbox and redraws them. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__flappy_gac459c993f010cd477b1cff328d2e6ce4}{flappy\+\_\+clear\+\_\+dead\+\_\+tubes}} ()
+\begin{DoxyCompactList}\small\item\em Frees the memory used by the offscreen tubes. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__flappy_ga0ae0e6cba690a1cba3a4514879eb1987}{flappy\+\_\+add\+\_\+tube}} (uint16\+\_\+t tube\+\_\+no)
+\begin{DoxyCompactList}\small\item\em Adds an obstacle on the screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__flappy_ga674a35d4936f4ab784c85addd4b4b830}{flappy\+\_\+remove\+\_\+tube}} (int index)
+\begin{DoxyCompactList}\small\item\em Removes an obstacle from the array. The array order may change. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__flappy_ga5c94499758654ce3c58278cdacb968c2}{start\+\_\+flappy}} (\mbox{\hyperlink{struct_layer}{Layer}} $\ast$\mbox{\hyperlink{wordpicker_8c_a202b703352248e94db55f961e7938e08}{background}})
+\begin{DoxyCompactList}\small\item\em Creates a bird object and starts the game. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__flappy_gae94076e45a9cafba1b36efea470aea73}{end\+\_\+flappy}} ()
+\begin{DoxyCompactList}\small\item\em Ends the game and destroys the bird object, and all of the obstacles. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__flappy_ga8efa272248ce46f0bb6081dcb680598d}{flappy\+\_\+tick}} ()
+\begin{DoxyCompactList}\small\item\em Moves the game forward. Moves the bird vertically, moves the screen to the left, updates the score and checks if the bird has collided with an obstacle. May also add new obstacles after a random amount of time. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__flappy_ga0f81030140c19deb72d5f033591450a8}{flappy\+\_\+dead}} ()
+\begin{DoxyCompactList}\small\item\em Checks if the bird is dead (attribute is\+Dead) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__flappy_ga204fac24b177bdc6293d3284fab9d771}{flappy\+\_\+jump}} ()
+\begin{DoxyCompactList}\small\item\em Sets the bird velocity to 3.\+5, upwards. Does nothing if is\+Dead or going\+Up attributes are set to true. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__flappy_ga321a721b58061dddbdae841607210cf0}{flappy\+\_\+endjump}} ()
+\begin{DoxyCompactList}\small\item\em Sets the going\+Up attribute to false. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__flappy_ga2a15bc1d4bff96014dcaa54973162a48}{flappy\+\_\+showstats}} ()
+\begin{DoxyCompactList}\small\item\em Displays, on the screen, the game highscore. \end{DoxyCompactList}\end{DoxyCompactItemize}

@@ -1,0 +1,58 @@
+\hypertarget{clock_8c}{}\section{clock.\+c File Reference}
+\label{clock_8c}\index{clock.\+c@{clock.\+c}}
+{\ttfamily \#include $<$lcom/lcf.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}clock.\+h\char`\"{}}\newline
+Include dependency graph for clock.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=296pt]{clock_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{group__clock_ga59029f76a2cbf7aad54d01f50cf80cf9}{create\+\_\+big\+\_\+ben}} ()
+\begin{DoxyCompactList}\small\item\em Creates a big clock on the top left of the screen, displaying the current date. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__clock_ga74cbf0ece67234028fdd0465d51bfc0d}{destroy\+\_\+big\+\_\+ben}} ()
+\begin{DoxyCompactList}\small\item\em Destroys the big clock. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__clock_gac56b75476d51e272a9efcbb174ed7bf8}{update\+\_\+big\+\_\+ben}} (bool force)
+\begin{DoxyCompactList}\small\item\em Updates the clock on the screen with the current date. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_bitmap}{Bitmap}} $\ast$ \mbox{\hyperlink{clock_8c_a4fd4cd63417d5ed9c53f57c75045e0b1}{clockbig\+\_\+bmp}}
+\item 
+static \mbox{\hyperlink{struct_text_box}{Text\+Box}} $\ast$ \mbox{\hyperlink{clock_8c_aa318a69be89300400c68ca87676009dd}{big\+\_\+ben1}} = N\+U\+LL
+\item 
+static \mbox{\hyperlink{struct_text_box}{Text\+Box}} $\ast$ \mbox{\hyperlink{clock_8c_aae3894ecc9417ee0b270fe094e2f6b96}{big\+\_\+ben2}} = N\+U\+LL
+\item 
+static \mbox{\hyperlink{struct_layer}{Layer}} $\ast$ \mbox{\hyperlink{clock_8c_a0dc5e0407e229b4a1f8f31a231cb6abd}{big\+\_\+ben\+\_\+layer}} = N\+U\+LL
+\end{DoxyCompactItemize}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{clock_8c_aa318a69be89300400c68ca87676009dd}\label{clock_8c_aa318a69be89300400c68ca87676009dd}} 
+\index{clock.\+c@{clock.\+c}!big\+\_\+ben1@{big\+\_\+ben1}}
+\index{big\+\_\+ben1@{big\+\_\+ben1}!clock.\+c@{clock.\+c}}
+\subsubsection{\texorpdfstring{big\+\_\+ben1}{big\_ben1}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_text_box}{Text\+Box}}$\ast$ big\+\_\+ben1 = N\+U\+LL\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{clock_8c_aae3894ecc9417ee0b270fe094e2f6b96}\label{clock_8c_aae3894ecc9417ee0b270fe094e2f6b96}} 
+\index{clock.\+c@{clock.\+c}!big\+\_\+ben2@{big\+\_\+ben2}}
+\index{big\+\_\+ben2@{big\+\_\+ben2}!clock.\+c@{clock.\+c}}
+\subsubsection{\texorpdfstring{big\+\_\+ben2}{big\_ben2}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_text_box}{Text\+Box}}$\ast$ big\+\_\+ben2 = N\+U\+LL\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{clock_8c_a0dc5e0407e229b4a1f8f31a231cb6abd}\label{clock_8c_a0dc5e0407e229b4a1f8f31a231cb6abd}} 
+\index{clock.\+c@{clock.\+c}!big\+\_\+ben\+\_\+layer@{big\+\_\+ben\+\_\+layer}}
+\index{big\+\_\+ben\+\_\+layer@{big\+\_\+ben\+\_\+layer}!clock.\+c@{clock.\+c}}
+\subsubsection{\texorpdfstring{big\+\_\+ben\+\_\+layer}{big\_ben\_layer}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_layer}{Layer}}$\ast$ big\+\_\+ben\+\_\+layer = N\+U\+LL\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{clock_8c_a4fd4cd63417d5ed9c53f57c75045e0b1}\label{clock_8c_a4fd4cd63417d5ed9c53f57c75045e0b1}} 
+\index{clock.\+c@{clock.\+c}!clockbig\+\_\+bmp@{clockbig\+\_\+bmp}}
+\index{clockbig\+\_\+bmp@{clockbig\+\_\+bmp}!clock.\+c@{clock.\+c}}
+\subsubsection{\texorpdfstring{clockbig\+\_\+bmp}{clockbig\_bmp}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_bitmap}{Bitmap}}$\ast$ clockbig\+\_\+bmp}
+

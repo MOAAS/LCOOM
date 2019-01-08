@@ -752,7 +752,7 @@ void load(char* saved_img_folder) {
     unpress_button(training_buttons[2]); // Releases load button
     if (bmp) {
         canvas_draw_image(bmp);
-        free(bmp);
+        deleteBitmap(bmp);
     }
 }
 

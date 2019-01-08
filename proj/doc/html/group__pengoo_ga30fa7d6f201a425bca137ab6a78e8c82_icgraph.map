@@ -1,0 +1,5 @@
+<map id="reset_pencil" name="reset_pencil">
+<area shape="rect" id="node2" href="$group__pengoo.html#ga885611589f6294afada89fe88362e863" title="Runs the main hub. Draws all the main menu buttons, allowing the user to proceed by clicking on them..." alt="" coords="145,5,235,32"/>
+<area shape="rect" id="node4" href="$group__pengoo.html#gaf06af764d8b387c19edc38c0effd1115" title="Ends a game round, adding the gained points. Displays on the screen whether they won or not..." alt="" coords="149,56,231,83"/>
+<area shape="rect" id="node3" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="283,31,392,57"/>
+</map>

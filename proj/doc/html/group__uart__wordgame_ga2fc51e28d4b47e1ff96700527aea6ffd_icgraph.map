@@ -1,0 +1,4 @@
+<map id="uart_send_number" name="uart_send_number">
+<area shape="rect" id="node2" href="$group__pengoo.html#gab4e279f31fb3e6e034e2b173aaa1a2fb" title="Waits for the other user, and randomly decide who is drawing first in the word game. They do this by choosing a random number and sending it every clock tick. The highest number draws first. " alt="" coords="183,5,285,32"/>
+<area shape="rect" id="node3" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="333,5,443,32"/>
+</map>

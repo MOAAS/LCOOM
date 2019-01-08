@@ -1,0 +1,44 @@
+<map id="setup_canvas" name="setup_canvas">
+<area shape="rect" id="node2" href="$pengoo_8c.html#a6a270065cf1a2a62f368005c74b5a1f4" title="reloadBackground" alt="" coords="318,208,445,235"/>
+<area shape="rect" id="node12" href="$group__canvas.html#ga8ca57c812327763152c635d235e3104e" title="Creates a canvas and draws it on the screen, with a black outline. " alt="" coords="511,527,617,553"/>
+<area shape="rect" id="node21" href="$group__sprite.html#gaeee668e211c134def251f737269b9d5e" title="Draws an IdleSprite on its layer, replacing all GREEN in its BMP with its color attribute. " alt="" coords="507,419,621,445"/>
+<area shape="rect" id="node23" href="$group__sprite.html#ga68e5ecf620b6fc346c992ef0eb49535f" title="Draws a slider on its layer. " alt="" coords="719,624,805,651"/>
+<area shape="rect" id="node25" href="$group__sprite.html#ga7438e498241a820e8b1f4ab63e42c99b" title="Unpresses and unhighlights all the buttons. " alt="" coords="155,629,268,656"/>
+<area shape="rect" id="node26" href="$group__sprite.html#ga73cc8ddf6dbcb83935fabd2443251edd" title="Draws a number of buttons on the screen. " alt="" coords="162,296,261,323"/>
+<area shape="rect" id="node32" href="$group__pengoo.html#gac36b16b3f3b197d1e93926a0b5ba1396" title="Changes the drawing&#45;state/pencil tool, updating the cursor and the paint tubes as well..." alt="" coords="165,360,257,387"/>
+<area shape="rect" id="node43" href="$group__sprite.html#ga5c42751a94b0c5695a62506fc2011d80" title="Presses a button, updating it. " alt="" coords="163,157,260,184"/>
+<area shape="rect" id="node3" href="$group__layer.html#ga9ac38361f9d11a9948ba299a6a6ad71f" title="Draws a bitmap on a layer. " alt="" coords="699,259,825,285"/>
+<area shape="rect" id="node4" href="$group__bitmap.html#ga4b5b3aefecdb54bfdadbe4995b979c7f" title="Checks if a color is transparent (MAGENTA) " alt="" coords="1108,5,1212,32"/>
+<area shape="rect" id="node5" href="$group__layer.html#ga04dfe9a97af5089a6b5a5a044d8d7e9c" title="Draws a pixel on a layer. If that pixel has no other layer above, updates the screen as well..." alt="" coords="916,571,1021,597"/>
+<area shape="rect" id="node6" href="$group__layer.html#ga8bd4001df9f278c1b60a0a7732deef83" title="Sets a pixel in the layer map (does not update the screen) " alt="" coords="1105,563,1215,589"/>
+<area shape="rect" id="node10" href="$group__layer.html#ga3eef68dc1d9d6086e747506f82a4eb11" title="Checks if layer is the highest on that position. " alt="" coords="1114,613,1206,640"/>
+<area shape="rect" id="node11" href="$group__video.html#ga26084597ddd2baa0ce4d70003a9492e9" title="Draws a pixel on the screen. " alt="" coords="1109,512,1211,539"/>
+<area shape="rect" id="node7" href="$group__layer.html#ga7f74243f1e256f7977109a1af3cfcaf2" title="Checks if a position is inside a layer. " alt="" coords="1273,664,1395,691"/>
+<area shape="rect" id="node8" href="$group__video.html#gad5d72716b0e4b468c37027482a707763" title="vg_get_bytes_pp" alt="" coords="1275,487,1393,513"/>
+<area shape="rect" id="node9" href="$group__video.html#ga9ce8b7520a298fda9e59cdeffbbd8670" title="Given a pixel address, inserts a color in it. " alt="" coords="1297,157,1371,184"/>
+<area shape="rect" id="node13" href="$group__canvas.html#ga1574bd14271b62f79a866c5b961ea41a" title="Frees the memory used by the canvas, so that a new one can be created later. " alt="" coords="706,523,818,549"/>
+<area shape="rect" id="node14" href="$group__canvas.html#ga82c276340112469fe11a819ade81ead2" title="Sets the canvas color, filling it. " alt="" coords="701,421,823,448"/>
+<area shape="rect" id="node20" href="$group__canvas.html#ga042599a460db7bc889fdf51cb56ae732" title="Sets the canvas outline (thickness 5) " alt="" coords="696,573,828,600"/>
+<area shape="rect" id="node15" href="$group__canvas.html#ga4d89ce4c1a9450f7a5ee8e1281832584" title="Draws a rectangle on the canvas. " alt="" coords="891,385,1047,412"/>
+<area shape="rect" id="node16" href="$group__video.html#ga57014a19e5d9cf805bcf7af1f6bbcec5" title="Given a base address, calculates the address of a specific position. " alt="" coords="1111,259,1209,285"/>
+<area shape="rect" id="node17" href="$group__video.html#ga0cd2b85b0088ab47b2b7bb6c135ad4b1" title="vg_get_video_mem" alt="" coords="1095,309,1225,336"/>
+<area shape="rect" id="node18" href="$group__video.html#gaa4a211ebfc5c87a0072eaf9bd03e3a56" title="vg_get_hres" alt="" coords="1115,360,1205,387"/>
+<area shape="rect" id="node19" href="$group__canvas.html#ga85fca0492c1f7ec8e1d20a9b5e48be1c" title="Checks if a position is inside the canvas. " alt="" coords="1100,461,1220,488"/>
+<area shape="rect" id="node22" href="$group__layer.html#gaafecb163f102a681ca44cd542057370a" title="Draws a bitmap on a layer, replacing all the GREEN with another color. " alt="" coords="681,371,843,397"/>
+<area shape="rect" id="node24" href="$group__video.html#ga8ff5bbb05f1cb62f5958290a45723571" title="Given a pixel address, returns the color associated with it. " alt="" coords="1293,816,1375,843"/>
+<area shape="rect" id="node27" href="$group__sprite.html#ga39cf20a4f80d3e42f7ecc3dab4bd7b65" title="Draws a button on the screen, highlighting it if cursor is on the button. " alt="" coords="335,259,427,285"/>
+<area shape="rect" id="node28" href="$group__sprite.html#ga8fe18a5b062a81b4b99dc62f0643446c" title="Checks if a cursor is on a button. " alt="" coords="516,56,612,83"/>
+<area shape="rect" id="node30" href="$group__sprite.html#ga1a1688248ec81812ca2c738584e323a4" title="Highlights a button, updating it. " alt="" coords="507,157,621,184"/>
+<area shape="rect" id="node31" href="$group__sprite.html#gaa28b2a8d13a3ab9e23c3d91691614c81" title="Unghlights a button, updating it. " alt="" coords="501,309,627,336"/>
+<area shape="rect" id="node29" href="$group__bitmap.html#gad73cdf3b48e5ca2e43ef1fbdd5b061b9" title="Gets the color of a certain bitmap pixel. " alt="" coords="701,56,823,83"/>
+<area shape="rect" id="node33" href="$group__sprite.html#gad12aa07248bed260a545f3ee69372842" title="Change the bitmap of a sprite. " alt="" coords="495,360,633,387"/>
+<area shape="rect" id="node38" href="$group__sprite.html#gab5aa8ee6efdb9ebf62df81cad24c445c" title="Draws a sprite on the screen, and replaces every color GREEN with its color atribute. " alt="" coords="701,208,823,235"/>
+<area shape="rect" id="node41" href="$group__sprite.html#gabae3594520c7d515ffda965caae199af" title="Changes the IdleSprite&#39;s color. " alt="" coords="316,411,447,453"/>
+<area shape="rect" id="node42" href="$group__sprite.html#ga9b18b2f3de6d4ee00e344881a08b17d6" title="Changes the color of a sprite. " alt="" coords="324,360,439,387"/>
+<area shape="rect" id="node34" href="$group__sprite.html#ga9c7e23b48dc8ea0f565655744cbae06c" title="Erases a sprite from the screen. " alt="" coords="715,472,809,499"/>
+<area shape="rect" id="node35" href="$group__layer.html#ga1f190aee16c183dcd256751cdbf41711" title="Gets the color of a layer pixel. If out of bounds, checks the one under it until it finds a valid lay..." alt="" coords="895,664,1043,691"/>
+<area shape="rect" id="node37" href="$group__layer.html#gaec705a8cfd8cc0d79ef36fa4f47da621" title="get_highest_layer" alt="" coords="907,520,1031,547"/>
+<area shape="rect" id="node36" href="$group__layer.html#gab108b73fe8d04f98fa55d281c245179b" title="Gets the color of a layer pixel. " alt="" coords="1105,715,1215,741"/>
+<area shape="rect" id="node39" href="$group__bitmap.html#ga0a2714359072f1a1b3f361c89e30be52" title="Draws a bitmap on the screen, replacing every GREEN pixel with another color. " alt="" coords="903,208,1034,235"/>
+<area shape="rect" id="node40" href="$group__video.html#ga4633499e0f197ac855f56473fc9fb291" title="vg_get_vres" alt="" coords="1115,107,1205,133"/>
+</map>

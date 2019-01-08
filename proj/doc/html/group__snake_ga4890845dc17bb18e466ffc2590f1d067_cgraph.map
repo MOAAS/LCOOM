@@ -1,0 +1,10 @@
+<map id="arena_update_obstacles" name="arena_update_obstacles">
+<area shape="rect" id="node2" href="$group__bitmap.html#ga37e42f0583efd18e7efa5a036798539e" title="Draws a bitmap on the screen. " alt="" coords="216,157,311,184"/>
+<area shape="rect" id="node3" href="$group__video.html#ga57014a19e5d9cf805bcf7af1f6bbcec5" title="Given a base address, calculates the address of a specific position. " alt="" coords="375,5,473,32"/>
+<area shape="rect" id="node4" href="$group__video.html#ga0cd2b85b0088ab47b2b7bb6c135ad4b1" title="vg_get_video_mem" alt="" coords="359,56,489,83"/>
+<area shape="rect" id="node5" href="$group__video.html#gaa4a211ebfc5c87a0072eaf9bd03e3a56" title="vg_get_hres" alt="" coords="379,107,469,133"/>
+<area shape="rect" id="node6" href="$group__video.html#ga4633499e0f197ac855f56473fc9fb291" title="vg_get_vres" alt="" coords="379,157,469,184"/>
+<area shape="rect" id="node7" href="$group__bitmap.html#ga4b5b3aefecdb54bfdadbe4995b979c7f" title="Checks if a color is transparent (MAGENTA) " alt="" coords="372,208,476,235"/>
+<area shape="rect" id="node8" href="$group__video.html#ga9ce8b7520a298fda9e59cdeffbbd8670" title="Given a pixel address, inserts a color in it. " alt="" coords="387,259,461,285"/>
+<area shape="rect" id="node9" href="$group__video.html#gad5d72716b0e4b468c37027482a707763" title="vg_get_bytes_pp" alt="" coords="365,309,483,336"/>
+</map>

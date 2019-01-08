@@ -1,0 +1,5 @@
+<map id="wordgame_destroy_clock" name="wordgame_destroy_clock">
+<area shape="rect" id="node2" href="$group__wordpicker.html#ga0b9b141f8ba315b5f78506c4d0bdc666" title="Ends a wordgame round. " alt="" coords="223,5,371,32"/>
+<area shape="rect" id="node3" href="$group__pengoo.html#gaf06af764d8b387c19edc38c0effd1115" title="Ends a game round, adding the gained points. Displays on the screen whether they won or not..." alt="" coords="419,5,501,32"/>
+<area shape="rect" id="node4" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="549,5,659,32"/>
+</map>

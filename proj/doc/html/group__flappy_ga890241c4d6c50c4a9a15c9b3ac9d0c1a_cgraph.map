@@ -1,0 +1,3 @@
+<map id="flappy_update_hitbox" name="flappy_update_hitbox">
+<area shape="rect" id="node2" href="$group__sprite.html#gadaf8e12cd78fdf0d2ea5b182ed1072c1" title="Creates a hitbox from 2 positions. " alt="" coords="197,5,293,32"/>
+</map>

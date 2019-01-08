@@ -1,0 +1,4 @@
+<map id="uart_set_dlab" name="uart_set_dlab">
+<area shape="rect" id="node2" href="$group__interrupts.html#ga52c0411fc9786e0c38241ab3584c7dd8" title="Subscribes a device&#39;s interrupts. For the mouse, enables data reporting in stream mode..." alt="" coords="153,5,275,32"/>
+<area shape="rect" id="node3" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="323,5,432,32"/>
+</map>

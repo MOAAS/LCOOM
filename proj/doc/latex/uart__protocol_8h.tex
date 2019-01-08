@@ -1,0 +1,44 @@
+\hypertarget{uart__protocol_8h}{}\section{uart\+\_\+protocol.\+h File Reference}
+\label{uart__protocol_8h}\index{uart\+\_\+protocol.\+h@{uart\+\_\+protocol.\+h}}
+{\ttfamily \#include \char`\"{}uart.\+h\char`\"{}}\newline
+Include dependency graph for uart\+\_\+protocol.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=214pt]{uart__protocol_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{uart__protocol_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_u_a_r_t_message}{U\+A\+R\+T\+Message}}
+\begin{DoxyCompactList}\small\item\em Represents a Message that is send through the serial port. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{group__uart__protocol_ga155260c75bcf6f1b9ff00fac4ad1cc48}{M\+S\+G\+\_\+\+P\+R\+E\+F\+IX}}~137
+\item 
+\#define \mbox{\hyperlink{group__uart__protocol_ga115462df9e5caa853c7d8f33f89cbba6}{M\+S\+G\+\_\+\+T\+R\+A\+I\+L\+ER}}~138
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_u_a_r_t_message}{U\+A\+R\+T\+Message}} $\ast$ \mbox{\hyperlink{group__uart__protocol_ga86ef94bd59a3b296a7c80badb2bea00a}{create\+\_\+message}} (uint8\+\_\+t size, uint8\+\_\+t type, uint8\+\_\+t $\ast$bytes)
+\begin{DoxyCompactList}\small\item\em Creates a message object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__uart__protocol_ga8bef6ea297e99b49a0dc05fc16f1a8f5}{destroy\+\_\+message}} (\mbox{\hyperlink{struct_u_a_r_t_message}{U\+A\+R\+T\+Message}} $\ast$msg)
+\begin{DoxyCompactList}\small\item\em Destroys a message, freeing its space. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__uart__protocol_ga5f455eb88a92b234368bc2d77c295f6a}{uart\+\_\+send\+\_\+message}} (uint8\+\_\+t type, uint8\+\_\+t size, uint8\+\_\+t $\ast$bytes)
+\begin{DoxyCompactList}\small\item\em Sends a message through the U\+A\+RT. Format\+: Byte 0 -\/ 137 Byte 1 -\/ \mbox{[}size (4) -\/ id (4)\mbox{]} Bytes 2\+:n-\/1 -\/ Content Byte n -\/ 138. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__uart__protocol_ga135e4c7043b1c4cd01caa52830b459de}{uart\+\_\+send\+\_\+empty\+\_\+msg}} (uint8\+\_\+t id)
+\begin{DoxyCompactList}\small\item\em Sends a message of size 0. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__uart__protocol_gaf24bc3ddb7d648a8a12a221c7a2e75af}{uart\+\_\+assemble\+\_\+received\+\_\+message}} (uint8\+\_\+t byte, \mbox{\hyperlink{struct_u_a_r_t_message}{U\+A\+R\+T\+Message}} $\ast$msg\+\_\+ptr)
+\begin{DoxyCompactList}\small\item\em Reads a received byte and starts to compose a message. Should be called every time a byte is received. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_u_a_r_t_message}{U\+A\+R\+T\+Message}} $\ast$ \mbox{\hyperlink{group__uart__protocol_gad448b41c7ab4a7e6ee93351e1475f829}{get\+\_\+msg\+\_\+by\+\_\+id}} (uint8\+\_\+t id, \mbox{\hyperlink{struct_u_a_r_t_message}{U\+A\+R\+T\+Message}} messages\mbox{[}$\,$\mbox{]}, uint16\+\_\+t num\+\_\+messages)
+\begin{DoxyCompactList}\small\item\em Gets a message from a message array. \end{DoxyCompactList}\end{DoxyCompactItemize}

@@ -1,0 +1,5 @@
+<map id="keyboard_disable_int" name="keyboard_disable_int">
+<area shape="rect" id="node2" href="$group__keyboard.html#gac95aea27a5e91b363b876fed881f368f" title="Unsubscribes keyboard interrupts. " alt="" coords="197,5,371,32"/>
+<area shape="rect" id="node3" href="$group__interrupts.html#gac34cc7680c64171b47100c01bb019ab4" title="Unsubscribes a device&#39;s interrupts For the mouse, disables data reporting in stream mode..." alt="" coords="419,5,553,32"/>
+<area shape="rect" id="node4" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="601,5,711,32"/>
+</map>

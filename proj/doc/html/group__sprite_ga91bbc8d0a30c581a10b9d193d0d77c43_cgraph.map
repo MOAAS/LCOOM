@@ -1,0 +1,18 @@
+<map id="move_sprite" name="move_sprite">
+<area shape="rect" id="node2" href="$group__sprite.html#ga9c7e23b48dc8ea0f565655744cbae06c" title="Erases a sprite from the screen. " alt="" coords="144,132,237,159"/>
+<area shape="rect" id="node11" href="$group__sprite.html#ga740994f8c16c38bf18eaabac1f5eeeb9" title="Draws a sprite on the screen. " alt="" coords="147,284,235,311"/>
+<area shape="rect" id="node3" href="$group__video.html#ga8ff5bbb05f1cb62f5958290a45723571" title="Given a pixel address, returns the color associated with it. " alt="" coords="679,120,762,147"/>
+<area shape="rect" id="node4" href="$group__bitmap.html#ga4b5b3aefecdb54bfdadbe4995b979c7f" title="Checks if a color is transparent (MAGENTA) " alt="" coords="495,259,599,285"/>
+<area shape="rect" id="node5" href="$group__video.html#ga26084597ddd2baa0ce4d70003a9492e9" title="Draws a pixel on the screen. " alt="" coords="308,5,411,32"/>
+<area shape="rect" id="node6" href="$group__layer.html#ga1f190aee16c183dcd256751cdbf41711" title="Gets the color of a layer pixel. If out of bounds, checks the one under it until it finds a valid lay..." alt="" coords="285,157,433,184"/>
+<area shape="rect" id="node10" href="$group__layer.html#gaec705a8cfd8cc0d79ef36fa4f47da621" title="get_highest_layer" alt="" coords="297,56,421,83"/>
+<area shape="rect" id="node7" href="$group__layer.html#ga7f74243f1e256f7977109a1af3cfcaf2" title="Checks if a position is inside a layer. " alt="" coords="660,196,781,223"/>
+<area shape="rect" id="node8" href="$group__layer.html#gab108b73fe8d04f98fa55d281c245179b" title="Gets the color of a layer pixel. " alt="" coords="492,157,601,184"/>
+<area shape="rect" id="node9" href="$group__video.html#gad5d72716b0e4b468c37027482a707763" title="vg_get_bytes_pp" alt="" coords="661,323,780,349"/>
+<area shape="rect" id="node12" href="$group__bitmap.html#ga37e42f0583efd18e7efa5a036798539e" title="Draws a bitmap on the screen. " alt="" coords="312,385,407,412"/>
+<area shape="rect" id="node13" href="$group__video.html#ga57014a19e5d9cf805bcf7af1f6bbcec5" title="Given a base address, calculates the address of a specific position. " alt="" coords="497,461,596,488"/>
+<area shape="rect" id="node14" href="$group__video.html#ga0cd2b85b0088ab47b2b7bb6c135ad4b1" title="vg_get_video_mem" alt="" coords="481,512,612,539"/>
+<area shape="rect" id="node15" href="$group__video.html#gaa4a211ebfc5c87a0072eaf9bd03e3a56" title="vg_get_hres" alt="" coords="501,563,592,589"/>
+<area shape="rect" id="node16" href="$group__video.html#ga4633499e0f197ac855f56473fc9fb291" title="vg_get_vres" alt="" coords="502,309,591,336"/>
+<area shape="rect" id="node17" href="$group__video.html#ga9ce8b7520a298fda9e59cdeffbbd8670" title="Given a pixel address, inserts a color in it. " alt="" coords="510,360,583,387"/>
+</map>

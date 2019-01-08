@@ -12,14 +12,14 @@ Date rtc_get_date(){
 	uint32_t ano, mes, dia, hora, minuto, segundo;
     Date d;
     wait_valid_rtc();
-    disable();
+    rtc_disable();
     sys_outb(RTC_ADDR_REG,RTC_REG_SEC); sys_inb(RTC_DATA_REG,&segundo);
     sys_outb(RTC_ADDR_REG,RTC_REG_MIN); sys_inb(RTC_DATA_REG,&minuto);
     sys_outb(RTC_ADDR_REG,RTC_REG_HOR); sys_inb(RTC_DATA_REG,&hora);
     sys_outb(RTC_ADDR_REG,RTC_REG_DAY); sys_inb(RTC_DATA_REG,&dia);
     sys_outb(RTC_ADDR_REG,RTC_REG_MTH); sys_inb(RTC_DATA_REG,&mes);
 	sys_outb(RTC_ADDR_REG,RTC_REG_YER); sys_inb(RTC_DATA_REG,&ano);
-    enable();
+    rtc_enable();
     d.sec=segundo;d.min = minuto;d.hor=hora;d.day=dia;d.mth=mes;d.yer=ano;
 	return d;
 }
@@ -28,23 +28,23 @@ Mini_Date rtc_get_mini_date(){
     uint32_t hora, minuto, segundo;
     Mini_Date d;
     wait_valid_rtc();
-    disable();
+    rtc_disable();
     sys_outb(RTC_ADDR_REG,RTC_REG_SEC); sys_inb(RTC_DATA_REG,&segundo);
     sys_outb(RTC_ADDR_REG,RTC_REG_MIN); sys_inb(RTC_DATA_REG,&minuto);
     sys_outb(RTC_ADDR_REG,RTC_REG_HOR); sys_inb(RTC_DATA_REG,&hora);
-    enable();
+    rtc_enable();
     d.sec=segundo;d.min = minuto;d.hor=hora;
 	return d;
 }
 
-uint32_t rtc_get(uint32_t thingy){
+uint32_t rtc_get(uint32_t param){
     uint32_t num;
-    sys_outb(RTC_ADDR_REG, thingy); 
+    sys_outb(RTC_ADDR_REG, param); 
     sys_inb(RTC_DATA_REG, &num);
     return num;
 }
 
-void print_date(Date  d){
+void print_date(Date  d) {
     printf("%x / %x /%x    " ,d.yer,d.mth,d.day);
 	printf("%x : %x : %x \n" ,d.hor,d.min,d.sec);
 }
@@ -56,26 +56,24 @@ void print_mini_date(Mini_Date  d){
 
 void wait_valid_rtc(){
     do{
-        disable();
+        rtc_disable();
         sys_outb(RTC_ADDR_REG,RTC_REG_A);
         sys_inb(RTC_DATA_REG,&regA);
-        enable();
+        rtc_enable();
     }while(regA & RTC_UIP);
 }
 
 
-int disable(){
+void rtc_disable(){
     sys_outb(RTC_ADDR_REG,RTC_REG_B);
     sys_inb(RTC_DATA_REG,&regB);
     sys_outb(RTC_ADDR_REG,RTC_REG_B);
     sys_outb(RTC_DATA_REG,RTC_UIP | regB);
-    return 0;
 }
 
-int enable(){    
+void rtc_enable(){    
     sys_outb(RTC_ADDR_REG,RTC_REG_B);
     sys_outb(RTC_DATA_REG,regB & ~RTC_UIP | RTC_24 ) ;
-    return 0;
 }
 
 static int hook_id_rtc;
@@ -136,60 +134,3 @@ void rtc_ih(){
         sys_outb(RTC_ADDR_REG,regC & ~AL_INT_BIT);
     }
 }
-
-/*
-int loop(int num){
-  // Subscribing interrupts
-  uint8_t irq_set;
-  if (rtc_subscribe_int(&irq_set) == FUNCTION_FAIL) {
-    printf("Function fail: rtc_subscribe_int() \n");
-    return 1;
-  }
-   enable_alarm_int_sec();
-  // Interrupt loop
-  int ipc_status; message msg;
-  while(num>0) { 
-    int r;
-    // Get a request message. 
-    if ( (r = driver_receive(ANY, &msg, &ipc_status)) != 0 ) { 
-      printf("driver_receive failed with: %d", r);
-      continue;
-    }
-    if (is_ipc_notify(ipc_status)) { // received notification 
-      switch (_ENDPOINT_P(msg.m_source)) {
-        case HARDWARE: // hardware interrupt notification                             
-          if (msg.m_notify.interrupts & irq_set) { // subscribed interrupt
-              rtc_ih();
-              if(alarm_int){
-                num --;
-                Mini_Date d = rtc_get_mini_date();
-                print_mini_date(d);
-                }
-            }
-          break;
-          default:
-          break; // no other notifications expected: do nothing     
-          }    
-      }
-    }
-    disable_alarm_int();
-
-  if (rtc_unsubscribe_int() == FUNCTION_FAIL) {
-    printf("Function fail: rtc_unsubscribe_int() \n");
-    return 1;
-    }
-  printf("Function ended successfully. \n");
-  return 0;
-}
-
-int teste(){
-    loop(5);
-    Mini_Date d;
-    for (int i =0;i< 4 ; i++){
-            d= rtc_get_mini_date();
-            print_mini_date(d);
-        }
-    return 0;
-}
-
-*/

@@ -1,0 +1,4 @@
+<map id="canvas_get_map" name="canvas_get_map">
+<area shape="rect" id="node2" href="$group__video.html#gad5d72716b0e4b468c37027482a707763" title="vg_get_bytes_pp" alt="" coords="172,5,291,32"/>
+<area shape="rect" id="node3" href="$group__video.html#ga57014a19e5d9cf805bcf7af1f6bbcec5" title="Given a base address, calculates the address of a specific position. " alt="" coords="182,56,281,83"/>
+</map>

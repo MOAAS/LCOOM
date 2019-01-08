@@ -1,0 +1,94 @@
+\hypertarget{textbox_8c}{}\section{textbox.\+c File Reference}
+\label{textbox_8c}\index{textbox.\+c@{textbox.\+c}}
+{\ttfamily \#include $<$lcom/lcf.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}textbox.\+h\char`\"{}}\newline
+Include dependency graph for textbox.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{textbox_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{group__textbox_gac90ac8157e721b0af9b86534c5a93047}{load\+Letter\+Map}} ()
+\begin{DoxyCompactList}\small\item\em Loads the bitmap arrays, from the letters\+\_\+bmp \mbox{\hyperlink{struct_bitmap}{Bitmap}}, in order to make drawing of larger letters less time consuming. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_text_box}{Text\+Box}} $\ast$ \mbox{\hyperlink{group__textbox_gabf9a7ec0dd3b157d66069418c95318ea}{create\+\_\+textbox}} (\mbox{\hyperlink{struct_layer}{Layer}} $\ast$layer, \mbox{\hyperlink{struct_bitmap}{Bitmap}} $\ast$bitmap, uint16\+\_\+t x\+\_\+disp, uint16\+\_\+t y\+\_\+disp, uint8\+\_\+t font\+\_\+scale, \mbox{\hyperlink{group__textbox_gaa56f1a82069b5feeadbb4591cb3e474f}{Text\+Alignment}} alignment)
+\begin{DoxyCompactList}\small\item\em Creates an empty textbox and draws it. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__textbox_ga75a9b146a69f4c875b18b683f7e5f872}{destroy\+\_\+textbox}} (\mbox{\hyperlink{struct_text_box}{Text\+Box}} $\ast$textbox)
+\begin{DoxyCompactList}\small\item\em Destroys a textbox and the layer used by it, freeing all used memory. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__textbox_ga71eed99ce4466e9e7b3ad1b9d61f2312}{textbox\+\_\+write}} (\mbox{\hyperlink{struct_text_box}{Text\+Box}} $\ast$textbox, char $\ast$string)
+\begin{DoxyCompactList}\small\item\em Writes a string on a textbox, updating the screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__textbox_ga6a60cec4ef24e6e154b93aa81af2b988}{textbox\+\_\+write\+\_\+int}} (\mbox{\hyperlink{struct_text_box}{Text\+Box}} $\ast$textbox, int number)
+\begin{DoxyCompactList}\small\item\em Writes a number on a textbox, updating the screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__textbox_gad6a37472eecd02e21570d33447c740e8}{textbox\+\_\+clear}} (\mbox{\hyperlink{struct_text_box}{Text\+Box}} $\ast$textbox)
+\begin{DoxyCompactList}\small\item\em Clears all the text in a textbox. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__textbox_gab3ac8e604e6b7f8b6b4666d687a09716}{textbox\+\_\+put}} (\mbox{\hyperlink{struct_text_box}{Text\+Box}} $\ast$textbox, char character)
+\begin{DoxyCompactList}\small\item\em Writes a character on a textbox, updating the screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__textbox_gae11fcc3afd300a03b3793eb4ec418207}{textbox\+\_\+linefeed}} (\mbox{\hyperlink{struct_text_box}{Text\+Box}} $\ast$textbox)
+\begin{DoxyCompactList}\small\item\em Moves the cursor to its initial X position and moves it down by font\+\_\+size. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{textbox_8c_a35f0852b486633342d24acbeb67a47ca}{string\+\_\+pop\+\_\+char}} (char string\mbox{[}$\,$\mbox{]})
+\item 
+void \mbox{\hyperlink{group__textbox_gaa1d2e3ffe1e358b7d2956e2942859d4b}{textbox\+\_\+backspace}} (\mbox{\hyperlink{struct_text_box}{Text\+Box}} $\ast$textbox)
+\begin{DoxyCompactList}\small\item\em Deletes the last written character, updating the screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__textbox_ga74cef8828b7e729a30291cc8039728b0}{draw\+\_\+char}} (\mbox{\hyperlink{struct_layer}{Layer}} $\ast$layer, char character, int16\+\_\+t x, int16\+\_\+t y, uint16\+\_\+t font\+\_\+scale, \mbox{\hyperlink{group__textbox_gaa56f1a82069b5feeadbb4591cb3e474f}{Text\+Alignment}} alignment)
+\begin{DoxyCompactList}\small\item\em Draws a character on the screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__textbox_ga61553368dcaad7426ae892f8795c1128}{draw\+\_\+word}} (\mbox{\hyperlink{struct_layer}{Layer}} $\ast$layer, char $\ast$\mbox{\hyperlink{wordpicker_8c_ac00a4258bfdabd98aca279382135ec92}{word}}, int16\+\_\+t x, int16\+\_\+t y, uint16\+\_\+t font\+\_\+scale, uint16\+\_\+t space\+\_\+scale, \mbox{\hyperlink{group__textbox_gaa56f1a82069b5feeadbb4591cb3e474f}{Text\+Alignment}} alignment)
+\begin{DoxyCompactList}\small\item\em Draws a string on the screen. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{struct_bitmap}{Bitmap}} $\ast$ \mbox{\hyperlink{textbox_8c_a046cbd41f54a3f8f53228ffd92998840}{letters\+\_\+small}} \mbox{[}256\mbox{]}
+\item 
+static \mbox{\hyperlink{struct_bitmap}{Bitmap}} $\ast$ \mbox{\hyperlink{textbox_8c_a04f65b1577466163ea1705e978374ee7}{letters\+\_\+medium}} \mbox{[}256\mbox{]}
+\item 
+static \mbox{\hyperlink{struct_bitmap}{Bitmap}} $\ast$ \mbox{\hyperlink{textbox_8c_abdc8a4413495f98f67897341b918303e}{letters\+\_\+big}} \mbox{[}256\mbox{]}
+\item 
+\mbox{\hyperlink{struct_bitmap}{Bitmap}} $\ast$ \mbox{\hyperlink{textbox_8c_a0c6503fc61ca382f2afea2664a947e6c}{letters\+\_\+bmp}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{textbox_8c_a35f0852b486633342d24acbeb67a47ca}\label{textbox_8c_a35f0852b486633342d24acbeb67a47ca}} 
+\index{textbox.\+c@{textbox.\+c}!string\+\_\+pop\+\_\+char@{string\+\_\+pop\+\_\+char}}
+\index{string\+\_\+pop\+\_\+char@{string\+\_\+pop\+\_\+char}!textbox.\+c@{textbox.\+c}}
+\subsubsection{\texorpdfstring{string\+\_\+pop\+\_\+char()}{string\_pop\_char()}}
+{\footnotesize\ttfamily void string\+\_\+pop\+\_\+char (\begin{DoxyParamCaption}\item[{char}]{string\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{textbox_8c_a35f0852b486633342d24acbeb67a47ca_icgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{textbox_8c_abdc8a4413495f98f67897341b918303e}\label{textbox_8c_abdc8a4413495f98f67897341b918303e}} 
+\index{textbox.\+c@{textbox.\+c}!letters\+\_\+big@{letters\+\_\+big}}
+\index{letters\+\_\+big@{letters\+\_\+big}!textbox.\+c@{textbox.\+c}}
+\subsubsection{\texorpdfstring{letters\+\_\+big}{letters\_big}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_bitmap}{Bitmap}}$\ast$ letters\+\_\+big\mbox{[}256\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{textbox_8c_a0c6503fc61ca382f2afea2664a947e6c}\label{textbox_8c_a0c6503fc61ca382f2afea2664a947e6c}} 
+\index{textbox.\+c@{textbox.\+c}!letters\+\_\+bmp@{letters\+\_\+bmp}}
+\index{letters\+\_\+bmp@{letters\+\_\+bmp}!textbox.\+c@{textbox.\+c}}
+\subsubsection{\texorpdfstring{letters\+\_\+bmp}{letters\_bmp}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_bitmap}{Bitmap}}$\ast$ letters\+\_\+bmp}
+
+\mbox{\Hypertarget{textbox_8c_a04f65b1577466163ea1705e978374ee7}\label{textbox_8c_a04f65b1577466163ea1705e978374ee7}} 
+\index{textbox.\+c@{textbox.\+c}!letters\+\_\+medium@{letters\+\_\+medium}}
+\index{letters\+\_\+medium@{letters\+\_\+medium}!textbox.\+c@{textbox.\+c}}
+\subsubsection{\texorpdfstring{letters\+\_\+medium}{letters\_medium}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_bitmap}{Bitmap}}$\ast$ letters\+\_\+medium\mbox{[}256\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{textbox_8c_a046cbd41f54a3f8f53228ffd92998840}\label{textbox_8c_a046cbd41f54a3f8f53228ffd92998840}} 
+\index{textbox.\+c@{textbox.\+c}!letters\+\_\+small@{letters\+\_\+small}}
+\index{letters\+\_\+small@{letters\+\_\+small}!textbox.\+c@{textbox.\+c}}
+\subsubsection{\texorpdfstring{letters\+\_\+small}{letters\_small}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_bitmap}{Bitmap}}$\ast$ letters\+\_\+small\mbox{[}256\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+

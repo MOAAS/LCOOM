@@ -1,0 +1,17 @@
+<map id="rainbow" name="rainbow">
+<area shape="rect" id="node2" href="$group__flappy.html#gaf8e964390506e60ce524b539e98ff4fc" title="Updates the screen, by moving the game area and obstacles, and redrawing the bird. " alt="" coords="120,27,268,54"/>
+<area shape="rect" id="node6" href="$group__pengoo.html#ga113731d7452fe7de36fbd2f4c90e0cb3" title="Draws a line with the rainbow tool. Updates the paint tubes and the pencil color. ..." alt="" coords="144,78,244,104"/>
+<area shape="rect" id="node12" href="$group__snake.html#ga18a5d5f3ad1a2a71338cf50900d6169e" title="Moves the snake, if it&#39;s not dead. Checks if there was obstacle collision (loses health and multiplie..." alt="" coords="340,128,435,155"/>
+<area shape="rect" id="node15" href="$snake_8c.html#a52364aab733d1c8fc9afdee66a7859ce" title="snake_move_decoy" alt="" coords="126,179,262,206"/>
+<area shape="rect" id="node3" href="$group__flappy.html#ga8efa272248ce46f0bb6081dcb680598d" title="Moves the game forward. Moves the bird vertically, moves the screen to the left, updates the score an..." alt="" coords="345,27,429,54"/>
+<area shape="rect" id="node4" href="$group__pengoo.html#ga2ef126f11a398bb34f581d5eca368e6b" title="Runs the flappy rainbow game. User can exit at any time by pressing ESC. " alt="" coords="525,27,612,54"/>
+<area shape="rect" id="node5" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="833,78,943,104"/>
+<area shape="rect" id="node7" href="$group__pengoo.html#ga6ac5130bfa3fa90697b1368d605563c0" title="Uses the pencil by reading an event. Depending on the tool, it may draw on the screen, update colors, etc. " alt="" coords="348,78,427,104"/>
+<area shape="rect" id="node8" href="$group__pengoo.html#ga3df244ae6ccf0baca3f8426c306d3802" title="Updates the drawing state, by checking whether or not a painting button was pressed. Updates the thickness slider if needed. Updades the cursor if needed. " alt="" coords="517,78,620,104"/>
+<area shape="rect" id="node9" href="$group__pengoo.html#ga56c5cf8a568cff737ff95520cbe6b405" title="Runs the word game, as a drawer. Sends the drawing to the other user on every move. Sends the clock updates to the other user, every second. User can use the several buttons and mouse to draw on the screen. " alt="" coords="707,27,757,54"/>
+<area shape="rect" id="node10" href="$group__pengoo.html#gae0cdf0dedf98ccbeac43b0300e0d2df1" title="Runs the training/single&#45;player mode. Same as soloing a guessing game but with added Undo..." alt="" coords="700,78,764,104"/>
+<area shape="rect" id="node11" href="$group__pengoo.html#gaa5d8d3d5af977d3d9e7141bf2693c81e" title="Runs the collab/multi&#45;player mode. Same as training mode, but without the Undo and Load buttons..." alt="" coords="679,128,785,155"/>
+<area shape="rect" id="node13" href="$group__snake.html#gae59edc17cc6d3f6f1fef0d047304265b" title="Moves the game forward. Moves the snake and decoys, redraws the obstacles and increases the snake&#39;s s..." alt="" coords="507,179,631,206"/>
+<area shape="rect" id="node14" href="$group__pengoo.html#gab63f8a21d8bd92b9f638151a9912fa84" title="Runs the rainbow snake game. User can exit at any time by pressing ESC. " alt="" coords="688,179,776,206"/>
+<area shape="rect" id="node16" href="$group__snake.html#gae3dcf4434c60729af7c3280262e8c6ad" title="Moves all the living snake decoys Checks if there was obstacle collision (stops) Checks if there was ..." alt="" coords="316,179,459,206"/>
+</map>

@@ -59,22 +59,7 @@ Bitmap* loadBitmap(const char* folderPath, const char* filename) {
     }
     // read in the bitmap image data
     fread((void*)bitmapImage, bitmapInfoHeader.imageSize, 1, filePtr);
-
-    /*
-    uint32_t color;
-    char* bitmoop = bitmapImage;
-    for (int i = 0; i < bitmapInfoHeader.height; i++) { // y
-    	for(int j = 0; j < bitmapInfoHeader.width; j++) { // x
-            memcpy(&color, bitmoop, bytes_per_pixel);
-            if ((color & 0xFFFFFF) == 0xF2FFD6 || (color & 0xFFFFFF) == 0xFFD607)
-                printf("UH OH! Color = %x \n", color);
-            bitmoop += bytes_per_pixel;
-        }
-        bitmoop += bmp->padding; 
-    }
-    */
-
-
+    
     // make sure bitmap image data was read
     if (bitmapImage == NULL) {
         fclose(filePtr);
@@ -153,6 +138,10 @@ Bitmap* resizeBitmap(Bitmap* bitmap, uint16_t factor) {
 
 void saveBitmap(char* filename, unsigned int width, unsigned int height, char* address) {
     FILE* file = fopen(filename, "w");
+    if (file == NULL) {
+        printf("Couldn't find folder, filename: %s \n", filename);
+        return;
+    }
 	static unsigned char bmp_header[54] = {66,77,0,0,0,0,0,0,0,0,54,0,0,0,40,0,0,0,0,0,0,0,0,0,0,0,1,0,24}; // info header
 	unsigned int bytes_per_row = width * vg_get_bytes_pp();
 	unsigned int padding = (4 - (bytes_per_row % 4)) % 4;
@@ -323,8 +312,6 @@ uint32_t get_bitmap_color(Bitmap* bmp, uint16_t x, uint16_t y) {
 bool is_transparent(uint32_t color) {
     return (color & 0xFFFFFF) == 0xFF00FF;
 }
-
-// NAO USADO POR AGORA
 
 void deleteBitmap(Bitmap* bmp) {
     if (bmp == NULL)

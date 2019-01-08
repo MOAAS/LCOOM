@@ -1,0 +1,4 @@
+<map id="is_on_button" name="is_on_button">
+<area shape="rect" id="node2" href="$group__bitmap.html#ga4b5b3aefecdb54bfdadbe4995b979c7f" title="Checks if a color is transparent (MAGENTA) " alt="" coords="158,5,262,32"/>
+<area shape="rect" id="node3" href="$group__bitmap.html#gad73cdf3b48e5ca2e43ef1fbdd5b061b9" title="Gets the color of a certain bitmap pixel. " alt="" coords="149,56,271,83"/>
+</map>

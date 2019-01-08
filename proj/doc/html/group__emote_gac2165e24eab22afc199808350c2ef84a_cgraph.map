@@ -1,0 +1,23 @@
+<map id="draw_emote_wheel" name="draw_emote_wheel">
+<area shape="rect" id="node2" href="$group__layer.html#gae7f68548d31f2961ac68df03e53558c2" title="Creates a layer. " alt="" coords="491,31,585,57"/>
+<area shape="rect" id="node14" href="$group__layer.html#ga9ac38361f9d11a9948ba299a6a6ad71f" title="Draws a bitmap on a layer. " alt="" coords="649,183,776,209"/>
+<area shape="rect" id="node16" href="$group__sprite.html#gae13b75db5ceecfd2fc00a030910c8e7a" title="Creates a button. " alt="" coords="185,183,287,209"/>
+<area shape="rect" id="node17" href="$group__sprite.html#ga73cc8ddf6dbcb83935fabd2443251edd" title="Draws a number of buttons on the screen. " alt="" coords="187,132,285,159"/>
+<area shape="rect" id="node3" href="$group__video.html#gad5d72716b0e4b468c37027482a707763" title="vg_get_bytes_pp" alt="" coords="1179,5,1297,32"/>
+<area shape="rect" id="node4" href="$group__layer.html#ga5c826dd6313f240df1df23f9b049e3fd" title="Changes a color of a layer position to the one under it. " alt="" coords="651,81,774,108"/>
+<area shape="rect" id="node5" href="$group__layer.html#ga04dfe9a97af5089a6b5a5a044d8d7e9c" title="Draws a pixel on a layer. If that pixel has no other layer above, updates the screen as well..." alt="" coords="845,183,951,209"/>
+<area shape="rect" id="node11" href="$group__layer.html#ga1f190aee16c183dcd256751cdbf41711" title="Gets the color of a layer pixel. If out of bounds, checks the one under it until it finds a valid lay..." alt="" coords="824,81,972,108"/>
+<area shape="rect" id="node6" href="$group__layer.html#ga8bd4001df9f278c1b60a0a7732deef83" title="Sets a pixel in the layer map (does not update the screen) " alt="" coords="1020,157,1129,184"/>
+<area shape="rect" id="node9" href="$group__layer.html#ga3eef68dc1d9d6086e747506f82a4eb11" title="Checks if layer is the highest on that position. " alt="" coords="1029,208,1121,235"/>
+<area shape="rect" id="node10" href="$group__video.html#ga26084597ddd2baa0ce4d70003a9492e9" title="Draws a pixel on the screen. " alt="" coords="1023,259,1126,285"/>
+<area shape="rect" id="node7" href="$group__layer.html#ga7f74243f1e256f7977109a1af3cfcaf2" title="Checks if a position is inside a layer. " alt="" coords="1177,107,1299,133"/>
+<area shape="rect" id="node8" href="$group__video.html#ga9ce8b7520a298fda9e59cdeffbbd8670" title="Given a pixel address, inserts a color in it. " alt="" coords="1201,157,1275,184"/>
+<area shape="rect" id="node12" href="$group__layer.html#gab108b73fe8d04f98fa55d281c245179b" title="Gets the color of a layer pixel. " alt="" coords="1020,56,1129,83"/>
+<area shape="rect" id="node13" href="$group__video.html#ga8ff5bbb05f1cb62f5958290a45723571" title="Given a pixel address, returns the color associated with it. " alt="" coords="1197,56,1279,83"/>
+<area shape="rect" id="node15" href="$group__bitmap.html#ga4b5b3aefecdb54bfdadbe4995b979c7f" title="Checks if a color is transparent (MAGENTA) " alt="" coords="846,233,950,260"/>
+<area shape="rect" id="node18" href="$group__sprite.html#ga39cf20a4f80d3e42f7ecc3dab4bd7b65" title="Draws a button on the screen, highlighting it if cursor is on the button. " alt="" coords="335,183,427,209"/>
+<area shape="rect" id="node19" href="$group__sprite.html#ga8fe18a5b062a81b4b99dc62f0643446c" title="Checks if a cursor is on a button. " alt="" coords="490,284,586,311"/>
+<area shape="rect" id="node21" href="$group__sprite.html#ga1a1688248ec81812ca2c738584e323a4" title="Highlights a button, updating it. " alt="" coords="481,183,595,209"/>
+<area shape="rect" id="node22" href="$group__sprite.html#gaa28b2a8d13a3ab9e23c3d91691614c81" title="Unghlights a button, updating it. " alt="" coords="475,233,601,260"/>
+<area shape="rect" id="node20" href="$group__bitmap.html#gad73cdf3b48e5ca2e43ef1fbdd5b061b9" title="Gets the color of a certain bitmap pixel. " alt="" coords="652,284,773,311"/>
+</map>

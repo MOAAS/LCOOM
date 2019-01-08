@@ -1,0 +1,14 @@
+<map id="uart_reset_fifo" name="uart_reset_fifo">
+<area shape="rect" id="node2" href="$group__uart.html#ga5eb3f3881ed8e1ff240400ecc1c7d20c" title="Disables the 64 Byte FIfo, destroys the toSend and received queues. " alt="" coords="156,93,273,120"/>
+<area shape="rect" id="node11" href="$group__uart.html#gadad7d5f52c59d4f78daa5b8030b13510" title="Enables the 64 Byte FIFO, creates the toSend and received queue. " alt="" coords="161,144,268,171"/>
+<area shape="rect" id="node3" href="$group__uart.html#gaab82e10e73e8b9986637482bc794f33e" title="Disables and clears the 64 Byte fifo. " alt="" coords="321,43,436,69"/>
+<area shape="rect" id="node10" href="$group__queue.html#gad21ee75924298937673e2b8d66665466" title="Destroys a queue, freeing all used memory. " alt="" coords="325,93,432,120"/>
+<area shape="rect" id="node4" href="$uart_8c.html#a37a83f9abca5c5d871b80ef18ec7fbca" title="uart_clear_rbr" alt="" coords="485,56,586,83"/>
+<area shape="rect" id="node9" href="$group__uart.html#ga59c922bd359845f14061ced67e74c6b3" title="Writes a byte to a register. " alt="" coords="484,132,587,159"/>
+<area shape="rect" id="node5" href="$group__keyboard.html#ga686f8d95e71a43edaddda1db8b78caa4" title="Waits. " alt="" coords="655,5,733,32"/>
+<area shape="rect" id="node6" href="$group__uart.html#ga2489cf587ed0d39db2aafebba69d6b6d" title="Reads the UART status register. " alt="" coords="635,107,753,133"/>
+<area shape="rect" id="node8" href="$group__uart.html#ga25bafed3ff787360a644c19f0e5acd26" title="Reads a byte from the RBR. " alt="" coords="640,56,748,83"/>
+<area shape="rect" id="node7" href="$group__uart.html#ga072a4cc00030540e86ac100c8e7c8902" title="Reads a one byte register. " alt="" coords="801,81,903,108"/>
+<area shape="rect" id="node12" href="$group__uart.html#gacc4e9858f70ddd58ddb77dd4f7cc034d" title="Enables and clears the 64 Byte fifo. " alt="" coords="323,144,435,171"/>
+<area shape="rect" id="node13" href="$group__queue.html#ga735dfbf59094f36f47a83d3a139c9b09" title="Creates a queue. " alt="" coords="329,195,429,221"/>
+</map>

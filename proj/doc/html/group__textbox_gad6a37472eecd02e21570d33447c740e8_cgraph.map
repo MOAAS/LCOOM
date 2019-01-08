@@ -1,0 +1,12 @@
+<map id="textbox_clear" name="textbox_clear">
+<area shape="rect" id="node2" href="$group__textbox.html#gaa1d2e3ffe1e358b7d2956e2942859d4b" title="Deletes the last written character, updating the screen. " alt="" coords="153,56,288,83"/>
+<area shape="rect" id="node3" href="$textbox_8c.html#a35f0852b486633342d24acbeb67a47ca" title="string_pop_char" alt="" coords="339,5,454,32"/>
+<area shape="rect" id="node4" href="$group__bitmap.html#gad73cdf3b48e5ca2e43ef1fbdd5b061b9" title="Gets the color of a certain bitmap pixel. " alt="" coords="336,56,457,83"/>
+<area shape="rect" id="node5" href="$group__layer.html#ga04dfe9a97af5089a6b5a5a044d8d7e9c" title="Draws a pixel on a layer. If that pixel has no other layer above, updates the screen as well..." alt="" coords="344,107,449,133"/>
+<area shape="rect" id="node6" href="$group__layer.html#ga8bd4001df9f278c1b60a0a7732deef83" title="Sets a pixel in the layer map (does not update the screen) " alt="" coords="505,107,615,133"/>
+<area shape="rect" id="node10" href="$group__layer.html#ga3eef68dc1d9d6086e747506f82a4eb11" title="Checks if layer is the highest on that position. " alt="" coords="514,56,606,83"/>
+<area shape="rect" id="node11" href="$group__video.html#ga26084597ddd2baa0ce4d70003a9492e9" title="Draws a pixel on the screen. " alt="" coords="509,157,611,184"/>
+<area shape="rect" id="node7" href="$group__layer.html#ga7f74243f1e256f7977109a1af3cfcaf2" title="Checks if a position is inside a layer. " alt="" coords="663,56,784,83"/>
+<area shape="rect" id="node8" href="$group__video.html#gad5d72716b0e4b468c37027482a707763" title="vg_get_bytes_pp" alt="" coords="664,107,783,133"/>
+<area shape="rect" id="node9" href="$group__video.html#ga9ce8b7520a298fda9e59cdeffbbd8670" title="Given a pixel address, inserts a color in it. " alt="" coords="687,157,760,184"/>
+</map>

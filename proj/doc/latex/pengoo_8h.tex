@@ -1,0 +1,109 @@
+\hypertarget{pengoo_8h}{}\section{pengoo.\+h File Reference}
+\label{pengoo_8h}\index{pengoo.\+h@{pengoo.\+h}}
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}bitmap.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}bitmaps.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}canvas.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}clock.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}event.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}emote.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}flappy.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}game\+\_\+info.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}game\+\_\+state.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}interrupts.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}i8042.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}i8254.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mouse.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}keyboard.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}timer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}textbox.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}snake.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sprite.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}uart\+\_\+protocol.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}uart\+\_\+wordgame.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}vbe.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}video.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}wordpicker.\+h\char`\"{}}\newline
+Include dependency graph for pengoo.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{pengoo_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=196pt]{pengoo_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{group__pengoo_ga099795341d84ce8caa2e79aeccfff34f}{load\+Cursor}} ()
+\begin{DoxyCompactList}\small\item\em Loads the cursor and initializes the \mbox{\hyperlink{struct_drawing_state}{Drawing\+State}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__pengoo_ga95635b27f6c1165153d2c11de57e60a8}{load\+Buttons}} ()
+\begin{DoxyCompactList}\small\item\em Initializes the used buttons. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__pengoo_gab9e42b0ec1e9c9ffdf1edd5dec1b0ddd}{load\+Background}} ()
+\begin{DoxyCompactList}\small\item\em Loads the game background layer and draws it. Also initializes sprites that go on the background layer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__pengoo_gadeb18b17fc386f53c77fbcd19dc7a8e6}{start\+\_\+screen}} ()
+\begin{DoxyCompactList}\small\item\em Runs the welcome screen. Waits until the user presses enter to continue. Updates the clock on the top left every second. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__pengoo_ga885611589f6294afada89fe88362e863}{main\+\_\+menu}} ()
+\begin{DoxyCompactList}\small\item\em Runs the main hub. Draws all the main menu buttons, allowing the user to proceed by clicking on them. Some of the buttons also display respective instructions. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__pengoo_ga089d0f37444b1b486cf98045a512deed}{guess}} ()
+\begin{DoxyCompactList}\small\item\em Runs the word game, as a guesser. Displays on the screen what the other user draws. User can press E\+N\+T\+ER to type a guess. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__pengoo_gabe23d2dac0552bf9069a47573770d379}{type\+\_\+guess}} ()
+\begin{DoxyCompactList}\small\item\em Runs the word game, as a guesser. Displays on the screen what the other user draws. User can type a guess, press E\+SC or E\+N\+T\+ER to insert his guess. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__pengoo_ga56c5cf8a568cff737ff95520cbe6b405}{draw}} ()
+\begin{DoxyCompactList}\small\item\em Runs the word game, as a drawer. Sends the drawing to the other user on every move. Sends the clock updates to the other user, every second. User can use the several buttons and mouse to draw on the screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__pengoo_ga178ee685108a5f6164bf1c1757040ee2}{color\+\_\+picker}} ()
+\begin{DoxyCompactList}\small\item\em Runs the word game, as a drawer. Sends the drawing to the other user on every move. Sends the clock updates to the other user, every second. User can select a color from the open window. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__pengoo_ga02cb99bd23a1083281e874b3b4ebbad5}{start\+\_\+round}} (char $\ast$solution)
+\begin{DoxyCompactList}\small\item\em Starts a word game round, setting up the canvas and in case the user is drawing, sets up the pencil and buttons. Displaying the word on top or not also depends on whether the user is drawing or not. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__pengoo_gaf06af764d8b387c19edc38c0effd1115}{end\+\_\+round}} ()
+\begin{DoxyCompactList}\small\item\em Ends a game round, adding the gained points. Displays on the screen whether they won or not, displaying the solution. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__pengoo_ga4202fa5c5191c7e387d7570da6c8cd8c}{end\+\_\+game}} ()
+\begin{DoxyCompactList}\small\item\em Ends and resets the game, showing the total amount of points. The user can return to the main menu by pressing enter. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__pengoo_gae0cdf0dedf98ccbeac43b0300e0d2df1}{training}} ()
+\begin{DoxyCompactList}\small\item\em Runs the training/single-\/player mode. Same as soloing a guessing game but with added Undo, Save and Load buttons. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__pengoo_ga7be478ae067a8e77c79ece6af6082ce5}{save}} (char $\ast$\mbox{\hyperlink{group__proj_ga0bd738406244c9e2cfb7a40534063a8d}{saved\+\_\+img\+\_\+folder}})
+\begin{DoxyCompactList}\small\item\em Runs the saving of the canvas drawing. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__pengoo_ga476146a203654a545a8493d3ebeaaf70}{load}} (char $\ast$\mbox{\hyperlink{group__proj_ga0bd738406244c9e2cfb7a40534063a8d}{saved\+\_\+img\+\_\+folder}})
+\begin{DoxyCompactList}\small\item\em Runs the loading of a .bmp file to the canvas. \end{DoxyCompactList}\item 
+char $\ast$ \mbox{\hyperlink{group__pengoo_ga0c383f0cb382ef07b72894184255e49f}{create\+\_\+bmp\+\_\+path}} (char $\ast$file\+\_\+name, char $\ast$\mbox{\hyperlink{group__proj_ga0bd738406244c9e2cfb7a40534063a8d}{saved\+\_\+img\+\_\+folder}})
+\begin{DoxyCompactList}\small\item\em Creates a string containing the full path of the saved .bmp file. (String memory is allocated) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__pengoo_gaa5d8d3d5af977d3d9e7141bf2693c81e}{collab\+\_\+drawing}} ()
+\begin{DoxyCompactList}\small\item\em Runs the collab/multi-\/player mode. Same as training mode, but without the Undo and Load buttons. In this game, both users get to draw and see other\textquotesingle{}s actions in real time. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__pengoo_gab63f8a21d8bd92b9f638151a9912fa84}{play\+\_\+snake}} ()
+\begin{DoxyCompactList}\small\item\em Runs the rainbow snake game. User can exit at any time by pressing E\+SC. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__pengoo_ga2ef126f11a398bb34f581d5eca368e6b}{play\+\_\+flappy}} ()
+\begin{DoxyCompactList}\small\item\em Runs the flappy rainbow game. User can exit at any time by pressing E\+SC. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__pengoo_gab4e279f31fb3e6e034e2b173aaa1a2fb}{select\+\_\+drawer}} ()
+\begin{DoxyCompactList}\small\item\em Waits for the other user, and randomly decide who is drawing first in the word game. They do this by choosing a random number and sending it every clock tick. The highest number draws first. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__pengoo_gad1277ef243282251ffd9bc319abf4cac}{waiting\+\_\+for\+\_\+player}} ()
+\begin{DoxyCompactList}\small\item\em Displays on the screen the message \char`\"{}\+Waiting for player...\char`\"{}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__pengoo_ga92c88d0b081234c242ddccf22be99782}{wait\+\_\+for\+\_\+collab}} ()
+\begin{DoxyCompactList}\small\item\em Waits for the other user to show up to the multi-\/player mode. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__pengoo_ga19cfab1706132a19749fc519f84d9445}{wait\+\_\+for\+\_\+guesser}} ()
+\begin{DoxyCompactList}\small\item\em Waits for the guesser to be ready to start a wordgame round (user is drawing) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__pengoo_ga45d4be7b19d3dd0ea742f0a489112c80}{wait\+\_\+for\+\_\+drawer}} ()
+\begin{DoxyCompactList}\small\item\em Waits for the drawer to be ready to start a wordgame round (user is guessing) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__pengoo_ga60a599fe4cffb804d5375495cdc35d9c}{update\+\_\+emote\+\_\+wheel}} (\mbox{\hyperlink{struct_event__t}{Event\+\_\+t}} \mbox{\hyperlink{pengoo_8c_af662780d461acf9ac3b1321884e7cb01}{event}})
+\begin{DoxyCompactList}\small\item\em Reads an event and the cursor and updates the emote \char`\"{}wheel\char`\"{} accordingly (applies in the word game). If the emote \char`\"{}wheel\char`\"{} button was pressed, toggles the window. If an emote was pressed on, sends it to the other player. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__pengoo_ga4de72e6fe25e96efa9d419d420f34fcb}{setup\+\_\+canvas}} ()
+\begin{DoxyCompactList}\small\item\em Sets the canvas up, along with the buttons, depending on the current game\+State. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__pengoo_ga30fa7d6f201a425bca137ab6a78e8c82}{reset\+\_\+pencil}} ()
+\begin{DoxyCompactList}\small\item\em Resets the drawing state to the initial one. (Black/\+White, thickness 4, No\+Tool, etc.) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__pengoo_gac36b16b3f3b197d1e93926a0b5ba1396}{change\+\_\+tool}} (\mbox{\hyperlink{group__game__state_ga8cdac3f25ed2be17d210ff50defe0791}{Tool}} tool)
+\begin{DoxyCompactList}\small\item\em Changes the drawing-\/state/pencil tool, updating the cursor and the paint tubes as well. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__pengoo_ga6ac5130bfa3fa90697b1368d605563c0}{use\+Pencil}} (\mbox{\hyperlink{struct_event__t}{Event\+\_\+t}} \mbox{\hyperlink{pengoo_8c_af662780d461acf9ac3b1321884e7cb01}{event}})
+\begin{DoxyCompactList}\small\item\em Uses the pencil by reading an event. Depending on the tool, it may draw on the screen, update colors, etc. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__pengoo_ga3df244ae6ccf0baca3f8426c306d3802}{update\+\_\+pencil}} (\mbox{\hyperlink{struct_event__t}{Event\+\_\+t}} \mbox{\hyperlink{pengoo_8c_af662780d461acf9ac3b1321884e7cb01}{event}})
+\begin{DoxyCompactList}\small\item\em Updates the drawing state, by checking whether or not a painting button was pressed. Updates the thickness slider if needed. Updades the cursor if needed. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__pengoo_ga771576cc26d893bc389c414f151af27f}{change\+Thickness}} (uint8\+\_\+t thickness)
+\begin{DoxyCompactList}\small\item\em Changes the pencil thickness, to a maximum of 10. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__pengoo_ga113731d7452fe7de36fbd2f4c90e0cb3}{rainbow\+\_\+draw}} (uint16\+\_\+t x0, uint16\+\_\+t y0, uint16\+\_\+t xf, uint16\+\_\+t yf)
+\begin{DoxyCompactList}\small\item\em Draws a line with the rainbow tool. Updates the paint tubes and the pencil color. \end{DoxyCompactList}\end{DoxyCompactItemize}

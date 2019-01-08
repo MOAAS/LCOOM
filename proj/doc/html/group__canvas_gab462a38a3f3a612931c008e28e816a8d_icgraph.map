@@ -1,0 +1,5 @@
+<map id="canvas_update" name="canvas_update">
+<area shape="rect" id="node2" href="$group__canvas.html#ga96be607ebdf4fda25a050f017d68db93" title="Edits the canvas to the last saved pixel map. " alt="" coords="161,5,259,32"/>
+<area shape="rect" id="node3" href="$group__pengoo.html#gae0cdf0dedf98ccbeac43b0300e0d2df1" title="Runs the training/single&#45;player mode. Same as soloing a guessing game but with added Undo..." alt="" coords="307,5,371,32"/>
+<area shape="rect" id="node4" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="419,5,528,32"/>
+</map>
