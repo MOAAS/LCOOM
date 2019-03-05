@@ -1,5 +1,0 @@
-<map id="canvas_start_drawing" name="canvas_start_drawing">
-<area shape="rect" id="node2" href="$group__canvas.html#ga85fca0492c1f7ec8e1d20a9b5e48be1c" title="Checks if a position is inside the canvas. " alt="" coords="213,5,333,32"/>
-<area shape="rect" id="node3" href="$group__canvas.html#ga3c9ed75a75ae36bc6fc7591952fccf17" title="Stores the current canvas pixel map in a buffer (for the next undo action). Sets an internal isDrawin..." alt="" coords="200,56,347,83"/>
-<area shape="rect" id="node4" href="$group__video.html#gad5d72716b0e4b468c37027482a707763" title="vg_get_bytes_pp" alt="" coords="395,56,513,83"/>
-</map>

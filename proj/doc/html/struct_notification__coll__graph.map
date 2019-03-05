@@ -1,4 +1,0 @@
-<map id="Notification" name="Notification">
-<area shape="rect" id="node2" href="$struct_u_a_r_t___int___info.html" title="Contains information about the received/sent information through the UART. " alt="" coords="5,109,109,136"/>
-<area shape="rect" id="node3" href="$struct_queue.html" title="Represents a queue. " alt="" coords="27,5,87,32"/>
-</map>

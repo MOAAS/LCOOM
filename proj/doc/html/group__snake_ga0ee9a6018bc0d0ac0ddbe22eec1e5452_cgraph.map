@@ -1,5 +1,0 @@
-<map id="is_obstacle" name="is_obstacle">
-<area shape="rect" id="node2" href="$group__video.html#ga8ff5bbb05f1cb62f5958290a45723571" title="Given a pixel address, returns the color associated with it. " alt="" coords="149,5,232,32"/>
-<area shape="rect" id="node3" href="$group__video.html#ga57014a19e5d9cf805bcf7af1f6bbcec5" title="Given a base address, calculates the address of a specific position. " alt="" coords="141,56,240,83"/>
-<area shape="rect" id="node4" href="$group__video.html#gaa4a211ebfc5c87a0072eaf9bd03e3a56" title="vg_get_hres" alt="" coords="145,107,236,133"/>
-</map>

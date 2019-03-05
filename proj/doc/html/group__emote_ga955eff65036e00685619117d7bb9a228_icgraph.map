@@ -1,4 +1,0 @@
-<map id="destroy_emote" name="destroy_emote">
-<area shape="rect" id="node2" href="$group__pengoo.html#gaf06af764d8b387c19edc38c0effd1115" title="Ends a game round, adding the gained points. Displays on the screen whether they won or not..." alt="" coords="161,5,244,32"/>
-<area shape="rect" id="node3" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="292,5,401,32"/>
-</map>

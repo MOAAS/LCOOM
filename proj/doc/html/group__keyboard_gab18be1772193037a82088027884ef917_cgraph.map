@@ -1,8 +1,0 @@
-<map id="kbc_write_cmd_byte" name="kbc_write_cmd_byte">
-<area shape="rect" id="node2" href="$group__keyboard.html#gaa1dcd642657d7da0376e36cda809b0e3" title="Issues a command to the kbc. " alt="" coords="195,56,305,83"/>
-<area shape="rect" id="node7" href="$group__keyboard.html#ga26b9ea576b6e214c7748979568e97c7c" title="Polls the input buffer until it is empty, in which case puts byte inside it. Returns after several fa..." alt="" coords="195,107,305,133"/>
-<area shape="rect" id="node3" href="$group__keyboard.html#ga54c1dc87fd33a133b8c1eaf08bc51a99" title="Gets the status byte from the KBC status register. " alt="" coords="392,107,503,133"/>
-<area shape="rect" id="node4" href="$group__keyboard.html#ga8348b9b1e74639dd7edf7e939ea2e1d1" title="Checks if there was any communication error between Keyboard and KBC. " alt="" coords="353,157,541,184"/>
-<area shape="rect" id="node5" href="$group__keyboard.html#ga710a06495d4ad2c8afba84634ec89984" title="Checks if the Input buffer is full. " alt="" coords="392,5,503,32"/>
-<area shape="rect" id="node6" href="$group__keyboard.html#ga686f8d95e71a43edaddda1db8b78caa4" title="Waits. " alt="" coords="409,56,486,83"/>
-</map>

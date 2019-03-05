@@ -1,4 +1,0 @@
-<map id="loadBitmapSection" name="loadBitmapSection">
-<area shape="rect" id="node2" href="$group__textbox.html#gac90ac8157e721b0af9b86534c5a93047" title="Loads the bitmap arrays, from the letters_bmp Bitmap, in order to make drawing of larger letters less..." alt="" coords="184,5,288,32"/>
-<area shape="rect" id="node3" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="336,5,445,32"/>
-</map>

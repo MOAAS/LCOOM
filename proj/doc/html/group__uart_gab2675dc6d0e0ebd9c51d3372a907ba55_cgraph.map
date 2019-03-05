@@ -1,6 +1,0 @@
-<map id="uart_receive_poll" name="uart_receive_poll">
-<area shape="rect" id="node2" href="$group__uart.html#ga2489cf587ed0d39db2aafebba69d6b6d" title="Reads the UART status register. " alt="" coords="172,5,291,32"/>
-<area shape="rect" id="node4" href="$group__keyboard.html#ga686f8d95e71a43edaddda1db8b78caa4" title="Waits. " alt="" coords="193,56,270,83"/>
-<area shape="rect" id="node5" href="$group__uart.html#ga25bafed3ff787360a644c19f0e5acd26" title="Reads a byte from the RBR. " alt="" coords="177,107,285,133"/>
-<area shape="rect" id="node3" href="$group__uart.html#ga072a4cc00030540e86ac100c8e7c8902" title="Reads a one byte register. " alt="" coords="339,56,440,83"/>
-</map>

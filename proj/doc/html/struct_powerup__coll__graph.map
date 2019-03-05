@@ -1,6 +1,0 @@
-<map id="Powerup" name="Powerup">
-<area shape="rect" id="node2" href="$struct_hitbox.html" title="Rectangle shape representing an area belonging to a sprite. " alt="" coords="5,95,64,121"/>
-<area shape="rect" id="node3" href="$struct_layer.html" title="Represents a layer, which may be under, or on top of other layers. " alt="" coords="89,95,143,121"/>
-<area shape="rect" id="node4" href="$struct_bitmap.html" title="Represents a Bitmap. " alt="" coords="167,95,230,121"/>
-<area shape="rect" id="node5" href="$struct_bitmap_info_header.html" title="Represents a bitmap info header. " alt="" coords="137,5,261,32"/>
-</map>

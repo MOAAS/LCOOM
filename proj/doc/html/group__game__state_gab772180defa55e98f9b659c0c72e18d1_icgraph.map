@@ -1,6 +1,0 @@
-<map id="useTextbox" name="useTextbox">
-<area shape="rect" id="node2" href="$group__pengoo.html#gabe23d2dac0552bf9069a47573770d379" title="Runs the word game, as a guesser. Displays on the screen what the other user draws. User can type a guess, press ESC or ENTER to insert his guess. " alt="" coords="143,5,232,32"/>
-<area shape="rect" id="node4" href="$group__pengoo.html#ga7be478ae067a8e77c79ece6af6082ce5" title="Runs the saving of the canvas drawing. " alt="" coords="163,56,211,83"/>
-<area shape="rect" id="node5" href="$group__pengoo.html#ga476146a203654a545a8493d3ebeaaf70" title="Runs the loading of a .bmp file to the canvas. " alt="" coords="164,107,211,133"/>
-<area shape="rect" id="node3" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="280,56,389,83"/>
-</map>

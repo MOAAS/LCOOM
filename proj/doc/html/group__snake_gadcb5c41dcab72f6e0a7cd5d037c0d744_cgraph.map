@@ -1,8 +1,0 @@
-<map id="create_snake" name="create_snake">
-<area shape="rect" id="node2" href="$group__snake.html#gaf1c909afe83fd09c4650ea8a0413fbf2" title="arena_get_random_x" alt="" coords="153,5,296,32"/>
-<area shape="rect" id="node3" href="$group__snake.html#ga7de9235e557e3ecd489919b5907e53ff" title="arena_get_random_y" alt="" coords="153,56,296,83"/>
-<area shape="rect" id="node4" href="$group__snake.html#ga0ee9a6018bc0d0ac0ddbe22eec1e5452" title="Looks at the pixel at (x,y) position and checks if it belongs to an obstacle. " alt="" coords="181,107,269,133"/>
-<area shape="rect" id="node5" href="$group__video.html#ga8ff5bbb05f1cb62f5958290a45723571" title="Given a pixel address, returns the color associated with it. " alt="" coords="352,56,435,83"/>
-<area shape="rect" id="node6" href="$group__video.html#ga57014a19e5d9cf805bcf7af1f6bbcec5" title="Given a base address, calculates the address of a specific position. " alt="" coords="344,107,443,133"/>
-<area shape="rect" id="node7" href="$group__video.html#gaa4a211ebfc5c87a0072eaf9bd03e3a56" title="vg_get_hres" alt="" coords="348,157,439,184"/>
-</map>

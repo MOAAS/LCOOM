@@ -1,6 +1,0 @@
-<map id="update_pencil" name="update_pencil">
-<area shape="rect" id="node2" href="$group__pengoo.html#ga56c5cf8a568cff737ff95520cbe6b405" title="Runs the word game, as a drawer. Sends the drawing to the other user on every move. Sends the clock updates to the other user, every second. User can use the several buttons and mouse to draw on the screen. " alt="" coords="185,5,234,32"/>
-<area shape="rect" id="node4" href="$group__pengoo.html#gae0cdf0dedf98ccbeac43b0300e0d2df1" title="Runs the training/single&#45;player mode. Same as soloing a guessing game but with added Undo..." alt="" coords="177,56,241,83"/>
-<area shape="rect" id="node5" href="$group__pengoo.html#gaa5d8d3d5af977d3d9e7141bf2693c81e" title="Runs the collab/multi&#45;player mode. Same as training mode, but without the Undo and Load buttons..." alt="" coords="156,107,263,133"/>
-<area shape="rect" id="node3" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="311,56,420,83"/>
-</map>

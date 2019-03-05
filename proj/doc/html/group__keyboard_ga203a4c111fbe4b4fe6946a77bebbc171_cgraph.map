@@ -1,7 +1,0 @@
-<map id="kbc_poll_out_buf" name="kbc_poll_out_buf">
-<area shape="rect" id="node2" href="$group__keyboard.html#ga54c1dc87fd33a133b8c1eaf08bc51a99" title="Gets the status byte from the KBC status register. " alt="" coords="211,5,321,32"/>
-<area shape="rect" id="node3" href="$group__keyboard.html#ga8348b9b1e74639dd7edf7e939ea2e1d1" title="Checks if there was any communication error between Keyboard and KBC. " alt="" coords="172,56,360,83"/>
-<area shape="rect" id="node4" href="$group__keyboard.html#ga4e0b2a8300752760d8c7f10fcb55b67a" title="Checks if the Output buffer is full. " alt="" coords="207,107,325,133"/>
-<area shape="rect" id="node5" href="$group__keyboard.html#ga870b444bcf2b470834d2027dc30bb46e" title="Reads keyboard&#39;s output buffer. " alt="" coords="195,157,337,184"/>
-<area shape="rect" id="node6" href="$group__keyboard.html#ga686f8d95e71a43edaddda1db8b78caa4" title="Waits. " alt="" coords="227,208,305,235"/>
-</map>

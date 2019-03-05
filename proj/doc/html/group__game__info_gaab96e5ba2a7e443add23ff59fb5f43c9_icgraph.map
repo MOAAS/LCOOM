@@ -1,6 +1,0 @@
-<map id="clear_instructions" name="clear_instructions">
-<area shape="rect" id="node2" href="$group__game__info.html#gaa555b2189fe80ff7c8095d0c80353c2d" title="Toggles the instructions window for a certain game mode. (If it&#39;s open closes it, if it&#39;s closed open..." alt="" coords="363,23,493,49"/>
-<area shape="rect" id="node3" href="$group__pengoo.html#ga885611589f6294afada89fe88362e863" title="Runs the main hub. Draws all the main menu buttons, allowing the user to proceed by clicking on them..." alt="" coords="541,48,631,75"/>
-<area shape="rect" id="node5" href="$group__game__info.html#ga6b00da117e65804d334e303e48a33a49" title="Displays, on the screen, instructions for a specific game mode. " alt="" coords="177,23,315,49"/>
-<area shape="rect" id="node4" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="679,48,788,75"/>
-</map>

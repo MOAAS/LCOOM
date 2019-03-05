@@ -1,5 +1,0 @@
-<map id="saveWordGameHighscore" name="saveWordGameHighscore">
-<area shape="rect" id="node2" href="$group__wordpicker.html#ga88c86e1108700ca4a9a38a276e70e3c9" title="Displays on the screen the highscore and points. " alt="" coords="225,5,372,32"/>
-<area shape="rect" id="node3" href="$group__pengoo.html#ga4202fa5c5191c7e387d7570da6c8cd8c" title="Ends and resets the game, showing the total amount of points. The user can return to the main menu by..." alt="" coords="420,5,503,32"/>
-<area shape="rect" id="node4" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="551,5,660,32"/>
-</map>

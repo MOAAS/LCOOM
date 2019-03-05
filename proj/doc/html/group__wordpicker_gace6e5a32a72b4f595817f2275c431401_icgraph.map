@@ -1,7 +1,0 @@
-<map id="wordgame_draw_hidden_word" name="wordgame_draw_hidden_word">
-<area shape="rect" id="node2" href="$group__wordpicker.html#gabec56325a776cfd186cc799eb7a8c6b8" title="Starts a wordgame round. " alt="" coords="248,31,401,57"/>
-<area shape="rect" id="node3" href="$group__pengoo.html#ga02cb99bd23a1083281e874b3b4ebbad5" title="Starts a word game round, setting up the canvas and in case the user is drawing, sets up the pencil a..." alt="" coords="449,31,536,57"/>
-<area shape="rect" id="node4" href="$group__pengoo.html#ga19cfab1706132a19749fc519f84d9445" title="Waits for the guesser to be ready to start a wordgame round (user is drawing) " alt="" coords="584,5,703,32"/>
-<area shape="rect" id="node6" href="$group__pengoo.html#ga45d4be7b19d3dd0ea742f0a489112c80" title="Waits for the drawer to be ready to start a wordgame round (user is guessing) " alt="" coords="588,56,699,83"/>
-<area shape="rect" id="node5" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="751,31,860,57"/>
-</map>

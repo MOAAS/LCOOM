@@ -1,8 +1,0 @@
-<map id="wait_valid_rtc" name="wait_valid_rtc">
-<area shape="rect" id="node2" href="$group__rtc.html#ga4b3527c6c15373fa4ccbf8c43557531d" title="reads rtc registers to get a date " alt="" coords="167,31,262,57"/>
-<area shape="rect" id="node7" href="$group__rtc.html#gafd5a541a5a16634152431be542dc9565" title="reads rtc registers to get a mini&#45;date " alt="" coords="152,81,277,108"/>
-<area shape="rect" id="node3" href="$group__clock.html#gac56b75476d51e272a9efcbb174ed7bf8" title="Updates the clock on the screen with the current date. " alt="" coords="325,31,439,57"/>
-<area shape="rect" id="node4" href="$group__clock.html#ga59029f76a2cbf7aad54d01f50cf80cf9" title="Creates a big clock on the top left of the screen, displaying the current date. " alt="" coords="487,5,597,32"/>
-<area shape="rect" id="node5" href="$group__pengoo.html#gadeb18b17fc386f53c77fbcd19dc7a8e6" title="Runs the welcome screen. Waits until the user presses enter to continue. Updates the clock on the top..." alt="" coords="645,31,740,57"/>
-<area shape="rect" id="node6" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="788,31,897,57"/>
-</map>

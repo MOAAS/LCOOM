@@ -1,7 +1,0 @@
-<map id="video_draw_rectangle" name="video_draw_rectangle">
-<area shape="rect" id="node2" href="$group__video.html#gaa81a86216d20abdc74fffe6a374d7c84" title="Draws a horizontal line on the screen. " alt="" coords="199,81,317,108"/>
-<area shape="rect" id="node3" href="$group__video.html#ga57014a19e5d9cf805bcf7af1f6bbcec5" title="Given a base address, calculates the address of a specific position. " alt="" coords="381,5,480,32"/>
-<area shape="rect" id="node4" href="$group__video.html#ga0cd2b85b0088ab47b2b7bb6c135ad4b1" title="vg_get_video_mem" alt="" coords="365,56,496,83"/>
-<area shape="rect" id="node5" href="$group__video.html#gaa4a211ebfc5c87a0072eaf9bd03e3a56" title="vg_get_hres" alt="" coords="385,107,476,133"/>
-<area shape="rect" id="node6" href="$group__video.html#ga9ce8b7520a298fda9e59cdeffbbd8670" title="Given a pixel address, inserts a color in it. " alt="" coords="394,157,467,184"/>
-</map>

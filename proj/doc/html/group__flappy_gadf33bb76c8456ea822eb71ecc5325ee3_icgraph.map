@@ -1,6 +1,0 @@
-<map id="flappy_increase_score" name="flappy_increase_score">
-<area shape="rect" id="node2" href="$group__flappy.html#gaa49e826d675bb2a5271332a23831fcd1" title="Updates the score area, checking if any new obstacle was passed. " alt="" coords="204,5,345,32"/>
-<area shape="rect" id="node3" href="$group__flappy.html#ga8efa272248ce46f0bb6081dcb680598d" title="Moves the game forward. Moves the bird vertically, moves the screen to the left, updates the score an..." alt="" coords="393,5,477,32"/>
-<area shape="rect" id="node4" href="$group__pengoo.html#ga2ef126f11a398bb34f581d5eca368e6b" title="Runs the flappy rainbow game. User can exit at any time by pressing ESC. " alt="" coords="525,5,612,32"/>
-<area shape="rect" id="node5" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="660,5,769,32"/>
-</map>

@@ -1,6 +1,0 @@
-<map id="kbc_clear_kbd_OUT_BUF" name="kbc_clear_kbd_OUT_BUF">
-<area shape="rect" id="node2" href="$group__keyboard.html#ga686f8d95e71a43edaddda1db8b78caa4" title="Waits. " alt="" coords="273,5,350,32"/>
-<area shape="rect" id="node3" href="$group__keyboard.html#ga54c1dc87fd33a133b8c1eaf08bc51a99" title="Gets the status byte from the KBC status register. " alt="" coords="256,56,367,83"/>
-<area shape="rect" id="node4" href="$group__keyboard.html#ga4e0b2a8300752760d8c7f10fcb55b67a" title="Checks if the Output buffer is full. " alt="" coords="253,107,370,133"/>
-<area shape="rect" id="node5" href="$group__keyboard.html#ga559aca235f02f3322fe738495efdd0e0" title="Checks if the OBF contains mouse byte. " alt="" coords="225,157,397,184"/>
-</map>

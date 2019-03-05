@@ -1,9 +1,0 @@
-<map id="clock.h" name="clock.h">
-<area shape="rect" id="node2" href="$textbox_8h.html" title="textbox.h" alt="" coords="97,80,173,107"/>
-<area shape="rect" id="node8" href="$rtc_8h.html" title="rtc.h" alt="" coords="223,80,271,107"/>
-<area shape="rect" id="node4" href="$layer_8h.html" title="layer.h" alt="" coords="93,155,154,181"/>
-<area shape="rect" id="node7" href="$bitmap_8h.html" title="bitmap.h" alt="" coords="155,229,227,256"/>
-<area shape="rect" id="node5" href="$video_8h.html" title="video.h" alt="" coords="123,304,185,331"/>
-<area shape="rect" id="node6" href="$vbe_8h.html" title="vbe.h" alt="" coords="128,379,180,405"/>
-<area shape="rect" id="node9" href="$i8042_8h.html" title="i8042.h" alt="" coords="229,155,293,181"/>
-</map>

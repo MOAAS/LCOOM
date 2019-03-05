@@ -1,4 +1,0 @@
-<map id="draw_bitmap_rotate" name="draw_bitmap_rotate">
-<area shape="rect" id="node2" href="$group__bitmap.html#ga4b5b3aefecdb54bfdadbe4995b979c7f" title="Checks if a color is transparent (MAGENTA) " alt="" coords="188,5,292,32"/>
-<area shape="rect" id="node3" href="$group__video.html#ga26084597ddd2baa0ce4d70003a9492e9" title="Draws a pixel on the screen. " alt="" coords="189,56,291,83"/>
-</map>

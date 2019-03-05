@@ -1,9 +1,0 @@
-<map id="kbc_enable_poll" name="kbc_enable_poll">
-<area shape="rect" id="node2" href="$group__keyboard.html#ga54c1dc87fd33a133b8c1eaf08bc51a99" title="Gets the status byte from the KBC status register. " alt="" coords="424,5,535,32"/>
-<area shape="rect" id="node3" href="$group__keyboard.html#ga4e0b2a8300752760d8c7f10fcb55b67a" title="Checks if the Output buffer is full. " alt="" coords="421,56,538,83"/>
-<area shape="rect" id="node4" href="$group__keyboard.html#gaa7f7b14e556eec81eb7b4eae1d63ec85" title="Gets the contents from the output buffer, if they exist. " alt="" coords="194,107,311,133"/>
-<area shape="rect" id="node7" href="$group__keyboard.html#ga32e63cb280df583f193cbc065b0b327e" title="Assembles a scancode received by the IH. May also use the previous scancode if it&#39;s a 2&#45;byte scancode..." alt="" coords="168,157,337,184"/>
-<area shape="rect" id="node8" href="$group__keyboard.html#ga686f8d95e71a43edaddda1db8b78caa4" title="Waits. " alt="" coords="214,208,291,235"/>
-<area shape="rect" id="node5" href="$group__keyboard.html#ga8348b9b1e74639dd7edf7e939ea2e1d1" title="Checks if there was any communication error between Keyboard and KBC. " alt="" coords="385,107,573,133"/>
-<area shape="rect" id="node6" href="$group__keyboard.html#ga870b444bcf2b470834d2027dc30bb46e" title="Reads keyboard&#39;s output buffer. " alt="" coords="409,157,550,184"/>
-</map>

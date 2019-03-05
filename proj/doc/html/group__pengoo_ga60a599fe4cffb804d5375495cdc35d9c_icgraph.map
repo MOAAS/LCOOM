@@ -1,5 +1,0 @@
-<map id="update_emote_wheel" name="update_emote_wheel">
-<area shape="rect" id="node2" href="$group__pengoo.html#ga56c5cf8a568cff737ff95520cbe6b405" title="Runs the word game, as a drawer. Sends the drawing to the other user on every move. Sends the clock updates to the other user, every second. User can use the several buttons and mouse to draw on the screen. " alt="" coords="219,5,268,32"/>
-<area shape="rect" id="node4" href="$group__pengoo.html#ga178ee685108a5f6164bf1c1757040ee2" title="Runs the word game, as a drawer. Sends the drawing to the other user on every move. Sends the clock updates to the other user, every second. User can select a color from the open window. " alt="" coords="197,56,289,83"/>
-<area shape="rect" id="node3" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="337,31,447,57"/>
-</map>

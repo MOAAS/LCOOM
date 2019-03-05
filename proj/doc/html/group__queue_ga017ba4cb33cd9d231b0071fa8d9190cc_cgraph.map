@@ -1,6 +1,0 @@
-<map id="queue_resize" name="queue_resize">
-<area shape="rect" id="node2" href="$group__queue.html#ga735dfbf59094f36f47a83d3a139c9b09" title="Creates a queue. " alt="" coords="152,5,252,32"/>
-<area shape="rect" id="node3" href="$group__queue.html#ga056bdcedf660416247cdb05759766702" title="Pushes an item to the end of the queue. " alt="" coords="156,56,248,83"/>
-<area shape="rect" id="node5" href="$group__queue.html#gaa7c283555566da64b71864f416e0178a" title="Removes the front of the queue. " alt="" coords="159,107,245,133"/>
-<area shape="rect" id="node4" href="$group__queue.html#gaca6621b01a2bae967c3c747bb6d855db" title="Checks if a queue is full. " alt="" coords="300,56,380,83"/>
-</map>

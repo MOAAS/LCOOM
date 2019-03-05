@@ -1,9 +1,0 @@
-<map id="keyboard_unsubscribe_int" name="keyboard_unsubscribe_int">
-<area shape="rect" id="node2" href="$group__keyboard.html#ga6d0b21990c1bc497f6986367d485af52" title="Disables keyboard interrupts. " alt="" coords="241,31,385,57"/>
-<area shape="rect" id="node3" href="$group__keyboard.html#gaf87a23192c923b92891892df893963b7" title="While OUT_BUF is &quot;full&quot; with a keyboard byte, discards its contents. " alt="" coords="227,81,399,108"/>
-<area shape="rect" id="node8" href="$group__keyboard.html#gaeb94e69ca92a37bc52ec381aa3ea5c70" title="Enables keyboard interrupts. " alt="" coords="242,132,383,159"/>
-<area shape="rect" id="node4" href="$group__keyboard.html#ga686f8d95e71a43edaddda1db8b78caa4" title="Waits. " alt="" coords="494,5,571,32"/>
-<area shape="rect" id="node5" href="$group__keyboard.html#ga54c1dc87fd33a133b8c1eaf08bc51a99" title="Gets the status byte from the KBC status register. " alt="" coords="477,56,588,83"/>
-<area shape="rect" id="node6" href="$group__keyboard.html#ga4e0b2a8300752760d8c7f10fcb55b67a" title="Checks if the Output buffer is full. " alt="" coords="474,107,591,133"/>
-<area shape="rect" id="node7" href="$group__keyboard.html#ga559aca235f02f3322fe738495efdd0e0" title="Checks if the OBF contains mouse byte. " alt="" coords="447,157,619,184"/>
-</map>

@@ -1,9 +1,0 @@
-<map id="disable_buttons" name="disable_buttons">
-<area shape="rect" id="node2" href="$group__pengoo.html#ga4de72e6fe25e96efa9d419d420f34fcb" title="Sets the canvas up, along with the buttons, depending on the current gameState. " alt="" coords="167,69,268,96"/>
-<area shape="rect" id="node3" href="$group__pengoo.html#ga885611589f6294afada89fe88362e863" title="Runs the main hub. Draws all the main menu buttons, allowing the user to proceed by clicking on them..." alt="" coords="485,5,575,32"/>
-<area shape="rect" id="node5" href="$group__pengoo.html#ga02cb99bd23a1083281e874b3b4ebbad5" title="Starts a word game round, setting up the canvas and in case the user is drawing, sets up the pencil a..." alt="" coords="326,69,413,96"/>
-<area shape="rect" id="node8" href="$group__pengoo.html#ga92c88d0b081234c242ddccf22be99782" title="Waits for the other user to show up to the multi&#45;player mode. " alt="" coords="316,132,423,159"/>
-<area shape="rect" id="node4" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="637,81,747,108"/>
-<area shape="rect" id="node6" href="$group__pengoo.html#ga19cfab1706132a19749fc519f84d9445" title="Waits for the guesser to be ready to start a wordgame round (user is drawing) " alt="" coords="471,56,589,83"/>
-<area shape="rect" id="node7" href="$group__pengoo.html#ga45d4be7b19d3dd0ea742f0a489112c80" title="Waits for the drawer to be ready to start a wordgame round (user is guessing) " alt="" coords="475,107,585,133"/>
-</map>

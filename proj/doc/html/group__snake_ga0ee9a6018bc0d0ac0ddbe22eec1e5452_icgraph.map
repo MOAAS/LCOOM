@@ -1,9 +1,0 @@
-<map id="is_obstacle" name="is_obstacle">
-<area shape="rect" id="node2" href="$group__snake.html#gadcb5c41dcab72f6e0a7cd5d037c0d744" title="Creates a snake, on a random position in the map that has no obstacle, starting with a random angle..." alt="" coords="347,5,447,32"/>
-<area shape="rect" id="node5" href="$group__snake.html#ga18a5d5f3ad1a2a71338cf50900d6169e" title="Moves the snake, if it&#39;s not dead. Checks if there was obstacle collision (loses health and multiplie..." alt="" coords="162,56,257,83"/>
-<area shape="rect" id="node7" href="$snake_8c.html#a52364aab733d1c8fc9afdee66a7859ce" title="snake_move_decoy" alt="" coords="141,107,277,133"/>
-<area shape="rect" id="node3" href="$group__pengoo.html#gab63f8a21d8bd92b9f638151a9912fa84" title="Runs the rainbow snake game. User can exit at any time by pressing ESC. " alt="" coords="688,31,776,57"/>
-<area shape="rect" id="node4" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="824,31,933,57"/>
-<area shape="rect" id="node6" href="$group__snake.html#gae59edc17cc6d3f6f1fef0d047304265b" title="Moves the game forward. Moves the snake and decoys, redraws the obstacles and increases the snake&#39;s s..." alt="" coords="516,56,640,83"/>
-<area shape="rect" id="node8" href="$group__snake.html#gae3dcf4434c60729af7c3280262e8c6ad" title="Moves all the living snake decoys Checks if there was obstacle collision (stops) Checks if there was ..." alt="" coords="325,107,468,133"/>
-</map>

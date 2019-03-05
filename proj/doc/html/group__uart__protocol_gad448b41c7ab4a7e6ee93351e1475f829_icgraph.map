@@ -1,9 +1,0 @@
-<map id="get_msg_by_id" name="get_msg_by_id">
-<area shape="rect" id="node2" href="$group__pengoo.html#gab4e279f31fb3e6e034e2b173aaa1a2fb" title="Waits for the other user, and randomly decide who is drawing first in the word game. They do this by choosing a random number and sending it every clock tick. The highest number draws first. " alt="" coords="172,5,275,32"/>
-<area shape="rect" id="node4" href="$group__pengoo.html#ga19cfab1706132a19749fc519f84d9445" title="Waits for the guesser to be ready to start a wordgame round (user is drawing) " alt="" coords="164,56,283,83"/>
-<area shape="rect" id="node5" href="$group__pengoo.html#ga45d4be7b19d3dd0ea742f0a489112c80" title="Waits for the drawer to be ready to start a wordgame round (user is guessing) " alt="" coords="168,107,279,133"/>
-<area shape="rect" id="node6" href="$group__pengoo.html#ga56c5cf8a568cff737ff95520cbe6b405" title="Runs the word game, as a drawer. Sends the drawing to the other user on every move. Sends the clock updates to the other user, every second. User can use the several buttons and mouse to draw on the screen. " alt="" coords="199,157,248,184"/>
-<area shape="rect" id="node7" href="$group__pengoo.html#ga178ee685108a5f6164bf1c1757040ee2" title="Runs the word game, as a drawer. Sends the drawing to the other user on every move. Sends the clock updates to the other user, every second. User can select a color from the open window. " alt="" coords="177,208,269,235"/>
-<area shape="rect" id="node8" href="$group__pengoo.html#ga92c88d0b081234c242ddccf22be99782" title="Waits for the other user to show up to the multi&#45;player mode. " alt="" coords="170,259,277,285"/>
-<area shape="rect" id="node3" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="331,132,440,159"/>
-</map>

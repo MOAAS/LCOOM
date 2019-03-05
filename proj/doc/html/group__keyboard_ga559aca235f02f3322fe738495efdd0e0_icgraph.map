@@ -1,8 +1,0 @@
-<map id="kbc_OBF_is_mouse_data" name="kbc_OBF_is_mouse_data">
-<area shape="rect" id="node2" href="$group__keyboard.html#ga3c87ba94c8bab09066553ba6d89c07c8" title="While OUT_BUF is &quot;full&quot; with a mouse byte, discards its contents. " alt="" coords="225,5,416,32"/>
-<area shape="rect" id="node6" href="$group__keyboard.html#gaf87a23192c923b92891892df893963b7" title="While OUT_BUF is &quot;full&quot; with a keyboard byte, discards its contents. " alt="" coords="235,56,407,83"/>
-<area shape="rect" id="node3" href="$group__mouse.html#ga685ad2706aca36d9869a30a19b9f446a" title="Unsubscribes mouse interrupts. " alt="" coords="471,5,630,32"/>
-<area shape="rect" id="node4" href="$group__interrupts.html#gac34cc7680c64171b47100c01bb019ab4" title="Unsubscribes a device&#39;s interrupts For the mouse, disables data reporting in stream mode..." alt="" coords="685,31,820,57"/>
-<area shape="rect" id="node5" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="868,31,977,57"/>
-<area shape="rect" id="node7" href="$group__keyboard.html#gac95aea27a5e91b363b876fed881f368f" title="Unsubscribes keyboard interrupts. " alt="" coords="464,56,637,83"/>
-</map>

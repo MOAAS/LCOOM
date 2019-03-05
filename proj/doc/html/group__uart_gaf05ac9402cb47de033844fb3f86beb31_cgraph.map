@@ -1,4 +1,0 @@
-<map id="uart_disable_ier" name="uart_disable_ier">
-<area shape="rect" id="node2" href="$group__uart.html#ga072a4cc00030540e86ac100c8e7c8902" title="Reads a one byte register. " alt="" coords="167,5,269,32"/>
-<area shape="rect" id="node3" href="$group__uart.html#ga59c922bd359845f14061ced67e74c6b3" title="Writes a byte to a register. " alt="" coords="167,56,269,83"/>
-</map>

@@ -1,9 +1,0 @@
-<map id="arena_get_random_x" name="arena_get_random_x">
-<area shape="rect" id="node2" href="$group__snake.html#gadcb5c41dcab72f6e0a7cd5d037c0d744" title="Creates a snake, on a random position in the map that has no obstacle, starting with a random angle..." alt="" coords="426,5,526,32"/>
-<area shape="rect" id="node5" href="$group__snake.html#gac5b60c5a2d1ca79c4983372122b5183a" title="Updates the arena powerups. If any of them expired, removes it. Randomly adds HP (time&#45;based) and oth..." alt="" coords="196,56,359,83"/>
-<area shape="rect" id="node7" href="$group__snake.html#ga0023b72115390a70c136c27bcd0f7844" title="Creates between 1 and 12 random obstacles, and adds them to the arena. " alt="" coords="197,107,357,133"/>
-<area shape="rect" id="node3" href="$group__pengoo.html#gab63f8a21d8bd92b9f638151a9912fa84" title="Runs the rainbow snake game. User can exit at any time by pressing ESC. " alt="" coords="593,56,681,83"/>
-<area shape="rect" id="node4" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="729,56,839,83"/>
-<area shape="rect" id="node6" href="$group__snake.html#gae59edc17cc6d3f6f1fef0d047304265b" title="Moves the game forward. Moves the snake and decoys, redraws the obstacles and increases the snake&#39;s s..." alt="" coords="414,56,538,83"/>
-<area shape="rect" id="node8" href="$group__snake.html#gae7016570a88c488abe2dabb31467daf8" title="Creates a snake arena and UI. Adds obstacles and creates the HP bar. Also adds the scoreboard on top..." alt="" coords="407,107,545,133"/>
-</map>

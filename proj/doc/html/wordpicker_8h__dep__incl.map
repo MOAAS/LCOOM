@@ -1,8 +1,0 @@
-<map id="wordpicker.h" name="wordpicker.h">
-<area shape="rect" id="node2" href="$uart__wordgame_8h.html" title="uart_wordgame.h" alt="" coords="125,80,246,107"/>
-<area shape="rect" id="node3" href="$pengoo_8h.html" title="pengoo.h" alt="" coords="49,155,124,181"/>
-<area shape="rect" id="node7" href="$wordpicker_8c.html" title="wordpicker.c" alt="" coords="270,80,365,107"/>
-<area shape="rect" id="node6" href="$uart__wordgame_8c.html" title="uart_wordgame.c" alt="" coords="149,155,270,181"/>
-<area shape="rect" id="node4" href="$pengoo_8c.html" title="pengoo.c" alt="" coords="5,229,80,256"/>
-<area shape="rect" id="node5" href="$proj_8c.html" title="proj.c" alt="" coords="105,229,159,256"/>
-</map>

@@ -1,5 +1,0 @@
-<map id="update_big_ben" name="update_big_ben">
-<area shape="rect" id="node2" href="$group__clock.html#ga59029f76a2cbf7aad54d01f50cf80cf9" title="Creates a big clock on the top left of the screen, displaying the current date. " alt="" coords="167,5,277,32"/>
-<area shape="rect" id="node3" href="$group__pengoo.html#gadeb18b17fc386f53c77fbcd19dc7a8e6" title="Runs the welcome screen. Waits until the user presses enter to continue. Updates the clock on the top..." alt="" coords="325,31,420,57"/>
-<area shape="rect" id="node4" href="$group__proj.html#ga33bde23e0d2bbde847401c5ac6fb62e0" title="Setups, starts and manages the entire game hub. " alt="" coords="468,31,577,57"/>
-</map>

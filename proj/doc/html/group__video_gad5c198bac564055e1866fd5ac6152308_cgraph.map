@@ -1,6 +1,0 @@
-<map id="video_init" name="video_init">
-<area shape="rect" id="node2" href="$group__vbe.html#ga9e78fdbbaab721c0b5075380a0688cff" title="Gets the info for a specific VBE mode. " alt="" coords="128,5,253,32"/>
-<area shape="rect" id="node3" href="$group__video.html#gaa4a211ebfc5c87a0072eaf9bd03e3a56" title="vg_get_hres" alt="" coords="145,56,236,83"/>
-<area shape="rect" id="node4" href="$group__video.html#ga4633499e0f197ac855f56473fc9fb291" title="vg_get_vres" alt="" coords="146,107,235,133"/>
-<area shape="rect" id="node5" href="$group__video.html#gad5d72716b0e4b468c37027482a707763" title="vg_get_bytes_pp" alt="" coords="131,157,250,184"/>
-</map>
